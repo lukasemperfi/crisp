@@ -1,0 +1,29 @@
+{
+  "name": "nuts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node generate-critical.js",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "critical": "^7.2.1",
+    "gh-pages": "^6.3.0",
+    "glob": "^11.0.3",
+    "nunjucks": "^3.2.4",
+    "sass": "^1.92.1",
+    "vite": "^7.1.2",
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-nunjucks": "^0.2.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.76.1",
+    "dotenv": "^17.2.3",
+    "just-validate": "^4.3.0",
+    "swiper": "^12.0.2"
+  }
+}

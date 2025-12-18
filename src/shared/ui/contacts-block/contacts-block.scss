@@ -1,0 +1,44 @@
+.contacts-block {
+  display: flex;
+  gap: 32px;
+
+  &__messengers {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__messenger {
+    width: 31px;
+    height: 31px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--background-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__phones {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__phone {
+    font-family: var(--font-family-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--foreground);
+    white-space: nowrap;
+  }
+
+  &_highlight-code {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  &_reverse {
+    flex-direction: row-reverse;
+  }
+}

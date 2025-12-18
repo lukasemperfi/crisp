@@ -1,0 +1,44 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+
+
+{%macro producer(baseUrl, sliderItems, content, class="")%}
+<section class="producer {{class}}">
+    <div class="page-container">
+        <div class="producer__content">
+            <div class="producer__col-1">
+                <h2 class="producer__title title-h2">О производителе</h2>
+                {{content | safe}}
+            </div>
+            <div class="producer__col-2">
+                <div class="producer__swiper swiper producer-slider">
+                    <div class="swiper-wrapper">
+                        {% for sliderItem in sliderItems %}
+                        <div class="swiper-slide">
+                            <div class="producer__card vide0-card">
+                                {{picture(sliderItem.image.src, sliderItem.image.webpSrc, sliderItem.image.alt,
+                                "video-card__img")}}
+                                <video class="video-card__video" data-src="{{sliderItem.video.src}}"
+                                    playsinline></video>
+                                <button class="video-card__button" name="play-button"
+                                    aria-label="Кнопка проигрывания видео">
+                                    {{ icons.play() }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="producer-slider__prev">
+                        {{ icons.leftArrow('producer-slider__icon') }}
+                    </div>
+                    <div class="producer-slider__next">
+                        {{ icons.rightArrow('producer-slider__icon') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{%endmacro%}

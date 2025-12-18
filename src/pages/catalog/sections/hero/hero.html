@@ -1,0 +1,19 @@
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+{%macro hero()%}
+<section class="hero">
+    <div class="banner hero__banner banner_size_sm">
+        <div class="banner__image-wrapper">
+            {{picture("/images/catalog-page/hero-banner.jpg", "/images/catalog-page/hero-banner.webp", "banner",
+            "banner__image", loading="eager", fetchpriority="high")}}
+        </div>
+        <div class="banner__title">Каталог продукции</div>
+    </div>
+    <div class="hero__breadcrumbs">
+        <div class="page-container">
+
+        </div>
+    </div>
+</section>
+
+{%endmacro%}

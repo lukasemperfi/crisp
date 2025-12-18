@@ -1,0 +1,35 @@
+@use "sass:math";
+@use "sass:meta";
+
+@function strip-unit($value) {
+  @if meta.type-of($value) == "number" and not math.is-unitless($value) {
+    @return math.div($value, ($value * 0 + 1));
+  }
+  @return $value;
+}
+
+@function fluidValue($f-min, $f-max, $w-min, $w-max) {
+  $f-min-unit: math.unit($f-min);
+  $f-max-unit: math.unit($f-max);
+  $w-min-unit: math.unit($w-min);
+  $w-max-unit: math.unit($w-max);
+
+  $f-min-num: strip-unit($f-min);
+  $f-max-num: strip-unit($f-max);
+  $w-min-num: strip-unit($w-min);
+  $w-max-num: strip-unit($w-max);
+
+  $k: math.div($f-max-num - $f-min-num, $w-max-num - $w-min-num);
+  $b: $f-min-num - $k * $w-min-num;
+
+  $actual-min: if($f-min-num < $f-max-num, $f-min-num, $f-max-num);
+  $actual-max: if($f-min-num > $f-max-num, $f-min-num, $f-max-num);
+  $actual-min-unit: if($f-min-num < $f-max-num, $f-min-unit, $f-max-unit);
+  $actual-max-unit: if($f-min-num > $f-max-num, $f-min-unit, $f-max-unit);
+
+  @return clamp(
+    #{$actual-min}#{$actual-min-unit},
+    calc(#{$k * 100}vw + #{$b}#{$f-min-unit}),
+    #{$actual-max}#{$actual-max-unit}
+  );
+}

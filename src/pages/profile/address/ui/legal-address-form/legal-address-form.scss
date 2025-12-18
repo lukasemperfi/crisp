@@ -1,0 +1,108 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.legal-address-form-wrapper {
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+
+  &__image {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    @include mixins.respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__content {
+    max-width: 347px;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 44px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--foreground-secondary);
+    margin-bottom: 20px;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--foreground-secondary);
+  }
+}
+.legal-address-form {
+  $items-gap: 20.5px;
+  max-width: 474px;
+  flex: 1;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__title {
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 32px;
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    text-align: left;
+  }
+
+  &__item {
+    margin-bottom: $items-gap;
+
+    &_contacts {
+      flex: 1 1 auto;
+    }
+  }
+
+  .form-item__fields {
+    gap: $items-gap;
+    padding: 2px;
+  }
+
+  .form-field {
+    min-width: 330px;
+  }
+
+  &__submit-btn {
+    padding-inline: 72px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@include mixins.respond-to(md) {
+  .profile-section__menu:not(.show)
+    ~ .profile-section__content
+    .legal-address-form {
+    margin: auto;
+  }
+}

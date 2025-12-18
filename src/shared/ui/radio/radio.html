@@ -1,0 +1,6 @@
+{% macro radio(group_name, value, label, id_val, checked=false) %}
+<div class="radio">
+    <input id="{{id_val}}" name="{{group_name}}" value="{{value}}" type="radio" {% if checked %}checked{% endif %}>
+    <label for="{{id_val}}" class="radio-label">{{label}}</label>
+</div>
+{% endmacro %}

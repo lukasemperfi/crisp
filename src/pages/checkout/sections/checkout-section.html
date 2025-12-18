@@ -1,0 +1,12 @@
+{%from "src/features/checkout/ui/checkout-form.html" import checkoutForm%}
+{%from "src/shared/ui/user-info-bar/user-info-bar.html" import userInfoBar%}
+
+{%macro checkoutSection(baseUrl)%}
+<section class="checkout-section">
+    <div class="checkout-section__page-container page-container">
+        {{userInfoBar(title="Оформление заказа", showMeta=false)}}
+        <div class="checkout-section__cart"></div>
+        {{checkoutForm(baseUrl)}}
+    </div>
+</section>
+{%endmacro%}

@@ -1,0 +1,66 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+
+
+{%macro manufacturerSection(baseUrl)%}
+{%set images = [
+{src: '/images/home-page/manufacturer/image-1.jpg', webpSrc: '/images/home-page/manufacturer/image-1.webp', alt:
+'manufacturer-1'},
+{src: '/images/home-page/manufacturer/image-1.jpg', webpSrc: '/images/home-page/manufacturer/image-1.webp', alt:
+'manufacturer-1'},
+{src: '/images/home-page/manufacturer/image-1.jpg', webpSrc: '/images/home-page/manufacturer/image-1.webp', alt:
+'manufacturer-1'},
+{src: '/images/home-page/manufacturer/image-1.jpg', webpSrc: '/images/home-page/manufacturer/image-1.webp', alt:
+'manufacturer-1'}
+]%}
+<section class="manufacturer">
+    <div class="page-container">
+        <div class="manufacturer__content">
+            <div class="manufacturer__col-1">
+                <h2 class="manufacturer__title title-h2">О производителе</h2>
+                <div class="manufacturer__description">
+                    <p><strong class="manufacturer__highlight">Сельскохозяйственный обслуживающий кооператив
+                            “Орех Причерноморья”</strong> выращивает смешанные сады
+                        ореха грецкого с фундуком, а также ореха грецкого
+                        с шиповником, на площади более 150 гектаров.</p>
+                    <p>
+                        Помимо этого кооператив занимается выращиванием
+                        посадочного материала, саженцов привитого и непривитого
+                        грецкого ореха, фундука и шиповника.
+                    </p>
+
+                </div>
+                <a class="button button_secondary button_size-md manufacturer__button" href="#" name="manufacturer"
+                    aria-label="Подробнее о производителе">Подробнее</a>
+            </div>
+            <div class="manufacturer__col-2">
+                <div class="manufacturer__swiper swiper manufacturer-slider">
+                    <div class="swiper-wrapper">
+                        {% for image in images %}
+                        <div class="swiper-slide">
+                            <div class="manufacturer__card vide0-card">
+                                {{picture(image.src, image.webpSrc, image.alt, "video-card__img")}}
+                                <video class="video-card__video" data-src="{{baseUrl}}videos/home-page/manufacturer.mp4"
+                                    playsinline></video>
+                                <button class="video-card__button" name="play-button"
+                                    aria-label="Кнопка проигрывания видео">
+                                    {{ icons.play() }}
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="manufacturer-slider__prev">
+                        {{ icons.leftArrow('manufacturer-slider__icon') }}
+                    </div>
+                    <div class="manufacturer-slider__next">
+                        {{ icons.rightArrow('manufacturer-slider__icon') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{%endmacro%}

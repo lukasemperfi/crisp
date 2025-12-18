@@ -1,0 +1,16 @@
+@use "@/app/styles/index.scss" as *;
+@use "swiper/css";
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/socials/socials.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/shared/ui/logo/logo.scss" as *;
+@use "@/shared/ui/contacts-block/contacts-block.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/contacts-section/contacts-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/widgets/news-section/news-section.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/pages/one-news/sections/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/pages/one-news/sections/content/content.scss" as *;

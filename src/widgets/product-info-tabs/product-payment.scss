@@ -1,0 +1,126 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+$bp-mobile: 999px;
+
+.product-info-card {
+  $bp-mobile-md: 1239px;
+  display: grid;
+  grid-template-columns: 1fr 59.69%;
+
+  @include mixins.respond-to($bp-mobile-md) {
+    grid-template-columns: 1fr;
+  }
+
+  &__col-1 {
+    padding-top: 9px;
+  }
+
+  &__col-2 {
+    @include mixins.respond-to($bp-mobile-md) {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    aspect-ratio: 770/471;
+    max-width: 770px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info-methods {
+    overflow-y: auto;
+    max-height: 475px;
+
+    &__title {
+      font-weight: 800;
+      font-size: functions.fluidValue(14px, 18px, 360px, 1920px);
+      line-height: 24px;
+      color: var(--foreground);
+      margin-bottom: functions.fluidValue(12px, 20px, 360px, 1920px);
+    }
+
+    &__list {
+      @include mixins.respond-to($bp-mobile-md) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+        gap: 20px;
+      }
+    }
+
+    &__item {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      row-gap: 8px;
+      margin-bottom: functions.fluidValue(14px, 32px, 360px, 1920px);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      @include mixins.respond-to($bp-mobile-md) {
+        margin-bottom: 0;
+      }
+    }
+
+    &__header {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      align-items: center;
+      column-gap: 13px;
+    }
+
+    &__method {
+      font-style: italic;
+      font-weight: 600;
+      font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+      line-height: 24px;
+      color: var(--foreground);
+    }
+
+    &__description {
+      font-weight: 500;
+      font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+      line-height: 23px;
+      color: var(--foreground);
+      max-width: 406px;
+
+      @include mixins.respond-to($bp-mobile-md) {
+        max-width: none;
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+    line-height: 23px;
+    color: var(--foreground);
+    max-width: 406px;
+    margin-bottom: functions.fluidValue(14px, 37px, 360px, 1920px);
+  }
+
+  &__point-list {
+    padding-left: 19px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 13px;
+
+    li {
+      list-style: disc;
+
+      &::marker {
+        color: var(--border-color);
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+{%macro productReturn()%}
+<div class="product-info-card">
+    <div class="product-info-card__col-1">
+        <div class="product-info-card__info-methods info-methods">
+            <div class="info-methods__title">Возврат товара</div>
+            <div class="info-methods__description" style="max-width: 100%;">
+                <p class="product-info-card__text">Возврат товара осуществляется в соответствии с Законом Украины «О
+                    защите прав потребителей». В период
+                    установленного производителем срока гарантии Вы можете вернуть нам товар при таких условиях:
+                </p>
+                <ul class="product-info-card__point-list">
+                    <li>Наличие документа от уполномоченного производителем сервисного центра, где указано, что дефект
+                        является существенным (товар ненадлежащего качества);
+                    </li>
+                    <li>Сохранен гарантийный талон и документ,<br>подтверждающий оплату;</li>
+                    <li>Целостность комплекта не нарушена.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="product-info-card__col-2">
+        <div class="product-info-card__image-wrapper">
+            {{picture('/images/product-details/return.jpg', '/images/product-details/return.webp', 'Product info
+            Image', 'product-info-card__image')}}
+        </div>
+    </div>
+</div>
+{%endmacro%}

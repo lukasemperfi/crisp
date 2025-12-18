@@ -1,0 +1,97 @@
+{%from "src/shared/ui/tabs/tabs.html" import tabs%}
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+{%from "src/shared/ui/button/button.html" import button%}
+
+{%macro tabsContent(image)%}
+<div class="product-info-card">
+    <div class="product-info-card__col-1">
+        <div class="product-info-card__text">
+            <p>СОК "Орех Причерноморья" предлагает своим клиентам выгодные условия сорудничества.</p>
+            <p>Мы готовы рассмотреть особые условия для оптовых покупателей, с готовностью идем на встречу к любому
+                предложению.
+            </p>
+            <p>
+                Особые условия подготовленны для розничных магазинов. компаний HoReCa, спорт-клубов.
+            </p>
+            <p>Если вы заинтересованы в нашей продукции, пишите или звоните в наш главный офис, мы всегда пойдем вам на
+                встречу.
+            </p>
+        </div>
+        {{button(text="Написать нам", class="button_primary button_size-lg product-info-card__btn")}}
+    </div>
+    <div class="product-info-card__col-2">
+        <div class="product-info-card__image-wrapper">
+            {{picture(image.jpg, image.webp, 'Corporate info
+            Image', 'product-info-card__image', loading="eager")}}
+        </div>
+    </div>
+</div>
+{%endmacro%}
+
+{% set items = [
+{
+label: 'Крупные<br>супермаркеты',
+icon: icons.supermarket(),
+content: tabsContent({jpg:'/images/corporate-customers-page/tabs/supermarket.jpg',
+webp:'/images/corporate-customers-page/tabs/supermarket.webp'})
+},
+{
+label: 'Розничные<br>магазины',
+icon: icons.shop(),
+content: tabsContent({jpg:'/images/corporate-customers-page/tabs/retail.jpg',
+webp:'/images/corporate-customers-page/tabs/retail.webp'})
+},
+{
+label: 'Компании<br>HoReCa',
+icon: icons.dinnerTable(),
+content: tabsContent({jpg:'/images/corporate-customers-page/tabs/horeca.jpg',
+webp:'/images/corporate-customers-page/tabs/horeca.webp'})
+},
+{
+label: 'Фитнес<br>и спорт клубы',
+icon: icons.dumbbell(),
+content: tabsContent({jpg:'/images/corporate-customers-page/tabs/sport.jpg',
+webp:'/images/corporate-customers-page/tabs/sport.webp'})
+},
+{
+label: 'Кондитерские<br>и пекарни',
+icon: icons.cake(),
+content: tabsContent({jpg:'/images/corporate-customers-page/tabs/sweet.jpg',
+webp:'/images/corporate-customers-page/tabs/sweet.webp'})
+}
+]
+
+%}
+
+{%macro corporateSection()%}
+<section class="corporate-section">
+    <div class="page-container">
+        <div class="corporate-section__description corporate-description">
+            <div class="corporate-description__title">Оптовым<br>и корпоративным клиентам</div>
+            <div class="corporate-description__text">
+                <div class="corporate-description__text-col-1">
+                    <p>Сельскохозяйственный обслуживающий кооператив “Орех Причерноморья” предлагает своим клиентам
+                        выгодные
+                        условия сотрудничества.</p>
+                    <p>Особые условия подготовлены для <strong>розничных магазинов, компаний HoReCa, спорт -
+                            клубов.</strong></p>
+                </div>
+                <div class="corporate-description__text-col-2">
+                    <p>Мы готовы рассмотреть особые условия для оптовых покупателей, с готовностью идем на встречу
+                        любому
+                        предложению.</p>
+                    <p>Если вы заинтересованы в нашей продукции, пишите, или звоните в наш главный офис - мы всегда
+                        пойдем
+                        вам
+                        на встречу!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="corporate-section__tabs">
+        {{tabs('corporate-section-tabs', items, 0)}}
+    </div>
+</section>
+{%endmacro%}

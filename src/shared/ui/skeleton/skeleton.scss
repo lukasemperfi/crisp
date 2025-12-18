@@ -1,0 +1,24 @@
+.skeleton {
+  background: #bdbdbd;
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 4px;
+  box-shadow: none;
+  background-clip: padding-box;
+  cursor: default;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

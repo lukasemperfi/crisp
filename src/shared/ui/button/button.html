@@ -1,0 +1,5 @@
+{%macro button(text, class)%}
+<button class="button {% if class %}{{class}}{% endif %}">
+    {{text}}
+</button>
+{%endmacro%}

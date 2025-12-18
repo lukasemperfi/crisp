@@ -1,0 +1,203 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.product-filters-bar {
+  --select-border-color: rgba(0, 0, 0, 0.1);
+  $dropdown-border: 1px solid var(--select-border-color);
+  $font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+  $font-weight: 600;
+  $font-family: var(--font-family-primary);
+
+  display: flex;
+  align-items: center;
+
+  @include mixins.respond-to(1230px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+
+    @include mixins.respond-to(1230px) {
+      width: 100%;
+    }
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(3, max-content) 1fr;
+    width: 100%;
+
+    @include mixins.respond-to(1230px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: flex-end;
+    }
+
+    @include mixins.respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+        "flavor-select weight-select"
+        "filter-actions filter-actions";
+    }
+
+    @include mixins.respond-to(499px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-areas:
+        "flavor-select"
+        "weight-select"
+        "filter-actions";
+    }
+  }
+
+  &__flavor-select {
+    min-width: 283px;
+    max-width: 283px;
+    margin-left: 68px;
+
+    @include mixins.respond-to(1230px) {
+      margin-left: 0;
+      width: 100%;
+      min-width: 171px;
+      max-width: 100%;
+    }
+
+    @include mixins.respond-to(sm) {
+      grid-area: flavor-select;
+    }
+  }
+
+  &__weight-select {
+    min-width: 171px;
+    max-width: 171px;
+    margin-left: 29px;
+
+    @include mixins.respond-to(1230px) {
+      margin-left: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @include mixins.respond-to(sm) {
+      grid-area: weight-select;
+    }
+  }
+
+  .filter-btn {
+    font-weight: 700;
+    font-size: functions.fluidValue(14px, 17px, 360px, 1920px);
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    display: flex;
+    gap: 13px;
+    align-items: center;
+
+    @include mixins.respond-to(1230px) {
+      // align-items: flex-end;
+    }
+
+    &__icon-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &__icon {
+      path {
+        fill: var(--muted-text);
+      }
+
+      &_active {
+        path {
+          fill: var(--accent);
+        }
+      }
+    }
+
+    &_price {
+      margin-left: 50px;
+      margin-right: 50px;
+
+      @include mixins.respond-to(1230px) {
+        margin-left: 0;
+        margin-right: 0;
+        justify-self: flex-end;
+        display: none;
+      }
+    }
+
+    &_price-mobile {
+      display: none;
+
+      @include mixins.respond-to(1230) {
+        display: flex;
+      }
+    }
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 47px;
+    margin-left: auto;
+
+    @include mixins.respond-to(1230px) {
+      margin-left: 0;
+      justify-self: flex-end;
+    }
+
+    @include mixins.respond-to(sm) {
+      justify-self: flex-start;
+      grid-area: filter-actions;
+    }
+
+    @include mixins.respond-to(499px) {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &__apply-btn {
+      padding-block: 14px;
+      padding-inline: functions.fluidValue(25px, 34px, 360px, 1920px);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    &__reset-btn {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+      color: var(--muted-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @media (hover: hover) {
+        &:hover {
+          color: var(--accent);
+          transition: all 0.3s ease;
+        }
+        &:hover path {
+          fill: var(--accent);
+          transition: all 0.3s ease;
+        }
+      }
+
+      svg path {
+        fill: var(--muted-text);
+      }
+    }
+  }
+
+  .dropdown__button,
+  .dropdown__option {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    font-size: $font-size;
+  }
+}

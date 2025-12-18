@@ -1,0 +1,93 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.tabs {
+  --tab-border: 1px solid #e0e0e0;
+  --tab-border-active-color: var(--border-color-secondary);
+  --tab-active-color: var(--foreground);
+  --tab-hover-bg: #f8f9fa;
+
+  &__nav {
+    border-bottom: 1px solid rgb(0 0 0 / 8%);
+  }
+
+  &__nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    position: relative;
+    margin-bottom: -1px;
+  }
+
+  &__nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 19px;
+    padding-top: 14px;
+    padding-inline: functions.fluidValue(10px, 28px, 360px, 1920px);
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: functions.fluidValue(14px, 18px, 360px, 1920px);
+    color: #5b5b5b;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: transparent;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--tab-active-color);
+      }
+
+      &:hover::before {
+        background-color: var(--tab-border-active-color);
+      }
+    }
+
+    &[aria-selected="true"] {
+      color: var(--tab-active-color);
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    &[aria-selected="true"]::before {
+      background-color: var(--tab-border-active-color);
+    }
+  }
+
+  &__nav-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+
+    svg,
+    i {
+      width: 1em;
+      height: 1em;
+    }
+  }
+
+  &__nav-label {
+    white-space: nowrap;
+  }
+
+  &__content {
+    padding-block: 20px;
+  }
+
+  &__panel {
+    &[hidden] {
+      display: none;
+    }
+  }
+}

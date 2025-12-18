@@ -1,0 +1,20 @@
+@use "@/app/styles/index.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/socials/socials.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/shared/ui/logo/logo.scss" as *;
+@use "@/shared/ui/contacts-block/contacts-block.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/contacts-section/contacts-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/features/auth/registration/ui/registration-form.scss" as *;
+@use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/pages/registration/sections/registration-section/registration-section.scss"
+  as *;
+@use "@/pages/registration/sections/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/shared/ui/upload-photo/upload-photo.scss" as *;
+@use "@/shared/ui/radio/radio.scss" as *;
+@use "@/shared/ui/overlay-spinner/overlay-spinner.scss" as *;
+@use "@/shared/ui/form-item/form-item.scss" as *;

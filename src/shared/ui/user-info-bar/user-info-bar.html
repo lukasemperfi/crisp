@@ -1,0 +1,24 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+
+{%macro userInfoBar(title="", showMeta=false, showMenuButton=false)%}
+<div class="user-info-bar">
+    <div class="user-info-bar__title">
+        {%if showMenuButton%}
+        <button class="user-info-bar__menu-button">Click</button>
+        {%endif%}
+        {{title}}
+    </div>
+    <div class="user-info-bar__manager-contacts">
+        <div class="manager-contacts">
+            <div class="manager-contacts__name">Ваш личный менеджер Олег</div>
+            <div class="manager-contacts__phone">
+                {{icons.phone()}}
+                <span>+38 067 777 14 12</span>
+            </div>
+        </div>
+    </div>
+    {%if showMeta%}
+    <div class="user-info-bar__meta">Ваша персональная скидка - 5%</div>
+    {%endif%}
+</div>
+{%endmacro%}

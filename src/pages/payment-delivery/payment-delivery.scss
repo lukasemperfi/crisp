@@ -1,0 +1,23 @@
+@use "@/app/styles/index.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/socials/socials.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/shared/ui/logo/logo.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/banner/banner.scss" as *;
+@use "@/widgets/stats/stats.scss" as *;
+@use "@/pages/payment-delivery/sections/hero/hero.scss" as *;
+@use "@/shared/ui/contacts-block/contacts-block.scss" as *;
+@use "@/widgets/contacts-section/contacts-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/shared/ui/video-card/video-card.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/shared/ui/tabs/tabs.scss" as *;
+@use "@/widgets/product-info-tabs/product-payment.scss" as *;
+@use "@/pages/payment-delivery/sections/payment-delivery-tabs/payment-delivery-tabs.scss"
+  as *;
+
+.stats {
+  background-color: var(--background-secondary);
+}

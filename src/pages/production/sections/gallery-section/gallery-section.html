@@ -1,0 +1,82 @@
+{%from "src/widgets/gallery-list/gallery-list.html" import galleryList%}
+
+{%macro gallerySection(baseUrl)%}
+{%set items = [
+{
+id:1,
+title:"SIAL Paris 2018",
+description:"В этом Году при поддержке проекта International Trade Centre Ukraine, и финансировании правительства
+Швеции, мы побывали на крупнейшей продовольственной выставке Европы <strong>SIAL Paris 2018</strong>",
+image: {src: "/images/gallery/image-1.jpg", webpSrc: "/images/gallery/image-1.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: null,
+className: "gallery-list__item-1",
+decor: false
+},
+{
+id:2,
+title:"Фермеры Украины",
+description:"Как бывший экспедитор выращивает грецкий орех, фундук и трюфель в одном саду",
+image: {src: "/images/gallery/image-2.jpg", webpSrc: "/images/gallery/image-2.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: null,
+className: "gallery-list__item-2",
+decor: true
+},
+{
+id:3,
+title: "Проект UBHDP",
+description: "Вчера к нам приезжал американский агроном Рон , спасибо Мельнику Евгению и проекту UBHDP за возможность
+получить консультацию от мировых специалистов!",
+image: {src: "/images/gallery/image-3.jpg", webpSrc: "/images/gallery/image-3.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: baseUrl + "videos/home-page/hero.mp4",
+className: "gallery-list__item-3",
+decor: false
+},
+{
+id:4,
+title:"Обработка горчицы",
+description:"Последняя обработка горчицы , дальше пчелы будут делать свою работу !",
+image: {src: "/images/gallery/image-4.jpg", webpSrc: "/images/gallery/image-4.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: null,
+className: "gallery-list__item-4",
+decor: false
+},
+{
+id:5,
+title:"Берлин",
+description:"Посещение Берлинского оптового рынка, совместно сспециалистами ITC",
+image: {src: "/images/gallery/image-5.jpg", webpSrc: "/images/gallery/image-5.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: null,
+className: "gallery-list__item-5",
+decor: false
+},
+{
+id:6,
+title: null,
+description: null,
+image: {src: "/images/gallery/image-6.jpg", webpSrc: "/images/gallery/image-6.webp", alt: "Conference",
+lazyLoading: "lazy"},
+video: baseUrl + "videos/home-page/hero.mp4",
+className: "gallery-list__item-6",
+decor: false
+}
+]%}
+<section class="gallery-section">
+    <div class="page-container">
+        <div class="gallery-section__top">
+            <h2 class="gallery-section__title ">Галерея</h2>
+            <div class="gallery-section__description">Кадры социальной активности компании</div>
+        </div>
+        {{galleryList(items)}}
+        <div class="gallery-section__bottom">
+            <a href="{{baseUrl}}gallery/" class="gallery-section__see-more button_secondary button_size-sm">Смотреть всю
+                галерею</a>
+        </div>
+    </div>
+
+</section>
+{%endmacro%}

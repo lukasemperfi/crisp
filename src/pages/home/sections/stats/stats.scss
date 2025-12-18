@@ -1,0 +1,91 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.stats {
+  $label-size: functions.fluidValue(11px, 18px, 360px, 1920px);
+  $container-width: calc(1190px + $label-size);
+  padding-top: functions.fluidValue(50px, 70px, 360px, 1920px);
+  padding-bottom: functions.fluidValue(50px, 87px, 360px, 1920px);
+
+  &__container {
+    max-width: $container-width;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: space-between;
+
+    @include mixins.respond-to(lg-sm) {
+      justify-content: space-around;
+    }
+
+    @include mixins.respond-to(md) {
+      grid-template-columns: repeat(2, max-content);
+      grid-template-rows: repeat(2, max-content);
+      justify-content: center;
+      gap: functions.fluidValue(30px, 100px, 360px, 1023px);
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__value {
+    font-family: var(--font-family-secondary);
+    font-weight: 800;
+    font-size: functions.fluidValue(36px, 72px, 360px, 1920px);
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    position: relative;
+    padding-inline: $label-size;
+  }
+
+  &__unit {
+    position: absolute;
+    top: 19%;
+    right: -1.5%;
+    z-index: 1;
+    font-family: var(--font-family-primary);
+    font-weight: 900;
+    font-size: $label-size;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+  }
+
+  &__label {
+    font-family: var(--font-family-primary);
+    font-weight: 400;
+    font-size: $label-size;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: var(--foreground);
+  }
+
+  &__item:nth-child(1) .stats__label {
+    max-width: 110px;
+  }
+
+  &__item:nth-child(2) .stats__label {
+    max-width: 110px;
+  }
+  &__item:nth-child(3) .stats__label {
+    max-width: 305px;
+  }
+  &__item:nth-child(4) .stats__label {
+    max-width: 150px;
+  }
+
+  &__item:nth-child(1) .stats__label,
+  &__item:nth-child(2) .stats__label,
+  &__item:nth-child(3) .stats__label,
+  &__item:nth-child(4) .stats__label {
+    @include mixins.respond-to(md) {
+      max-width: functions.fluidValue(130px, 190px, 360px, 1023px);
+    }
+  }
+}

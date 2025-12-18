@@ -1,0 +1,37 @@
+.flag {
+  font-family: var(--font-family-primary);
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--foreground-secondary);
+  text-transform: uppercase;
+  background-color: gray;
+  padding-top: 10px;
+  display: inline-flex;
+  justify-content: center;
+  position: absolute;
+  top: 20px;
+  left: -2px;
+  z-index: 1;
+  width: 82px;
+  aspect-ratio: 2.636;
+  clip-path: shape(
+    from 5.04% 0%,
+    curve to 0% 16.38% with 5.04% 0%/0% 2.71%,
+    curve to 0% 100% with 0% 30.05%/0% 100%,
+    curve to 5.04% 83.15% with 0% 100%/0.56% 83.15%,
+    hline to 100%,
+    line to 90.32% 40.1%,
+    line to 100% 0%,
+    hline to 5.04%,
+    close
+  );
+
+  &_sale {
+    background-color: #dd133b;
+  }
+
+  &_new {
+    background-color: #e1843e;
+  }
+}

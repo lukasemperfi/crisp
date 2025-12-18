@@ -1,0 +1,108 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.manufacturer {
+  padding-top: functions.fluidValue(50px, 100px, 360px, 1920px);
+  padding-bottom: functions.fluidValue(50px, 90px, 360px, 1920px);
+  background-color: var(--background-secondary);
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 700px;
+    grid-template-rows: 472px;
+
+    gap: 32px;
+
+    @include mixins.respond-to(lg-sm) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      justify-items: center;
+    }
+  }
+
+  &__col-1 {
+    padding-top: 27px;
+
+    @include mixins.respond-to(lg-sm) {
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 700px;
+    }
+  }
+
+  &__col-2 {
+    aspect-ratio: 700 / 472;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  &__title {
+    margin-bottom: functions.fluidValue(14px, 42px, 360px, 1920px);
+    text-align: left;
+  }
+
+  &__description {
+    font-family: var(--font-family-primary);
+    font-weight: 500;
+    font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    max-width: 480px;
+    line-height: 25px;
+    display: flex;
+    gap: 29px;
+    flex-direction: column;
+
+    @include mixins.respond-to(lg-sm) {
+      max-width: 100%;
+    }
+  }
+
+  &__highlight {
+    color: var(--foreground-tertiary);
+    font-weight: 600;
+  }
+
+  &__button {
+    margin-top: 49px;
+    font-size: 14px;
+    padding-inline: 43px;
+  }
+}
+
+.manufacturer-slider {
+  height: 100%;
+  &__prev,
+  &__next {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 58px;
+    background-color: var(--background-tertiary);
+    color: var(--foreground-secondary);
+    @include mixins.prevent-text-selection();
+    cursor: pointer;
+  }
+
+  &__prev {
+    left: 0;
+  }
+  &__next {
+    left: 69px;
+  }
+
+  .swiper-button-disabled {
+    cursor: auto;
+  }
+
+  .swiper-button-disabled svg {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

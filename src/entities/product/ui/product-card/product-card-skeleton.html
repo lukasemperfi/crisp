@@ -1,0 +1,31 @@
+{% from "src/shared/ui/skeleton/skeleton.html" import skeleton%}
+
+{%macro productCardSkeleton()%}
+<div class="product-card product-card-skeleton">
+    {{skeleton(class="product-card__image-wrapper",style="border-radius: inherit;")}}
+    <div class="product-card__middle">
+        {{skeleton(height="21px", class="product-card__title")}}
+        {{skeleton(height="19px", width="85px",class="product-card__sku sku")}}
+        <div class="product-card__description">
+            {{skeleton(height="17px")}}
+            {{skeleton(height="17px", width="85px",style="margin-top: 4px;")}}
+        </div>
+
+        <div class="product-card__attributes">
+            <div class="weight__value-wrapper">
+                {{skeleton(width="85px", height="16px")}}
+                {{skeleton(width="85px", height="16px", style="margin-top: 4px;")}}
+            </div>
+            <div class="packaging__value-wrapper">
+                {{skeleton(width="85px", height="16px")}}
+                {{skeleton(width="85px", height="16px", style="margin-top: 4px;")}}
+            </div>
+        </div>
+    </div>
+    <div class="product-card__bottom">
+        {{skeleton(height="19px", width="85px", class="bottom__price price")}}
+        {{skeleton(height="41px", width="124px", class="bottom__button")}}
+
+    </div>
+</div>
+{%endmacro%}

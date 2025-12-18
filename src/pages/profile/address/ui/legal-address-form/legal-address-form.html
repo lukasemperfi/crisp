@@ -1,0 +1,63 @@
+{%from "src/shared/ui/form-field/form-field.html" import formField%}
+{%from "src/shared/ui/button/button.html" import button%}
+{%from "src/shared/ui/dropdown/dropdown.html" import dropdown%}
+
+{%macro legalAddressForm()%}
+<div class="legal-address-form-wrapper" style="display: none;">
+    <form action="#" class="legal-address-form" id="legal-address-form">
+        <div class="legal-address-form__item form-item">
+            <div class="form-item__title">1. Реквизиты</div>
+            <div class="form-item__fields">
+                {{ formField(name="legal_entity_okpo", placeholder="ОКПО", id="legal-entity-address-okpo") }}
+            </div>
+        </div>
+        <div class="legal-address-form__item form-item address-form__item_contacts">
+            <div class="form-item__title">2. Адрес</div>
+            <div class="form-item__fields">
+                {{dropdown(name="country",
+                class="legal-address-form__country-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Страна", id="legal-address-country")}}
+                {{dropdown(name="region", class="legal-address-form__region-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Область", id="legal-address-region")}}
+                {{ formField(name="city", placeholder="Город", required=true, id="legal-address-city") }}
+                {{ formField(name="address", placeholder="Адрес", id="legal-address-address") }}
+            </div>
+        </div>
+        <div class="legal-address-form__item form-item">
+            <div class="form-item__title">2. Юридический адрес</div>
+            <div class="form-item__fields">
+                {{dropdown(name="legal_entity_country",
+                class="legal-address-form__legal-entity-country-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Страна", id="legal-entity-address-country")}}
+                {{dropdown(name="legal_entity_region",
+                class="legal-address-form__legal-entity-region-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Область", id="legal-entity-address-region")}}
+                {{ formField(name="legal_entity_city", placeholder="Город", required=true,
+                id="legal-entity-address-city") }}
+                {{ formField(name="legal_entity_address", placeholder="Адрес", id="legal-entity-address-address") }}
+                {{ formField(name="legal_entity_postal_code", placeholder="Индекс",
+                id="legal-entity-address-postal-code") }}
+            </div>
+        </div>
+        <div class="legal-address-form__footer">
+            {{button(text="Сохранить", class="button_primary button_size-lg legal-address-form__submit-btn")}}
+        </div>
+    </form>
+    <div class="legal-address-form-wrapper__image">
+        <img src="/images/auth/address.jpg" alt="banner">
+        <div class="legal-address-form-wrapper__content">
+            <div class="legal-address-form-wrapper__title">
+                Орех Причерноморья
+            </div>
+            <div class="legal-address-form-wrapper__text">
+                Единственный в Украине сад совместного выращивания фундука и грецкого ореха
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endmacro%}

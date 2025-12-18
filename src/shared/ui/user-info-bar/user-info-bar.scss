@@ -1,0 +1,72 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.user-info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 72px;
+  row-gap: 14px;
+  padding-block: 46px;
+
+  @include mixins.respond-to(lg-sm) {
+    column-gap: functions.fluidValue(24px, 72px, 360px, 1920px);
+    padding-block: functions.fluidValue(20px, 46px, 360px, 1920px);
+  }
+
+  &__title {
+    font-family: var(--font-family-secondary);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 32px;
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    white-space: nowrap;
+
+    @include mixins.respond-to(lg-sm) {
+      font-size: functions.fluidValue(24px, 32px, 360px, 1920px);
+    }
+  }
+
+  .manager-contacts {
+    &__name {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 33px;
+      letter-spacing: 0.01em;
+      color: var(--foreground);
+      white-space: nowrap;
+
+      @include mixins.respond-to(sm) {
+        font-size: 14px;
+      }
+    }
+
+    &__phone {
+      font-family: var(--font-family-secondary);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: var(--foreground-tertiary);
+      display: flex;
+      gap: 6px;
+
+      @include mixins.respond-to(sm) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__meta {
+    font-family: var(--font-family-secondary);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--foreground-tertiary);
+    justify-self: flex-end;
+    line-height: 32px;
+
+    @include mixins.respond-to(sm) {
+      font-size: 14px;
+    }
+  }
+}

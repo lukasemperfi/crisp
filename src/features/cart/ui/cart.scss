@@ -1,0 +1,25 @@
+.cart {
+  position: relative;
+  overflow-x: auto;
+
+  .table {
+    justify-content: space-between;
+  }
+
+  &__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(1px);
+    background: rgba(0, 0, 0, 0.1);
+
+    &:not(.show) .spinner {
+      display: none;
+    }
+
+    .spinner {
+      border: 5px solid var(--background);
+      border-top-color: transparent;
+    }
+  }
+}

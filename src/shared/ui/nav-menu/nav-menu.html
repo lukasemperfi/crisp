@@ -1,0 +1,12 @@
+{%macro navMenu(items, menuClass, linkClass="")%}
+<nav class="nav-menu {% if menuClass %}{{menuClass}}{% endif %}">
+    <ul class="nav-menu__list">
+        {%for item in items%}
+        <li class="nav-menu__item">
+            <a class="nav-menu__link {{linkClass}}" href="{{item.href}}" name="{{item.label}}"
+                aria-label="{{item.label}}">{{item.label}}</a>
+        </li>
+        {%endfor%}
+    </ul>
+</nav>
+{%endmacro%}

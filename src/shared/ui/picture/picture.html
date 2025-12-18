@@ -1,0 +1,10 @@
+{% macro picture(jpgSrc, webpSrc, alt, class, loading="lazy", fetchpriority="auto") %}
+{% set isLazy = (loading !== "eager") %}
+
+<picture>
+    <source type="image/webp" {% if isLazy %} data-srcset="{{ webpSrc }}" {% else %} srcset="{{ webpSrc }}" {% endif %}>
+    <img class="{{ class }} {% if isLazy %}lazy{% endif %}" alt="{{ alt }}" {% if loading==="eager" %} loading="eager"
+        {% endif %} fetchpriority="{{ fetchpriority }}" {% if isLazy %} data-src="{{ jpgSrc }}" {% else %}
+        src="{{ jpgSrc }}" {% endif %}>
+</picture>
+{% endmacro %}

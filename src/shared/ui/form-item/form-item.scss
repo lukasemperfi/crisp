@@ -1,0 +1,44 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.form-item {
+  margin-bottom: 49px;
+
+  &_contacts {
+    grid-area: contacts;
+  }
+  &_address {
+    grid-area: address;
+  }
+  &_password {
+    grid-area: password;
+    margin-bottom: 0;
+
+    @include mixins.respond-to(md) {
+      margin-bottom: 49px;
+    }
+  }
+  &_person-type {
+    grid-area: person-type;
+  }
+  &_entity-details {
+    grid-area: entity-details;
+    margin-bottom: 0;
+  }
+
+  &__title {
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 32px;
+    letter-spacing: 0.01em;
+    color: var(--foreground);
+    margin-bottom: 21px;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+}

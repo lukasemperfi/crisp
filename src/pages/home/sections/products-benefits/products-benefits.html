@@ -1,0 +1,80 @@
+{%from "src/shared/ui/icons/icons.html" import walnut as walnutIcon%}
+{%from "src/shared/ui/icons/icons.html" import hazelnut as hazelnutIcon%}
+{%from "src/shared/ui/icons/icons.html" import rosehip as rosehipIcon%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+{% macro productsBenefits()%}
+<section class="products-benefits">
+    <div class="page-container">
+        <div class="products-benefits__title title-h2">О пользе продукта</div>
+        <div class="products-benefits__description title-h2-description">
+            Каждый вид ореха содержит свой неповторимый уникальный
+            баланс витаминов, и микроэлементов </div>
+
+        <div class="products-benefits__grid grid">
+            <div class="grid__item">
+                <div class="grid__image-wrapper">
+                    {{picture("/images/home-page/products-benefits/walnut.jpg",
+                    "/images/home-page/products-benefits/walnut.webp", "grid__image")}}
+                </div>
+                <div class="grid__icon-wrapper">
+                    {{walnutIcon()}}
+                </div>
+                <div class="grid__title">Грецкий орех</div>
+                <div class="grid__description">
+                    <p class="grid__paragraph">
+                        Дерево жизни - так часто величают грецкий орех, поскольку с
+                        давних пор он кормил, восстанавливал
+                        силы и лечил человека.
+                    </p>
+                    <p class="grid__paragraph">
+                        Даже небольшая горсть грецких орехов - это кладезь витаминов
+                        и хорошая профилактика многих заболеваний
+                    </p>
+                </div>
+            </div>
+            <div class="grid__item">
+                <div class="grid__image-wrapper">
+                    {{picture("/images/home-page/products-benefits/hazelnut.jpg",
+                    "/images/home-page/products-benefits/hazelnut.webp", "grid__image")}}
+                </div>
+                <div class="grid__icon-wrapper">
+                    {{hazelnutIcon()}}
+                </div>
+                <div class="grid__title">Фундук</div>
+                <div class="grid__description">
+                    <p class="grid__paragraph">
+                        Фундук издавна считают символом силы и долголетия — его ядра питательны, вкусны и придают
+                        энергию.
+                    </p>
+                    <p class="grid__paragraph">
+                        Всего горсть фундука в день поддерживает здоровье сердца, укрепляет иммунитет и улучшает
+                        настроение.
+                    </p>
+                </div>
+            </div>
+            <div class="grid__item">
+                <div class="grid__image-wrapper">
+                    {{picture("/images/home-page/products-benefits/rose-hip.jpg",
+                    "/images/home-page/products-benefits/rose-hip.webp", "grid__image")}}
+                </div>
+                <div class="grid__icon-wrapper">
+                    {{rosehipIcon()}}
+                </div>
+                <div class="grid__title">Шиповник</div>
+                <div class="grid__description">
+                    <p class="grid__paragraph">
+                        Шиповник называют природным источником молодости — его ягоды наполняют организм жизненной силой
+                        и свежестью.
+                    </p>
+                    <p class="grid__paragraph">
+                        Всего горсть сушёных плодов укрепляет иммунитет, поддерживает здоровье сердца и помогает
+                        восстановить энергию.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{%endmacro%}

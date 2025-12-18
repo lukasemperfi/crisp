@@ -1,0 +1,44 @@
+{%from "src/widgets/header/header.html" import header%}
+{%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
+{%from "src/widgets/contacts-section/contacts-section.html" import contactsSection%}
+{%from "src/widgets/footer/footer.html" import footer%}
+{%from "src/widgets/news-section/news-section.html" import newsSection%}
+{%from "src/pages/production/sections/hero/hero.html" import hero%}
+{%from "src/pages/production/sections/producer-section/producer-section.html" import producerSection%}
+{%from "src/pages/production/sections/owner-section/owner-section.html" import ownerSection%}
+{%from "src/widgets/stats/stats.html" import statsSection%}
+{%from "src/pages/production/sections/gallery-section/gallery-section.html" import gallerySection%}
+{%from "src/widgets/eco/eco.html" import eco%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy the best nuts. Fresh, tasty, and delivered straight to your door.">
+    <title>Production Page</title>
+    <link rel="stylesheet" href="./production-page.scss">
+</head>
+
+<body>
+    {{header(baseUrl)}}
+    <main>
+        {{hero(baseUrl)}}
+        {{producerSection(baseUrl)}}
+        {{ownerSection()}}
+        {{statsSection()}}
+        {{gallerySection(baseUrl)}}
+        {{eco(image={jpg: "/images/production-page/eco.jpg", webp: "/images/production-page/eco.webp"})}}
+        {{newsSection(baseUrl)}}
+        {{contactsSection()}}
+        {{footer(baseUrl)}}
+    </main>
+    <div class="portal-root">
+        {{mobileMenu(baseUrl)}}
+    </div>
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="./production-page.js"></script>
+</body>
+
+</html>

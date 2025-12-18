@@ -1,0 +1,129 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.contacts-section {
+  padding-top: functions.fluidValue(25px, 102px, 360px, 1920px);
+  padding-bottom: functions.fluidValue(25px, 90px, 360px, 1920px);
+
+  &_color_secondary {
+    background-color: var(--background-secondary);
+  }
+
+  &__content {
+    // display: flex;
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 739px);
+    gap: functions.fluidValue(24px, 50px, 360px, 1920px);
+
+    @include mixins.respond-to(lg-sm) {
+      grid-template-columns: minmax(0, 739px);
+      justify-content: center;
+    }
+  }
+
+  &__col-1 {
+    flex: 1;
+    padding-top: 11px;
+    padding-bottom: 34px;
+  }
+
+  &__col-2 {
+    flex: 1 1 14.574%;
+    aspect-ratio: 739/518;
+  }
+
+  &__title {
+    text-align: left;
+    margin-bottom: functions.fluidValue(14px, 74px, 360px, 1920px);
+
+    @include mixins.respond-to(lg-sm) {
+      text-align: center;
+    }
+  }
+
+  &__info {
+    display: grid;
+    // flex-direction: column;
+    gap: functions.fluidValue(30px, 46px, 360px, 1920px);
+
+    @include mixins.respond-to(lg-sm) {
+      grid-template-columns: repeat(2, max-content);
+      grid-template-rows: repeat(2, 1fr);
+      justify-content: space-between;
+    }
+
+    @include mixins.respond-to(661px) {
+      grid-template-columns: max-content;
+      grid-template-rows: auto;
+      justify-content: center;
+    }
+  }
+
+  .info-item {
+    display: grid;
+    grid-template-columns: 16px max-content;
+    column-gap: 14px;
+    align-items: center;
+
+    &_type_secondary {
+      grid-template-columns: 16px max-content;
+      grid-template-areas:
+        "icon-wrapper title"
+        ". label";
+      align-items: baseline;
+      row-gap: 18px;
+
+      .info-item__icon-wrapper {
+        grid-area: icon-wrapper;
+      }
+
+      .info-item__title {
+        grid-area: title;
+      }
+
+      .info-item__label {
+        grid-area: label;
+      }
+    }
+
+    &__icon-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__label {
+      font-family: var(--font-family-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.01em;
+      color: var(--foreground);
+    }
+
+    &__title {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 0.01em;
+      color: var(--foreground);
+    }
+
+    .contacts-block {
+      gap: 47px;
+    }
+
+    .contacts-block__phone {
+      font-family: var(--font-family-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+  }
+
+  &__map {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    display: block;
+  }
+}

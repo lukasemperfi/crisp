@@ -1,0 +1,34 @@
+{%from "src/widgets/header/header.html" import header%}
+{%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
+{%from "src/widgets/contacts-section/contacts-section.html" import contactsSection%}
+{%from "src/widgets/footer/footer.html" import footer%}
+{%from "src/pages/one-news/sections/breadcrumbs/breadcrumbs.html" import newsPageBreadcrumbs%}
+{%from "src/pages/one-news/sections/content/content.html" import oneNewsContentSection%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy the best nuts. Fresh, tasty, and delivered straight to your door.">
+    <title>One News Page</title>
+    <link rel="stylesheet" href="./one-news-page.scss">
+</head>
+
+<body>
+    {{header(baseUrl)}}
+    <main>
+        {{newsPageBreadcrumbs()}}
+        {{oneNewsContentSection(baseUrl)}}
+        {{contactsSection(class="contacts-section_color_secondary")}}
+        {{footer(baseUrl)}}
+    </main>
+    <div class="portal-root">
+        {{mobileMenu(baseUrl)}}
+    </div>
+    <script type="module" src="../main.js"></script>
+    <script type="module" src="./one-news-page.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.button {
+  font-family: var(--font-family-primary);
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  width: fit-content;
+
+  &_primary {
+    background-color: var(--background-tertiary);
+    color: var(--foreground-secondary);
+    border: 1.5px solid var(--background-tertiary);
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: transparent;
+        color: var(--foreground-tertiary);
+        border: 1.5px solid var(--border-color-secondary);
+      }
+    }
+  }
+
+  &_secondary {
+    background-color: transparent;
+    color: var(--foreground-tertiary);
+    border: 1.5px solid var(--border-color-secondary);
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+
+    path {
+      transition: fill 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--background-tertiary);
+        color: var(--foreground-secondary);
+
+        path {
+          fill: var(--foreground-secondary);
+        }
+      }
+    }
+  }
+
+  &_size-sm {
+    font-weight: 600;
+    font-size: 13px;
+    padding-block: 12px;
+    padding-inline: 22px;
+  }
+
+  &_size-md {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    padding-block: 16px;
+    padding-inline: 27px;
+  }
+
+  &_size-lg {
+    font-weight: 700;
+    font-size: 15px;
+    padding-inline: functions.fluidValue(25px, 44px, 360px, 1920px);
+    padding-block: functions.fluidValue(14px, 15px, 360px, 1920px);
+  }
+
+  &_size-xl {
+    font-weight: 700;
+    font-size: 15px;
+    padding-inline: functions.fluidValue(25px, 66px, 360px, 1920px);
+    padding-block: functions.fluidValue(14px, 15px, 360px, 1920px);
+  }
+
+  &_fill {
+    width: 100%;
+  }
+}

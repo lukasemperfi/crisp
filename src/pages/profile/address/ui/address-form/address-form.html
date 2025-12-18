@@ -1,0 +1,28 @@
+{%from "src/shared/ui/form-field/form-field.html" import formField%}
+{%from "src/shared/ui/button/button.html" import button%}
+{%from "src/shared/ui/upload-photo/upload-photo.html" import uploadPhoto%}
+{%from "src/shared/ui/dropdown/dropdown.html" import dropdown%}
+
+{%macro addressForm(baseUrl)%}
+<form action="#" class="address-form" id="address-form" style="display: none;">
+    <div class="address-form__body">
+        <div class="address-form__title">Адрес</div>
+        <div class="address-form__item form-item address-form__item_contacts">
+            <div class="form-item__fields">
+                {{dropdown(name="country",
+                class="address-form__country-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Страна", id="address-country")}}
+                {{dropdown(name="region", class="address-form__region-dropdown
+                dropdown_select dropdown_highlight-selected",
+                placeholder="Область", id="address-region")}}
+                {{ formField(name="city", placeholder="Город", required=true, id="address-city") }}
+                {{ formField(name="address", placeholder="Адрес", id="address-address") }}
+            </div>
+        </div>
+    </div>
+    <div class="address-form__footer">
+        {{button(text="Сохранить", class="button_primary button_size-lg address-form__submit-btn")}}
+    </div>
+</form>
+{%endmacro%}

@@ -1,0 +1,113 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.form-field {
+  $dropdown-border-size: 0.5px;
+  $dropdown-active-border-size: 1px;
+
+  $dropdown-border-color: rgba(0, 0, 0, 0.15);
+  $dropdown-border: 0 0 0 $dropdown-border-size $dropdown-border-color;
+
+  $dropdown-active-border-color: var(--accent);
+  $dropdown-active-border: 0 0 0 $dropdown-active-border-size
+    $dropdown-active-border-color;
+
+  $dropdown-error-border: 0 0 0 $dropdown-active-border-size var(--error);
+
+  $padding-inline: 17px;
+  $padding-block: 13px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  position: relative;
+
+  &__input {
+    padding-block: $padding-block;
+    padding-inline: $padding-inline;
+    box-shadow: $dropdown-border;
+    transition: box-shadow 0.15s ease;
+    font-family: var(--font-family-secondary);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--foreground);
+
+    @include mixins.respond-to(sm) {
+      font-size: 12px;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba(51, 125, 90, 0.1);
+      }
+    }
+
+    &:focus:not(.form-field__input_error) {
+      box-shadow: $dropdown-active-border;
+    }
+
+    &::placeholder {
+      font-family: var(--font-family-secondary);
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 17px;
+      color: var(--foreground);
+
+      @include mixins.respond-to(sm) {
+        font-size: 12px;
+      }
+    }
+
+    &_error {
+      box-shadow: $dropdown-error-border;
+
+      &[type="checkbox"] + label::before {
+        border-color: var(--error);
+      }
+    }
+  }
+
+  &__error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: 12px;
+    font-family: var(--font-family-secondary);
+    color: var(--error);
+    line-height: 1.2;
+    white-space: nowrap;
+
+    @include mixins.respond-to(sm) {
+      font-size: 10px;
+    }
+  }
+
+  &__icon-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 14px;
+    pointer-events: none;
+
+    & .form-field__icon {
+      width: 14px;
+      height: 14px;
+      transform: translateY(0) rotateX(0);
+      transition: all 0.3s ease;
+
+      path {
+        fill: var(--border-color-secondary);
+      }
+    }
+  }
+
+  &__selected {
+    max-width: 80%;
+  }
+}

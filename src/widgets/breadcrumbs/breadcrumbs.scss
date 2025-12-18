@@ -1,0 +1,43 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__link {
+    display: inline-flex;
+    color: var(--foreground-secondary);
+    font-weight: 600;
+    font-size: functions.fluidValue(11px, 14px, 360px, 1920px);
+    letter-spacing: 0.02em;
+    padding-block: 5px;
+
+    @media (hover: hover) {
+      &:not(.breadcrumbs__link_current):hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: functions.fluidValue(9px, 12px, 360px, 1920px);
+    height: functions.fluidValue(9px, 12px, 360px, 1920px);
+    margin-inline: functions.fluidValue(4px, 10px, 360px, 1920px);
+  }
+
+  &_color_muted {
+    .breadcrumbs__link {
+      color: var(--muted-text);
+    }
+
+    .breadcrumbs__icon path {
+      fill: var(--muted-text);
+    }
+  }
+}

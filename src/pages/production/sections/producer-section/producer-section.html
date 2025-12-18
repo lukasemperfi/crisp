@@ -1,0 +1,39 @@
+{%from "src/widgets/producer/producer.html" import producer%}
+
+{%macro producerSectionDescription()%}
+<div class="producer__description">
+    <p>Сельскохозяйственный обслуживающий кооператив “Орех Причерноморья” выращивает смешанные сады ореха грецкого с
+        фундуком, а также ореха грецкого с шиповником, на площади более 150 гектаров.</p>
+    <p>Помимо этого кооператив занимается выращиванием посадочного материала, саженцов привитого и непривитого грецкого
+        ореха, фундука и шиповника.</p>
+    <p>Предприятие укомплектовано всей необходимой техникой и оборудованием для выращивания интенсивного сада,
+        воспроизводства саженцев в питомнике и выращивания трюфеля.</p>
+</div>
+{%endmacro%}
+
+{%macro producerSection(baseUrl)%}
+{%set sliderItems = [
+{
+image: {src: '/images/production-page/producer.jpg', webpSrc: '/images/production-page/producer.webp', alt:
+'producer-1'},
+video: {src: baseUrl + 'videos/home-page/manufacturer.mp4'}
+},
+{
+image: {
+src: '/images/production-page/producer.jpg', webpSrc: '/images/production-page/producer.webp', alt:'producer-2'},
+video: {src: baseUrl + 'videos/home-page/manufacturer.mp4'}
+},
+{
+image: {src: '/images/production-page/producer.jpg', webpSrc: '/images/production-page/producer.webp', alt:
+'producer-3'},
+video: {src: baseUrl + 'videos/home-page/manufacturer.mp4'}
+},
+{
+image: {src: '/images/production-page/producer.jpg', webpSrc: '/images/production-page/producer.webp', alt:
+'producer-4'},
+video: {src: baseUrl + 'videos/home-page/manufacturer.mp4'}
+}
+]%}
+
+{{producer(baseUrl, sliderItems, content=producerSectionDescription(), class="producer-section")}}
+{%endmacro%}

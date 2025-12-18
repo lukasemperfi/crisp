@@ -1,0 +1,21 @@
+{% from "src/features/product-filters/ui/product-filters-bar.html" import productFiltersBar%}
+{%from "src/entities/product/ui/product-list/product-list-skeleton.html" import productListSkeleton%}
+
+
+{%macro products()%}
+<section class="products">
+    <div class="page-container">
+        <div class="products__filters">
+            {{productFiltersBar()}}
+        </div>
+        <div class="products__list">
+            <div class="products__catalog">
+                {{ productListSkeleton() }}
+            </div>
+            <a class="button button_secondary button_size-md products__button" href="#" name="products-button"
+                aria-label="Загрузить еще товары">Загрузить
+                еще</a>
+        </div>
+    </div>
+</section>
+{%endmacro%}

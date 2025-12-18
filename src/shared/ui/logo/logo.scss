@@ -1,0 +1,46 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  &__image {
+    width: 54px;
+    height: 53px;
+  }
+  &__text {
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--foreground);
+    text-align: left;
+  }
+
+  &_vertical {
+    flex-direction: column;
+
+    .logo__text {
+      text-align: center;
+    }
+  }
+
+  &_size_xs {
+    .logo__image {
+      width: 29px;
+      height: 28px;
+    }
+    .logo__text {
+      font-size: 11px;
+    }
+  }
+
+  &_size_sm {
+    .logo__image {
+      width: 34px;
+      height: 33px;
+    }
+    .logo__text {
+      font-size: 12px;
+    }
+  }
+}

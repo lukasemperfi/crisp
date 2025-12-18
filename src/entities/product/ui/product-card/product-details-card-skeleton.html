@@ -1,0 +1,34 @@
+{% from "src/shared/ui/skeleton/skeleton.html" import skeleton%}
+
+{% macro productDetailsCardSkeleton()%}
+<div class="product-details-card">
+    <div class="product-details-card__col-1" style="padding-top: 0;">
+        {{skeleton(class="product-details-card__image-wrapper")}}
+    </div>
+    <div class="product-details-card__col-2">
+        <div class="product-details-card__info info">
+            <div class="info__top">
+                {{skeleton(height="21px", width="30%")}}
+                {{skeleton(height="21px", width="80px")}}
+            </div>
+            {{skeleton(height="30px", width="68%", style="margin-bottom: 8px;")}}
+            {{skeleton(height="30px", width="30%", class="info__subtitle")}}
+            <div class="info__properties properties" style="grid-template-columns: 30% 1fr;">
+                {{skeleton(height="21px")}}
+                {{skeleton(height="21px", style="margin-bottom: 25px;")}}
+                {{skeleton(height="21px")}}
+                {{skeleton(height="21px", style="margin-bottom: 25px;")}}
+                {{skeleton(height="21px")}}
+                {{skeleton(height="21px", style="margin-bottom: 25px;")}}
+                {{skeleton(height="21px")}}
+                {{skeleton(height="21px", style="margin-bottom: 25px;")}}
+            </div>
+            {{skeleton(height="106px", width="100%", style="margin-bottom: 36px;")}}
+            <div class="info__bottom" style="align-items: baseline;">
+                {{skeleton(height="30px", width="40%")}}
+                {{skeleton(height="51px", width="190px")}}
+            </div>
+        </div>
+    </div>
+</div>
+{%endmacro%}

@@ -1,0 +1,42 @@
+{%from "src/shared/ui/logo/logo.html" import logo%}
+{%from "src/shared/ui/nav-menu/nav-menu.html" import navMenu%}
+{%from "src/shared/ui/socials/socials.html" import socials%}
+
+
+
+
+{%macro footer(baseUrl)%}
+{%set navItems = [
+{href: baseUrl + "catalog/", label: "Магазин"},
+{href: baseUrl + "corporate-customers/", label: "Корпоративным клиентам"},
+{href: baseUrl + 'payment-delivery/', label: "Оплата и доставка"},
+{href: baseUrl + 'production/', label: "О производстве"},
+{href: baseUrl + "news/", label: "Новости и статьи"},
+{href: baseUrl + "gallery/", label: "Галерея"}
+]%}
+
+<footer class="page-footer">
+    <div class="page-footer__content">
+        <div class="page-footer__main page-footer-main">
+            <div class="page-container">
+                <div class="page-footer-main__content">
+                    {{ logo(baseUrl) }}
+                    {{ navMenu(navItems, "nav-menu_horizontal") }}
+                </div>
+            </div>
+        </div>
+        <div class="page-footer__bottom page-footer-bottom">
+            <div class="page-container">
+                <div class=" page-footer-bottom__content">
+                    <div class="page-footer__developer">Разработано <strong
+                            class="page-footer-bottom__highlight page-footer-bottom__highlight_bold">AVADA</strong>
+                        <strong class="page-footer-bottom__highlight"> MEDIA</strong>
+                    </div>
+                    <div class="page-footer__copyright">Copyright © 2019. Все права защищены</div>
+                    {{socials()}}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{%endmacro%}

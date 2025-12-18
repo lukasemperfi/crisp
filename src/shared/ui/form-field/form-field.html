@@ -1,0 +1,24 @@
+{% macro formField(name, label='', value='', type='text', error='', placeholder='', required=false, id='') %}
+{% if not id %}
+{% set id = name %}
+{% endif %}
+
+<div class="form-field" data-input-wrapper>
+    {% if label %}
+    <label class="form-field__label" for="{{ id }}">{{ label }}</label>
+    {% endif %}
+
+    {% if required %}
+    {% set finalPlaceholder = placeholder + "*" %}
+    {% else %}
+    {% set finalPlaceholder = placeholder %}
+    {% endif %}
+
+    <input class="form-field__input{% if error %} form-field__input_error{% endif %}" type="{{ type }}" id="{{ id }}"
+        name="{{ name }}" value="{{ value }}" placeholder="{{ finalPlaceholder }}" autocomplete="off" data-input>
+
+    {% if error %}
+    <span class="form-field__error">{{ error }}</span>
+    {% endif %}
+</div>
+{% endmacro %}

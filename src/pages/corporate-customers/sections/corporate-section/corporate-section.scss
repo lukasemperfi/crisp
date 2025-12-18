@@ -1,0 +1,186 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.corporate-section {
+  $bp-tablet: 1063px;
+  $bp-mobile: 999px;
+
+  padding-top: functions.fluidValue(20px, 80px, 360px, 1920px);
+
+  .corporate-description {
+    display: flex;
+    margin-bottom: functions.fluidValue(20px, 52px, 360px, 1920px);
+
+    @include mixins.respond-to($bp-tablet) {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    &__title {
+      font-weight: 800;
+      font-size: 45px;
+      letter-spacing: 0.01em;
+      color: var(--foregroud);
+      flex: 1 1 410px;
+      margin-right: 111px;
+
+      @include mixins.respond-to(lg-sm) {
+        font-size: functions.fluidValue(20px, 45px, 360px, 1920px);
+        margin-right: functions.fluidValue(20px, 111px, 360px, 1920px);
+      }
+
+      @include mixins.respond-to($bp-tablet) {
+        margin-right: 0;
+
+        br {
+          display: none;
+        }
+      }
+    }
+
+    &__text {
+      font-weight: 500;
+      font-size: functions.fluidValue(14px, 16px, 360px, 1920px);
+      line-height: 24px;
+      color: var(--foregroud);
+      flex: 1 1 770px;
+      padding-top: 13px;
+      display: flex;
+      gap: 61px;
+
+      @include mixins.respond-to(lg-sm) {
+        gap: functions.fluidValue(20px, 61px, 360px, 1920px);
+      }
+
+      @include mixins.respond-to($bp-tablet) {
+        padding-top: 0;
+      }
+
+      @include mixins.respond-to(560px) {
+        flex-direction: column;
+      }
+    }
+
+    &__text-col-1,
+    &__text-col-2 {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  &__tabs {
+    padding-top: functions.fluidValue(20px, 69px, 360px, 1920px);
+    padding-bottom: functions.fluidValue(10px, 23px, 360px, 1920px);
+
+    .tabs__nav-wrapper {
+      @include mixins.pageContainer();
+
+      @include mixins.respond-to(lg-sm) {
+        justify-content: space-between;
+        gap: 16px;
+      }
+    }
+
+    .tabs__content {
+      padding-block: functions.fluidValue(20px, 52px, 360px, 1920px);
+
+      @include mixins.pageContainer();
+    }
+
+    .tabs__nav-btn {
+      font-weight: 800;
+      font-size: functions.fluidValue(12px, 20px, 360px, 1920px);
+      line-height: 23px;
+      letter-spacing: 0.01em;
+      color: var(--foreground);
+      gap: 17px;
+      padding-top: 10px;
+      padding-bottom: 18px;
+      padding-inline: 0;
+    }
+
+    .tabs__nav-btn[aria-selected="true"] {
+      text-shadow: none;
+
+      path {
+        fill: var(--background-tertiary);
+      }
+    }
+
+    .tabs__nav-btn:nth-child(1) svg {
+      width: 37px;
+      height: 37px;
+    }
+
+    .tabs__nav-btn:nth-child(2) svg {
+      width: 37px;
+      height: 37px;
+    }
+    .tabs__nav-btn:nth-child(3) svg {
+      width: 49px;
+      height: 49px;
+    }
+    .tabs__nav-btn:nth-child(4) svg {
+      width: 45px;
+      height: 45px;
+    }
+    .tabs__nav-btn:nth-child(5) svg {
+      width: 43px;
+      height: 43px;
+    }
+
+    @include mixins.respond-to(lg-sm) {
+      .tabs__nav-btn:nth-child(1) svg {
+        width: functions.fluidValue(20px, 37px, 360px, 1920px);
+        height: functions.fluidValue(20px, 37px, 360px, 1920px);
+      }
+
+      .tabs__nav-btn:nth-child(2) svg {
+        width: functions.fluidValue(20px, 37px, 360px, 1920px);
+        height: functions.fluidValue(20px, 37px, 360px, 1920px);
+      }
+      .tabs__nav-btn:nth-child(3) svg {
+        width: functions.fluidValue(20px, 49px, 360px, 1920px);
+        height: functions.fluidValue(20px, 49px, 360px, 1920px);
+      }
+      .tabs__nav-btn:nth-child(4) svg {
+        width: functions.fluidValue(20px, 45px, 360px, 1920px);
+        height: functions.fluidValue(20px, 45px, 360px, 1920px);
+      }
+      .tabs__nav-btn:nth-child(5) svg {
+        width: functions.fluidValue(20px, 43px, 360px, 1920px);
+        height: functions.fluidValue(20px, 43px, 360px, 1920px);
+      }
+    }
+
+    .tabs__nav-label {
+      text-align: left;
+      @include mixins.respond-to(lg-sm) {
+        line-height: functions.fluidValue(15px, 23px, 360px, 1920px);
+      }
+    }
+
+    .product-info-card {
+      column-gap: 86px;
+    }
+
+    .product-info-card__text {
+      display: flex;
+      flex-direction: column;
+      gap: 27px;
+      max-width: 100%;
+      margin-bottom: 43px;
+
+      @include mixins.respond-to(lg-sm) {
+        gap: functions.fluidValue(12px, 27px, 360px, 1920px);
+        margin-bottom: functions.fluidValue(26px, 43px, 360px, 1920px);
+      }
+    }
+
+    .product-info-card__btn {
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
+}

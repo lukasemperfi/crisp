@@ -1,0 +1,49 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/contacts-block/contacts-block.html" import contactsBlock%}
+
+{% macro contactsSection(class="")%}
+<section class="contacts-section {{class}}">
+    <div class="page-container">
+        <div class="contacts-section__content">
+            <div class="contacts-section__col-1">
+                <div class="contacts-section__title title-h2">Контакты</div>
+                <div class="contacts-section__info info">
+                    <div class="info__item info-item">
+                        <div class="info-item__icon-wrapper">{{icons.phone()}}</div>
+                        <div class="info-item__content">
+                            {{contactsBlock(reverse=true, phone1Code="(095)", phone1="711 11 11", phone2Code="(095)",
+                            phone2="711 11 11")}}
+                        </div>
+                    </div>
+                    <div class="info__item info-item">
+                        <div class="info-item__icon-wrapper">{{icons.envelope()}}</div>
+                        <div class="info-item__label">
+                            nuts@nbsc.com.ua
+                        </div>
+                    </div>
+                    <div class="info__item info-item info-item_type_secondary">
+                        <div class="info-item__icon-wrapper">{{icons.house()}}</div>
+                        <div class="info-item__title">Офис и отдел продаж</div>
+                        <div class="info-item__label">
+                            Украина, г. Одесса,<br> ул. Космонавтов, 32
+                        </div>
+                    </div>
+                    <div class="info__item info-item info-item_type_secondary">
+                        <div class="info-item__icon-wrapper">{{icons.tree()}}</div>
+                        <div class="info-item__title">Производство</div>
+                        <div class="info-item__label">
+                            Украина, Одесская обл,<br> с. Яськи, ул. Центральная, 232
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="contacts-section__col-2">
+                <iframe class="contacts-section__map lazy"
+                    data-src="https://www.openstreetmap.org/export/embed.html?bbox=30.720439553260807%2C46.42226509089123%2C30.729398131370548%2C46.42558570182441&amp;layer=mapnik&amp;marker=46.42392542164024%2C30.724918842315674"
+                    title="map"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+{% endmacro %}

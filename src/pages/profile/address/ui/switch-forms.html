@@ -1,0 +1,9 @@
+{%from "src/pages/profile/address/ui/legal-address-form/legal-address-form.html" import legalAddressForm%}
+{%from "src/pages/profile/address/ui/address-form/address-form.html" import addressForm%}
+
+{% macro switchForms(baseUrl)%}
+<div>
+    {{legalAddressForm(baseUrl)}}
+    {{addressForm(baseUrl)}}
+</div>
+{%endmacro%}

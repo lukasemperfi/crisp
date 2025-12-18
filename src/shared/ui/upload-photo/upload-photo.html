@@ -1,0 +1,17 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+
+{%macro uploadPhoto(class="",text="Загрузить фото", id="avatar-upload", name="upload_file", baseUrl="/")%}
+<div class="upload-photo {{class}}" data-upload-photo data-placeholder="{{baseUrl}}images/auth/avatar.png">
+    <input type="file" id="{{id}}" accept="image/*" name="{{name}}" class="upload-photo__input" data-upload-input>
+
+    <label for="{{id}}" class="upload-photo__label" data-upload-label>
+        <img src="{{baseUrl}}images/auth/avatar.png" alt="" class="upload-photo__avatar" data-upload-preview>
+        <span class="upload-photo__text" data-upload-text>Загрузить фото</span>
+    </label>
+
+    <button type="button" class="upload-photo__remove" data-upload-remove>
+        {{icons.close()}}
+    </button>
+</div>
+
+{%endmacro%}

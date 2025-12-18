@@ -1,0 +1,31 @@
+{% from "src/shared/ui/skeleton/skeleton.html" import skeleton%}
+
+{%macro productDescriptionSkeleton()%}
+<div class="product-description">
+    <div class="product-description__col-1">
+        {{skeleton(height="100%",width="100%", class="product-description__image-wrapper")}}
+    </div>
+    <div class="product-description__col-2">
+        <div class="product-description__text" style="display: grid; row-gap: 10px;">
+            <p>
+                {{skeleton(height="25px", width="80%" )}}
+                {{skeleton(height="25px", width="70%" )}}
+                {{skeleton(height="25px", width="60%" )}}
+                {{skeleton(height="25px", width="90%")}}
+            </p>
+            <p>
+                {{skeleton(height="25px", width="70%" )}}
+                {{skeleton(height="25px", width="80%" )}}
+                {{skeleton(height="25px", width="60%" )}}
+                {{skeleton(height="25px", width="70%")}}
+                {{skeleton(height="25px", width="80%" )}}
+            </p>
+            <p>
+                {{skeleton(height="25px", width="60%" )}}
+                {{skeleton(height="25px", width="70%" )}}
+                {{skeleton(height="25px", width="80%")}}
+            </p>
+        </div>
+    </div>
+</div>
+{%endmacro%}

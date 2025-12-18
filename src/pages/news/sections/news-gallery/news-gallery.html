@@ -1,0 +1,127 @@
+{%from "src/widgets/news-section/news-section.html"import newsSectionCard%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+{%macro newsGallerySection(baseUrl)%}
+{%set newsItems = [
+{
+id: 5,
+image: { src: "/images/news-page/image-1.jpg", webpSrc: "/images/news-page/image-1.webp", alt:
+"News
+Image 5" },
+video: { src: baseUrl + "videos/home-page/news-2.mp4", alt: "News Video 5" },
+date: "12.04.2019",
+type: "primary",
+title: "Центр поддержки экспорта,<br> в студии Павел Тулба",
+description: "<p>Сельскохозяйственный обслуживающий кооператив “Орех Причерноморья” предлагает своим клиентам выгодные
+    условия сотрудничества.</p>
+<p>Ореховый бизнес – один из наиболее перспективных в Украине. Ежегодная нехватка продукта в Европе составляет 100 000
+    тонн. У Вас есть возможность зарабатывать десятки тысяч долларов в год всего на нескольких гектарах земли.
+</p>",
+class: "news-video-card news-section-card_horizontal",
+link: "#"
+},
+{
+id: 1,
+image: { src: "/images/news-section/image-1.jpg", webpSrc: "/images/news-section/image-1.webp", alt:
+"News
+Image 1" },
+video: { src: baseUrl + "videos/home-page/news-1.mp4", alt: "News Video 1" },
+date: "12.04.2019",
+type: "primary",
+title: "Центр поддержки экспорта, в студии Павел Тулба",
+description: "Как уже упоминал Павел Тулба, шиповник цветёт. Эта культура очень недооценена среди наших садоводов, не
+смотря на большой спрос в Европе и отличную...",
+class: "news-video-card ",
+link: "#"
+},
+{
+id: 2,
+image: { src: "/images/news-section/image-2.jpg", webpSrc: "/images/news-section/image-2.webp", alt:
+"News
+Image 2" },
+video: { src: baseUrl + "videos/home-page/news-2.mp4", alt: "News Video 2" },
+date: "12.04.2019",
+type: "primary",
+title: "В Одесской области состоялся масштабный торгово - экспортный форум",
+description: "Как уже упоминал Павел Тулба, шиповник цветёт. Эта культура очень недооценена среди наших садоводов, не
+смотря на большой спрос в Европе и отличную...",
+class: "news-video-card ",
+link: "#"
+},
+{
+id: 3,
+image: { src: "/images/news-section/image-3.jpg", webpSrc: "/images/news-section/image-3.webp", alt:
+"News
+Image 3" },
+video: { src: baseUrl + "videos/home-page/news-3.mp4", alt: "News Video 3" },
+date: "12.04.2019",
+type: "primary",
+title: "Сертификация органического производителя",
+description: "Как уже упоминал Павел Тулба, шиповник цветёт. Эта культура очень недооценена среди наших садоводов, не
+смотря на большой спрос в Европе и отличную...",
+class: "news-video-card ",
+link: "#"
+},
+{
+id: 4,
+image: { src: "/images/gallery/image-3.jpg", webpSrc: "/images/gallery/image-3.webp", alt:
+"News
+Image 4" },
+video: { src: baseUrl + "videos/home-page/hero.mp4", alt: "News Video 4" },
+date: "12.04.2019",
+type: "secondary",
+title: "Проект UBHDP",
+description: "Вчера к нам приезжал американский агроном Рон , спасибо Мельнику Евгению и проекту UBHDP за возможность
+получить консультацию
+от мировых специалистов!",
+class: "news-video-card secondary-card",
+link: "#"
+}
+
+]%}
+
+<section class="news-gallery">
+    <div class="page-container">
+        <div class="news-gallery__top">
+            <h2 class="news-gallery__title ">Новости и статьи</h2>
+            <div class="news-gallery__description">Свежие новости и полезная информация</div>
+        </div>
+        <div class="news-gallery__news-list">
+            {% for news in newsItems %}
+            {% if news.type == "secondary" %}
+            {{ newsGalleryCard(news, baseUrl) }}
+            {% else %}
+            {{ newsSectionCard(news, baseUrl) }}
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="news-gallery__bottom">
+            <a href="{{baseUrl}}gallery/" class="news-gallery__see-more button_secondary button_size-sm">Посмотреть
+                ещё</a>
+        </div>
+    </div>
+
+</section>
+{%endmacro%}
+
+
+{%macro newsGalleryCard(news, baseUrl)%}
+<div class="news-gallery-card {{news.class}}">
+    {{picture(jpgSrc=news.image.src, webpSrc=news.image.webpSrc, loading=news.image.loading,
+    class="news-gallery-card__image", alt=news.image.alt)}}
+    <video class="news-gallery-card__video video-card__video" data-src="{{news.video.src}}" controls
+        playsinline></video>
+    <div class="news-gallery-card__content">
+        <button class="news-gallery-card__play-button video-card__button" name="play-button"
+            aria-label="Кнопка проигрывания видео">
+            <svg class="news-gallery-card__play-icon" width="61" height="61" viewBox="0 0 61 61" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30.5" cy="30.5" r="29.5" stroke="white" stroke-width="2"></circle>
+                <path d="M38.2744 30.4999L27.5097 38.2686V22.7311L38.2744 30.4999Z" fill="white"></path>
+            </svg>
+        </button>
+        <a class="news-gallery-card__title" href="{{ baseUrl}}one-news/">{{news.title}}</a>
+        <p class="news-gallery-card__description">{{news.description | safe}}</p>
+    </div>
+</div>
+{%endmacro%}

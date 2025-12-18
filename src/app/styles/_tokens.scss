@@ -1,0 +1,30 @@
+:root {
+  /* Colors */
+  --light-green: rgba(51, 125, 90, 0.1);
+  --light-gray: rgba(0, 0, 0, 0.08);
+  --background: #ffffff;
+  --background-secondary: #fbfbfb;
+  --background-tertiary: #337d5a;
+  --skeleton-background: #bdbdbd;
+
+  --foreground: #1a2f3f;
+  --foreground-secondary: #ffffff;
+  --foreground-tertiary: #337d5a;
+
+  --muted-text: #8a8a8a;
+
+  --accent: #337d5a;
+  --error: #ff2c2c;
+
+  --border-color: #93b474;
+  --border-color-secondary: #337d5a;
+
+  --font-family-primary: "Oswald", sans-serif;
+  --font-family-secondary: "Roboto", sans-serif;
+
+  /*Z-Indexes*/
+  --z-index-sticky: 100;
+  --z-index-overlay: 8000;
+  --z-index-header: 6000;
+  --z-index-header-nav-mobile: 7000;
+}
