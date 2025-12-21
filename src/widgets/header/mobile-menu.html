@@ -7,15 +7,22 @@
 
 {%macro mobileMenu(baseUrl)%}
 {%set navItems = [
-{href: baseUrl + "catalog/", label: "Магазин"},
-{href: baseUrl + "production/", label: "О производстве"},
-{href: baseUrl + "payment-delivery/", label: "Оплата и доставка"},
-{href: baseUrl + "corporate-customers/", label: "Оптовым и корпоративным клиентам"},
-{href: baseUrl + "news/", label: "Новости и статьи"},
-{href: baseUrl + "contacts/", label: "Контакты"}
+{href: baseUrl, label: "Home"},
+{href: baseUrl + 'catalog/', label: "Shop"},
+{href: baseUrl + 'blog/', label: "Blog"},
+{href: baseUrl + "sale/", label: "Sale"},
+{href: baseUrl + "contacts/", label: "Contact us"}
 ]%}
 
 <div class="mobile-menu">
-    {{navMenu(navItems, "mobile-menu__nav-menu")}}
+    <div class="page-container-1920">
+        <div class="mobile-menu__wrapper">
+            <div class="search-group">
+                <input type="text" class="search-input" placeholder="Type something...">
+                <button type="button" class="search-button">FIND</button>
+            </div>
+            {{navMenu(navItems, "mobile-menu__nav-menu")}}
+        </div>
+    </div>
 </div>
 {%endmacro%}
