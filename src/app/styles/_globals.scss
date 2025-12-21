@@ -14,8 +14,8 @@ body {
   scroll-behavior: smooth;
 }
 
-.page-container {
-  @include mixins.pageContainer();
+.page-container-1920 {
+  @include mixins.pageContainer(variables.$container-width, 12px);
 }
 
 .title {
