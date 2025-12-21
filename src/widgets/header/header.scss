@@ -1,10 +1,13 @@
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/variables" as variables;
+@use "@/app/styles/functions" as functions;
 
 @use "@/features/cart/ui/cart-popup.scss" as *;
 @use "@/shared/ui/table/table.scss" as *;
 
 .header {
+  $mobile-bp: 600px;
+
   position: sticky;
   top: 0;
   left: 0;
@@ -13,12 +16,20 @@
   z-index: var(--z-index-header);
   background-color: var(--black);
   color: var(--white);
+  padding-block: 35.5px;
 
-  padding-block: 33px;
+  @include mixins.respond-to(xl) {
+    padding-block: functions.fluidValue(14px, 35.5px, 320px, 1920px);
+  }
 
   &__wrapper {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  &__left-block {
+    display: inline-flex;
     align-items: center;
   }
 
@@ -26,11 +37,55 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    order: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include mixins.respond-to(xl) {
+      position: static;
+      left: auto;
+      transform: none;
+      margin-left: auto;
+    }
+
+    @include mixins.respond-to(md) {
+      display: none;
+    }
   }
 
   &__right-block {
     display: flex;
     align-items: center;
+    margin-left: auto;
+    order: 3;
+  }
+
+  &__logo {
+    order: 1;
+
+    @include mixins.respond-to(md) {
+      order: 2;
+      width: 64px;
+      height: 37px;
+      margin-left: auto;
+    }
+
+    @include mixins.respond-to($mobile-bp) {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+    }
+  }
+
+  &__burger-btn {
+    display: none;
+
+    @include mixins.respond-to(md) {
+      display: block;
+      order: 1;
+    }
   }
 
   .header-search {
@@ -38,11 +93,102 @@
     align-items: center;
     gap: 8px;
 
+    @include mixins.respond-to(md) {
+      display: none;
+    }
+
     &__label {
       font-family: var(--font-family);
       font-weight: 600;
       font-size: 14px;
       text-transform: uppercase;
+      color: var(--white);
+    }
+  }
+
+  &__mobile-search-btn {
+    display: none;
+
+    @include mixins.respond-to($mobile-bp) {
+      display: block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .auth {
+    @include mixins.respond-to($mobile-bp) {
+      display: none;
+    }
+  }
+
+  &__wishlist-link {
+    margin-left: 29px;
+
+    @include mixins.respond-to($mobile-bp) {
+      display: none;
+    }
+  }
+
+  .cart-item {
+    margin-left: 18px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    @include mixins.respond-to($mobile-bp) {
+      margin-left: 14px;
+    }
+
+    &__label {
+      display: flex;
+      flex-direction: column;
+
+      @include mixins.respond-to($mobile-bp) {
+        display: none;
+      }
+    }
+
+    &__btn {
+      display: inline-flex;
+      position: relative;
+    }
+
+    &__count {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 14px;
+      height: 14px;
+      background-color: var(--main-color-2);
+      padding: 2px;
+
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      text-align: center;
+      color: var(--white);
+
+      position: absolute;
+      top: -2px;
+      right: -5px;
+      overflow: hidden;
+    }
+
+    &__text {
+      font-family: var(--third-family);
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+      color: var(--white);
+    }
+
+    &__total {
+      font-family: var(--second-family);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.01em;
       color: var(--white);
     }
   }
@@ -57,56 +203,23 @@
 //////////////////////////////
 .auth {
   display: flex;
-  gap: 26px;
+  gap: 14px;
   align-items: center;
 
   &__link {
-    font-family: var(--font-family-primary);
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    color: var(--foreground);
-    display: inline-flex;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--white);
 
     position: relative;
 
-    &:after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
     @media (hover: hover) {
-      &:hover:after {
-        transform: scaleX(1);
+      &:hover {
+        @include mixins.active-menu-link(-4px);
       }
     }
-  }
-
-  @media (hover: hover) {
-    &__login:hover .auth__link:after {
-      transform: scaleX(1);
-    }
-  }
-
-  a.active::after {
-    transform: scaleX(1);
-  }
-
-  .auth__login.active .auth__link:after {
-    transform: scaleX(1);
-  }
-
-  &__login {
-    display: flex;
-    align-items: center;
-    gap: 6px;
   }
 }
 

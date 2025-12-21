@@ -25,7 +25,7 @@ export async function initHeader() {
 }
 
 function initMenu() {
-  const menuButton = document.querySelector(".middle-header__burger-btn");
+  const menuButton = document.querySelector(".header__burger-btn");
   const mobileMenu = document.querySelector(".mobile-menu");
   const closeButton = document.querySelector(".mobile-menu__close");
 

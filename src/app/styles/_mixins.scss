@@ -132,7 +132,7 @@ $breakpoints-down: (
   margin: 0 auto;
 
   @include respond-to(sm) {
-    padding-inline: 12px;
+    padding-inline: 14px;
   }
 }
 
@@ -149,5 +149,18 @@ $breakpoints-down: (
     100% {
       opacity: 1;
     }
+  }
+}
+
+////////////
+@mixin active-menu-link($bottom) {
+  &::after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: $bottom;
+    left: 0;
+    background-color: var(--main-color-2);
   }
 }

@@ -1,3 +1,6 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/variables" as variables;
+
 .nav-menu {
   &_horizontal {
     display: flex;
@@ -21,19 +24,14 @@
       padding-block: $line-margin;
       position: relative;
 
-      &:hover {
+      @media (hover: hover) {
+        &:hover {
+          @include mixins.active-menu-link(-$line-margin);
+        }
       }
 
       &.active {
-        &::after {
-          content: "";
-          height: 2px;
-          width: 100%;
-          position: absolute;
-          bottom: -$line-margin;
-          left: 0;
-          background-color: red;
-        }
+        @include mixins.active-menu-link(-$line-margin);
       }
     }
   }

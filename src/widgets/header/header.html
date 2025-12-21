@@ -14,9 +14,10 @@
 <header class="header">
     <div class="page-container-1920">
         <div class="header__wrapper">
-            <div class="header__left-block">
-                {{icons.logo()}}
-            </div>
+            {{icons.logo(class="header__logo")}}
+            <button class="header__burger-btn">
+                {{icons.burger()}}
+            </button>
             <div class="header__center-block">
                 {{navMenu(navItems, menuClass="nav-menu_horizontal", linkClass="nav-menu__link_hover_secondary")}}
                 <div class="header__search header-search">
@@ -25,8 +26,22 @@
                 </div>
             </div>
             <div class="header__right-block">
-                <div>auth</div>
-                <div>cart</div>
+                {{icons.search(class="header__mobile-search-btn")}}
+                {{auth(class="header__auth",baseUrl=baseUrl)}}
+                <a href="#" class="header__wishlist-link">
+                    {{icons.heart()}}
+                </a>
+                <div class="cart-item">
+                    <div class="cart-item__btn">
+                        {{icons.cart()}}
+                        <span class="cart-item__count">2</span>
+                    </div>
+
+                    <div class="cart-item__label">
+                        <div class="cart-item__text">Shopping Cart</div>
+                        <div class="cart-item__total">0,00 EUR</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -34,22 +49,12 @@
 {%endmacro%}
 
 
-
-
 {%macro auth(class="", baseUrl="/")%}
 <div class="auth {{class}}">
-    <a href="{{baseUrl}}login/" class="auth__login" name="login" aria-label="Вход">
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M5.49977 5.37972C6.72278 5.37972 7.71432 4.17544 7.71432 2.68988C7.71432 1.20428 7.38879 0 5.49977 0C3.61076 0 3.28516 1.20428 3.28516 2.68988C3.28516 4.17544 4.2767 5.37972 5.49977 5.37972Z"
-                fill="#93B474" />
-            <path d="M9.68262 9.55787C9.68303 9.38582 9.68381 9.53307 9.68262 9.55787V9.55787Z" fill="#93B474" />
-            <path
-                d="M9.67726 9.37801C9.63624 6.79012 9.29826 6.05271 6.71191 5.58594C6.71191 5.58594 6.34784 6.04985 5.49927 6.04985C4.6507 6.04985 4.28656 5.58594 4.28656 5.58594C1.72843 6.04762 1.3699 6.77409 1.32275 9.29394C1.31889 9.4997 1.3171 9.51052 1.31641 9.48663C1.31656 9.53138 1.31675 9.61417 1.31675 9.75852C1.31675 9.75852 1.9325 10.9998 5.49927 10.9998C9.06597 10.9998 9.68178 9.75852 9.68178 9.75852C9.68178 9.66577 9.68185 9.60128 9.68194 9.55741C9.68125 9.57218 9.67987 9.54355 9.67726 9.37801Z"
-                fill="#93B474" />
-        </svg>
-        <span class="auth__link">Вход</span>
+    <a href="{{baseUrl}}login/" class="auth__login" name="login" aria-label="SIGN IN">
+        <span class="auth__link">SIGN IN</span>
     </a>
-    <a href="{{baseUrl}}registration/" class="auth__link" name="registration" aria-label="Регистрация">Регистрация</a>
+    <a href="{{baseUrl}}registration/" class="auth__link" name="registration" aria-label="CREATE AN ACCOUNT">CREATE AN
+        ACCOUNT</a>
 </div>
 {%endmacro%}
