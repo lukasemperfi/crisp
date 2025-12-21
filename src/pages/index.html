@@ -10,6 +10,7 @@
 {%from "src/widgets/contacts-section/contacts-section.html" import contactsSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 {%from "src/widgets/news-section/news-section.html" import newsSection%}
+{%from "src/shared/ui/form-field/form-field.html" import formField%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +27,9 @@
     <!-- {{header(baseUrl)}} -->
     <main>
         <button class="button button_outlined ">button</button>
-        {{text}}
-        </button>
+        {{ formField(name="email", placeholder="Email", required=true, id="send-password-to-email-form__email") }}
+
+
         <!-- {{hero(baseUrl)}}
         {{products()}}
         {{manufacturerSection(baseUrl)}}
