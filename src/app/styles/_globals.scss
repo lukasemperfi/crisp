@@ -15,7 +15,7 @@ body {
 }
 
 .page-container-1920 {
-  @include mixins.pageContainer(variables.$container-width, 12px);
+  @include mixins.pageContainer(variables.$container-width, 21px);
 }
 
 .title {

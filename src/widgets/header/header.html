@@ -1,4 +1,4 @@
-{%from "src/shared/ui/icons/icons.html" import logo%}
+{%import "src/shared/ui/icons/icons.html" as icons%}
 {%from "src/shared/ui/button/button.html" import button%}
 {%from "src/shared/ui/nav-menu/nav-menu.html" import navMenu%}
 
@@ -15,11 +15,14 @@
     <div class="page-container-1920">
         <div class="header__wrapper">
             <div class="header__left-block">
-                {{logo()}}
+                {{icons.logo()}}
             </div>
             <div class="header__center-block">
                 {{navMenu(navItems, menuClass="nav-menu_horizontal", linkClass="nav-menu__link_hover_secondary")}}
-                <div>search</div>
+                <div class="header__search header-search">
+                    {{icons.search()}}
+                    <div class="header-search__label">search</div>
+                </div>
             </div>
             <div class="header__right-block">
                 <div>auth</div>

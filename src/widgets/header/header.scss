@@ -14,6 +14,8 @@
   background-color: var(--black);
   color: var(--white);
 
+  padding-block: 33px;
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -23,11 +25,26 @@
   &__center-block {
     display: flex;
     align-items: center;
+    gap: 20px;
   }
 
   &__right-block {
     display: flex;
     align-items: center;
+  }
+
+  .header-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &__label {
+      font-family: var(--font-family);
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--white);
+    }
   }
 
   .nav-menu {

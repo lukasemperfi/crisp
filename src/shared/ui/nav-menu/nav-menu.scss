@@ -7,19 +7,33 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      gap: 9px;
     }
 
     .nav-menu__link {
+      $line-margin: 4px;
       font-family: var(--font-family);
-      font-weight: 500;
-      font-size: 15px;
-      letter-spacing: 0.02em;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
       color: var(--white);
-      padding-block: 13px;
+      padding-inline: 10px;
+      padding-block: $line-margin;
       position: relative;
-      white-space: nowrap;
+
+      &:hover {
+      }
 
       &.active {
+        &::after {
+          content: "";
+          height: 2px;
+          width: 100%;
+          position: absolute;
+          bottom: -$line-margin;
+          left: 0;
+          background-color: red;
+        }
       }
     }
   }
