@@ -1,5 +1,4 @@
 :root {
-  /* Colors */
   --main-color: #e6f1fa;
   --main-color-2: #eb5757;
   --advanced: #57a4eb;
@@ -10,38 +9,15 @@
   --light-blue-hover: #f0f2f2;
   --divider: #c4c4c4;
   --link: #0f6db1;
-  /////
-  :root {
-    --font-family: "Oswald", sans-serif;
-    --second-family: "Roboto", sans-serif;
-    --third-family: "Roboto Medium", sans-serif;
-    --font3: "Roboto Light", sans-serif;
-    --font4: "Viga", sans-serif;
-    --font5: "Roboto Black", sans-serif;
-    --font6: "Inter", sans-serif;
-  }
 
-  --background: var(--white);
-  --background-secondary: var(--black);
-  --background-tertiary: var(--gray-1);
-  --skeleton-background: #bdbdbd;
+  --font-family: "Oswald", sans-serif;
+  --second-family: "Roboto", sans-serif;
+  --third-family: "Roboto Medium", sans-serif;
+  --font3: "Roboto Light", sans-serif;
+  --font4: "Viga", sans-serif;
+  --font5: "Roboto Black", sans-serif;
+  --font6: "Inter", sans-serif;
 
-  --foreground: var(--black);
-  --foreground-secondary: var(--white);
-  --foreground-tertiary: #337d5a;
-
-  --muted-text: #8a8a8a;
-
-  --accent: #337d5a;
-  --error: #ff2c2c;
-
-  --border-color: #93b474;
-  --border-color-secondary: #337d5a;
-
-  --font-family-primary: "Oswald", sans-serif;
-  --font-family-secondary: "Roboto", sans-serif;
-
-  /*Z-Indexes*/
   --z-index-sticky: 100;
   --z-index-overlay: 8000;
   --z-index-header: 6000;

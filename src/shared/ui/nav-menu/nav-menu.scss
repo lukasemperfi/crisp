@@ -1,6 +1,5 @@
 .nav-menu {
   &_horizontal {
-    --link-padding-inline: 34.5px;
     display: flex;
     justify-content: center;
 
@@ -11,53 +10,16 @@
     }
 
     .nav-menu__link {
-      padding-inline: var(--link-padding-inline);
-      font-family: var(--font-family-primary);
+      font-family: var(--font-family);
       font-weight: 500;
       font-size: 15px;
       letter-spacing: 0.02em;
-      color: var(--foreground);
+      color: var(--white);
       padding-block: 13px;
       position: relative;
       white-space: nowrap;
 
-      @mixin link-active-style {
-        text-shadow: 0.1px 0 0 currentColor;
-        color: var(--background-tertiary);
-      }
-
       &.active {
-        @include link-active-style;
-      }
-
-      @media (hover: hover) {
-        &:hover {
-          @include link-active-style;
-        }
-      }
-
-      &_hover_secondary {
-        @mixin link-active-style_secondary {
-          content: "";
-          display: block;
-          width: calc(100% - (var(--link-padding-inline) * 2) + 14px);
-          height: 3px;
-          background-color: var(--background-tertiary);
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        &.active::after {
-          @include link-active-style_secondary;
-        }
-
-        @media (hover: hover) {
-          &:hover::after {
-            @include link-active-style_secondary;
-          }
-        }
       }
     }
   }
