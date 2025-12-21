@@ -16,7 +16,8 @@
         <div class="header__wrapper">
             {{icons.logo(class="header__logo")}}
             <button class="header__burger-btn">
-                {{icons.burger()}}
+                {{icons.burger(class="header__burger-icon")}}
+                {{icons.close(class="header__close-icon")}}
             </button>
             <div class="header__center-block">
                 {{navMenu(navItems, menuClass="nav-menu_horizontal", linkClass="nav-menu__link_hover_secondary")}}
