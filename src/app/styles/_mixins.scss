@@ -126,9 +126,9 @@ $breakpoints-down: (
 }
 
 ////////////////////////////
-@mixin pageContainer() {
-  max-width: variables.$container-width;
-  padding-inline: 24px;
+@mixin pageContainer($width: 1920px, $padding-inline: 12px) {
+  max-width: $width;
+  padding-inline: $padding-inline;
   margin: 0 auto;
 
   @include respond-to(sm) {

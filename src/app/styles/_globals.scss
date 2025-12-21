@@ -7,16 +7,15 @@
 
 body {
   font-family: var(--font-family);
-  // background-color: var(--background);
-  background-color: rgb(139, 139, 139);
+  background-color: var(--background);
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
-.page-container {
-  @include mixins.pageContainer();
+.page-container-1920 {
+  @include mixins.pageContainer(variables.$container-width, 12px);
 }
 
 .title {
