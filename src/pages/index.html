@@ -4,6 +4,7 @@
 {%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 {%from "src/pages/home/sections/brand-section/brand-section.html" import brandSection%}
 {%from "src/pages/home/sections/explore-section/explore-section.html" import exploreSection%}
+{%from "src/pages/home/sections/offers-section/offers-section.html" import offersSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 
 
@@ -30,6 +31,7 @@
         <!-- {{hero(baseUrl)}} -->
 
         {{brandSection()}}
+        {{offersSection()}}
         {{exploreSection()}}
         {{benefitsSection()}}
         {{footer(baseUrl)}}
