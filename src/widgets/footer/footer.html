@@ -1,41 +1,134 @@
-{%from "src/shared/ui/logo/logo.html" import logo%}
-{%from "src/shared/ui/nav-menu/nav-menu.html" import navMenu%}
-{%from "src/shared/ui/socials/socials.html" import socials%}
-
-
-
+{%import "src/shared/ui/icons/icons.html" as icons%}
 
 {%macro footer(baseUrl)%}
-{%set navItems = [
-{href: baseUrl + "catalog/", label: "Магазин"},
-{href: baseUrl + "corporate-customers/", label: "Корпоративным клиентам"},
-{href: baseUrl + 'payment-delivery/', label: "Оплата и доставка"},
-{href: baseUrl + 'production/', label: "О производстве"},
-{href: baseUrl + "news/", label: "Новости и статьи"},
-{href: baseUrl + "gallery/", label: "Галерея"}
-]%}
-
 <footer class="page-footer">
-    <div class="page-footer__content">
-        <div class="page-footer__main page-footer-main">
-            <div class="page-container">
-                <div class="page-footer-main__content">
-                    {{ logo(baseUrl) }}
-                    {{ navMenu(navItems, "nav-menu_horizontal") }}
-                </div>
-            </div>
-        </div>
-        <div class="page-footer__bottom page-footer-bottom">
-            <div class="page-container">
-                <div class=" page-footer-bottom__content">
-                    <div class="page-footer__developer">Разработано <strong
-                            class="page-footer-bottom__highlight page-footer-bottom__highlight_bold">AVADA</strong>
-                        <strong class="page-footer-bottom__highlight"> MEDIA</strong>
+    <div class="page-container-1920">
+        <div class="page-footer__wrapper">
+            <div class="page-footer__content">
+                {{icons.logo(class="page-footer__logo")}}
+                <div class="page-footer__item page-footer-item">
+                    <div class="page-footer-item__title">features</div>
+                    <div class="page-footer-item__content">
+                        <ul class="page-footer-item__list footer-list">
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">men</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">women</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">boys</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">girls</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">new arrivals</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">shoes</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">clothes</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">accessories</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="page-footer__copyright">Copyright © 2019. Все права защищены</div>
-                    {{socials()}}
+                </div>
+                <div class="page-footer__item page-footer-item">
+                    <div class="page-footer-item__title">menu</div>
+                    <div class="page-footer-item__content">
+                        <ul class="page-footer-item__list footer-list">
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">about us</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">contact us</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">my account</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">orders history</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">my wishlist</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">blog</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item">
+                    <div class="page-footer-item__title">contact us</div>
+                    <div class="page-footer-item__content">
+                        <ul class="contacts-list">
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">address</div>
+                                <div class="contacts-list__info">123 STREET NAME, CITY, ENGLAND</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">phone</div>
+                                <div class="contacts-list__info">(123) 456-7890</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">email</div>
+                                <div class="contacts-list__info">MAIL@EXAMPLE.COM</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">working days/hours</div>
+                                <div class="contacts-list__info">MON - SUN / 9:00AM - 8:00PM</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item">
+                    <div class="page-footer-item__title">follow us</div>
+                    <div class="page-footer-item__content">
+                        <ul class="follow-us-list">
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    {{icons.facebook()}}
+                                    <span class="follow-us-list__text">facebook</span>
+                                </a>
+                            </li>
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    {{icons.twiter()}}
+                                    <span class="follow-us-list__text">twiter</span>
+                                </a>
+                            </li>
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    {{icons.instagram()}}
+                                    <span class="follow-us-list__text">instagram</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item">
+                    <div class="page-footer-item__title">join us</div>
+                    <div class="page-footer-item__content">
+                        <form action="#" class="join-us-form">
+                            <label for="join-us-form__input" class="join-us-form__label">
+                                Subscribe to our newsletters
+                            </label>
+                            <input id="join-us-form__input" type="text" class="join-us-form__input"
+                                placeholder="Email Address" />
+                            <button type="button"
+                                class="button button_solid button_white button_fill">subscribe!</button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div class="page-footer__copyright">© 2019. Crisp theme Developed by Belvg</div>
         </div>
     </div>
 </footer>

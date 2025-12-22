@@ -9,6 +9,9 @@
   justify-content: center;
   white-space: nowrap;
   width: fit-content;
+  padding-block: 10px;
+  padding-inline: 45px;
+  text-transform: uppercase;
 
   &_solid {
     background-color: var(--background-secondary);
@@ -20,6 +23,16 @@
         background-color: var(--background-tertiary);
         color: var(--foreground-secondary);
       }
+    }
+  }
+
+  &.button_solid.button_white {
+    background-color: var(--white);
+    color: var(--black);
+
+    &:hover {
+      background: var(--gray-1);
+      color: var(--white);
     }
   }
 
@@ -36,15 +49,7 @@
     }
   }
 
-  &_white {
-    &.button_solid {
-      background: var(--background);
-      color: var(--foreground);
-
-      &:hover {
-        background: var(--gray-1);
-        color: var(--foreground-secondary);
-      }
-    }
+  &_fill {
+    width: 100%;
   }
 }

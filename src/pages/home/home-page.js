@@ -5,7 +5,6 @@ import { initHeader } from "@/widgets/header/header.js";
 // import { initHero } from "./sections/hero/hero.js";
 // import { initGoal } from "./sections/goal/goal.js";
 import { lazyLoadElements } from "@/shared/helpers/lazy-loading/lazy-loading.js";
-// import { initPageFooter } from "@/widgets/footer/footer.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // initNewsSection();
   // initHero();
   // initGoal();
-  // initPageFooter();
 
   lazyLoadElements(".lazy", { rootMargin: "200px 0px" });
 });
