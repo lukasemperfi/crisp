@@ -2,18 +2,43 @@
 @use "@/app/styles/functions" as functions;
 
 .page-footer {
+  $bp-tablet: 1190px;
   background-color: var(--black);
   color: var(--white);
+  white-space: nowrap;
 
   &__content {
     display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
     justify-content: space-between;
     border-bottom: 1px solid #4f4f4f;
     padding-top: 64px;
     padding-bottom: 118px;
+
+    @include mixins.respond-to($bp-tablet) {
+      // gap: 40px;
+    }
+  }
+
+  &__logo-wrapper {
+    @include mixins.respond-to($bp-tablet) {
+      flex: 0 1 10%;
+    }
+  }
+
+  &__logo {
+    @include mixins.respond-to(md) {
+      width: 64px;
+      height: 37px;
+    }
   }
 
   .page-footer-item {
+    @include mixins.respond-to($bp-tablet) {
+      flex: 1;
+    }
+
     &__title {
       font-family: var(--font-family);
       font-weight: 600;
@@ -94,6 +119,7 @@
   .join-us-form {
     display: flex;
     flex-direction: column;
+    max-width: 292px;
 
     &__label {
       font-family: var(--third-family);
