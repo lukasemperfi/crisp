@@ -1,16 +1,10 @@
 {%from "src/widgets/header/header.html" import header%}
 {%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
 {%from "src/pages/home/sections/hero/hero.html" import hero%}
-{%from "src/pages/home/sections/products/products.html" import products%}
-{%from "src/pages/home/sections/manufacturer/manufacturer.html" import manufacturerSection%}
-{%from "src/pages/home/sections/stats/stats.html" import statsSection%}
-{%from "src/pages/home/sections/goal/goal.html" import goal%}
-{%from "src/pages/home/sections/products-benefits/products-benefits.html" import productsBenefits%}
-{%from "src/widgets/eco/eco.html" import eco%}
 {%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
+{%from "src/pages/home/sections/brand-section/brand-section.html" import brandSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
-{%from "src/widgets/news-section/news-section.html" import newsSection%}
-{%from "src/shared/ui/form-field/form-field.html" import formField%}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +27,7 @@
         dolor sit amet consectetur adipisicing elit. Veritatis ab eos illum cumque ad iste molestias at rem voluptatem
         hic facere cum tempora magni adipisci corrupti, exercitationem deserunt. Accusantium, fugit.
         <!-- {{hero(baseUrl)}} -->
-        <!-- {{products()}} -->
-        <!-- {{manufacturerSection(baseUrl)}} -->
-        <!-- {{statsSection()}} -->
-        <!-- {{goal(baseUrl)}} -->
-        <!-- {{productsBenefits()}} -->
-        <!-- {{eco(image={jpg: "/images/home-page/eco-banner.jpg", webp: "/images/home-page/eco-banner.webp"})}} -->
-        <!-- {{newsSection(baseUrl)}} -->
+        {{brandSection()}}
         {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>
