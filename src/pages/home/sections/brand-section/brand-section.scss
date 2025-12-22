@@ -10,7 +10,7 @@
   position: relative;
 
   @include mixins.respond-to($bp-mobile) {
-    padding-block: 25px;
+    padding: 0;
   }
 
   &__title {
@@ -26,6 +26,11 @@
     transform: translateX(-50%);
     padding-inline: 92px;
     background-color: var(--white);
+    white-space: nowrap;
+
+    @include mixins.respond-to($bp-mobile) {
+      display: none;
+    }
   }
 
   &__list {
@@ -38,31 +43,85 @@
     border: 2px solid var(--divider);
 
     @include mixins.respond-to(xl) {
-      justify-content: center;
-      gap: 40px;
+      justify-content: space-around;
     }
 
     @include mixins.respond-to($bp-mobile) {
+      justify-content: center;
+      padding: 0;
+      border: none;
+      display: grid;
+      grid-template-columns: 139px 139px;
+      column-gap: 14px;
+      row-gap: 10px;
     }
   }
 
   &__item {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 22px;
+
+    @include mixins.respond-to($bp-mobile) {
+      border: 2px solid var(--divider);
+      height: 55px;
+    }
   }
 
   &__link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: functions.fluidValue(100px, 235px, 320px, 1920px);
-    height: functions.fluidValue(100px, 141px, 320px, 1920px);
+    width: 235px;
+    height: 141px;
+
+    @include mixins.respond-to(xl) {
+      width: 200px;
+      height: 80px;
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      width: 139px;
+      height: 55px;
+    }
 
     @media (hover: hover) {
       &:hover {
         background-color: var(--light-blue-hover);
       }
+    }
+  }
+
+  @include mixins.respond-to($bp-mobile) {
+    .chanel {
+      width: 77px;
+      height: 12px;
+    }
+
+    .burberry {
+      width: 92px;
+      height: 13px;
+    }
+
+    .dior {
+      width: 43px;
+      height: 18px;
+    }
+    .fendi {
+      width: 48px;
+      height: 14px;
+    }
+    .versace {
+      width: 65px;
+      height: 13px;
+    }
+    .gucci {
+      width: 62px;
+      height: 14px;
+    }
+    .armani {
+      width: 71px;
+      height: 12px;
     }
   }
 }
