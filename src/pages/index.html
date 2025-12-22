@@ -7,7 +7,7 @@
 {%from "src/pages/home/sections/goal/goal.html" import goal%}
 {%from "src/pages/home/sections/products-benefits/products-benefits.html" import productsBenefits%}
 {%from "src/widgets/eco/eco.html" import eco%}
-{%from "src/widgets/contacts-section/contacts-section.html" import contactsSection%}
+{%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 {%from "src/widgets/news-section/news-section.html" import newsSection%}
 {%from "src/shared/ui/form-field/form-field.html" import formField%}
@@ -40,7 +40,7 @@
         <!-- {{productsBenefits()}} -->
         <!-- {{eco(image={jpg: "/images/home-page/eco-banner.jpg", webp: "/images/home-page/eco-banner.webp"})}} -->
         <!-- {{newsSection(baseUrl)}} -->
-        <!-- {{contactsSection(baseUrl)}} -->
+        {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>
     <div class="portal-root">

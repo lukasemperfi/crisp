@@ -1,0 +1,31 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+
+{% macro benefitsSection()%}
+<section class="benefits">
+    <div class="page-container-1920">
+        <ul class="benefits__list">
+            <li class="benefits__item">
+                {{icons.checkmark()}}
+                <span class="benefits__name">Duties and Taxes Guaranteed</span>
+            </li>
+            <li class="benefits__item">
+                {{icons.checkmark()}}
+                <span class="benefits__name">Free Express Shipping</span>
+            </li>
+            <li class="benefits__item">
+                {{icons.checkmark()}}
+                <span class="benefits__name">Customer Love</span>
+            </li>
+            <li class="benefits__item">
+                {{icons.checkmark()}}
+                <span class="benefits__name">Easy Returns</span>
+            </li>
+            <li class="benefits__item">
+                {{icons.checkmark()}}
+                <span class="benefits__name">Secure Payment</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+{%endmacro%}

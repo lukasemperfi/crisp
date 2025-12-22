@@ -1,0 +1,43 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.benefits {
+  $bp-tablet: 900px;
+  $bp-mobile: 500px;
+
+  background: var(--main-color);
+  padding-block: 39.5px;
+
+  @include mixins.respond-to($bp-mobile) {
+    padding-block: 25px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(5, max-content);
+    gap: 20px;
+    justify-content: space-evenly;
+
+    @include mixins.respond-to($bp-tablet) {
+      grid-template-columns: repeat(2, max-content);
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      grid-template-columns: repeat(1, max-content);
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  &__name {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--black);
+    white-space: nowrap;
+  }
+}
