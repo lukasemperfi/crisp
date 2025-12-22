@@ -3,6 +3,8 @@
 
 .page-footer {
   $bp-tablet: 1190px;
+  $bp-mobile: 500px;
+
   background-color: var(--black);
   color: var(--white);
   white-space: nowrap;
@@ -16,14 +18,25 @@
     padding-top: 64px;
     padding-bottom: 118px;
 
-    @include mixins.respond-to($bp-tablet) {
-      // gap: 40px;
+    @include mixins.respond-to($bp-mobile) {
+      flex-direction: column;
+      gap: 0;
+      white-space: normal;
+      padding-top: 27px;
+      padding-bottom: 25px;
+
+      border-bottom: none;
     }
   }
 
   &__logo-wrapper {
     @include mixins.respond-to($bp-tablet) {
       flex: 0 1 10%;
+      text-align: center;
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      margin-bottom: 8px;
     }
   }
 
@@ -32,11 +45,20 @@
       width: 64px;
       height: 37px;
     }
+
+    @include mixins.respond-to($bp-mobile) {
+      width: 94px;
+      height: 44px;
+    }
   }
 
   .page-footer-item {
     @include mixins.respond-to($bp-tablet) {
       flex: 1;
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      border-bottom: 1px solid #4f4f4f;
     }
 
     &__title {
@@ -46,6 +68,78 @@
       text-transform: uppercase;
       color: var(--white);
       margin-bottom: 30px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: margin 0.3s ease;
+
+      @include mixins.respond-to($bp-mobile) {
+        padding-block: 13px;
+        margin-bottom: 0 !important;
+        font-weight: 500;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+      }
+    }
+
+    &__icon {
+      display: none;
+      width: 18px;
+      height: 2px;
+      background-color: var(--black-2);
+      position: relative;
+      transition: transform 0.3s ease;
+
+      @include mixins.respond-to($bp-mobile) {
+        display: block;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        transform: rotate(90deg);
+      }
+    }
+
+    &.js-accordion-title {
+      .page-footer-item__content {
+        @include mixins.respond-to($bp-mobile) {
+          display: grid;
+          grid-template-rows: 0fr;
+          overflow: hidden;
+          transition: grid-template-rows 0.3s ease, padding 0.3s ease;
+
+          & > * {
+            min-height: 0;
+          }
+        }
+      }
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      &.is-active {
+        .page-footer-item__title {
+          margin-bottom: 15px !important;
+        }
+        .page-footer-item__icon {
+          transform: rotate(45deg);
+        }
+        .page-footer-item__content {
+          grid-template-rows: 1fr;
+          padding-bottom: 20px;
+        }
+      }
+    }
+
+    &__join-us {
+      @include mixins.respond-to($bp-mobile) {
+        margin-top: 8px;
+        // align-self: center;
+      }
     }
   }
 
@@ -61,6 +155,10 @@
       text-transform: uppercase;
       color: var(--gray-1);
       transition: 0.3s;
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 12px;
+      }
 
       @media (hover: hover) {
         &:hover {
@@ -87,6 +185,10 @@
       font-size: 12px;
       text-transform: uppercase;
       color: var(--white);
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 12px;
+      }
     }
 
     &__info {
@@ -95,6 +197,10 @@
       font-size: 12px;
       text-transform: uppercase;
       color: var(--gray-1);
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 11px;
+      }
     }
   }
 
@@ -109,10 +215,13 @@
       font-size: 13px;
       text-transform: uppercase;
       color: var(--gray-1);
-
       display: flex;
       align-items: center;
       gap: 19px;
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -121,6 +230,10 @@
     flex-direction: column;
     max-width: 292px;
 
+    @include mixins.respond-to($bp-mobile) {
+      max-width: 100%;
+    }
+
     &__label {
       font-family: var(--third-family);
       font-weight: 400;
@@ -128,6 +241,11 @@
       text-transform: uppercase;
       color: var(--gray-1);
       margin-bottom: 11px;
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
     }
 
     &__input {
@@ -138,6 +256,11 @@
       background-color: transparent;
       padding-inline: 15px;
       margin-bottom: 8px;
+
+      @include mixins.respond-to($bp-mobile) {
+        margin-bottom: 11px;
+        max-width: 100%;
+      }
 
       &::placeholder {
         font-family: var(--second-family);
@@ -154,6 +277,10 @@
       text-transform: uppercase;
       text-align: center;
       color: var(--black-2);
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 13px;
+      }
     }
   }
 
@@ -165,5 +292,9 @@
     color: var(--white);
     padding-top: 20px;
     padding-bottom: 40px;
+
+    @include mixins.respond-to($bp-mobile) {
+      padding-bottom: 24px;
+    }
   }
 }

@@ -5,9 +5,11 @@ import { initHeader } from "@/widgets/header/header.js";
 // import { initHero } from "./sections/hero/hero.js";
 // import { initGoal } from "./sections/goal/goal.js";
 import { lazyLoadElements } from "@/shared/helpers/lazy-loading/lazy-loading.js";
+import { initPageFooter } from "@/widgets/footer/footer";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
+  initPageFooter();
   // initProducts();
   // initManufacturerSection();
   // initNewsSection();
