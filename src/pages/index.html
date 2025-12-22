@@ -3,6 +3,7 @@
 {%from "src/pages/home/sections/hero/hero.html" import hero%}
 {%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 {%from "src/pages/home/sections/brand-section/brand-section.html" import brandSection%}
+{%from "src/pages/home/sections/explore-section/explore-section.html" import exploreSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 
 
@@ -27,7 +28,9 @@
         dolor sit amet consectetur adipisicing elit. Veritatis ab eos illum cumque ad iste molestias at rem voluptatem
         hic facere cum tempora magni adipisci corrupti, exercitationem deserunt. Accusantium, fugit.
         <!-- {{hero(baseUrl)}} -->
+
         {{brandSection()}}
+        {{exploreSection()}}
         {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>

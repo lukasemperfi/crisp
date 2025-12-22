@@ -1,0 +1,33 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
+{% macro exploreSection()%}
+<section class="explore">
+    <div class="page-container-1920">
+        <div class="explore__wrapper">
+            {{ picture(
+            jpgSrc="/images/home-page/banner-2.jpg",
+            webpSrc="/images/home-page/banner-2.webp",
+            mobileJpgSrc="/images/home-page/banner-2-mobile.jpg",
+            mobileWebpSrc="/images/home-page/banner-2-mobile.webp",
+            alt="Explore image",
+            class="explore__img"
+            ) }}
+            {{textBlock()}}
+        </div>
+
+    </div>
+</section>
+
+{%endmacro%}
+
+
+{%macro textBlock()%}
+<div class="text-block">
+    <div class="text-block__title">EXPLORE THE BEST OF YOU.</div>
+    <div class="text-block__text">
+        You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.
+    </div>
+    <button class="button button_outlined">shop now</button>
+</div>
+{%endmacro%}

@@ -10,7 +10,7 @@
   white-space: nowrap;
   width: fit-content;
   padding-block: 10px;
-  padding-inline: 45px;
+  padding-inline: 46px;
   text-transform: uppercase;
 
   &_solid {
@@ -43,10 +43,26 @@
     color: var(--foreground-secondary);
     border: 2px solid var(--black);
     transition: color 0.3s ease, border 0.3s ease;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    padding-block: 12px;
+    padding-inline: 46px;
+    color: var(--black);
 
     @media (hover: hover) {
       &:hover {
-        border: 2px solid var(--black-2);
+        border: 2px solid var(--gray-1);
+      }
+    }
+  }
+
+  &.button_outlined.button_black {
+    border: 2px solid var(--black);
+
+    @media (hover: hover) {
+      &:hover {
+        border: 2px solid var(--gray-1);
       }
     }
   }

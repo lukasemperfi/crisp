@@ -1,8 +1,19 @@
-{% macro picture(jpgSrc, webpSrc, alt, class, loading="lazy", fetchpriority="auto") %}
+{% macro picture(jpgSrc, webpSrc, mobileJpgSrc, mobileWebpSrc, alt, class, loading="lazy", fetchpriority="auto") %}
 {% set isLazy = (loading !== "eager") %}
 
 <picture>
+    {% if mobileWebpSrc %}
+    <source media="(max-width: 500px)" type="image/webp" {% if isLazy %} data-srcset="{{ mobileWebpSrc }}" {% else %}
+        srcset="{{ mobileWebpSrc }}" {% endif %}>
+    {% endif %}
+
+    {% if mobileJpgSrc %}
+    <source media="(max-width: 500px)" type="image/jpeg" {% if isLazy %} data-srcset="{{ mobileJpgSrc }}" {% else %}
+        srcset="{{ mobileJpgSrc }}" {% endif %}>
+    {% endif %}
+
     <source type="image/webp" {% if isLazy %} data-srcset="{{ webpSrc }}" {% else %} srcset="{{ webpSrc }}" {% endif %}>
+
     <img class="{{ class }} {% if isLazy %}lazy{% endif %}" alt="{{ alt }}" {% if loading==="eager" %} loading="eager"
         {% endif %} fetchpriority="{{ fetchpriority }}" {% if isLazy %} data-src="{{ jpgSrc }}" {% else %}
         src="{{ jpgSrc }}" {% endif %}>
