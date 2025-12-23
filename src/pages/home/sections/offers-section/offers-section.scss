@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto auto;
-    gap: functions.fluidValue(10px, 29px, $bp-mobile, 1920px);
+    gap: functions.fluidValue(12px, 29px, $bp-mobile, 1920px);
     grid-template-areas:
       "col-1 col-3"
       "col-2 col-3";
@@ -17,8 +17,8 @@
       grid-template-columns: 1fr;
       grid-template-areas:
         "col-1"
-        "col-2"
-        "col-3";
+        "col-3"
+        "col-2";
     }
   }
   &__list-item {
@@ -74,7 +74,7 @@
       }
 
       @include mixins.respond-to($bp-mobile) {
-        right: functions.fluidValue(22px, 163px, 320px, $bp-mobile);
+        right: functions.fluidValue(22px, 110px, 320px, $bp-mobile);
       }
 
       &__title {
@@ -89,13 +89,11 @@
         @include mixins.respond-to(xl) {
           font-size: functions.fluidValue(16px, 48px, 320px, 1920px);
           line-height: functions.fluidValue(19px, 62px, 320px, 1920px);
-          // margin-bottom: functions.fluidValue(3px, 7px, 320px, 1920px);
         }
 
         @include mixins.respond-to($bp-mobile) {
           font-size: functions.fluidValue(16px, 48px, 320px, $bp-mobile);
           line-height: functions.fluidValue(19px, 62px, 320px, $bp-mobile);
-          margin-bottom: functions.fluidValue(3px, 7px, 320px, $bp-mobile);
         }
 
         @include mixins.respond-to(350px) {
@@ -106,12 +104,20 @@
       &__text {
         font-family: var(--font3);
         font-weight: 400;
-        font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+        font-size: 22px;
         letter-spacing: 0.01em;
         color: var(--black);
-        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
-      }
-      .button {
+        margin-bottom: 48px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(10px, 22px, 320px, $bp-mobile);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, $bp-mobile);
+        }
       }
     }
 
@@ -133,24 +139,46 @@
         transform: translateY(-50%);
       }
 
+      @include mixins.respond-to($bp-mobile) {
+        left: functions.fluidValue(31px, 55px, 320px, $bp-mobile);
+      }
+
       &__title {
         font-family: var(--font-family);
         font-weight: 600;
-        font-size: functions.fluidValue(16px, 48px, 320px, 1920px);
-        line-height: functions.fluidValue(19px, 62px, 320px, 1920px);
+        font-size: 48px;
+        line-height: 62px;
         text-transform: uppercase;
         color: var(--black);
         margin-bottom: 7px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(16px, 48px, 320px, 1920px);
+          line-height: functions.fluidValue(19px, 62px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(16px, 48px, 320px, $bp-mobile);
+          line-height: functions.fluidValue(19px, 62px, 320px, $bp-mobile);
+        }
       }
       &__text {
         font-family: var(--font3);
         font-weight: 400;
-        font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+        font-size: 22px;
         letter-spacing: 0.01em;
         color: var(--black);
-        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
-      }
-      .button {
+        margin-bottom: 48px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(10px, 22px, 320px, $bp-mobile);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, $bp-mobile);
+        }
       }
     }
   }
@@ -165,24 +193,47 @@
         bottom: functions.fluidValue(5px, 50px, 320px, 1920px);
       }
 
+      @include mixins.respond-to($bp-mobile) {
+        left: functions.fluidValue(27px, 50px, 320px, 1920px);
+        bottom: functions.fluidValue(36px, 50px, 320px, 1920px);
+      }
+
       &__title {
         font-family: var(--font-family);
         font-weight: 600;
-        font-size: functions.fluidValue(26px, 96px, 320px, 1920px);
-        line-height: functions.fluidValue(29px, 110px, 320px, 1920px);
+        font-size: 96px;
+        line-height: 110px;
         text-transform: uppercase;
         color: var(--black);
         margin-bottom: 7px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(26px, 96px, 320px, 1920px);
+          line-height: functions.fluidValue(29px, 110px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(26px, 96px, 320px, $bp-mobile);
+          line-height: functions.fluidValue(29px, 110px, 320px, $bp-mobile);
+        }
       }
       &__text {
         font-family: var(--font3);
         font-weight: 400;
-        font-size: functions.fluidValue(10px, 25px, 320px, 1920px);
+        font-size: 22px;
         letter-spacing: 0.01em;
         color: var(--black);
-        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
-      }
-      .button {
+        margin-bottom: 48px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(10px, 22px, 320px, $bp-mobile);
+          margin-bottom: functions.fluidValue(11px, 48px, 320px, $bp-mobile);
+        }
       }
     }
   }
