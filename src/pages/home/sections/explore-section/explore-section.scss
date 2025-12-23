@@ -8,12 +8,12 @@
     display: flex;
     gap: functions.fluidValue(20px, 96px, 320px, 1920px);
     position: relative;
-    aspect-ratio: 292/252;
 
     @include mixins.respond-to($bp-mobile) {
       gap: 0;
       align-items: flex-end;
       padding: 12px;
+      aspect-ratio: 292/252;
     }
   }
 

@@ -2,16 +2,24 @@
 @use "@/app/styles/functions" as functions;
 
 .offers {
-  $bp-mobile: 650px;
+  $bp-mobile: 850px;
 
   &__list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto auto;
-    gap: 29px;
+    gap: functions.fluidValue(10px, 29px, $bp-mobile, 1920px);
     grid-template-areas:
       "col-1 col-3"
       "col-2 col-3";
+
+    @include mixins.respond-to($bp-mobile) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "col-1"
+        "col-2"
+        "col-3";
+    }
   }
   &__list-item {
     position: relative;
@@ -41,5 +49,141 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .text-block {
+    width: max-content;
+    position: absolute;
+    padding: 0;
+
+    &::after,
+    &::before {
+      display: none;
+    }
+  }
+
+  .col-1 {
+    .text-block {
+      top: 83px;
+      right: 163px;
+
+      @include mixins.respond-to(xl) {
+        top: 50%;
+        transform: translateY(-50%);
+        right: functions.fluidValue(5px, 110px, 320px, 1920px);
+      }
+
+      @include mixins.respond-to($bp-mobile) {
+        right: functions.fluidValue(22px, 163px, 320px, $bp-mobile);
+      }
+
+      &__title {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 62px;
+        text-transform: uppercase;
+        color: var(--black);
+        margin-bottom: 7px;
+
+        @include mixins.respond-to(xl) {
+          font-size: functions.fluidValue(16px, 48px, 320px, 1920px);
+          line-height: functions.fluidValue(19px, 62px, 320px, 1920px);
+          // margin-bottom: functions.fluidValue(3px, 7px, 320px, 1920px);
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          font-size: functions.fluidValue(16px, 48px, 320px, $bp-mobile);
+          line-height: functions.fluidValue(19px, 62px, 320px, $bp-mobile);
+          margin-bottom: functions.fluidValue(3px, 7px, 320px, $bp-mobile);
+        }
+
+        @include mixins.respond-to(350px) {
+          white-space: wrap;
+          max-width: 100px;
+        }
+      }
+      &__text {
+        font-family: var(--font3);
+        font-weight: 400;
+        font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+        letter-spacing: 0.01em;
+        color: var(--black);
+        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+      }
+      .button {
+      }
+    }
+
+    br {
+      @include mixins.respond-to(350px) {
+        display: none;
+      }
+    }
+  }
+
+  .col-2 {
+    .text-block {
+      top: 117px;
+      left: 95px;
+
+      @include mixins.respond-to(xl) {
+        top: 50%;
+        left: functions.fluidValue(5px, 55px, 320px, 1920px);
+        transform: translateY(-50%);
+      }
+
+      &__title {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: functions.fluidValue(16px, 48px, 320px, 1920px);
+        line-height: functions.fluidValue(19px, 62px, 320px, 1920px);
+        text-transform: uppercase;
+        color: var(--black);
+        margin-bottom: 7px;
+      }
+      &__text {
+        font-family: var(--font3);
+        font-weight: 400;
+        font-size: functions.fluidValue(10px, 22px, 320px, 1920px);
+        letter-spacing: 0.01em;
+        color: var(--black);
+        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+      }
+      .button {
+      }
+    }
+  }
+
+  .col-3 {
+    .text-block {
+      left: 86px;
+      bottom: 103px;
+
+      @include mixins.respond-to(xl) {
+        left: functions.fluidValue(5px, 50px, 320px, 1920px);
+        bottom: functions.fluidValue(5px, 50px, 320px, 1920px);
+      }
+
+      &__title {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: functions.fluidValue(26px, 96px, 320px, 1920px);
+        line-height: functions.fluidValue(29px, 110px, 320px, 1920px);
+        text-transform: uppercase;
+        color: var(--black);
+        margin-bottom: 7px;
+      }
+      &__text {
+        font-family: var(--font3);
+        font-weight: 400;
+        font-size: functions.fluidValue(10px, 25px, 320px, 1920px);
+        letter-spacing: 0.01em;
+        color: var(--black);
+        margin-bottom: functions.fluidValue(11px, 48px, 320px, 1920px);
+      }
+      .button {
+      }
+    }
   }
 }
