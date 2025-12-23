@@ -5,7 +5,7 @@
   &__wrapper {
     display: flex;
     position: relative;
-    aspect-ratio: 1878/800;
+    // aspect-ratio: 1878/800;
     padding-block: functions.fluidValue(10px, 40px, 320px, 1920px);
   }
 
@@ -16,6 +16,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
 
     @include mixins.respond-to(lg-sm) {
       object-position: 100% 50%;
@@ -26,8 +27,21 @@
     }
   }
 
+  &__content {
+    display: flex;
+    // display: grid;
+    // grid-template-columns: max-content 50%;
+    width: 100%;
+    justify-content: center;
+    // gap: 99px;
+
+    @include mixins.respond-to(xl) {
+      // gap: functions.fluidValue(10px, 99px, 320px, 1920px);
+    }
+  }
+
   .text-block {
-    left: 234px;
+    // left: 234px;
     margin-block: auto;
     max-width: 100%;
     padding-right: 43px;
@@ -35,7 +49,7 @@
     padding-top: 23px;
 
     @include mixins.respond-to(xl) {
-      left: functions.fluidValue(23px, 234px, 320px, 1920px);
+      // left: functions.fluidValue(23px, 234px, 320px, 1920px);
       padding-right: functions.fluidValue(10px, 43px, 320px, 1920px);
       padding-top: functions.fluidValue(10px, 23px, 320px, 1920px);
     }
@@ -66,6 +80,65 @@
 
     &__text {
       display: none;
+    }
+  }
+
+  &__slider {
+    // flex: 1 1 814px;
+    // background-color: pink;
+    min-width: 0;
+    // aspect-ratio: 814/719;
+    max-width: 948px;
+    max-height: 719px;
+    // // height: 719px;
+    overflow-x: clip;
+
+    // @include mixins.respond-to(1560px) {
+    //   aspect-ratio: 814/719;
+    //   width: 600px;
+    // }
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+  }
+
+  .hero-slider {
+    // margin: 0 auto;
+    transform: translateX(functions.fluidValue(80px, 160px, 320px, 1920px));
+    overflow: visible;
+    // padding: 20px;
+    height: 100%;
+
+    // &__card {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+      // max-width: 474px;
+    }
+    // }
+
+    .swiper-slide {
+      position: relative;
+      aspect-ratio: 474/709;
+      max-width: 474px;
+      max-height: 709px;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.5s;
+    }
+
+    .swiper-slide-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .swiper-slide-prev {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 }
