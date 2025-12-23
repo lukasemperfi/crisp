@@ -1,14 +1,17 @@
-{% macro picture(jpgSrc, webpSrc, mobileJpgSrc, mobileWebpSrc, alt, class, loading="lazy", fetchpriority="auto") %}
+{% macro picture(jpgSrc, webpSrc, mobileJpgSrc, mobileWebpSrc, alt, class, breakpoint=500, loading="lazy",
+fetchpriority="auto") %}
 {% set isLazy = (loading !== "eager") %}
+{% set mediaQuery = "(max-width: " ~ breakpoint ~ "px)" %}
 
 <picture>
+
     {% if mobileWebpSrc %}
-    <source media="(max-width: 500px)" type="image/webp" {% if isLazy %} data-srcset="{{ mobileWebpSrc }}" {% else %}
+    <source media="{{ mediaQuery }}" type="image/webp" {% if isLazy %} data-srcset="{{ mobileWebpSrc }}" {% else %}
         srcset="{{ mobileWebpSrc }}" {% endif %}>
     {% endif %}
 
     {% if mobileJpgSrc %}
-    <source media="(max-width: 500px)" type="image/jpeg" {% if isLazy %} data-srcset="{{ mobileJpgSrc }}" {% else %}
+    <source media="{{ mediaQuery }}" type="image/jpeg" {% if isLazy %} data-srcset="{{ mobileJpgSrc }}" {% else %}
         srcset="{{ mobileJpgSrc }}" {% endif %}>
     {% endif %}
 

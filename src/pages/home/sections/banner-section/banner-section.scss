@@ -1,0 +1,60 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.banner {
+  &__wrapper {
+    display: flex;
+    position: relative;
+    aspect-ratio: 1878/467;
+
+    padding-block: functions.fluidValue(10px, 40px, 320px, 1920px);
+
+    @include mixins.respond-to(lg-sm) {
+      // aspect-ratio: 380/126;
+    }
+
+    @include mixins.respond-to(md) {
+      // aspect-ratio: 296/126;
+    }
+  }
+
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @include mixins.respond-to(lg-sm) {
+      object-position: 100% 50%;
+    }
+
+    @include mixins.respond-to(sm) {
+      object-position: 88% 50%;
+    }
+  }
+
+  .text-block {
+    // position: relative;
+    // top: 50%;
+    left: 269px;
+    // transform: translateY(-50%);
+    margin-block: auto;
+    max-width: functions.fluidValue(171px, 640px, 320px, 1920px);
+    padding-right: 22px;
+
+    @include mixins.respond-to(xl) {
+      left: functions.fluidValue(23px, 169px, 320px, 1920px);
+      // margin-left: functions.fluidValue(23px, 169px, 320px, 1920px);
+    }
+    @include mixins.respond-to(sm) {
+      padding: 0;
+
+      &::after,
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
