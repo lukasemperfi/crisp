@@ -3,39 +3,16 @@
 {%from "src/shared/ui/picture/picture.html" import picture%}
 {% from "src/shared/ui/skeleton/skeleton.html" import skeleton%}
 
-
-
 {%macro productsSection()%}
 <section class="products">
     <div class="page-container-1920">
         <div class="products__list">
             <div class="products__catalog">
-                {{productCard()}}
-                {{productCard()}}
-                {{productCard()}}
+                {{productListSkeleton()}}
             </div>
             <button class="button button_outlined products__button" name="Load more" aria-label="Перейти в магазин">Load
                 more</button>
         </div>
     </div>
 </section>
-{%endmacro%}
-
-
-{%macro productCard()%}
-<div class="product-card">
-    <div class="product-card__image">
-        {{ picture(
-        jpgSrc="/images/products/img-1.jpg",
-        alt="product-card background image",
-        class="product-card__img"
-        ) }}
-    </div>
-    <div class="product-card__category">TOP women</div>
-    <div class="product-card__name">Angels malu zip jeans slim black used</div>
-    <div class="product-card__price price">
-        <div class="price__current">139,00 EUR</div>
-        <div class="price__old">119,00 EUR</div>
-    </div>
-</div>
 {%endmacro%}

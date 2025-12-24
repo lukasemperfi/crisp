@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
   initHeroSection();
   initPageFooter();
-  // initProducts();
+  initProducts();
   // initManufacturerSection();
   // initNewsSection();
   // initHero();
