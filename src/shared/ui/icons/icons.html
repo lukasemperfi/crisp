@@ -219,6 +219,18 @@
 </svg>
 {%endmacro%}
 
+{% macro rightArrow(class) %}
+<svg class="{{class}}" width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.707108 14.8489L7.77796 7.77803L0.70711 0.707183" stroke="white" stroke-width="2" />
+</svg>
+{% endmacro %}
+
+{% macro leftArrow(class) %}
+<svg class="{{class}}" width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8.48506 0.707031L1.41421 7.77788L8.48506 14.8487" stroke="white" stroke-width="2" />
+</svg>
+{% endmacro %}
+
 
 
 
@@ -233,21 +245,7 @@
 </svg>
 {% endmacro %}
 
-{% macro rightArrow(class) %}
-<svg class="{{class}}" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-        d="M19.8333 8.83301L18.55 10.1163L25.5167 17.083H7V18.9163H25.5167L18.55 25.883L19.8333 27.1663L29 17.9997L19.8333 8.83301Z"
-        fill="currentColor" />
-</svg>
-{% endmacro %}
 
-{% macro leftArrow(class) %}
-<svg class="{{class}}" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-        d="M14.1667 8.83301L15.45 10.1163L8.4833 17.083H27V18.9163H8.4833L15.45 25.883L14.1667 27.1663L5 17.9997L14.1667 8.83301Z"
-        fill="currentColor" />
-</svg>
-{% endmacro %}
 
 {% macro play(class="")%}
 <svg class="{{class}}" width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">

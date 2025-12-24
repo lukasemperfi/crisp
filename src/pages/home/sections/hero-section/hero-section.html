@@ -30,7 +30,7 @@
                             <div class="swiper-slide">
                                 <img src="/images/home-page/hero-slider-2.jpg" />
                             </div>
-                            <div class="swiper-slide">
+                            <!-- <div class="swiper-slide">
                                 <img src="/images/home-page/hero-slider-1.jpg" />
                             </div>
                             <div class="swiper-slide">
@@ -41,13 +41,29 @@
                             </div>
                             <div class="swiper-slide">
                                 <img src="/images/home-page/hero-slider-2.jpg" />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="hero-slider__nav">
+                <div class="swiper-pagination hero-slider__nav-bullets"></div>
+                <!-- <div class=" hero-slider__nav-buttons"> -->
+                {{sliderLeftNav()}}
+                {{sliderRightNav()}}
+                <!-- </div> -->
 
+            </div>
         </div>
     </div>
 </section>
+{%endmacro%}
+
+
+{%macro sliderLeftNav()%}
+<button class="slider-nav slider-nav-left">{{icons.leftArrow()}}</button>
+{%endmacro%}
+
+{%macro sliderRightNav()%}
+<button class="slider-nav slider-nav-right">{{icons.rightArrow()}}</button>
 {%endmacro%}

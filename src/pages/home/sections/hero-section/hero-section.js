@@ -1,7 +1,8 @@
 import { initSwiper } from "@/shared/lib/swiper/init-swiper";
-import { EffectCoverflow } from "swiper/modules";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 
 import "swiper/css/effect-coverflow";
+// import "swiper/css/pagination";
 
 export const initHeroSection = () => {
   const swiper = initSwiper(".hero-slider", {
@@ -12,7 +13,7 @@ export const initHeroSection = () => {
     speed: 600,
     preventClicks: true,
     slidesPerView: "2",
-    loop: true,
+    loop: false,
     coverflowEffect: {
       rotate: 0,
       stretch: 65,
@@ -32,6 +33,17 @@ export const initHeroSection = () => {
         },
       },
     },
-    modules: [EffectCoverflow],
+    modules: [EffectCoverflow, Navigation, Pagination],
+    navigation: {
+      prevEl: ".slider-nav-left",
+      nextEl: ".slider-nav-right",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<span class="${className}"></span>`;
+      },
+    },
   });
 };

@@ -3,11 +3,18 @@
 
 .hero {
   $bp-mobile: 550px;
+
+  .page-container-1920 {
+    @include mixins.respond-to($bp-mobile) {
+      padding: 0;
+    }
+  }
+
   &__wrapper {
     display: flex;
     position: relative;
-    // aspect-ratio: 1878/800;
-    padding-block: functions.fluidValue(15.5px, 40px, 320px, 1920px);
+    // padding-block: functions.fluidValue(15.5px, 45.5px, 320px, 1920px);
+    padding-block: 45.5px;
 
     @include mixins.respond-to($bp-mobile) {
       padding-top: 30px;
@@ -132,13 +139,106 @@
   }
 
   .hero-slider {
-    // transform: translateX(functions.fluidValue(80px, 160px, 320px, 1920px));
     transform: translateX(17%);
     overflow: visible;
     height: 100%;
 
     @include mixins.respond-to($bp-mobile) {
       transform: translateX(12%);
+    }
+
+    &__nav {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      width: 100%;
+      // justify-content: space-between;
+      align-items: center;
+
+      @include mixins.respond-to($bp-mobile) {
+        padding-inline: 14px;
+        padding-bottom: 11px;
+        justify-content: space-between;
+      }
+
+      .slider-nav {
+        &.slider-nav-left {
+          margin-left: auto;
+
+          @include mixins.respond-to($bp-mobile) {
+            margin: 0;
+            order: 1;
+          }
+        }
+        &.slider-nav-right {
+          margin-left: 3px;
+          @include mixins.respond-to($bp-mobile) {
+            margin: 0;
+            order: 3;
+          }
+        }
+
+        @include mixins.respond-to(xl) {
+          width: functions.fluidValue(30px, 50px, $bp-mobile, 1920px);
+          height: functions.fluidValue(30px, 50px, $bp-mobile, 1920px);
+
+          svg {
+            width: 8px;
+            height: 14px;
+          }
+        }
+
+        @include mixins.respond-to($bp-mobile) {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    // &__nav-buttons {
+    // display: flex;
+    // gap: 3px;
+    // }
+
+    &__nav-bullets {
+      margin-left: functions.fluidValue(14px, 28px, $bp-mobile, 1920px);
+
+      @include mixins.respond-to($bp-mobile) {
+        margin: 0;
+        order: 2;
+      }
+
+      &.swiper-pagination {
+        display: flex;
+        gap: 8px;
+        height: max-content;
+        align-items: center;
+      }
+
+      .swiper-pagination-bullet {
+        display: inline-flex;
+        border: 1px solid var(--gray-1);
+        width: functions.fluidValue(16px, 18px, $bp-mobile, 1920px);
+        height: functions.fluidValue(16px, 18px, $bp-mobile, 1920px);
+        transition: 0.3s;
+
+        // @include mixins.respond-to($bp-mobile) {
+        //   width: 16px;
+        //   height: 16px;
+        // }
+      }
+
+      .swiper-pagination-bullet-active {
+        width: functions.fluidValue(20px, 22px, $bp-mobile, 1920px);
+        height: functions.fluidValue(20px, 22px, $bp-mobile, 1920px);
+        background-color: var(--black);
+
+        // @include mixins.respond-to($bp-mobile) {
+        //   width: 20px;
+        //   height: 20px;
+        // }
+      }
     }
 
     img {
@@ -173,4 +273,23 @@
       pointer-events: auto;
     }
   }
+}
+
+.slider-nav {
+  width: 50px;
+  height: 50px;
+  background-color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 10px;
+    height: 16px;
+  }
+}
+
+.slider-nav-left {
+}
+.slider-nav-right {
 }
