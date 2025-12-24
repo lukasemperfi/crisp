@@ -67,6 +67,17 @@
     }
   }
 
+  &.button_outlined.button_gray {
+    border: 2px solid var(--divider);
+    color: var(--gray-1);
+
+    @media (hover: hover) {
+      &:hover {
+        border: 2px solid var(--gray-1);
+      }
+    }
+  }
+
   &_fill {
     width: 100%;
   }

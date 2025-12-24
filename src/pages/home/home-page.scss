@@ -26,3 +26,19 @@
     margin-top: 0;
   }
 }
+
+.brand {
+  margin-top: functions.fluidValue(12px, 21px, 320px, 1920px);
+}
+
+.offers {
+  margin-top: functions.fluidValue(12px, 28px, 320px, 1920px);
+}
+
+.products {
+  margin-top: 31px;
+}
+
+.banner {
+  margin-top: functions.fluidValue(12px, 23px, 320px, 1920px);
+}

@@ -2,7 +2,7 @@ import { productList } from "@/entities/product/ui/product-list/product-list";
 import { renderProductList } from "@/entities/product/ui/product-list/product-list";
 export const initProducts = () => {
   // productList(".products__catalog");
-  renderProductList(productItems, ".products__catalog");
+  renderProductList(productItems, ".products__main");
 };
 
 const productItems = [

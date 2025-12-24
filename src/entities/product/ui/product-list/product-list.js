@@ -35,31 +35,25 @@ export const filteredProductList = async (containerSelector) => {
 };
 
 export const productList = async (containerSelector) => {
-  const state = store.getState().products;
-
-  let prevProducts = null;
-
-  store.subscribe("products", (newState) => {
-    if (newState.status === PRODUCTS_STATUS.SUCCEEDED) {
-      const same =
-        prevProducts &&
-        JSON.stringify(prevProducts) === JSON.stringify(newState.items);
-
-      if (same) {
-        return;
-      }
-
-      prevProducts = newState.items;
-
-      renderProductList(newState.items, containerSelector);
-    }
-  });
-
-  if (state.items.length === 0 && state.status === PRODUCTS_STATUS.IDLE) {
-    await fetchProducts();
-  } else if (state.status === PRODUCTS_STATUS.SUCCEEDED) {
-    renderProductList(state.items, containerSelector);
-  }
+  // const state = store.getState().products;
+  // let prevProducts = null;
+  // store.subscribe("products", (newState) => {
+  //   if (newState.status === PRODUCTS_STATUS.SUCCEEDED) {
+  //     const same =
+  //       prevProducts &&
+  //       JSON.stringify(prevProducts) === JSON.stringify(newState.items);
+  //     if (same) {
+  //       return;
+  //     }
+  //     prevProducts = newState.items;
+  //     renderProductList(newState.items, containerSelector);
+  //   }
+  // });
+  // if (state.items.length === 0 && state.status === PRODUCTS_STATUS.IDLE) {
+  //   await fetchProducts();
+  // } else if (state.status === PRODUCTS_STATUS.SUCCEEDED) {
+  //   renderProductList(state.items, containerSelector);
+  // }
 };
 
 export function renderProductList(products, containerSelector) {
@@ -74,13 +68,30 @@ export function renderProductList(products, containerSelector) {
 
   mainContainer.innerHTML = "";
 
+  const productListWrapper = document.createElement("div");
+  productListWrapper.className = "catalog";
+
   const catalogDiv = document.createElement("div");
-  catalogDiv.className = "catalog";
+  catalogDiv.className = "catalog__list";
 
   products.forEach((product) => {
     const card = createProductCard(product);
     catalogDiv.appendChild(card);
   });
 
-  mainContainer.appendChild(catalogDiv);
+  const loadMoreWrapper = document.createElement("div");
+  loadMoreWrapper.className = "catalog__actions";
+
+  const loadMoreButton = document.createElement("button");
+  loadMoreButton.className =
+    "button button_outlined button_gray catalog__more-button";
+  loadMoreButton.name = "Load more";
+  loadMoreButton.setAttribute("aria-label", "Перейти в магазин");
+  loadMoreButton.textContent = "Load more";
+
+  loadMoreWrapper.appendChild(loadMoreButton);
+
+  productListWrapper.appendChild(catalogDiv);
+  productListWrapper.appendChild(loadMoreWrapper);
+  mainContainer.appendChild(productListWrapper);
 }
