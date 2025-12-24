@@ -13,7 +13,6 @@
   &__wrapper {
     display: flex;
     position: relative;
-    // padding-block: functions.fluidValue(15.5px, 45.5px, 320px, 1920px);
     padding-block: 45.5px;
 
     @include mixins.respond-to($bp-mobile) {
@@ -49,7 +48,6 @@
     gap: 39px;
 
     @include mixins.respond-to(xl) {
-      // gap: functions.fluidValue(1px, 39px, 320px, 1920px);
       gap: 0;
       padding-left: 30px;
     }
@@ -63,7 +61,6 @@
   }
 
   .text-block {
-    // left: 234px;
     margin-block: auto;
     max-width: 100%;
     padding-right: 43px;
@@ -71,7 +68,6 @@
     padding-top: 23px;
 
     @include mixins.respond-to(xl) {
-      // left: functions.fluidValue(23px, 234px, 320px, 1920px);
       padding-right: functions.fluidValue(10px, 43px, 320px, 1920px);
       padding-top: functions.fluidValue(10px, 23px, 320px, 1920px);
     }
@@ -131,7 +127,6 @@
   }
 
   &__slider {
-    // background-color: pink;
     min-width: 0;
     max-width: functions.fluidValue(277px, 948px, 320px, 1920px);
     max-height: functions.fluidValue(277px, 719px, 320px, 1920px);
@@ -153,7 +148,6 @@
       right: 0;
       display: flex;
       width: 100%;
-      // justify-content: space-between;
       align-items: center;
 
       @include mixins.respond-to($bp-mobile) {
@@ -196,11 +190,6 @@
       }
     }
 
-    // &__nav-buttons {
-    // display: flex;
-    // gap: 3px;
-    // }
-
     &__nav-bullets {
       margin-left: functions.fluidValue(14px, 28px, $bp-mobile, 1920px);
 
@@ -222,22 +211,12 @@
         width: functions.fluidValue(16px, 18px, $bp-mobile, 1920px);
         height: functions.fluidValue(16px, 18px, $bp-mobile, 1920px);
         transition: 0.3s;
-
-        // @include mixins.respond-to($bp-mobile) {
-        //   width: 16px;
-        //   height: 16px;
-        // }
       }
 
       .swiper-pagination-bullet-active {
         width: functions.fluidValue(20px, 22px, $bp-mobile, 1920px);
         height: functions.fluidValue(20px, 22px, $bp-mobile, 1920px);
         background-color: var(--black);
-
-        // @include mixins.respond-to($bp-mobile) {
-        //   width: 20px;
-        //   height: 20px;
-        // }
       }
     }
 
@@ -287,9 +266,4 @@
     width: 10px;
     height: 16px;
   }
-}
-
-.slider-nav-left {
-}
-.slider-nav-right {
 }

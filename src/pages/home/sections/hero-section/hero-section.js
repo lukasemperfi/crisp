@@ -13,7 +13,7 @@ export const initHeroSection = () => {
     speed: 600,
     preventClicks: true,
     slidesPerView: "2",
-    loop: false,
+    loop: true,
     coverflowEffect: {
       rotate: 0,
       stretch: 65,
