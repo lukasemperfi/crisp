@@ -20,6 +20,18 @@ export const initHeroSection = () => {
       modifier: 1,
       slideShadows: false,
     },
+    breakpoints: {
+      0: {
+        coverflowEffect: {
+          stretch: 52,
+        },
+      },
+      550: {
+        coverflowEffect: {
+          stretch: 65,
+        },
+      },
+    },
     modules: [EffectCoverflow],
   });
 };
