@@ -1,0 +1,9 @@
+{%import "src/shared/ui/slider/slider.html" as slider%}
+
+{%macro featuredProductsSection()%}
+<section class="featured-products">
+    <div class="page-container-1920">
+        {{slider.slider(title="Featured Items")}}
+    </div>
+</section>
+{%endmacro%}

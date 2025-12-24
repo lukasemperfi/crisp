@@ -1,6 +1,7 @@
 {%import "src/shared/ui/icons/icons.html" as icons%}
 {%from "src/shared/ui/picture/picture.html" import picture%}
 {%from "src/shared/ui/text-block/text-block.html" import textBlock%}
+{%import "src/shared/ui/slider/slider.html" as slider%}
 
 {% macro heroSection()%}
 <section class="hero">
@@ -48,19 +49,10 @@
             </div>
             <div class="hero-slider__nav">
                 <div class="swiper-pagination hero-slider__nav-bullets"></div>
-                {{sliderLeftNav()}}
-                {{sliderRightNav()}}
+                {{slider.sliderLeftNav()}}
+                {{slider.sliderRightNav()}}
             </div>
         </div>
     </div>
 </section>
-{%endmacro%}
-
-
-{%macro sliderLeftNav()%}
-<button class="slider-nav slider-nav-left">{{icons.leftArrow()}}</button>
-{%endmacro%}
-
-{%macro sliderRightNav()%}
-<button class="slider-nav slider-nav-right">{{icons.rightArrow()}}</button>
 {%endmacro%}

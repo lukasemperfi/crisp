@@ -1,3 +1,51 @@
-{%macro slider()}
+{%import "src/shared/ui/icons/icons.html" as icons%}
 
+{%macro slider(class="", title="")%}
+<div class="slider{{class}}">
+    <div class="slider__top">
+        <div class="slider__title">{{title}}</div>
+        <div class="slider__nav">
+            {{sliderLeftNav(class="slider-nav_gray slider-nav_size-sm")}}
+            {{sliderRightNav(class="slider-nav_gray slider-nav_size-sm")}}
+        </div>
+    </div>
+    <div class="slider__main">
+        <div class="swiper slider__slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="/images/home-page/hero-slider-2.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endmacro%}
+
+{%macro sliderLeftNav(class)%}
+<button class="slider-nav slider-nav-left {{class}}">{{icons.leftArrow()}}</button>
+{%endmacro%}
+
+{%macro sliderRightNav(class)%}
+<button class="slider-nav slider-nav-right {{class}}">{{icons.rightArrow()}}</button>
 {%endmacro%}

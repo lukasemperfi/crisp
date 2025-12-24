@@ -8,6 +8,8 @@
 {%from "src/pages/home/sections/products-section/products-section.html" import productsSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 {%from "src/pages/home/sections/banner-section/banner-section.html" import bannerSection%}
+{%from "src/pages/home/sections/featured-products-section/featured-products-section.html" import
+featuredProductsSection%}
 
 
 <!DOCTYPE html>
@@ -29,6 +31,7 @@
         {{offersSection()}}
         {{productsSection()}}
         {{bannerSection()}}
+        {{featuredProductsSection()}}
         {{exploreSection()}}
         {{benefitsSection()}}
         {{footer(baseUrl)}}
