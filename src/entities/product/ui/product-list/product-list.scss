@@ -3,15 +3,21 @@
 
 .catalog {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+  // grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   column-gap: functions.fluidValue(14px, 26px, 360px, 1920px);
   row-gap: functions.fluidValue(18px, 48px, 360px, 1920px);
 
+  @include mixins.respond-to(1080px) {
+    // grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(139px, 1fr));
+  }
+
   @include mixins.respond-to(lg) {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 
   @include mixins.respond-to(600px) {
-    grid-template-columns: repeat(auto-fill, minmax(139px, 1fr));
+    // grid-template-columns: repeat(auto-fill, minmax(139px, 1fr));
   }
 }

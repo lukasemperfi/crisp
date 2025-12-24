@@ -2,4 +2,28 @@
 @use "@/app/styles/mixins" as mixins;
 
 .products {
+  &__content {
+    display: flex;
+    // grid-template-columns: 21% 79%;
+    gap: 30px;
+  }
+
+  &__aside {
+    border-right: 1px solid var(--divider);
+    flex: 1 1 394px;
+
+    @include mixins.respond-to(650px) {
+      display: none;
+    }
+  }
+
+  &__main {
+    flex: 1 1 1454px;
+  }
+
+  &__catalog {
+  }
+
+  &__button {
+  }
 }

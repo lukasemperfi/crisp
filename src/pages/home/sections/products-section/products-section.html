@@ -6,12 +6,18 @@
 {%macro productsSection()%}
 <section class="products">
     <div class="page-container-1920">
-        <div class="products__list">
-            <div class="products__catalog">
-                {{productListSkeleton()}}
+        <div class="products__content">
+            <aside class="products__aside">
+                filters
+            </aside>
+            <div class="products__main">
+                <div class="products__catalog">
+                    {{productListSkeleton()}}
+                </div>
+                <button class="button button_outlined products__button" name="Load more"
+                    aria-label="Перейти в магазин">Load
+                    more</button>
             </div>
-            <button class="button button_outlined products__button" name="Load more" aria-label="Перейти в магазин">Load
-                more</button>
         </div>
     </div>
 </section>
