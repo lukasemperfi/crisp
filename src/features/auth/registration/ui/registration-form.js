@@ -14,7 +14,7 @@ import { REQUIRED_RULE } from "@/shared/lib/just-validate/rules";
 import { countries, regionsByCountry } from "@/shared/lib/location";
 
 const mode = import.meta.env.MODE;
-let baseUrl = mode === "production" ? "/nuts/" : import.meta.env.BASE_URL;
+let baseUrl = mode === "production" ? "/crisp/" : import.meta.env.BASE_URL;
 
 export const initRegistrationForm = () => {
   const registrationValidator = initRegistrationFormValidation().onSuccess(

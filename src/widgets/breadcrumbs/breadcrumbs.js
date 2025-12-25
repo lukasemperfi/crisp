@@ -27,7 +27,7 @@ export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
   const parts = path.split("/").filter(Boolean);
 
   const mode = import.meta.env.MODE;
-  let basePath = mode === "production" ? "/nuts/" : import.meta.env.BASE_URL;
+  let basePath = mode === "production" ? "/crisp/" : import.meta.env.BASE_URL;
   const normalizedBasePath = basePath.endsWith("/") ? basePath : basePath + "/";
 
   if (parts.length > 0 && parts[0] === normalizedBasePath.replace(/\//g, "")) {

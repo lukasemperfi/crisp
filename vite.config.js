@@ -22,19 +22,19 @@ function getHtmlEntries() {
     entries[name] = file;
   }
 
-  const file404 = glob.sync(`${pagesDir}/404.html`)[0];
-  const relative404 = file404.replace(pagesDir, "").replace(/\\/g, "/");
-  let name404 = relative404.replace(".html", "");
+  // const file404 = glob.sync(`${pagesDir}/404.html`)[0];
+  // const relative404 = file404.replace(pagesDir, "").replace(/\\/g, "/");
+  // let name404 = relative404.replace(".html", "");
 
-  if (file404) {
-    entries[name404] = file404;
-  }
+  // if (file404) {
+  //   entries[name404] = file404;
+  // }
 
   return entries;
 }
 
 export default defineConfig(({ mode }) => {
-  const baseUrl = mode === "production" ? "/nuts/" : "/";
+  const baseUrl = mode === "production" ? "/crisp/" : "/";
   // const baseUrl = "/";
 
   return {

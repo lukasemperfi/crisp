@@ -9,7 +9,7 @@ import { AUTH_STATUS } from "@/entities/auth/model/auth-slice";
 import { redirect } from "@/shared/helpers/redirect";
 
 const mode = import.meta.env.MODE;
-let baseUrl = mode === "production" ? "/nuts/" : import.meta.env.BASE_URL;
+let baseUrl = mode === "production" ? "/crisp/" : import.meta.env.BASE_URL;
 
 export const initLoginForm = () => {
   const overlay = createOverlaySpinner({
