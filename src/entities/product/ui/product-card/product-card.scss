@@ -2,9 +2,9 @@
 @use "@/app/styles/mixins" as mixins;
 
 .product-card {
-  display: grid;
-  grid-template-rows: max-content max-content 1fr;
-  grid-row: span 4;
+  // display: grid;
+  // grid-template-rows: max-content max-content 1fr;
+  // grid-row: span 4;
 
   position: relative;
   width: 100%;
@@ -24,12 +24,17 @@
   }
 
   &__image {
+    position: relative;
     aspect-ratio: 344/450;
     // max-width: 344px;
     // background-color: pink;
     margin-bottom: functions.fluidValue(5px, 16px, 320px, 1920px);
 
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
       width: 100%;
       height: 100%;
       object-fit: cover;

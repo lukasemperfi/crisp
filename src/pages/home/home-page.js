@@ -1,23 +1,16 @@
 import { initHeader } from "@/widgets/header/header.js";
-
-// import { initManufacturerSection } from "./sections/manufacturer/manufacturer.js";
-// import { initNewsSection } from "@/widgets/news-section/news-section.js";
-// import { initHero } from "./sections/hero/hero.js";
-// import { initGoal } from "./sections/goal/goal.js";
 import { lazyLoadElements } from "@/shared/helpers/lazy-loading/lazy-loading.js";
 import { initPageFooter } from "@/widgets/footer/footer";
 import { initHeroSection } from "./sections/hero-section/hero-section";
 import { initProducts } from "./sections/products-section/products-section";
+import { initFeaturedProductsSection } from "./sections/featured-products-section/featured-products-section";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
   initHeroSection();
-  initPageFooter();
   initProducts();
-  // initManufacturerSection();
-  // initNewsSection();
-  // initHero();
-  // initGoal();
+  initFeaturedProductsSection();
+  initPageFooter();
 
   lazyLoadElements(".lazy", { rootMargin: "200px 0px" });
 });

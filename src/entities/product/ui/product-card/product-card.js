@@ -1,63 +1,59 @@
-import { initSwiper } from "@/shared/lib/swiper/init-swiper.js";
-import { Navigation } from "swiper/modules";
-import { cartThunks } from "@/features/cart/model/cart-slice";
-import { debounce } from "@/shared/helpers/debounce";
-import { showToast } from "@/shared/ui/toast/toast";
-
-const baseUrl =
-  import.meta.env.MODE === "development"
-    ? "/"
-    : import.meta.env.VITE_PROD_URL || "";
+import { baseUrl } from "@/shared/helpers/base-url";
 
 export function createProductCard(product) {
   const {
     id,
-    product_images,
-    title,
-    sku,
-    subtitle,
-    weight,
-    weight_unit,
-    packaging_types,
-    discount_price,
+    name,
+    category,
     price,
-    price_unit,
-    product_statuses,
+    discountRate,
+    images = [],
+    badge = {},
   } = product;
-  const images = product_images.sort((a, b) => a.sort_order - b.sort_order);
-  const statuses = {
-    regular: {
-      name: "regular",
-      class: "",
-    },
-    sale: {
-      name: "Акция",
-      class: "product-card__status_sale",
-    },
-    new: {
-      name: "Новинка",
-      class: "product-card__status_new",
-    },
-  };
+
+  const mainImage = images.find((img) => img.is_main) || images[0];
+  const hasDiscount = discountRate > 0;
+  const currentPrice = hasDiscount ? price * (1 - discountRate) : price;
+  const oldPrice = hasDiscount ? price : null;
+  const discountPercent = hasDiscount ? Math.round(discountRate * 100) : null;
 
   const card = document.createElement("div");
   card.className = "product-card";
 
   card.innerHTML = `
-    <div class="product-card__badge">-30%</div>
+    ${
+      hasDiscount
+        ? `<div class="product-card__badge">-${discountPercent}%</div>`
+        : ""
+    }
+
     <div class="product-card__image">
-        <picture>
-            <source type="image/webp" srcset="">
-            <img class="product-card-__image" src="/images/products/img-1.jpg" loading="eager" alt="image" fetchpriority="high">
-        </picture>
+
+        <img
+          class="product-card__image"
+          src="${baseUrl}${mainImage?.image_path_jpg || ""}"
+          loading="eager"
+          alt="${name}"
+          fetchpriority="high"
+        >
     </div>
-    <div class="product-card__category">TOP women</div>
-    <div class="product-card__name">Angels malu zip jeans slim black used</div>
+
+<div class="product-card__category">${badge.label}</div>
+
+
+    <div class="product-card__name">${name}</div>
+
     <div class="product-card__price price">
-        <div class="price__current">139,00 EUR</div>
-        <div class="price__old">119,00 EUR</div>
+      <div class="price__current">
+        ${formatPrice(currentPrice)}
+      </div>
+      ${
+        hasDiscount
+          ? `<div class="price__old">${formatPrice(oldPrice)}</div>`
+          : ""
+      }
     </div>
-    `;
+  `;
 
   // const addButton = card.querySelector(".product-card__buy-button");
 
@@ -73,4 +69,29 @@ export function createProductCard(product) {
   // });
 
   return card;
+}
+
+function formatPrice(value, currency = "EUR", locale = "de-DE") {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
+}
+
+{
+  /* <picture>
+<source
+  type="image/webp"
+  srcset="${baseUrl}${mainImage?.image_path_webp || ""}"
+>
+<img
+  class="product-card__image"
+  src="${baseUrl}${mainImage?.image_path_jpg || ""}"
+  loading="eager"
+  alt="${name}"
+  fetchpriority="high"
+>
+</picture> */
 }
