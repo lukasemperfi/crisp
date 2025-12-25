@@ -14,6 +14,7 @@
 @use "@/pages/home/sections/products-section/products-section.scss" as *;
 @use "@/pages/home/sections/featured-products-section/featured-products-section.scss"
   as *;
+@use "@/pages/home/sections/blog-section/blog-section.scss" as *;
 @use "@/entities/product/ui/product-card/product-card.scss" as *;
 @use "@/entities/product/ui/product-list/product-list.scss" as *;
 @use "@/shared/ui/skeleton/skeleton.scss" as *;
@@ -52,4 +53,8 @@
 
 .explore {
   margin-top: functions.fluidValue(12px, 98px, 320px, 1920px);
+}
+
+.blog {
+  margin-top: functions.fluidValue(11px, 94px, 320px, 1920px);
 }

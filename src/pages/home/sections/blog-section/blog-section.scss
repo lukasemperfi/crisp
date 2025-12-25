@@ -1,0 +1,70 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.blog {
+  background-color: #f8f9fb;
+  padding-block: functions.fluidValue(11px, 34px, 320px, 1920px);
+
+  .blog-card {
+    background: var(--white);
+    padding-top: functions.fluidValue(10px, 24px, 320, 1920px);
+    padding-inline: functions.fluidValue(12px, 24px, 320, 1920px);
+
+    &__badge {
+      font-family: var(--font-family);
+      font-weight: 600;
+      font-size: functions.fluidValue(10px, 18px, 320, 1920px);
+      text-transform: uppercase;
+      color: #bdbdbd;
+      margin-bottom: functions.fluidValue(2px, 10px, 320, 1920px);
+    }
+
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: functions.fluidValue(14px, 26px, 320, 1920px);
+      color: var(--black);
+      margin-bottom: functions.fluidValue(16px, 24px, 320, 1920px);
+    }
+
+    &__text {
+      font-family: var(--font3);
+      font-weight: 400;
+      font-size: functions.fluidValue(10px, 16px, 320, 1920px);
+      line-height: functions.fluidValue(13px, 24px, 320, 1920px);
+      letter-spacing: 0.01em;
+      color: var(--black);
+      margin-bottom: functions.fluidValue(51px, 77px, 320, 1920px);
+    }
+
+    &__meta {
+      font-family: var(--font-family);
+      font-weight: 300;
+      font-size: functions.fluidValue(10px, 13px, 320, 1920px);
+      line-height: functions.fluidValue(22px, 37px, 320, 1920px);
+      color: #4f4f4f;
+
+      border-top: 3px solid var(--black);
+    }
+
+    &__date {
+    }
+
+    &__author {
+    }
+  }
+
+  .blog-list {
+    @include mixins.respond-to(470px) {
+      display: flex;
+      flex-direction: column;
+      gap: 19px;
+    }
+  }
+
+  @include mixins.respond-to(470px) {
+    .slider-nav {
+      display: none;
+    }
+  }
+}

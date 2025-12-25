@@ -1,0 +1,13 @@
+{%import "src/shared/ui/slider/slider.html" as slider%}
+
+{%macro blogSection()%}
+<section class="blog">
+    <div class="page-container-1920">
+        <div class="blog__slider">
+            {{slider.slider(class="blog-slider",title="Blog",
+            sliderContainerClass="blog-slider__slider-container", leftNavClass="blog-slider__left-nav",
+            rightNavClass="blog-slider__right-nav")}}
+        </div>
+    </div>
+</section>
+{%endmacro%}

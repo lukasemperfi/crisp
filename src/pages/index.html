@@ -10,6 +10,8 @@
 {%from "src/pages/home/sections/banner-section/banner-section.html" import bannerSection%}
 {%from "src/pages/home/sections/featured-products-section/featured-products-section.html" import
 featuredProductsSection%}
+{%from "src/pages/home/sections/blog-section/blog-section.html" import
+blogSection%}
 
 
 <!DOCTYPE html>
@@ -33,6 +35,7 @@ featuredProductsSection%}
         {{bannerSection()}}
         {{featuredProductsSection()}}
         {{exploreSection()}}
+        {{blogSection()}}
         {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>
