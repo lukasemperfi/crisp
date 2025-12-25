@@ -35,8 +35,8 @@ export const initHeroSection = () => {
     },
     modules: [EffectCoverflow, Navigation, Pagination],
     navigation: {
-      prevEl: ".slider-nav-left",
-      nextEl: ".slider-nav-right",
+      prevEl: ".hero-slider__nav-left",
+      nextEl: ".hero-slider__nav-right",
     },
     pagination: {
       el: ".swiper-pagination",

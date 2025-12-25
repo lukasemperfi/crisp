@@ -1,12 +1,12 @@
 {%import "src/shared/ui/icons/icons.html" as icons%}
 
-{%macro slider(сlass="", title="", sliderContainerClass="")%}
+{%macro slider(class="", title="", sliderContainerClass="", leftNavClass="",rightNavClass="")%}
 <div class="slider {{class}}">
     <div class="slider__top">
         <div class="slider__title">{{title}}</div>
         <div class="slider__nav">
-            {{sliderLeftNav(class="slider-nav_gray slider-nav_size-sm")}}
-            {{sliderRightNav(class="slider-nav_gray slider-nav_size-sm")}}
+            {{sliderLeftNav(class="slider-nav_gray slider-nav_size-sm " ~ leftNavClass)}}
+            {{sliderRightNav(class="slider-nav_gray slider-nav_size-sm " ~ rightNavClass)}}
         </div>
     </div>
     <div class="slider__main {{sliderContainerClass}}"></div>

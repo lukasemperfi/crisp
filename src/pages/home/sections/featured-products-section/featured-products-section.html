@@ -3,7 +3,12 @@
 {%macro featuredProductsSection()%}
 <section class="featured-products">
     <div class="page-container-1920">
-        {{slider.slider(title="Featured Items", sliderContainerClass="featured-products__slider")}}
+        {{slider.slider(class="featured-slider",title="Featured Items",
+        sliderContainerClass="featured-products__featured-slider", leftNavClass="featured-slider__left-nav",
+        rightNavClass="featured-slider__right-nav")}}
+        {{slider.slider(class="popular-slider",title="Most Popular",
+        sliderContainerClass="featured-products__popular-slider", leftNavClass="popular-slider__left-nav",
+        rightNavClass="popular-slider__right-nav")}}
     </div>
 </section>
 {%endmacro%}
