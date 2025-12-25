@@ -1,4 +1,4 @@
-import{c}from"./footer-DhrWEGpA.js";class y{async getProfile(){const{data:{user:i},error:l}=await c.auth.getUser();if(l||!i){if(l)throw l;return null}const e=i.id;try{const{data:n,error:f}=await c.from("profiles").select(`
+import{c}from"./footer-Dv3gA37Q.js";class y{async getProfile(){const{data:{user:i},error:l}=await c.auth.getUser();if(l||!i){if(l)throw l;return null}const e=i.id;try{const{data:n,error:f}=await c.from("profiles").select(`
                     *,
                     fop_details (
                         edrpou,
