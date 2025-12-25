@@ -1,3 +1,6 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
 .slider {
   &__top {
     display: flex;
@@ -8,8 +11,8 @@
   &__title {
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 24px;
-    line-height: 68px;
+    font-size: functions.fluidValue(18px, 24px, 320px, 1920px);
+    line-height: functions.fluidValue(30px, 68px, 320px, 1920px);
     color: var(--black);
   }
 
@@ -59,5 +62,10 @@
   svg {
     width: 8px;
     height: 13px;
+  }
+
+  @include mixins.respond-to(xl) {
+    width: functions.fluidValue(30px, 41px, 470px, 1920px);
+    height: functions.fluidValue(30px, 41px, 470px, 1920px);
   }
 }

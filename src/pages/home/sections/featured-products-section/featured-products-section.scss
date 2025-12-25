@@ -1,9 +1,18 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
 .featured-products {
   .product-card__image {
-    aspect-ratio: 354/450;
+    // aspect-ratio: 354/450;
   }
 
-  .popular-slider {
-    margin-top: 36px;
+  &__popular-slider {
+    margin-top: functions.fluidValue(1px, 24px, 470px, 1920px);
+  }
+
+  @include mixins.respond-to(470px) {
+    .slider-nav {
+      display: none;
+    }
   }
 }

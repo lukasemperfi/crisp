@@ -56,7 +56,7 @@ export const productList = async (containerSelector) => {
   // }
 };
 
-export function renderProductList(products, containerSelector) {
+export function renderProductList(products, containerSelector, limit = null) {
   const mainContainer = document.querySelector(containerSelector);
 
   if (!mainContainer) {
@@ -68,13 +68,16 @@ export function renderProductList(products, containerSelector) {
 
   mainContainer.innerHTML = "";
 
+  const displayedProducts =
+    limit && typeof limit === "number" ? products.slice(0, limit) : products;
+
   const productListWrapper = document.createElement("div");
   productListWrapper.className = "catalog";
 
   const catalogDiv = document.createElement("div");
   catalogDiv.className = "catalog__list";
 
-  products.forEach((product) => {
+  displayedProducts.forEach((product) => {
     const card = createProductCard(product);
     catalogDiv.appendChild(card);
   });
@@ -90,7 +93,6 @@ export function renderProductList(products, containerSelector) {
   loadMoreButton.textContent = "Load more";
 
   loadMoreWrapper.appendChild(loadMoreButton);
-
   productListWrapper.appendChild(catalogDiv);
   productListWrapper.appendChild(loadMoreWrapper);
   mainContainer.appendChild(productListWrapper);

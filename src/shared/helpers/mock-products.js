@@ -2,7 +2,7 @@ export const mockProducts = [
   {
     id: 1,
     category: "women-dresses",
-    name: "Floral Summer Dress",
+    name: "Angels malu zip jeans slim black used",
     price: 120,
     discountRate: 0.2,
     badge: { type: "top", label: "Top Women" },
@@ -28,7 +28,7 @@ export const mockProducts = [
   {
     id: 2,
     category: "women-dresses",
-    name: "Elegant Evening Dress",
+    name: "Angels malu zip jeans slim black used",
     price: 180,
     discountRate: 0,
     badge: { type: "top", label: "Top Women" },
@@ -46,7 +46,7 @@ export const mockProducts = [
   {
     id: 3,
     category: "women-tops",
-    name: "Classic White Blouse",
+    name: "Angels malu zip jeans slim black used",
     price: 75,
     discountRate: 0.1,
     badge: { type: "top", label: "Top Women" },
@@ -64,7 +64,7 @@ export const mockProducts = [
   {
     id: 4,
     category: "women-outerwear",
-    name: "Oversized Denim Jacket",
+    name: "Angels malu zip jeans slim black used",
     price: 150,
     discountRate: 0.25,
     badge: { type: "top", label: "Top Women" },
@@ -82,7 +82,7 @@ export const mockProducts = [
   {
     id: 5,
     category: "women-shoes",
-    name: "Running Sneakers",
+    name: "Angels malu zip jeans slim black used",
     price: 130,
     discountRate: 0.15,
     badge: { type: "top", label: "Top Women" },
@@ -100,7 +100,7 @@ export const mockProducts = [
   {
     id: 6,
     category: "women-bags",
-    name: "Leather Shoulder Bag",
+    name: "Angels malu zip jeans slim black used",
     price: 170,
     discountRate: 0,
     badge: { type: "top", label: "Top Women" },
@@ -118,7 +118,7 @@ export const mockProducts = [
   {
     id: 7,
     category: "women-accessories",
-    name: "Silk Scarf",
+    name: "Angels malu zip jeans slim black used",
     price: 60,
     discountRate: 0.1,
     badge: { type: "top", label: "Top Women" },
@@ -136,7 +136,7 @@ export const mockProducts = [
   {
     id: 8,
     category: "women-shoes",
-    name: "Classic High Heels",
+    name: "Angels malu zip jeans slim black used",
     price: 140,
     discountRate: 0.3,
     badge: { type: "top", label: "Top Women" },
