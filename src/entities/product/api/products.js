@@ -2,78 +2,102 @@ import { supabase } from "@/shared/api/supabase/client.js";
 
 class Products {
   getAllProducts = async (filters = {}) => {
-    const { flavor = [], weight = [], sort = null } = filters;
+    const {
+      brands = [],
+      sizes = [],
+      colors = [],
+      dressLengths = [],
+      priceRange = {},
+      sort = null,
+      limit = 20,
+    } = filters;
 
     let query = supabase
       .from("products")
       .select(
         `
         *,
-        product_images (*),
-        product_flavors!inner (
-          flavor_id,
-          flavors!inner (*)
-        ),
-        packaging_types (*),
-        product_statuses (*)
+        brand:brands (*),
+        images:product_images (*),
+        variants:product_variants!inner (*)
       `
       )
-      .limit(6);
+      .limit(limit);
 
-    if (flavor.length > 0) {
-      query = query.in("product_flavors.flavors.value", flavor);
+    // Фильтры
+    if (brands.length) {
+      query = query.in("brand_id", brands);
     }
 
-    if (weight.length > 0) {
-      query = query.in("weight", weight);
+    if (sizes.length) {
+      query = query.in("variants.size", sizes);
     }
 
+    if (colors.length) {
+      query = query.in("variants.color", colors);
+    }
+
+    if (dressLengths.length) {
+      query = query.in("dress_length", dressLengths);
+    }
+
+    if (priceRange.min != null) {
+      query = query.gte("base_price", priceRange.min);
+    }
+
+    if (priceRange.max != null) {
+      query = query.lte("base_price", priceRange.max);
+    }
+
+    // Сортировка
     if (sort === "asc" || sort === "desc") {
-      query = query.order("price", { ascending: sort === "asc" });
+      query = query.order("base_price", { ascending: sort === "asc" });
     }
 
-    const { data: products, error } = await query;
+    const { data, error } = await query;
 
     if (error) {
-      console.error("Ошибка при получении продуктов:", error.message);
-      return [];
+      console.error("getAllProducts error:", error);
+      throw error;
     }
 
-    return products;
+    return data;
   };
 
   getProductById = async (id) => {
-    if (!id || isNaN(id)) {
-      return null;
-    }
-
     const { data, error } = await supabase
       .from("products")
       .select(
         `
-        *,
-        product_images (
+        id,
+        name,
+        description,
+        base_price,
+        discount_percent,
+        dress_length,
+        created_at,
+
+        brand:brands (
           id,
-          image_path_png,
-          image_path_webp,
+          name,
+          created_at
+        ),
+
+        images:product_images (
+          id,
+          product_id,
+          image_url,
           is_main,
-          sort_order
+          created_at
         ),
-        product_flavors (
-          flavor_id,
-          flavors (
-            id,
-            name,
-            value
-          )
-        ),
-        packaging_types (
+
+        variants:product_variants (
           id,
-          name
-        ),
-        product_statuses (
-          id,
-          name
+          product_id,
+          color,
+          size,
+          stock,
+          created_at
         )
       `
       )
@@ -81,42 +105,41 @@ class Products {
       .single();
 
     if (error) {
-      if (error.code === "PGRST116") return null;
-      console.error("Ошибка при получении продукта:", error);
-      return null;
+      console.error("getProductById error:", error);
+      throw error;
     }
 
     return data;
   };
-
-  getProductsByIds = async (ids = []) => {
-    if (!Array.isArray(ids) || ids.length === 0) {
-      return [];
-    }
-
-    const { data: products, error } = await supabase
-      .from("products")
-      .select(
-        `
-        *,
-        product_images (*),
-        product_flavors!inner (
-          flavor_id,
-          flavors!inner (*)
-        ),
-        packaging_types (*),
-        product_statuses (*)
-      `
-      )
-      .in("id", ids);
-
-    if (error) {
-      console.error("Ошибка при получении продуктов по ID:", error.message);
-      return [];
-    }
-
-    return products;
-  };
 }
 
 export const productsApi = new Products();
+
+// getProductsByIds = async (ids = []) => {
+//   if (!Array.isArray(ids) || ids.length === 0) {
+//     return [];
+//   }
+
+//   const { data: products, error } = await supabase
+//     .from("products")
+//     .select(
+//       `
+//       *,
+//       product_images (*),
+//       product_flavors!inner (
+//         flavor_id,
+//         flavors!inner (*)
+//       ),
+//       packaging_types (*),
+//       product_statuses (*)
+//     `
+//     )
+//     .in("id", ids);
+
+//   if (error) {
+//     console.error("Ошибка при получении продуктов по ID:", error.message);
+//     return [];
+//   }
+
+//   return products;
+// };

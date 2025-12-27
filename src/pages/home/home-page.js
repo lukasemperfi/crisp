@@ -5,8 +5,31 @@ import { initHeroSection } from "./sections/hero-section/hero-section";
 import { initProducts } from "./sections/products-section/products-section";
 import { initFeaturedProductsSection } from "./sections/featured-products-section/featured-products-section";
 import { initBlogSection } from "./sections/blog-section/blog-section";
+import { productsApi } from "@/entities/product/api/products";
+
+// const filters = {
+//   brands: [1, 3],
+//   sizes: ["M", "L"],
+//   colors: ["red", "blue"],
+//   dressLengths: ["mini", "midi"],
+//   priceRange: {
+//     min: 50,
+//     max: 100
+//   },
+//   sort: "asc",
+//   limit: 10
+// };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // const products = await productsApi.getAllProducts();
+
+  // console.log("products", products);
+
+  // const product = await productsApi.getProductById(
+  //   "31d50440-9997-46fc-807e-6d2cf2430a64"
+  // );
+  // console.log(product);
+
   initHeader();
   initHeroSection();
   initProducts();

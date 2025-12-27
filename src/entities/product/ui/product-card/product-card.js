@@ -4,18 +4,18 @@ export function createProductCard(product) {
   const {
     id,
     name,
-    category,
-    price,
-    discountRate,
+    brand,
+    base_price: price,
+    discount_percent: discountRate,
     images = [],
-    badge = {},
+    tag,
   } = product;
 
   const mainImage = images.find((img) => img.is_main) || images[0];
   const hasDiscount = discountRate > 0;
-  const currentPrice = hasDiscount ? price * (1 - discountRate) : price;
+  const currentPrice = hasDiscount ? price * (1 - discountRate / 100) : price;
   const oldPrice = hasDiscount ? price : null;
-  const discountPercent = hasDiscount ? Math.round(discountRate * 100) : null;
+  const discountPercent = discountRate;
 
   const card = document.createElement("div");
   card.className = "product-card";
@@ -31,14 +31,14 @@ export function createProductCard(product) {
 
         <img
           class="product-card__image"
-          src="${baseUrl}${mainImage?.image_path_jpg || ""}"
+          src="${mainImage?.image_path_jpg || ""}"
           loading="eager"
           alt="${name}"
           fetchpriority="high"
         >
     </div>
 
-<div class="product-card__category">${badge.label}</div>
+<div class="product-card__category">${tag}</div>
 
 
     <div class="product-card__name">${name}</div>
