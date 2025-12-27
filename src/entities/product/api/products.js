@@ -7,6 +7,7 @@ class Products {
       sizes = [],
       colors = [],
       dressLengths = [],
+      tags = [],
       priceRange = {},
       sort = null,
       limit = 20,
@@ -16,15 +17,17 @@ class Products {
       .from("products")
       .select(
         `
-        *,
-        brand:brands (*),
-        images:product_images (*),
-        variants:product_variants!inner (*)
-      `
+      *,
+      brand:brands (*),
+      images:product_images (*),
+      variants:product_variants!inner (*),
+      tags:product_tags_mapping!inner (
+        tag:product_tags (*)
+      )
+    `
       )
       .limit(limit);
 
-    // Фильтры
     if (brands.length) {
       query = query.in("brand_id", brands);
     }
@@ -41,6 +44,10 @@ class Products {
       query = query.in("dress_length", dressLengths);
     }
 
+    if (tags.length) {
+      query = query.in("product_tags_mapping.tag_id", tags);
+    }
+
     if (priceRange.min != null) {
       query = query.gte("base_price", priceRange.min);
     }
@@ -49,7 +56,6 @@ class Products {
       query = query.lte("base_price", priceRange.max);
     }
 
-    // Сортировка
     if (sort === "asc" || sort === "desc") {
       query = query.order("base_price", { ascending: sort === "asc" });
     }
@@ -98,6 +104,10 @@ class Products {
           size,
           stock,
           created_at
+        ),
+
+        tags:product_tags_mapping (
+          tag:product_tags (*)
         )
       `
       )

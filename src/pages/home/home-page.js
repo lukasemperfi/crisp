@@ -6,6 +6,7 @@ import { initProducts } from "./sections/products-section/products-section";
 import { initFeaturedProductsSection } from "./sections/featured-products-section/featured-products-section";
 import { initBlogSection } from "./sections/blog-section/blog-section";
 import { productsApi } from "@/entities/product/api/products";
+import { productFiltersApi } from "@/entities/product/api/filters";
 
 // const filters = {
 //   brands: [1, 3],
@@ -21,7 +22,14 @@ import { productsApi } from "@/entities/product/api/products";
 // };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // const products = await productsApi.getAllProducts();
+  const filters = await productFiltersApi.getFilters();
+
+  console.log(filters);
+
+  // const tags = await productFiltersApi.getTags();
+  // console.log(tags);
+
+  // const products = await productsApi.getAllProducts({ tags: ["2"] });
 
   // console.log("products", products);
 
