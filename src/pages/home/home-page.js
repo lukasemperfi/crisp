@@ -10,9 +10,9 @@ import { productFiltersApi } from "@/entities/product/api/filters";
 
 // const filters = {
 //   brands: [1, 3],
-//   sizes: ["M", "L"],
-//   colors: ["red", "blue"],
-//   dressLengths: ["mini", "midi"],
+//   sizes: [4, 7],
+//   colors: [1,6],
+//   lengths: [2],
 //   priceRange: {
 //     min: 50,
 //     max: 100
@@ -29,14 +29,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   // const tags = await productFiltersApi.getTags();
   // console.log(tags);
 
-  // const products = await productsApi.getAllProducts({ tags: ["2"] });
+  const products = await productsApi.getAllProducts({ lengths: [2] });
 
-  // console.log("products", products);
+  console.log("products", products);
 
-  // const product = await productsApi.getProductById(
-  //   "31d50440-9997-46fc-807e-6d2cf2430a64"
-  // );
-  // console.log(product);
+  const product = await productsApi.getProductById(
+    "7f6b929a-c835-47db-9687-a412d76eba2d"
+  );
+  console.log(product);
 
   initHeader();
   initHeroSection();

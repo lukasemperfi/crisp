@@ -6,11 +6,11 @@ class Products {
       brands = [],
       sizes = [],
       colors = [],
-      dressLengths = [],
+      lengths = [],
       tags = [],
       priceRange = {},
       sort = null,
-      limit = 20,
+      limit = 100,
     } = filters;
 
     let query = supabase
@@ -20,7 +20,13 @@ class Products {
       *,
       brand:brands (*),
       images:product_images (*),
-      variants:product_variants!inner (*),
+      length:product_lengths (*),
+      variants:product_variants!inner (
+        id,
+        stock,
+        color:product_colors (*),
+        size:product_sizes (*)
+      ),
       tags:product_tags_mapping!inner (
         tag:product_tags (*)
       )
@@ -33,15 +39,15 @@ class Products {
     }
 
     if (sizes.length) {
-      query = query.in("variants.size", sizes);
+      query = query.in("variants.size_id", sizes);
     }
 
     if (colors.length) {
-      query = query.in("variants.color", colors);
+      query = query.in("variants.color_id", colors);
     }
 
-    if (dressLengths.length) {
-      query = query.in("dress_length", dressLengths);
+    if (lengths.length) {
+      query = query.in("length_id", lengths);
     }
 
     if (tags.length) {
@@ -75,41 +81,50 @@ class Products {
       .from("products")
       .select(
         `
+      id,
+      name,
+      description,
+      base_price,
+      discount_percent,
+      created_at,
+      length:product_lengths (id, name),
+      brand:brands (
         id,
         name,
-        description,
-        base_price,
-        discount_percent,
-        dress_length,
-        created_at,
+        created_at
+      ),
 
-        brand:brands (
+      images:product_images (
+        id,
+        product_id,
+        image_path_jpg,
+        image_path_webp,
+        is_main,
+        sort_order,
+        created_at
+      ),
+
+      variants:product_variants (
+        id,
+        product_id,
+        stock,
+        created_at,
+        color:product_colors (
           id,
           name,
-          created_at
+          hex_code
         ),
-
-        images:product_images (
+        size:product_sizes (
           id,
-          product_id,
-          image_url,
-          is_main,
-          created_at
-        ),
-
-        variants:product_variants (
-          id,
-          product_id,
-          color,
-          size,
-          stock,
-          created_at
-        ),
-
-        tags:product_tags_mapping (
-          tag:product_tags (*)
+          name,
+          sort_order
         )
-      `
+      ),
+
+      tags:product_tags_mapping (
+        tag:product_tags (*)
+      )
+    `
       )
       .eq("id", id)
       .single();

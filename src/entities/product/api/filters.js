@@ -15,28 +15,28 @@ class ProductFilters {
     return data;
   };
   getFilters = async () => {
-    const [brands, variants, tags, products] = await Promise.all([
-      supabase.from("brands").select("id, name").order("name"),
-      supabase.from("product_variants").select("color, size"),
-      this.getTags(),
-      supabase.from("products").select("base_price, dress_length"),
-    ]);
+    try {
+      const [brands, colors, sizes, lengths, tags, priceRange] =
+        await Promise.all([
+          supabase.from("brands").select("*").order("name"),
+          supabase.from("product_colors").select("*").order("name"),
+          supabase.from("product_sizes").select("*").order("sort_order"),
+          supabase.from("product_lengths").select("*").order("sort_order"),
+          this.getTags(),
+          supabase.rpc("get_price_range"),
+        ]);
 
-    const prices = products.data?.map((p) => Number(p.base_price)) || [];
-
-    return {
-      brands: brands.data || [],
-      tags: tags || [],
-      colors: [...new Set(variants.data?.map((v) => v.color))].sort(),
-      sizes: [...new Set(variants.data?.map((v) => v.size))].sort(),
-      dressLengths: [
-        ...new Set(products.data?.map((p) => p.dress_length).filter(Boolean)),
-      ].sort(),
-      priceRange: {
-        min: prices.length ? Math.min(...prices) : 0,
-        max: prices.length ? Math.max(...prices) : 0,
-      },
-    };
+      return {
+        brands: brands.data,
+        colors: colors.data,
+        sizes: sizes.data,
+        tags: tags,
+        lengths: lengths.data,
+        priceRange: priceRange.data,
+      };
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 
