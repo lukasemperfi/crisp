@@ -1,62 +1,38 @@
-import { store } from "@/app/store/index.js";
-import { fetchProducts } from "@/entities/product/model/products-slice.js";
-import { PRODUCTS_STATUS } from "@/entities/product/model/products-slice.js";
 import { createProductCard } from "@/entities/product/ui/product-card/product-card.js";
 
-export const filteredProductList = async (containerSelector) => {
-  let prevProducts = null;
+export function initProductListContainer(containerSelector, onLoadMore) {
+  const mainContainer = document.querySelector(containerSelector);
+  if (!mainContainer) {
+    return null;
+  }
 
-  store.subscribe("products", (newState) => {
-    if (newState.status === PRODUCTS_STATUS.SUCCEEDED) {
-      const same =
-        prevProducts &&
-        JSON.stringify(prevProducts) === JSON.stringify(newState.items);
+  mainContainer.innerHTML = `
+    <div class="catalog">
+      <div class="catalog__list"></div>
+      <div class="catalog__actions">
+        <button class="button button_outlined button_gray catalog__more-button">
+          Load more
+        </button>
+      </div>
+    </div>
+  `;
 
-      if (same) {
-        return;
-      }
+  const list = mainContainer.querySelector(".catalog__list");
+  const btn = mainContainer.querySelector(".catalog__more-button");
 
-      prevProducts = newState.items;
+  btn.addEventListener("click", onLoadMore);
 
-      renderProductList(newState.items, containerSelector);
-    }
+  return { list, btn };
+}
+
+export function appendProducts(products, listContainer) {
+  products.forEach((product) => {
+    const card = createProductCard(product);
+    listContainer.appendChild(card);
   });
+}
 
-  store.subscribe("productFilters", async (newState) => {
-    const newFilters = newState.filters;
-    const isInitialized = newState.isInitialized;
-
-    if (!isInitialized) {
-      return;
-    }
-
-    await fetchProducts(newFilters);
-  });
-};
-
-export const productList = async (containerSelector) => {
-  // const state = store.getState().products;
-  // let prevProducts = null;
-  // store.subscribe("products", (newState) => {
-  //   if (newState.status === PRODUCTS_STATUS.SUCCEEDED) {
-  //     const same =
-  //       prevProducts &&
-  //       JSON.stringify(prevProducts) === JSON.stringify(newState.items);
-  //     if (same) {
-  //       return;
-  //     }
-  //     prevProducts = newState.items;
-  //     renderProductList(newState.items, containerSelector);
-  //   }
-  // });
-  // if (state.items.length === 0 && state.status === PRODUCTS_STATUS.IDLE) {
-  //   await fetchProducts();
-  // } else if (state.status === PRODUCTS_STATUS.SUCCEEDED) {
-  //   renderProductList(state.items, containerSelector);
-  // }
-};
-
-export function renderProductList(products, containerSelector, limit = null) {
+export function renderProductList(products, containerSelector) {
   const mainContainer = document.querySelector(containerSelector);
 
   if (!mainContainer) {
@@ -68,16 +44,13 @@ export function renderProductList(products, containerSelector, limit = null) {
 
   mainContainer.innerHTML = "";
 
-  const displayedProducts =
-    limit && typeof limit === "number" ? products.slice(0, limit) : products;
-
   const productListWrapper = document.createElement("div");
   productListWrapper.className = "catalog";
 
   const catalogDiv = document.createElement("div");
   catalogDiv.className = "catalog__list";
 
-  displayedProducts.forEach((product) => {
+  products.forEach((product) => {
     const card = createProductCard(product);
     catalogDiv.appendChild(card);
   });

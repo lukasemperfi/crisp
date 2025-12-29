@@ -1,6 +1,3 @@
-import { productsSlice } from "@/entities/product/model/products-slice";
-import { productFiltersSlice } from "@/features/product-filters/model/product-filters-slice.js";
-import { productSlice } from "@/entities/product/model/product-slice.js";
 import { authSlice } from "@/entities/auth/model/auth-slice";
 import { cartSlice } from "@/features/cart/model/cart-slice";
 
@@ -133,6 +130,3 @@ export const store = new Store();
 
 store.registerSlice(authSlice);
 store.registerSlice(cartSlice, { persist: true, fields: ["items"] });
-store.registerSlice(productsSlice);
-store.registerSlice(productFiltersSlice);
-store.registerSlice(productSlice);

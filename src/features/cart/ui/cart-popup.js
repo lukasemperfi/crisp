@@ -1,12 +1,7 @@
-import { Table } from "@/shared/ui/table/table";
 import { QuantityComponent } from "@/shared/ui/table/quantity";
 import { createDeleteButton } from "@/shared/ui/table/table";
-import { TableModel } from "@/shared/ui/table/model/table-model";
 import { store } from "@/app/store";
-import { mapProductsToTableRows } from "./map-products-to-table-rows";
 import { baseUrl } from "../../../shared/helpers/base-url";
-import { PRODUCTS_STATUS } from "../../../entities/product/model/products-slice";
-import { createOverlaySpinner } from "../../../shared/ui/overlay-spinner/overlay-spinner";
 import { Cart } from "./cart";
 import { createFormattedCurrencyElement } from "@/shared/ui/table/helpers";
 

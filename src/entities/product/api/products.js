@@ -1,7 +1,10 @@
 import { supabase } from "@/shared/api/supabase/client.js";
 
 class Products {
-  getAllProducts = async (filters = {}) => {
+  getAllProducts = async (
+    filters = {},
+    pagination = { page: 0, limit: 24 }
+  ) => {
     const {
       brands = [],
       sizes = [],
@@ -10,8 +13,12 @@ class Products {
       tags = [],
       priceRange = {},
       sort = null,
-      limit = 100,
     } = filters;
+
+    const { page, limit } = pagination;
+
+    const from = page * limit;
+    const to = from + limit - 1;
 
     let query = supabase
       .from("products")
@@ -22,58 +29,55 @@ class Products {
       images:product_images (*),
       length:product_lengths (*),
       variants:product_variants!inner (
-        id,
-        stock,
-        color:product_colors (*),
-        size:product_sizes (*)
+        id, stock, color:product_colors (*), size:product_sizes (*)
       ),
       tags:product_tags_mapping!inner (
         tag:product_tags (*)
       )
-    `
+    `,
+        { count: "exact" }
       )
-      .limit(limit);
+      .range(from, to);
 
     if (brands.length) {
       query = query.in("brand_id", brands);
     }
-
     if (sizes.length) {
       query = query.in("variants.size_id", sizes);
     }
-
     if (colors.length) {
       query = query.in("variants.color_id", colors);
     }
-
     if (lengths.length) {
       query = query.in("length_id", lengths);
     }
-
     if (tags.length) {
       query = query.in("product_tags_mapping.tag_id", tags);
     }
-
     if (priceRange.min != null) {
       query = query.gte("base_price", priceRange.min);
     }
-
     if (priceRange.max != null) {
       query = query.lte("base_price", priceRange.max);
     }
 
     if (sort === "asc" || sort === "desc") {
-      query = query.order("base_price", { ascending: sort === "asc" });
+      query = query
+        .order("final_price", { ascending: sort === "asc" })
+        .order("id", { ascending: true });
+    } else {
+      query = query
+        .order("created_at", { ascending: false })
+        .order("id", { ascending: true });
     }
 
-    const { data, error } = await query;
+    const { data, error, count } = await query;
 
     if (error) {
-      console.error("getAllProducts error:", error);
       throw error;
     }
 
-    return data;
+    return { data, count };
   };
 
   getProductById = async (id) => {
