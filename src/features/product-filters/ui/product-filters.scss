@@ -1,0 +1,138 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .filter-item {
+    border-bottom: 1px solid rgba(var(--white-rgb), 0.1);
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 68px;
+      color: var(--black);
+    }
+
+    &__icon {
+      display: block;
+      width: 12px;
+      height: 2px;
+      background-color: var(--black-2);
+      position: relative;
+      transition: transform 0.3s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        transform: rotate(90deg);
+        transition: opacity 0.3s ease;
+      }
+    }
+
+    &__body {
+      display: grid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      transition: grid-template-rows 0.3s ease, padding 0.3s ease;
+    }
+
+    &__content {
+      min-height: 0;
+    }
+
+    &_is-open {
+      .filter-item__icon {
+        &::after {
+          opacity: 0;
+        }
+      }
+
+      .filter-item__body {
+        grid-template-rows: 1fr;
+        padding-bottom: 20px;
+        padding-top: 11px;
+      }
+    }
+  }
+}
+
+.filter-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  &__label-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 9px;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked + .filter-checkbox-list__box {
+      background-color: var(--black);
+      border-color: var(--black);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__box {
+    border: 1px solid var(--gray-1);
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: "";
+      display: block;
+      opacity: 0;
+      width: 6px;
+      height: 4px;
+      border: solid white;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(-45deg) scaleX(-1);
+      margin-top: -2px;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  &__label {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--black-2);
+  }
+}
