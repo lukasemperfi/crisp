@@ -5,21 +5,41 @@ export class ProductManager {
     this.limit = limit;
     this.filters = initialFilters;
     this.page = 0;
-
     this.ui = null;
   }
 
-  init(initUIFn, appendFn) {
-    this.ui = initUIFn(this.containerSelector, () => this.loadNextPage());
+  async init(createStructureFn, appendFn) {
     this.appendFn = appendFn;
 
-    return this.fetchAndRender();
+    try {
+      const { data, count } = await this.fetchFn(this.filters, {
+        page: this.page,
+        limit: this.limit,
+      });
+
+      const { wrapper, list, btn } = createStructureFn(data, () =>
+        this.loadNextPage()
+      );
+
+      this.ui = { list, btn };
+
+      const mainContainer = document.querySelector(this.containerSelector);
+      if (mainContainer) {
+        mainContainer.innerHTML = "";
+        mainContainer.appendChild(wrapper);
+      }
+
+      this._updateButtonVisibility(data.length, count);
+    } catch (error) {
+      console.error("Initial load error:", error);
+    }
   }
 
   async updateFilters(newFilters) {
     this.filters = { ...this.filters, ...newFilters };
     this.page = 0;
-    this.ui.list.innerHTML = "";
+
+    if (this.ui) this.ui.list.innerHTML = "";
     await this.fetchAndRender();
   }
 
@@ -45,14 +65,21 @@ export class ProductManager {
         this.appendFn(data, list);
       }
 
-      const itemsOnScreen = list.children.length;
-      btn.style.display =
-        itemsOnScreen >= count || data.length < this.limit ? "none" : "block";
+      this._updateButtonVisibility(data.length, count);
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
       btn.disabled = false;
       btn.textContent = "Load more";
     }
+  }
+
+  _updateButtonVisibility(currentBatchLength, totalCount) {
+    if (!this.ui) return;
+    const itemsOnScreen = this.ui.list.children.length;
+    this.ui.btn.style.display =
+      itemsOnScreen >= totalCount || currentBatchLength < this.limit
+        ? "none"
+        : "block";
   }
 }

@@ -1,72 +1,48 @@
 import { createProductCard } from "@/entities/product/ui/product-card/product-card.js";
 
-export function initProductListContainer(containerSelector, onLoadMore) {
-  const mainContainer = document.querySelector(containerSelector);
-  if (!mainContainer) {
-    return null;
-  }
+export function createProductListStructure(initialProducts, onLoadMore) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "catalog";
 
-  mainContainer.innerHTML = `
-    <div class="catalog">
-      <div class="catalog__list"></div>
-      <div class="catalog__actions">
-        <button class="button button_outlined button_gray catalog__more-button">
-          Load more
-        </button>
-      </div>
+  wrapper.innerHTML = `
+    <div class="catalog__list"></div>
+    <div class="catalog__actions">
+      <button type="button" class="button button_outlined button_gray catalog__more-button">
+        Load more
+      </button>
     </div>
   `;
 
-  const list = mainContainer.querySelector(".catalog__list");
-  const btn = mainContainer.querySelector(".catalog__more-button");
+  const list = wrapper.querySelector(".catalog__list");
+  const btn = wrapper.querySelector(".catalog__more-button");
 
   btn.addEventListener("click", onLoadMore);
 
-  return { list, btn };
+  if (initialProducts && initialProducts.length > 0) {
+    appendProducts(initialProducts, list);
+  }
+
+  return { wrapper, list, btn };
 }
 
 export function appendProducts(products, listContainer) {
+  const fragment = document.createDocumentFragment();
+
   products.forEach((product) => {
     const card = createProductCard(product);
-    listContainer.appendChild(card);
+    fragment.appendChild(card);
   });
+
+  listContainer.appendChild(fragment);
 }
 
 export function renderProductList(products, containerSelector) {
   const mainContainer = document.querySelector(containerSelector);
-
-  if (!mainContainer) {
-    console.error(
-      `Ошибка: Основной контейнер с селектором "${containerSelector}" не найден.`
-    );
-    return;
-  }
+  if (!mainContainer) return;
 
   mainContainer.innerHTML = "";
+  const { wrapper } = createProductListStructure(products, () => {});
 
-  const productListWrapper = document.createElement("div");
-  productListWrapper.className = "catalog";
-
-  const catalogDiv = document.createElement("div");
-  catalogDiv.className = "catalog__list";
-
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    catalogDiv.appendChild(card);
-  });
-
-  const loadMoreWrapper = document.createElement("div");
-  loadMoreWrapper.className = "catalog__actions";
-
-  const loadMoreButton = document.createElement("button");
-  loadMoreButton.className =
-    "button button_outlined button_gray catalog__more-button";
-  loadMoreButton.name = "Load more";
-  loadMoreButton.setAttribute("aria-label", "Перейти в магазин");
-  loadMoreButton.textContent = "Load more";
-
-  loadMoreWrapper.appendChild(loadMoreButton);
-  productListWrapper.appendChild(catalogDiv);
-  productListWrapper.appendChild(loadMoreWrapper);
-  mainContainer.appendChild(productListWrapper);
+  wrapper.querySelector(".catalog__actions").style.display = "none";
+  mainContainer.appendChild(wrapper);
 }

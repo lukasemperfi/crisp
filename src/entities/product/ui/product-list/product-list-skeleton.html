@@ -1,12 +1,9 @@
-{%from "src/entities/product/ui/product-card/product-card-skeleton.html" import productCardSkeleton%}
+{% from "src/entities/product/ui/product-card/product-card-skeleton.html" import productCardSkeleton %}
 
-{% macro productListSkeleton()%}
-{% set items = [1, 2, 3, 4, 5, 6] %}
-
+{% macro productListSkeleton(count = 8) %}
 <div class="catalog__list">
-    {% for item in items %}
+    {% for i in range(0, count) %}
     {{ productCardSkeleton() }}
-    {%endfor%}
+    {% endfor %}
 </div>
-
-{%endmacro%}
+{% endmacro %}
