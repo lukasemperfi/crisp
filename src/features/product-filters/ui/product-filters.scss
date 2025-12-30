@@ -284,6 +284,7 @@
     background: none;
     pointer-events: none;
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
     outline: none;
 
@@ -311,15 +312,15 @@
       border: none;
     }
 
-    &_min {
-      z-index: 3;
-    }
-    &_max {
-      z-index: 3;
-    }
+    // &_min {
+    //   z-index: 3;
+    // }
+    // &_max {
+    //   z-index: 4;
+    // }
 
-    &:active {
-      z-index: 4;
-    }
+    // &:active {
+    //   z-index: 4;
+    // }
   }
 }

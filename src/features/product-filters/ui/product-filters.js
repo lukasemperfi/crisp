@@ -135,10 +135,8 @@ export function createPriceRange(item) {
   const min = range.min || 0;
   const max = range.max || 1000;
 
-  // НАСТРОЙКИ
-  const priceStep = 10; // Желаемый шаг цены (кратность)
-  const collisionGap = 5; // Физическое расстояние между ползунками (в единицах шкалы)
-  // Настройте его так, чтобы прямоугольники касались как вам нужно
+  const priceStep = 10;
+  const collisionGap = 20;
 
   wrapper.innerHTML = `
     <div class="price-range__values">
@@ -164,39 +162,31 @@ export function createPriceRange(item) {
     let rawMin = parseFloat(minRange.value);
     let rawMax = parseFloat(maxRange.value);
 
-    // 1. ЛОГИКА СТОЛКНОВЕНИЯ (на "плавных" значениях)
-    if (rawMax - rawMin < collisionGap) {
-      if (e?.target.classList.contains("price-range__input_min")) {
-        rawMin = rawMax - collisionGap;
-        minRange.value = rawMin;
-      } else {
-        rawMax = rawMin + collisionGap;
-        maxRange.value = rawMax;
-      }
+    // === 1. ЖЁСТКИЕ ЛИМИТЫ (блокируем движение дальше) ===
+    const minLimit = rawMax - collisionGap;
+    const maxLimit = rawMin + collisionGap;
+
+    if (e?.target === minRange && rawMin > minLimit) {
+      rawMin = minLimit;
+      minRange.value = rawMin;
     }
 
-    // 2. ПРОГРАММНЫЙ ШАГ ЦЕНЫ (Округление для текста)
-    // Округляем плавное значение ползунка до ближайшего priceStep
+    if (e?.target === maxRange && rawMax < maxLimit) {
+      rawMax = maxLimit;
+      maxRange.value = rawMax;
+    }
+
+    // === 2. ПРОГРАММНЫЙ ШАГ ЦЕНЫ (только для отображения) ===
     let displayMin = Math.round(rawMin / priceStep) * priceStep;
     let displayMax = Math.round(rawMax / priceStep) * priceStep;
 
-    // Гарантируем, что цена не выйдет за пределы min/max из-за округления
     displayMin = Math.max(min, Math.min(max, displayMin));
     displayMax = Math.max(min, Math.min(max, displayMax));
-
-    // Синхронизируем текст при столкновении
-    if (rawMax - rawMin <= collisionGap) {
-      if (e?.target.classList.contains("price-range__input_min")) {
-        displayMin = displayMax;
-      } else {
-        displayMax = displayMin;
-      }
-    }
 
     minText.textContent = `${displayMin.toFixed(2)} EUR`;
     maxText.textContent = `${displayMax.toFixed(2)} EUR`;
 
-    // 3. ОБНОВЛЕНИЕ CSS (используем плавные значения для точности полоски)
+    // === 3. CSS ТРЕК ===
     const percent1 = ((rawMin - min) / (max - min)) * 100;
     const percent2 = ((rawMax - min) / (max - min)) * 100;
 
