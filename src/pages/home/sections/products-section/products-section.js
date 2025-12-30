@@ -340,7 +340,7 @@ export const initProducts = async () => {
   const filterPanel = new FilterPanel(".products__aside", filterConfig);
 
   let currentPage = 0;
-  const pageSize = 30;
+  const pageSize = 8;
   let activeFilters = {};
 
   const loadProducts = async (reset = false) => {
