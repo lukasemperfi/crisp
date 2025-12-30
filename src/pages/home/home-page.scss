@@ -19,7 +19,7 @@
 @use "@/entities/product/ui/product-list/product-list.scss" as *;
 @use "@/shared/ui/skeleton/skeleton.scss" as *;
 @use "@/shared/ui/slider/slider.scss" as *;
-@use "@/features/product-filters/ui/product-filters.scss" as *;
+@use "@/features/product-filters/ui/filter-panel.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
