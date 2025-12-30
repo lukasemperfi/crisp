@@ -2,7 +2,7 @@ import { renderSlider } from "@/shared/ui/slider/slider";
 import { mockProducts } from "@/shared/helpers/mock-products";
 import { createProductCard } from "@/entities/product/ui/product-card/product-card";
 import { Navigation } from "swiper/modules";
-import { renderProductList } from "@/entities/product/ui/product-list/product-list";
+// import { renderProductList } from "@/entities/product/ui/product-list/product-list";
 
 export const initFeaturedProductsSection = () => {
   const BREAKPOINT = 470;
@@ -41,8 +41,8 @@ export const initFeaturedProductsSection = () => {
         }
       });
 
-      renderProductList(mockProducts, ".featured-slider__slider-container", 4);
-      renderProductList(mockProducts, ".popular-slider__slider-container", 4);
+      // renderProductList(mockProducts, ".featured-slider__slider-container", 4);
+      // renderProductList(mockProducts, ".popular-slider__slider-container", 4);
     } else {
       swipers.featured = renderSlider({
         container: ".featured-slider__slider-container",

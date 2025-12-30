@@ -2,7 +2,6 @@ import { renderSlider } from "@/shared/ui/slider/slider";
 import { mockProducts } from "@/shared/helpers/mock-products";
 import { createProductCard } from "@/entities/product/ui/product-card/product-card";
 import { Navigation } from "swiper/modules";
-import { renderProductList } from "@/entities/product/ui/product-list/product-list";
 
 export const initBlogSection = () => {
   const BREAKPOINT = 470;

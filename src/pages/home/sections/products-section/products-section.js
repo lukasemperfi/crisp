@@ -1,12 +1,7 @@
-import { renderProductList } from "@/entities/product/ui/product-list/product-list";
 import { mockProducts } from "@/shared/helpers/mock-products";
 import { productsApi } from "@/entities/product/api/products";
 import { productFiltersApi } from "@/entities/product/api/filters";
-import {
-  createProductListStructure,
-  appendProducts,
-} from "@/entities/product/ui/product-list/product-list";
-import { ProductManager } from "@/entities/product/model/product-manager";
+import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
 const mockFilters = {
   brands: [
@@ -344,11 +339,43 @@ export const initProducts = async () => {
 
   const filterPanel = new FilterPanel(".products__aside", filterConfig);
 
-  filterPanel.onChange((filters) => {
-    console.log("LIVE FILTERS:", filters);
-  });
+  let currentPage = 0;
+  const pageSize = 30;
+  let activeFilters = {};
 
-  filterPanel.onApply((filters) => {
-    console.log("APPLY FILTERS:", filters);
-  });
+  const loadProducts = async (reset = false) => {
+    if (reset) {
+      currentPage = 0;
+      productList.clear();
+      productList.showLoadMore();
+    }
+
+    const { data, count } = await productsApi.getAllProducts(activeFilters, {
+      page: currentPage,
+      limit: pageSize,
+    });
+
+    productList.appendProducts(data);
+
+    if ((currentPage + 1) * pageSize >= count) {
+      productList.hideLoadMore();
+    }
+
+    currentPage++;
+  };
+
+  const productList = new ProductList(".products__main", [], loadProducts);
+
+  await loadProducts();
+
+  // filterPanel.onChange((filters) => {
+  //   activeFilters = filters;
+  //   // live preview при изменении фильтров
+  //   loadProducts(true);
+  // });
+
+  // filterPanel.onApply((filters) => {
+  //   activeFilters = filters;
+  //   loadProducts(true);
+  // });
 };

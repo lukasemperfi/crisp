@@ -1,48 +1,128 @@
 import { createProductCard } from "@/entities/product/ui/product-card/product-card.js";
 
-export function createProductListStructure(initialProducts, onLoadMore) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "catalog";
+export class ProductList {
+  constructor(
+    containerSelector,
+    initialProducts = [],
+    onLoadMore,
+    showEmptyMessageOnInit = false
+  ) {
+    this._container =
+      typeof containerSelector === "string"
+        ? document.querySelector(containerSelector)
+        : containerSelector;
 
-  wrapper.innerHTML = `
-    <div class="catalog__list"></div>
-    <div class="catalog__actions">
-      <button type="button" class="button button_outlined button_gray catalog__more-button">
-        Load more
-      </button>
-    </div>
-  `;
+    if (!this._container) {
+      throw new Error("ProductList: container not found");
+    }
 
-  const list = wrapper.querySelector(".catalog__list");
-  const btn = wrapper.querySelector(".catalog__more-button");
+    this._onLoadMore = onLoadMore;
+    this._products = [];
+    this._showEmptyMessageOnInit = showEmptyMessageOnInit;
+    this._initialized = false;
 
-  btn.addEventListener("click", onLoadMore);
-
-  if (initialProducts && initialProducts.length > 0) {
-    appendProducts(initialProducts, list);
+    if (initialProducts.length > 0) {
+      this._renderStructure();
+      this.appendProducts(initialProducts);
+    } else {
+      if (this._showEmptyMessageOnInit) {
+        this._renderStructure();
+        this._renderEmptyMessage();
+      }
+    }
   }
 
-  return { wrapper, list, btn };
-}
+  _renderStructure() {
+    if (this._initialized) return;
 
-export function appendProducts(products, listContainer) {
-  const fragment = document.createDocumentFragment();
+    this._container.innerHTML = "";
 
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    fragment.appendChild(card);
-  });
+    this._wrapper = document.createElement("div");
+    this._wrapper.className = "catalog";
 
-  listContainer.appendChild(fragment);
-}
+    this._wrapper.innerHTML = `
+      <div class="catalog__list"></div>
+      <div class="catalog__actions">
+        <button type="button" class="button button_outlined button_gray catalog__more-button">
+          Load more
+        </button>
+      </div>
+    `;
 
-export function renderProductList(products, containerSelector) {
-  const mainContainer = document.querySelector(containerSelector);
-  if (!mainContainer) return;
+    this._list = this._wrapper.querySelector(".catalog__list");
+    this._btnWrapper = this._wrapper.querySelector(".catalog__actions");
+    this._btn = this._wrapper.querySelector(".catalog__more-button");
 
-  mainContainer.innerHTML = "";
-  const { wrapper } = createProductListStructure(products, () => {});
+    this._btn.addEventListener("click", () => {
+      if (typeof this._onLoadMore === "function") {
+        this._onLoadMore();
+      }
+    });
 
-  wrapper.querySelector(".catalog__actions").style.display = "none";
-  mainContainer.appendChild(wrapper);
+    this._container.appendChild(this._wrapper);
+    this._initialized = true;
+  }
+
+  appendProducts(products) {
+    if (!products || products.length === 0) {
+      if (this._initialized) {
+        this._renderEmptyMessage();
+      }
+      return;
+    }
+
+    if (!this._initialized) {
+      this._renderStructure();
+    }
+
+    this._hideEmptyMessage();
+    this.showLoadMore();
+
+    const fragment = document.createDocumentFragment();
+
+    products.forEach((product) => {
+      const card = createProductCard(product);
+      fragment.appendChild(card);
+      this._products.push(product);
+    });
+
+    this._list.appendChild(fragment);
+  }
+
+  clear() {
+    if (this._list) this._list.innerHTML = "";
+    this._products = [];
+    this._hideEmptyMessage();
+  }
+
+  hideLoadMore() {
+    if (this._btnWrapper) this._btnWrapper.style.display = "none";
+    if (this._btn) this._btn.style.display = "none";
+  }
+
+  showLoadMore() {
+    if (this._btnWrapper) this._btnWrapper.style.display = "";
+    if (this._btn) this._btn.style.display = "";
+  }
+
+  getProducts() {
+    return [...this._products];
+  }
+
+  _renderEmptyMessage() {
+    if (!this._emptyMessage) {
+      this._emptyMessage = document.createElement("div");
+      this._emptyMessage.className = "catalog__empty";
+      this._emptyMessage.textContent = "No products found";
+      this._wrapper.appendChild(this._emptyMessage);
+    }
+    this.hideLoadMore();
+    this._emptyMessage.style.display = "";
+  }
+
+  _hideEmptyMessage() {
+    if (this._emptyMessage) {
+      this._emptyMessage.style.display = "none";
+    }
+  }
 }
