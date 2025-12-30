@@ -136,7 +136,6 @@ export function createPriceRange(item) {
   const max = range.max || 1000;
 
   const priceStep = 10;
-  const collisionGap = 20;
 
   wrapper.innerHTML = `
     <div class="price-range__values">
@@ -162,31 +161,33 @@ export function createPriceRange(item) {
     let rawMin = parseFloat(minRange.value);
     let rawMax = parseFloat(maxRange.value);
 
-    // === 1. ЖЁСТКИЕ ЛИМИТЫ (блокируем движение дальше) ===
-    const minLimit = rawMax - collisionGap;
-    const maxLimit = rawMin + collisionGap;
-
-    if (e?.target === minRange && rawMin > minLimit) {
-      rawMin = minLimit;
-      minRange.value = rawMin;
+    if (rawMax - rawMin < priceStep) {
+      if (e?.target.classList.contains("price-range__input_min")) {
+        rawMin = rawMax - priceStep;
+        minRange.value = rawMin;
+      } else {
+        rawMax = rawMin + priceStep;
+        maxRange.value = rawMax;
+      }
     }
 
-    if (e?.target === maxRange && rawMax < maxLimit) {
-      rawMax = maxLimit;
-      maxRange.value = rawMax;
-    }
-
-    // === 2. ПРОГРАММНЫЙ ШАГ ЦЕНЫ (только для отображения) ===
     let displayMin = Math.round(rawMin / priceStep) * priceStep;
     let displayMax = Math.round(rawMax / priceStep) * priceStep;
 
     displayMin = Math.max(min, Math.min(max, displayMin));
     displayMax = Math.max(min, Math.min(max, displayMax));
 
+    if (rawMax - rawMin <= priceStep) {
+      if (e?.target.classList.contains("price-range__input_min")) {
+        displayMin = displayMax - priceStep;
+      } else {
+        displayMax = displayMin + priceStep;
+      }
+    }
+
     minText.textContent = `${displayMin.toFixed(2)} EUR`;
     maxText.textContent = `${displayMax.toFixed(2)} EUR`;
 
-    // === 3. CSS ТРЕК ===
     const percent1 = ((rawMin - min) / (max - min)) * 100;
     const percent2 = ((rawMax - min) / (max - min)) * 100;
 
@@ -195,75 +196,7 @@ export function createPriceRange(item) {
   };
 
   wrapper.addEventListener("input", updateUI);
-  setTimeout(() => updateUI(), 0);
+  updateUI();
 
   return wrapper;
 }
-// export function createPriceRange(item) {
-//   const wrapper = document.createElement("div");
-//   wrapper.className = "price-range";
-
-//   const range = item.options[0];
-//   const min = range.min || 0;
-//   const max = range.max || 1000;
-//   const priceGap = 50;
-
-//   wrapper.innerHTML = `
-//     <div class="price-range__values">
-//       <span class="price-range__value price-range__value_min">${min}€</span>
-//       <span class="price-range__value price-range__value_max">${max}€</span>
-//     </div>
-//     <div class="price-range__slider">
-//       <div class="price-range__track"></div>
-//       <input type="range" class="price-range__input price-range__input_min" min="${min}" max="${max}" value="${min}">
-//       <input type="range" class="price-range__input price-range__input_max" min="${min}" max="${max}" value="${max}">
-//     </div>
-//   `;
-
-//   const minRange = wrapper.querySelector(".price-range__input_min");
-//   const maxRange = wrapper.querySelector(".price-range__input_max");
-//   const minText = wrapper.querySelector(".price-range__value_min");
-//   const maxText = wrapper.querySelector(".price-range__value_max");
-//   const track = wrapper.querySelector(".price-range__track");
-
-//   const updateUI = (e) => {
-//     let minVal = parseFloat(minRange.value);
-//     let maxVal = parseFloat(maxRange.value);
-
-//     if (maxVal - minVal < priceGap) {
-//       if (e?.target.classList.contains("price-range__input_min")) {
-//         minRange.value = maxVal - priceGap;
-//       } else if (e?.target.classList.contains("price-range__input_max")) {
-//         maxRange.value = minVal + priceGap;
-//       }
-//     }
-
-//     const visualMin = parseFloat(minRange.value);
-//     const visualMax = parseFloat(maxRange.value);
-
-//     let displayMin = visualMin;
-//     let displayMax = visualMax;
-
-//     if (visualMax - visualMin <= priceGap) {
-//       if (e?.target.classList.contains("price-range__input_min")) {
-//         displayMin = visualMax;
-//       } else {
-//         displayMax = visualMin;
-//       }
-//     }
-
-//     minText.textContent = `${displayMin.toFixed(2)} EUR`;
-//     maxText.textContent = `${displayMax.toFixed(2)} EUR`;
-
-//     const percent1 = ((visualMin - min) / (max - min)) * 100;
-//     const percent2 = ((visualMax - min) / (max - min)) * 100;
-
-//     track.style.left = percent1 + "%";
-//     track.style.right = 100 - percent2 + "%";
-//   };
-
-//   wrapper.addEventListener("input", updateUI);
-//   setTimeout(() => updateUI(), 0);
-
-//   return wrapper;
-// }
