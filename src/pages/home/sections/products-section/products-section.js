@@ -8,6 +8,7 @@ import {
 } from "@/entities/product/ui/product-list/product-list";
 import { ProductManager } from "@/entities/product/model/product-manager";
 import { renderFilterPanel } from "@/features/product-filters/ui/product-filters";
+import { FilterPanelController } from "@/features/product-filters/model/filters-controller";
 const mockFilters = {
   brands: [
     {
@@ -344,14 +345,24 @@ export const initProducts = async () => {
 
   renderFilterPanel(".products__aside", filterConfig);
 
-  const productsManager = new ProductManager({
-    containerSelector: ".products__main",
-    fetchFn: productsApi.getAllProducts,
-    limit: 8,
-    initialFilters: { sort: "asc" },
+  const filtersController = new FilterPanelController(".products__aside");
+
+  filtersController.onChange((filters) => {
+    console.log("LIVE FILTERS:", filters);
   });
 
-  await productsManager.init(createProductListStructure, appendProducts);
+  filtersController.onApply((filters) => {
+    console.log("APPLY:", filters);
+  });
+
+  // const productsManager = new ProductManager({
+  //   containerSelector: ".products__main",
+  //   fetchFn: productsApi.getAllProducts,
+  //   limit: 8,
+  //   initialFilters: { sort: "asc" },
+  // });
+
+  // await productsManager.init(createProductListStructure, appendProducts);
 
   // productsManager.updateFilters({ brands: [1, 2] });
 };

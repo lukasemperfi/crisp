@@ -69,6 +69,24 @@
       }
     }
   }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  &__apply-btn {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gray-1);
+    padding-block: 7.5px;
+    padding-inline: 37px;
+  }
 }
 
 .filter-checkbox-list {

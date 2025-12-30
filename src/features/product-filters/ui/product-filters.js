@@ -19,7 +19,28 @@ export function renderFilterPanel(containerSelector, config) {
     filterPanel.appendChild(accordion);
   });
 
+  const applyBtnWrapper = createApplyButton();
+
+  filterPanel.appendChild(applyBtnWrapper);
+
   container.appendChild(filterPanel);
+}
+
+function createApplyButton(text = "APPLY") {
+  const applyBtnWrapper = document.createElement("div");
+  applyBtnWrapper.className = "filter-panel__footer";
+
+  const applyBtn = document.createElement("button");
+  applyBtn.classList.add(
+    "button",
+    "button_elevated",
+    "button_gray",
+    "filter-panel__apply-btn"
+  );
+  applyBtn.textContent = text;
+  applyBtnWrapper.appendChild(applyBtn);
+
+  return applyBtnWrapper;
 }
 
 export function createFilterItem({ title, content, isOpen = true }) {
@@ -62,7 +83,9 @@ export function createFilterContent(item) {
     return document.createElement("div");
   }
 
-  return renderFn(item);
+  const content = renderFn(item);
+  content.dataset.filterId = item.id;
+  return content;
 }
 
 function createCheckboxList(item) {
@@ -196,6 +219,16 @@ export function createPriceRange(item) {
   };
 
   wrapper.addEventListener("input", updateUI);
+  wrapper.addEventListener("change", () => {
+    const snappedMin = Math.round(minRange.value / priceStep) * priceStep;
+    const snappedMax = Math.round(maxRange.value / priceStep) * priceStep;
+
+    minRange.value = snappedMin.toFixed(2);
+    maxRange.value = snappedMax.toFixed(2);
+
+    updateUI();
+  });
+
   updateUI();
 
   return wrapper;

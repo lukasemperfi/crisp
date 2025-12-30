@@ -14,14 +14,14 @@
   text-transform: uppercase;
 
   &_solid {
-    background-color: var(--background-secondary);
-    color: var(--foreground-secondary);
+    background-color: var(--black);
+    color: var(--white);
     transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--background-tertiary);
-        color: var(--foreground-secondary);
+        background-color: var(--black-2);
+        color: var(--white);
       }
     }
   }
@@ -80,5 +80,35 @@
 
   &_fill {
     width: 100%;
+  }
+
+  &_elevated {
+    background-color: var(--black);
+    color: var(--white);
+    border: 2px solid var(--black);
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--black-2);
+        background-color: var(--black-2);
+        color: var(--white);
+      }
+    }
+  }
+
+  &.button_elevated.button_gray {
+    background-color: var(--light-blue-hover);
+    color: var(--gray-1);
+    border: 2px solid var(--divider);
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--gray-1);
+        background-color: var(--light-blue-hover);
+        color: var(--gray-1);
+      }
+    }
   }
 }
