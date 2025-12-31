@@ -37,19 +37,30 @@ export class FilterPanel {
   }
 
   reset() {
+    // Сброс состояния
     this._state = {};
+
+    // Сброс всех чекбоксов
     this._container
       .querySelectorAll("input[type='checkbox']")
       .forEach((i) => (i.checked = false));
-    this._container
-      .querySelectorAll("input[type='range']")
-      .forEach((i) => (i.value = i.min));
-    this._container
-      .querySelectorAll(".price-range__value_min")
-      .forEach((el) => (el.textContent = ""));
-    this._container
-      .querySelectorAll(".price-range__value_max")
-      .forEach((el) => (el.textContent = ""));
+
+    // Сброс всех range фильтров
+    this._container.querySelectorAll(".price-range").forEach((wrapper) => {
+      const minInput = wrapper.querySelector(".price-range__input_min");
+      const maxInput = wrapper.querySelector(".price-range__input_max");
+      if (minInput && maxInput) {
+        minInput.value = minInput.min;
+        maxInput.value = maxInput.max;
+        this._updatePriceRangeUI(wrapper); // Обновляем UI ползунков
+      }
+    });
+
+    // Обновляем панель выбранных фильтров
+    this._renderSelectedFilters();
+
+    // Оповещаем слушателей
+    this._emit("change");
   }
 
   destroy() {
@@ -380,6 +391,23 @@ export class FilterPanel {
     updateUI();
     return wrapper;
   }
+  _updatePriceRangeUI(wrapper) {
+    const minInput = wrapper.querySelector(".price-range__input_min");
+    const maxInput = wrapper.querySelector(".price-range__input_max");
+    const minText = wrapper.querySelector(".price-range__value_min");
+    const maxText = wrapper.querySelector(".price-range__value_max");
+    const track = wrapper.querySelector(".price-range__track");
+
+    const min = parseFloat(minInput.min);
+    const max = parseFloat(maxInput.max);
+
+    minText.textContent = `${min.toFixed(2)} EUR`;
+    maxText.textContent = `${max.toFixed(2)} EUR`;
+
+    track.style.left = "0%";
+    track.style.right = "0%";
+  }
+
   _renderSelectedFilters() {
     const selectedContainer = this._container.querySelector(
       ".filter-panel__selected"
@@ -396,54 +424,149 @@ export class FilterPanel {
 
     selectedContainer.style.display = "block";
 
-    selectedContainer.innerHTML = `
-    <div class="selected-filters">
-      <div class="selected-filters__header">
-        <div class="selected-filters__title">Filter</div>
-        <button class="selected-filters__reset-btn">${this._closeIcon()} reset all</button>
-      </div>
-      <div class="selected-filters__main">
-        <div class="selected-filters__list">
-          <div class="selected-filters__list-item list-item">
-            <div class="list-item__title">Brand:</div>
-            <div class="list-item__values values">
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 1</div>
-              </div>
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 2</div>
-              </div>
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 3</div>
-              </div>
-            </div>
-          </div>
-          <div class="selected-filters__list-item list-item">
-            <div class="list-item__title">Size (Inches):</div>
-            <div class="list-item__values values">
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 1</div>
-              </div>
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 2</div>
-              </div>
-              <div class="values__item">
-                ${this._closeIcon()}
-                <div class="values__label">label 3</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    `;
+    const wrapper = this._createSelectedFiltersWrapper();
+    const header = this._createSelectedFiltersHeader();
+    const mainList = this._createSelectedFiltersList(filters);
 
-    console.log("keys", filterKeys);
+    wrapper.appendChild(header);
+    wrapper.appendChild(mainList);
+    selectedContainer.appendChild(wrapper);
+  }
+
+  // Создание контейнера всей панели selected-filters
+  _createSelectedFiltersWrapper() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "selected-filters";
+    return wrapper;
+  }
+
+  // Создание заголовка панели с кнопкой reset
+  _createSelectedFiltersHeader() {
+    const header = document.createElement("div");
+    header.className = "selected-filters__header";
+    header.innerHTML = `
+    <div class="selected-filters__title">Filter</div>
+    <button class="selected-filters__reset-btn">${this._closeIcon()} reset all</button>
+  `;
+    header
+      .querySelector(".selected-filters__reset-btn")
+      .addEventListener("click", () => this.reset());
+    return header;
+  }
+
+  // Создание основного списка выбранных фильтров
+  _createSelectedFiltersList(filters) {
+    const main = document.createElement("div");
+    main.className = "selected-filters__main";
+
+    const list = document.createElement("div");
+    list.className = "selected-filters__list";
+
+    Object.keys(filters).forEach((key) => {
+      const item = this._createSelectedFilterItem(key, filters[key]);
+      list.appendChild(item);
+    });
+
+    main.appendChild(list);
+    return main;
+  }
+
+  // Создание отдельного выбранного фильтра
+  _createSelectedFilterItem(filterId, value) {
+    const item = document.createElement("div");
+    item.className = "selected-filters__list-item list-item";
+
+    const title = document.createElement("div");
+    title.className = "list-item__title";
+    const configItem = this._config.find((i) => i.id === filterId);
+    title.textContent = configItem?.title || filterId;
+    item.appendChild(title);
+
+    const valuesWrapper = document.createElement("div");
+    valuesWrapper.className = "list-item__values values";
+
+    if (Array.isArray(value)) {
+      value.forEach((val) => {
+        valuesWrapper.appendChild(
+          this._createSelectedFilterValue(filterId, val)
+        );
+      });
+    } else if (typeof value === "object") {
+      valuesWrapper.appendChild(
+        this._createSelectedFilterRange(filterId, value)
+      );
+    }
+
+    item.appendChild(valuesWrapper);
+    return item;
+  }
+
+  _createSelectedFilterValue(filterId, val) {
+    const configItem = this._config.find((i) => i.id === filterId);
+    const isColor = configItem?.type === "color-grid";
+
+    const valueItem = document.createElement("div");
+    valueItem.className = "values__item";
+
+    if (isColor) {
+      const option = configItem.options.find((o) => o.id === val);
+      const colorValue = option?.hex_code.toLowerCase() || "#000";
+
+      const isWhite =
+        colorValue == "#ffffff" ||
+        colorValue == "#fff" ||
+        colorValue == "white";
+
+      const whiteModifier = isWhite ? "color-grid__box_is-white" : "";
+
+      valueItem.innerHTML = `
+     <button class="values__item-remove-btn">${this._closeIcon()}<div class="color-grid__item">
+          <span class="color-grid__box color-grid__box_selected-secondary ${whiteModifier}" style="background-color: ${colorValue}"></span>
+      </div></button>
+
+    `;
+    } else {
+      // Для всех остальных фильтров оставляем текст
+      valueItem.innerHTML = `
+      <button class="values__item-remove-btn">${this._closeIcon()}<div class="values__label">${this._getOptionLabel(
+        filterId,
+        val
+      )}</div></button>
+      
+    `;
+    }
+
+    valueItem
+      .querySelector(".values__item-remove-btn")
+      .addEventListener("click", () =>
+        this._removeSelectedFilter(filterId, val)
+      );
+
+    return valueItem;
+  }
+
+  // Создание выбранного значения для range фильтров
+  _createSelectedFilterRange(filterId, value) {
+    const valueItem = document.createElement("div");
+    valueItem.className = "values__item";
+    valueItem.innerHTML = `
+    <button class="values__item-remove-btn">${this._closeIcon()}
+    <div class="values__label">${value.min} - ${
+      value.max
+    } EUR</div><button class="values__item-remove-btn">
+  `;
+    valueItem
+      .querySelector(".values__item-remove-btn")
+      .addEventListener("click", () => this._removeSelectedFilter(filterId));
+    return valueItem;
+  }
+
+  // Вспомогательный метод для отображения лейбла по id опции
+  _getOptionLabel(filterId, valueId) {
+    const configItem = this._config.find((i) => i.id === filterId);
+    if (!configItem || !configItem.options) return valueId;
+    const option = configItem.options.find((o) => o.id === valueId);
+    return option?.name || valueId;
   }
 
   _removeSelectedFilter(filterId, val = null) {
@@ -459,15 +582,19 @@ export class FilterPanel {
         this._updateCheckbox(input);
       }
     } else {
+      // Сбрасываем range фильтр
       const minInput = wrapper.querySelector(".price-range__input_min");
       const maxInput = wrapper.querySelector(".price-range__input_max");
       if (minInput && maxInput) {
         minInput.value = minInput.min;
         maxInput.value = maxInput.max;
-        this._updateRange(minInput);
+        // Удаляем фильтр из состояния
+        delete this._state[filterId];
+        this._updatePriceRangeUI(wrapper);
       }
     }
 
+    this._renderSelectedFilters();
     this._emit("change");
   }
 
