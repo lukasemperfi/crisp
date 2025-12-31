@@ -53,8 +53,8 @@ export class FilterPanel {
   }
 
   destroy() {
-    this._container.removeEventListener("change", this._handleChange);
-    this._container.removeEventListener("click", this._handleClick);
+    this._panel.removeEventListener("change", this._handleChange);
+    this._panel.removeEventListener("click", this._handleClick);
   }
 
   _emit(type) {
@@ -63,8 +63,8 @@ export class FilterPanel {
   }
 
   _bindEvents() {
-    this._container.addEventListener("change", this._handleChange);
-    this._container.addEventListener("click", this._handleClick);
+    this._panel.addEventListener("change", this._handleChange);
+    this._panel.addEventListener("click", this._handleClick);
   }
 
   _onClick(e) {
@@ -129,8 +129,15 @@ export class FilterPanel {
 
   _renderPanel() {
     this._container.innerHTML = "";
-    const filterPanel = document.createElement("div");
-    filterPanel.className = "filter-panel";
+
+    this._panel = document.createElement("div");
+    this._panel.className = "filter-panel";
+
+    const selected = document.createElement("div");
+    selected.className = "filter-panel__selected";
+
+    const filters = document.createElement("div");
+    filters.className = "filter-panel__filters";
 
     this._config.forEach((item) => {
       const content = this._createFilterContent(item);
@@ -139,11 +146,14 @@ export class FilterPanel {
         content,
         isOpen: item.defaultOpen,
       });
-      filterPanel.appendChild(accordion);
+      filters.appendChild(accordion);
     });
 
-    filterPanel.appendChild(this._createApplyButton());
-    this._container.appendChild(filterPanel);
+    filters.appendChild(this._createApplyButton());
+
+    this._panel.appendChild(selected);
+    this._panel.appendChild(filters);
+    this._container.appendChild(this._panel);
   }
 
   _applyDefaultValues() {

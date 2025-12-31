@@ -348,39 +348,43 @@ export const initProducts = async () => {
   const pageSize = 8;
   let activeFilters = {};
 
-  const loadProducts = async (reset = false) => {
-    if (reset) {
-      currentPage = 0;
-      productList.clear();
-      productList.showLoadMore();
-    }
+  // const loadProducts = async (reset = false) => {
+  //   if (reset) {
+  //     currentPage = 0;
+  //     productList.clear();
+  //     productList.showLoadMore();
+  //   }
 
-    const { data, count } = await productsApi.getAllProducts(activeFilters, {
-      page: currentPage,
-      limit: pageSize,
-    });
+  //   const { data, count } = await productsApi.getAllProducts(activeFilters, {
+  //     page: currentPage,
+  //     limit: pageSize,
+  //   });
 
-    productList.appendProducts(data);
+  //   productList.appendProducts(data);
 
-    if ((currentPage + 1) * pageSize >= count) {
-      productList.hideLoadMore();
-    }
+  //   if ((currentPage + 1) * pageSize >= count) {
+  //     productList.hideLoadMore();
+  //   }
 
-    currentPage++;
-  };
+  //   currentPage++;
+  // };
 
-  const productList = new ProductList(".products__main", [], loadProducts);
+  // const productList = new ProductList(".products__main", [], loadProducts);
 
-  await loadProducts();
+  // await loadProducts();
 
-  // filterPanel.onChange((filters) => {
-  //   activeFilters = filters;
-  //   // live preview при изменении фильтров
-  //   loadProducts(true);
-  // });
+  filterPanel.onChange((filters) => {
+    console.log("filters change: ", filters);
 
-  // filterPanel.onApply((filters) => {
-  //   activeFilters = filters;
-  //   loadProducts(true);
-  // });
+    // activeFilters = filters;
+    // // live preview при изменении фильтров
+    // loadProducts(true);
+  });
+
+  filterPanel.onApply((filters) => {
+    console.log("filters APPLY: ", filters);
+
+    // activeFilters = filters;
+    // loadProducts(true);
+  });
 };
