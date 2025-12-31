@@ -20,6 +20,7 @@ export class FilterPanel {
     this._handleClick = this._onClick.bind(this);
 
     this._renderPanel();
+    this._applyDefaultValues();
     this._bindEvents();
   }
 
@@ -141,9 +142,44 @@ export class FilterPanel {
       filterPanel.appendChild(accordion);
     });
 
-    const applyBtnWrapper = this._createApplyButton();
-    filterPanel.appendChild(applyBtnWrapper);
+    filterPanel.appendChild(this._createApplyButton());
     this._container.appendChild(filterPanel);
+  }
+
+  _applyDefaultValues() {
+    this._config.forEach((item) => {
+      if (!item.defaultValue) return;
+
+      if (Array.isArray(item.defaultValue)) {
+        item.defaultValue.forEach((val) => {
+          const input = this._container.querySelector(
+            `input[name="${item.id}"][value="${val}"]`
+          );
+          if (input) {
+            input.checked = true;
+            this._updateCheckbox(input);
+          }
+        });
+      }
+
+      if (typeof item.defaultValue === "object") {
+        const wrapper = this._container.querySelector(
+          `[data-filter-id="${item.id}"]`
+        );
+        if (!wrapper) return;
+
+        const minInput = wrapper.querySelector(".price-range__input_min");
+        const maxInput = wrapper.querySelector(".price-range__input_max");
+
+        if (minInput && maxInput) {
+          minInput.value = item.defaultValue.min;
+          maxInput.value = item.defaultValue.max;
+          this._updateRange(minInput);
+
+          wrapper.dispatchEvent(new Event("input"));
+        }
+      }
+    });
   }
 
   _createApplyButton(text = "APPLY") {

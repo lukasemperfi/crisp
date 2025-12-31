@@ -306,6 +306,7 @@ export const initProducts = async () => {
       type: "checkbox-list",
       defaultOpen: true,
       options: mockFilters.brands,
+      defaultValue: [16, 18],
     },
     {
       id: "size",
@@ -313,6 +314,7 @@ export const initProducts = async () => {
       type: "size-grid",
       defaultOpen: true,
       options: mockFilters.sizes,
+      defaultValue: [29, 32],
     },
     {
       id: "length",
@@ -320,6 +322,7 @@ export const initProducts = async () => {
       type: "checkbox-list",
       defaultOpen: true,
       options: mockFilters.lengths,
+      defaultValue: [3, 4],
     },
     {
       id: "color",
@@ -327,6 +330,7 @@ export const initProducts = async () => {
       type: "color-grid",
       defaultOpen: true,
       options: mockFilters.colors,
+      defaultValue: [24, 21],
     },
     {
       id: "price",
@@ -334,6 +338,7 @@ export const initProducts = async () => {
       type: "price-range",
       defaultOpen: true,
       options: mockFilters.priceRange,
+      defaultValue: { min: 80, max: 150 },
     },
   ];
 
