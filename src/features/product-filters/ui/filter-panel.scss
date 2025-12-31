@@ -87,6 +87,85 @@
     padding-block: 7.5px;
     padding-inline: 37px;
   }
+
+  .selected-filters {
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    padding: 22px;
+    margin-bottom: 60px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 35px;
+    }
+
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 1;
+      color: var(--black);
+    }
+
+    &__reset-btn {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &__main {
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    &__list-item {
+    }
+  }
+  .list-item {
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    &__values {
+    }
+  }
+  .values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &__icon {
+    }
+
+    &__label {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+  }
 }
 
 .filter-checkbox-list {

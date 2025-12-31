@@ -11,7 +11,7 @@
     border-right: 1px solid var(--divider);
     flex: 1 1 394px;
     margin-top: -5px;
-    padding-right: 40px;
+    padding-right: 29px;
 
     @include mixins.respond-to(650px) {
       display: none;

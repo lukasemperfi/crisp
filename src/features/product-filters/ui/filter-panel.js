@@ -86,6 +86,7 @@ export class FilterPanel {
       this._updateRange(input);
     }
 
+    this._renderSelectedFilters(); // <== обновляем выбранные фильтры
     this._emit("change");
   }
 
@@ -190,6 +191,8 @@ export class FilterPanel {
         }
       }
     });
+
+    this._renderSelectedFilters();
   }
 
   _createApplyButton(text = "APPLY") {
@@ -376,5 +379,104 @@ export class FilterPanel {
 
     updateUI();
     return wrapper;
+  }
+  _renderSelectedFilters() {
+    const selectedContainer = this._container.querySelector(
+      ".filter-panel__selected"
+    );
+    selectedContainer.innerHTML = "";
+
+    const filters = this.getFilters();
+    const filterKeys = Object.keys(filters);
+
+    if (filterKeys.length === 0) {
+      selectedContainer.style.display = "none";
+      return;
+    }
+
+    selectedContainer.style.display = "block";
+
+    selectedContainer.innerHTML = `
+    <div class="selected-filters">
+      <div class="selected-filters__header">
+        <div class="selected-filters__title">Filter</div>
+        <button class="selected-filters__reset-btn">${this._closeIcon()} reset all</button>
+      </div>
+      <div class="selected-filters__main">
+        <div class="selected-filters__list">
+          <div class="selected-filters__list-item list-item">
+            <div class="list-item__title">Brand:</div>
+            <div class="list-item__values values">
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 1</div>
+              </div>
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 2</div>
+              </div>
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 3</div>
+              </div>
+            </div>
+          </div>
+          <div class="selected-filters__list-item list-item">
+            <div class="list-item__title">Size (Inches):</div>
+            <div class="list-item__values values">
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 1</div>
+              </div>
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 2</div>
+              </div>
+              <div class="values__item">
+                ${this._closeIcon()}
+                <div class="values__label">label 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    `;
+
+    console.log("keys", filterKeys);
+  }
+
+  _removeSelectedFilter(filterId, val = null) {
+    const wrapper = this._container.querySelector(
+      `[data-filter-id="${filterId}"]`
+    );
+    if (!wrapper) return;
+
+    if (val !== null) {
+      const input = wrapper.querySelector(`input[value="${val}"]`);
+      if (input) {
+        input.checked = false;
+        this._updateCheckbox(input);
+      }
+    } else {
+      const minInput = wrapper.querySelector(".price-range__input_min");
+      const maxInput = wrapper.querySelector(".price-range__input_max");
+      if (minInput && maxInput) {
+        minInput.value = minInput.min;
+        maxInput.value = maxInput.max;
+        this._updateRange(minInput);
+      }
+    }
+
+    this._emit("change");
+  }
+
+  _closeIcon(className = "") {
+    return `
+<svg class="${className}" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8.83887 0.353516L0.353586 8.8388" stroke="black" />
+  <path d="M8.83887 8.83887L0.353587 0.353585" stroke="black" />
+</svg>
+    `;
   }
 }
