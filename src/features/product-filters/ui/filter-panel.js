@@ -1,5 +1,5 @@
 export class FilterPanel {
-  constructor(containerSelector, config) {
+  constructor(containerSelector, config, options = {}) {
     this._container =
       typeof containerSelector === "string"
         ? document.querySelector(containerSelector)
@@ -15,6 +15,7 @@ export class FilterPanel {
       change: [],
       apply: [],
     };
+    this._showSelectedFilters = options.showSelectedFilters !== false;
 
     this._handleChange = this._onChange.bind(this);
     this._handleClick = this._onClick.bind(this);
@@ -414,6 +415,11 @@ export class FilterPanel {
     );
     selectedContainer.innerHTML = "";
 
+    if (!this._showSelectedFilters) {
+      selectedContainer.style.display = "none";
+      return;
+    }
+
     const filters = this.getFilters();
     const filterKeys = Object.keys(filters);
 
@@ -433,14 +439,12 @@ export class FilterPanel {
     selectedContainer.appendChild(wrapper);
   }
 
-  // Создание контейнера всей панели selected-filters
   _createSelectedFiltersWrapper() {
     const wrapper = document.createElement("div");
     wrapper.className = "selected-filters";
     return wrapper;
   }
 
-  // Создание заголовка панели с кнопкой reset
   _createSelectedFiltersHeader() {
     const header = document.createElement("div");
     header.className = "selected-filters__header";
@@ -454,7 +458,6 @@ export class FilterPanel {
     return header;
   }
 
-  // Создание основного списка выбранных фильтров
   _createSelectedFiltersList(filters) {
     const main = document.createElement("div");
     main.className = "selected-filters__main";
@@ -471,7 +474,6 @@ export class FilterPanel {
     return main;
   }
 
-  // Создание отдельного выбранного фильтра
   _createSelectedFilterItem(filterId, value) {
     const item = document.createElement("div");
     item.className = "selected-filters__list-item list-item";
@@ -526,7 +528,6 @@ export class FilterPanel {
 
     `;
     } else {
-      // Для всех остальных фильтров оставляем текст
       valueItem.innerHTML = `
       <button class="values__item-remove-btn">${this._closeIcon()}<div class="values__label">${this._getOptionLabel(
         filterId,
@@ -545,7 +546,6 @@ export class FilterPanel {
     return valueItem;
   }
 
-  // Создание выбранного значения для range фильтров
   _createSelectedFilterRange(filterId, value) {
     const valueItem = document.createElement("div");
     valueItem.className = "values__item";
@@ -561,7 +561,6 @@ export class FilterPanel {
     return valueItem;
   }
 
-  // Вспомогательный метод для отображения лейбла по id опции
   _getOptionLabel(filterId, valueId) {
     const configItem = this._config.find((i) => i.id === filterId);
     if (!configItem || !configItem.options) return valueId;
@@ -582,13 +581,11 @@ export class FilterPanel {
         this._updateCheckbox(input);
       }
     } else {
-      // Сбрасываем range фильтр
       const minInput = wrapper.querySelector(".price-range__input_min");
       const maxInput = wrapper.querySelector(".price-range__input_max");
       if (minInput && maxInput) {
         minInput.value = minInput.min;
         maxInput.value = maxInput.max;
-        // Удаляем фильтр из состояния
         delete this._state[filterId];
         this._updatePriceRangeUI(wrapper);
       }

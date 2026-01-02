@@ -342,7 +342,9 @@ export const initProducts = async () => {
     },
   ];
 
-  const filterPanel = new FilterPanel(".products__aside", filterConfig);
+  const filterPanel = new FilterPanel(".products__aside", filterConfig, {
+    showSelectedFilters: false,
+  });
 
   let currentPage = 0;
   const pageSize = 8;
