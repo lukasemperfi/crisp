@@ -55,7 +55,8 @@
       min-height: 0;
     }
 
-    &_is-open {
+    &_is-open,
+    &_static {
       .filter-item__icon {
         &::after {
           opacity: 0;

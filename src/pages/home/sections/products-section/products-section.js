@@ -3,6 +3,7 @@ import { productsApi } from "@/entities/product/api/products";
 import { productFiltersApi } from "@/entities/product/api/filters";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
+import { AboutDresses } from "./about-dresses";
 const mockFilters = {
   brands: [
     {
@@ -315,6 +316,7 @@ export const initProducts = async () => {
       defaultOpen: true,
       options: mockFilters.sizes,
       defaultValue: [29, 32],
+      accordion: false,
     },
     {
       id: "length",
@@ -342,9 +344,10 @@ export const initProducts = async () => {
     },
   ];
 
-  const filterPanel = new FilterPanel(".products__aside", filterConfig, {
-    showSelectedFilters: false,
+  const filterPanel = new FilterPanel(".products__filters", filterConfig, {
+    showSelectedFilters: true,
   });
+  AboutDresses(".products__category-description", { className: "" });
 
   let currentPage = 0;
   const pageSize = 8;
