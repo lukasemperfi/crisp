@@ -12,7 +12,7 @@ export function FiltersBar(container, filterConfig, filterOptions) {
 
   _container.innerHTML = `
     <div class="filters-bar">
-      <button class="filters-bar__toggle">Filters ${createArrowIcon(
+      <button class="filters-bar__toggle">Filter${createArrowIcon(
         "filters-bar__icon"
       )}</button>
       <div class="filters-bar__content">
@@ -22,18 +22,20 @@ export function FiltersBar(container, filterConfig, filterOptions) {
     </div>
   `;
 
+  const filtersBar = _container.querySelector(".filters-bar");
+
   const filterPanel = new FilterPanel(
-    _container.querySelector(".filters-bar__filters"),
+    filtersBar.querySelector(".filters-bar__filters"),
     filterConfig,
     filterOptions
   );
 
-  AboutDresses(_container.querySelector(".filters-bar__category-description"));
+  AboutDresses(filtersBar.querySelector(".filters-bar__category-description"));
 
-  const toggleBtn = _container.querySelector(".filters-bar__toggle");
+  const toggleBtn = filtersBar.querySelector(".filters-bar__toggle");
 
   toggleBtn.addEventListener("click", () => {
-    _container.classList.toggle("filters-bar_is-open");
+    filtersBar.classList.toggle("filters-bar_is-open");
   });
 
   return filterPanel;

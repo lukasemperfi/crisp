@@ -6,6 +6,12 @@
   flex-direction: column;
   width: 100%;
 
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
   .filter-item {
     border-bottom: 1px solid rgba(var(--white-rgb), 0.1);
 
@@ -20,14 +26,14 @@
     &__title {
       font-family: var(--font-family);
       font-weight: 400;
-      font-size: 24px;
-      line-height: 68px;
+      font-size: functions.fluidValue(12px, 24px, 320px, 1920px);
+      line-height: functions.fluidValue(18px, 68px, 320px, 1920px);
       color: var(--black);
     }
 
     &__icon {
       display: block;
-      width: 12px;
+      width: functions.fluidValue(10px, 12px, 320px, 1920px);
       height: 2px;
       background-color: var(--black-2);
       position: relative;
@@ -66,7 +72,11 @@
       .filter-item__body {
         grid-template-rows: 1fr;
         padding-bottom: 20px;
-        padding-top: 11px;
+        padding-top: functions.fluidValue(15px, 11px, 320px, 1920px);
+
+        @include mixins.respond-to(900px) {
+          border-bottom: 2px solid var(--light-blue-hover);
+        }
       }
     }
   }
@@ -74,54 +84,67 @@
   &__footer {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-block: functions.fluidValue(10px, 20px, 320px, 1920px);
   }
 
   &__apply-btn {
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 14px;
+    font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
     color: var(--gray-1);
-    padding-block: 7.5px;
-    padding-inline: 37px;
+    padding-block: functions.fluidValue(6.5px, 7.5px, 320px, 1920px);
+    padding-inline: functions.fluidValue(25px, 37px, 320px, 1920px);
   }
 
   .selected-filters {
     border: 1px solid var(--black);
     background-color: var(--white);
     padding: 22px;
-    margin-bottom: 60px;
+    margin-bottom: functions.fluidValue(20px, 60px, 320px, 1920px);
+
+    @include mixins.respond-to(900px) {
+      padding: 0;
+      padding-bottom: 20px;
+      border: none;
+      border-bottom: 2px solid var(--light-blue-hover);
+    }
 
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 35px;
+      margin-bottom: functions.fluidValue(20px, 35px, 320px, 1920px);
     }
 
     &__title {
       font-family: var(--font-family);
       font-weight: 400;
-      font-size: 32px;
+      font-size: functions.fluidValue(16px, 32px, 320px, 1920px);
       line-height: 1;
       color: var(--black);
+    }
+
+    &__icon {
+      width: functions.fluidValue(8px, 10px, 320px, 1920px);
+      height: functions.fluidValue(8px, 10px, 320px, 1920px);
+
+      path {
+        stroke: var(--black);
+      }
     }
 
     &__reset-btn {
       font-family: var(--font-family);
       font-weight: 400;
-      font-size: 14px;
+      font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
       text-transform: uppercase;
       color: var(--black);
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 8px;
-    }
-
-    &__main {
     }
 
     &__list {
@@ -130,18 +153,13 @@
       gap: 18px;
     }
 
-    &__list-item {
-    }
     .list-item {
       &__title {
         font-family: var(--font-family);
         font-weight: 400;
-        font-size: 24px;
+        font-size: functions.fluidValue(12px, 24px, 320px, 1920px);
         color: var(--black);
-        margin-bottom: 12px;
-      }
-
-      &__values {
+        margin-bottom: functions.fluidValue(8px, 12px, 320px, 1920px);
       }
     }
     .values {
@@ -149,25 +167,16 @@
       flex-wrap: wrap;
       gap: 12px;
 
-      &__item {
-        // display: flex;
-        // align-items: center;
-        // gap: 8px;
-      }
-
       &__item-remove-btn {
         display: flex;
         align-items: center;
-        gap: 8px;
-      }
-
-      &__icon {
+        gap: functions.fluidValue(6px, 8px, 320px, 1920px);
       }
 
       &__label {
         font-family: var(--second-family);
         font-weight: 400;
-        font-size: 14px;
+        font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
         text-transform: uppercase;
         color: var(--black);
       }
@@ -178,7 +187,7 @@
 .filter-checkbox-list {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: functions.fluidValue(15px, 25px, 320px, 1920px);
 
   &__label-wrapper {
     display: flex;
@@ -245,7 +254,7 @@
   &__label {
     font-family: var(--second-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
     text-transform: uppercase;
     color: var(--black-2);
   }
@@ -254,7 +263,7 @@
 .size-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: functions.fluidValue(9px, 10px, 320px, 1920px);
   max-width: 270px;
 
   &__item {
@@ -283,13 +292,13 @@
     justify-content: center;
     aspect-ratio: 1 / 1;
     border: 1px solid var(--divider);
-    width: 46px;
-    height: 46px;
+    width: functions.fluidValue(38px, 46px, 320px, 1920px);
+    height: functions.fluidValue(38px, 46px, 320px, 1920px);
     background-color: transparent;
 
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
     text-transform: uppercase;
     text-align: center;
     color: var(--gray-1);
@@ -334,8 +343,8 @@
     align-items: center;
     justify-content: center;
     aspect-ratio: 1 / 1;
-    width: 17px;
-    height: 17px;
+    width: functions.fluidValue(15px, 17px, 320px, 1920px);
+    height: functions.fluidValue(15px, 17px, 320px, 1920px);
     box-shadow: 0 0 0 3px transparent, 0 0 0 4px transparent;
     transition: box-shadow 0.2s;
 
@@ -357,15 +366,16 @@
 
 .price-range {
   padding-top: 5px;
+  margin-bottom: 10px;
 
   &__values {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 14px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
     color: var(--black);
     text-transform: uppercase;
   }
@@ -409,6 +419,11 @@
       &:hover {
         background-color: var(--black-2);
       }
+
+      @include mixins.respond-to(900px) {
+        width: 5px;
+        height: 18px;
+      }
     }
 
     &::-moz-range-thumb {
@@ -418,17 +433,11 @@
       background: var(--black);
       cursor: pointer;
       border: none;
+
+      @include mixins.respond-to(900px) {
+        width: 5px;
+        height: 18px;
+      }
     }
-
-    // &_min {
-    //   z-index: 3;
-    // }
-    // &_max {
-    //   z-index: 4;
-    // }
-
-    // &:active {
-    //   z-index: 4;
-    // }
   }
 }

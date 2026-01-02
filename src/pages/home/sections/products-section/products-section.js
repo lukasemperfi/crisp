@@ -31,11 +31,11 @@ const mockFilters = {
       name: "Donna Ricco",
       created_at: "2025-12-28T13:49:23.703911+00:00",
     },
-    {
-      id: 14,
-      name: "State",
-      created_at: "2025-12-28T13:49:23.703911+00:00",
-    },
+    // {
+    //   id: 14,
+    //   name: "State",
+    //   created_at: "2025-12-28T13:49:23.703911+00:00",
+    // },
   ],
   colors: [
     {

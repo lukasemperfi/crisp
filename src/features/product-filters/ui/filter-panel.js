@@ -644,10 +644,7 @@ export class FilterPanel {
 
   _closeIcon(className = "") {
     return `
-<svg class="${className}" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M8.83887 0.353516L0.353586 8.8388" stroke="black" />
-  <path d="M8.83887 8.83887L0.353587 0.353585" stroke="black" />
-</svg>
+    <svg class="selected-filters__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.15 -0.15 9.49 9.49"><path d="M8.83887 0.353516L0.353586 8.8388" stroke="black"></path><path d="M8.83887 8.83887L0.353587 0.353585" stroke="black"></path></svg>
     `;
   }
 }

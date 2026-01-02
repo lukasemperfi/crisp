@@ -22,29 +22,4 @@
   &__main {
     flex: 1 1 1454px;
   }
-
-  &__category-description {
-    margin-top: 20px;
-  }
-}
-
-.about-dresses {
-  &__title {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 68px;
-    color: var(--black);
-  }
-
-  &__text {
-    padding-bottom: 20px;
-    padding-top: 11px;
-    font-family: var(--font3);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0.01em;
-    color: var(--black);
-  }
 }
