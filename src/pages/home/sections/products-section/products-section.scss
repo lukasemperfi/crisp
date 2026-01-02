@@ -13,8 +13,9 @@
     margin-top: -5px;
     padding-right: 29px;
 
-    @include mixins.respond-to(650px) {
-      display: none;
+    @include mixins.respond-to(900px) {
+      padding-right: 0;
+      border: none;
     }
   }
 

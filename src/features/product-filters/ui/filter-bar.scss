@@ -2,30 +2,38 @@
 @use "@/app/styles/mixins" as mixins;
 
 .filters-bar {
+  $bp-mobile: 900px;
   position: relative;
-  min-width: 350px;
+  width: 100%;
 
   &__toggle {
     display: none;
+
+    @include mixins.respond-to($bp-mobile) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--black);
+      border: 1px solid var(--divider);
+      padding-block: 15px;
+      padding-inline: 10px;
+    }
   }
 
   &__content {
     display: block;
-  }
 
-  @include mixins.respond-to(900px) {
-    &__toggle {
-      display: inline-flex;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 10px 15px;
-    }
-
-    &__content {
+    @include mixins.respond-to($bp-mobile) {
+      min-width: 278px;
+      width: 100%;
       position: absolute;
       bottom: auto;
       left: 0;
-      right: 0;
       margin-top: 10px;
       background-color: var(--white);
       border: 1px solid var(--black);
@@ -38,8 +46,31 @@
       transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
       overflow-y: auto;
     }
+  }
 
-    &_is-open &__content {
+  &__icon {
+    transform: rotateX(0);
+    transition: 0.3s;
+  }
+
+  &_is-open &__icon {
+    @include mixins.respond-to($bp-mobile) {
+      transform: rotateX(180deg);
+      transition: 0.3s;
+      fill: var(--white);
+    }
+  }
+
+  &_is-open &__toogle {
+    @include mixins.respond-to($bp-mobile) {
+      color: var(--white);
+      background-color: var(--black);
+      border: 1px solid var(--black);
+    }
+  }
+
+  &_is-open &__content {
+    @include mixins.respond-to($bp-mobile) {
       max-height: 1000px;
       opacity: 1;
       transform: translateY(0);

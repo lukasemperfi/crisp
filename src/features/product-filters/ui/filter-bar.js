@@ -12,7 +12,9 @@ export function FiltersBar(container, filterConfig, filterOptions) {
 
   _container.innerHTML = `
     <div class="filters-bar">
-      <button class="filters-bar__toggle">Filters</button>
+      <button class="filters-bar__toggle">Filters ${createArrowIcon(
+        "filters-bar__icon"
+      )}</button>
       <div class="filters-bar__content">
         <div class="filters-bar__filters"></div>
         <div class="filters-bar__category-description"></div>
@@ -29,17 +31,12 @@ export function FiltersBar(container, filterConfig, filterOptions) {
   AboutDresses(_container.querySelector(".filters-bar__category-description"));
 
   const toggleBtn = _container.querySelector(".filters-bar__toggle");
-  const content = _container.querySelector(".filters-bar__content");
 
   toggleBtn.addEventListener("click", () => {
     _container.classList.toggle("filters-bar_is-open");
   });
 
-  return {
-    filterPanel,
-    open: () => _container.classList.add("filters-bar_is-open"),
-    close: () => _container.classList.remove("filters-bar_is-open"),
-  };
+  return filterPanel;
 }
 
 function AboutDresses(container, props = {}) {
@@ -69,4 +66,12 @@ function AboutDresses(container, props = {}) {
   };
 
   render();
+}
+
+function createArrowIcon(className = "") {
+  return `
+  <svg class="${className}" width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.353516 0.353516L4.35352 4.35352L8.35352 0.353516" stroke="black" />
+  </svg>
+  `;
 }

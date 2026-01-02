@@ -316,7 +316,6 @@ export const initProducts = async () => {
       defaultOpen: true,
       options: mockFilters.sizes,
       defaultValue: [29, 32],
-      accordion: false,
     },
     {
       id: "length",
