@@ -3,7 +3,7 @@ import { productsApi } from "@/entities/product/api/products";
 import { productFiltersApi } from "@/entities/product/api/filters";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
-import { AboutDresses } from "./about-dresses";
+import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
 const mockFilters = {
   brands: [
     {
@@ -344,10 +344,24 @@ export const initProducts = async () => {
     },
   ];
 
-  const filterPanel = new FilterPanel(".products__filters", filterConfig, {
+  const filtersBar = new FiltersBar(".products__aside", filterConfig, {
     showSelectedFilters: true,
   });
-  AboutDresses(".products__category-description", { className: "" });
+
+  // filtersBar.onChange((filters) => {
+  //   console.log("filters change: ", filters);
+
+  //   // activeFilters = filters;
+  //   // // live preview при изменении фильтров
+  //   // loadProducts(true);
+  // });
+
+  // filtersBar.onApply((filters) => {
+  //   console.log("filters APPLY: ", filters);
+
+  //   // activeFilters = filters;
+  //   // loadProducts(true);
+  // });
 
   let currentPage = 0;
   const pageSize = 8;
@@ -377,19 +391,4 @@ export const initProducts = async () => {
   // const productList = new ProductList(".products__main", [], loadProducts);
 
   // await loadProducts();
-
-  filterPanel.onChange((filters) => {
-    console.log("filters change: ", filters);
-
-    // activeFilters = filters;
-    // // live preview при изменении фильтров
-    // loadProducts(true);
-  });
-
-  filterPanel.onApply((filters) => {
-    console.log("filters APPLY: ", filters);
-
-    // activeFilters = filters;
-    // loadProducts(true);
-  });
 };

@@ -1,0 +1,48 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.filters-bar {
+  position: relative;
+  min-width: 350px;
+
+  &__toggle {
+    display: none;
+  }
+
+  &__content {
+    display: block;
+  }
+
+  @include mixins.respond-to(900px) {
+    &__toggle {
+      display: inline-flex;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 10px 15px;
+    }
+
+    &__content {
+      position: absolute;
+      bottom: auto;
+      left: 0;
+      right: 0;
+      margin-top: 10px;
+      background-color: var(--white);
+      border: 1px solid var(--black);
+      padding: 15px;
+      z-index: 10;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    &_is-open &__content {
+      max-height: 1000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
