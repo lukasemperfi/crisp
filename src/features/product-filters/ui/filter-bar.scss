@@ -2,9 +2,10 @@
 @use "@/app/styles/mixins" as mixins;
 
 .filters-bar {
-  $bp-mobile: 900px;
+  $bp-mobile: 768px;
   position: relative;
   width: 100%;
+  min-width: 220px;
 
   &__toggle {
     display: none;
@@ -29,7 +30,6 @@
     display: block;
 
     @include mixins.respond-to($bp-mobile) {
-      min-width: 278px;
       width: 100%;
       position: absolute;
       bottom: auto;

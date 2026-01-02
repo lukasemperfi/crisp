@@ -2,24 +2,35 @@
 @use "@/app/styles/mixins" as mixins;
 
 .products {
+  $bp-mobile: 768px;
+
   &__content {
     display: flex;
-    gap: 30px;
+    gap: functions.fluidValue(14px, 30px, $bp-mobile, 1920px);
+
+    @include mixins.respond-to($bp-mobile) {
+      flex-direction: column;
+    }
   }
 
   &__aside {
     border-right: 1px solid var(--divider);
     flex: 1 1 394px;
     margin-top: -5px;
-    padding-right: 29px;
+    padding-right: functions.fluidValue(14px, 29px, $bp-mobile, 1920px);
 
-    @include mixins.respond-to(900px) {
+    @include mixins.respond-to($bp-mobile) {
       padding-right: 0;
       border: none;
+      flex: auto;
     }
   }
 
   &__main {
     flex: 1 1 1454px;
+
+    @include mixins.respond-to($bp-mobile) {
+      flex: auto;
+    }
   }
 }
