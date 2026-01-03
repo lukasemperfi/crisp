@@ -12,9 +12,10 @@ export function FiltersBar(container, filterConfig, filterOptions) {
 
   _container.innerHTML = `
     <div class="filters-bar">
-      <button class="filters-bar__toggle">Filter${createArrowIcon(
-        "filters-bar__icon"
-      )}</button>
+      <button class="filters-bar__toggle">
+        <span class="filters-bar__value">Filter</span>
+        <span class="filters-bar__icon">${createArrowIcon()}</span>
+      </button>
       <div class="filters-bar__content">
         <div class="filters-bar__filters"></div>
         <div class="filters-bar__category-description"></div>

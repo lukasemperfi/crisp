@@ -4,6 +4,7 @@ import { productFiltersApi } from "@/entities/product/api/filters";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
 import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
+import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 const mockFilters = {
   brands: [
     {
@@ -347,6 +348,18 @@ export const initProducts = async () => {
     showSelectedFilters: true,
   });
 
+  Dropdown(".products__sort-panel", {
+    options: [
+      { value: "new", label: "Newest" },
+      { value: "price_asc", label: "Price (Low to High)" },
+      { value: "price_desc", label: "Price (High to Low)" },
+    ],
+    defaultValue: "price_desc",
+    onChange: (value) => {
+      console.log("Selected:", value);
+    },
+  });
+
   // filtersBar.onChange((filters) => {
   //   console.log("filters change: ", filters);
 
@@ -387,7 +400,7 @@ export const initProducts = async () => {
   //   currentPage++;
   // };
 
-  // const productList = new ProductList(".products__main", [], loadProducts);
+  // const productList = new ProductList(".products__products-list", [], loadProducts);
 
   // await loadProducts();
 };
