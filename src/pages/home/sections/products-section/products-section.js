@@ -348,13 +348,25 @@ export const initProducts = async () => {
     showSelectedFilters: true,
   });
 
-  Dropdown(".products__sort-panel", {
+  Dropdown(".products__sort", {
     options: [
       { value: "new", label: "Newest" },
       { value: "price_asc", label: "Price (Low to High)" },
       { value: "price_desc", label: "Price (High to Low)" },
     ],
     defaultValue: "price_desc",
+    onChange: (value) => {
+      console.log("Selected:", value);
+    },
+  });
+
+  Dropdown(".products__limit", {
+    options: [
+      { value: "limit_48", label: "48" },
+      { value: "limit_24", label: "24" },
+      { value: "limit_8", label: "8" },
+    ],
+    defaultValue: "8",
     onChange: (value) => {
       console.log("Selected:", value);
     },
