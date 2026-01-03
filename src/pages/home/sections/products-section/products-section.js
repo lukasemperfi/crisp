@@ -409,21 +409,12 @@ export const initProducts = async () => {
     const query = stringifyUrlParams(cleanedState);
     const newUrl = query ? `?${query}` : window.location.pathname;
 
-    // Обновляем URL без перезагрузки страницы
     window.history.pushState({ path: newUrl }, "", newUrl);
   };
 
   let currentPage = queryState.page;
 
   const loadProducts = async () => {
-    // 1. Получаем данные
-    console.log("filters", {
-      ...urlParams,
-      page: currentPage,
-      limit: queryState.limit,
-      sort: queryState.sort,
-    });
-
     const { data, count } = await productsApi.getAllProducts({
       ...urlParams,
       page: currentPage,
@@ -432,15 +423,12 @@ export const initProducts = async () => {
     });
     console.log("data", data);
 
-    // // 2. Отрисовываем
     productList.appendProducts(data);
 
-    // 3. Обновляем URL (кроме первой загрузки)
     if (currentPage !== queryState.page || currentPage > 0) {
       updateUrlPage(currentPage);
     }
 
-    // 4. Проверяем кнопку "Load More"
     if ((currentPage + 1) * queryState.limit >= count) {
       productList.hideLoadMore();
     } else {
@@ -452,41 +440,11 @@ export const initProducts = async () => {
 
   const productList = new ProductList(".products__list", [], loadProducts);
 
-  // Первый запуск
   await loadProducts();
-
-  // const loadProducts = async (reset = false) => {
-  //   if (reset) {
-  //     currentPage = 0;
-  //     productList.clear();
-  //     productList.showLoadMore();
-  //   }
-
-  //   const { data, count } = await productsApi.getAllProducts(activeFilters, {
-  //     page: currentPage,
-  //     limit: pageSize,
-  //   });
-
-  //   productList.appendProducts(data);
-
-  //   if ((currentPage + 1) * pageSize >= count) {
-  //     productList.hideLoadMore();
-  //   }
-
-  //   currentPage++;
-  // };
-
-  // const productList = new ProductList(
-  //   ".products__products-list",
-  //   [],
-  //   loadProducts
-  // );
-
-  // await loadProducts();
 };
 
 const stringifyOptions = {
-  arrayFormat: "comma", // Можно использовать 'bracket', 'index' или 'comma'
+  arrayFormat: "comma",
   skipEmptyString: true,
   skipNull: true,
 };
