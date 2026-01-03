@@ -1,10 +1,7 @@
 import { supabase } from "@/shared/api/supabase/client.js";
 
 class Products {
-  getAllProducts = async (
-    filters = {},
-    pagination = { page: 0, limit: 24 }
-  ) => {
+  getAllProducts = async (filters = {}) => {
     const {
       brands = [],
       sizes = [],
@@ -13,9 +10,9 @@ class Products {
       tags = [],
       priceRange = {},
       sort = null,
+      page = 0,
+      limit = 8,
     } = filters;
-
-    const { page, limit } = pagination;
 
     const from = page * limit;
     const to = from + limit - 1;

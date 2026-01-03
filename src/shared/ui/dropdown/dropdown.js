@@ -41,7 +41,6 @@ export function Dropdown(container, props = {}) {
     if (emit) onChange(val);
   };
 
-  // ---------- render ----------
   root.innerHTML = `
     <div class="dropdown">
       <select
@@ -82,14 +81,12 @@ export function Dropdown(container, props = {}) {
   const valueEl = root.querySelector(".dropdown__value");
   const menu = root.querySelector(".dropdown__menu");
 
-  // ---------- init value ----------
   const hasDefault = options.some((o) => o.value === defaultValue);
 
   const initialValue = hasDefault ? defaultValue : options[0]?.value ?? "";
 
   setValue(initialValue, false);
 
-  // ---------- events ----------
   trigger.addEventListener("click", toggle);
 
   menu.addEventListener("click", (e) => {
@@ -107,17 +104,6 @@ export function Dropdown(container, props = {}) {
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target)) close();
   });
-
-  // ---------- public api ----------
-  return {
-    getValue: () => currentValue,
-    setValue,
-    open,
-    close,
-    destroy() {
-      root.innerHTML = "";
-    },
-  };
 }
 
 function createArrowIcon(className = "") {

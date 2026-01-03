@@ -2,9 +2,10 @@ import { mockProducts } from "@/shared/helpers/mock-products";
 import { productsApi } from "@/entities/product/api/products";
 import { productFiltersApi } from "@/entities/product/api/filters";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
-import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
 import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
 import { Dropdown } from "@/shared/ui/dropdown/dropdown";
+import queryString from "query-string";
+
 const mockFilters = {
   brands: [
     {
@@ -301,6 +302,38 @@ const mockFilters = {
 };
 
 export const initProducts = async () => {
+  const urlParams = parseUrlParams(window.location.search);
+  const DEFAULT_QUERY = {
+    page: 0,
+    limit: 8,
+    sort: "new",
+  };
+
+  let queryState = {
+    page: urlParams.page ?? DEFAULT_QUERY.page,
+    limit: urlParams.limit ?? DEFAULT_QUERY.limit,
+    sort: urlParams.sort ?? DEFAULT_QUERY.sort,
+  };
+
+  const applyNewParams = (newFilters) => {
+    const newState = {
+      limit: queryState.limit,
+      sort: queryState.sort,
+      ...newFilters,
+      page: 0,
+    };
+    console.log("newfilters/newState", newFilters, newState);
+    const cleanedState = removeDefaultParams(newState, DEFAULT_QUERY);
+    console.log("cleaned", cleanedState);
+    const query = stringifyUrlParams(cleanedState);
+
+    if (query) {
+      window.location.search = query;
+    } else {
+      window.location.href = window.location.pathname;
+    }
+  };
+
   const filterConfig = [
     {
       id: "brand",
@@ -308,7 +341,7 @@ export const initProducts = async () => {
       type: "checkbox-list",
       defaultOpen: true,
       options: mockFilters.brands,
-      defaultValue: [16, 18],
+      defaultValue: urlParams.brand || [],
     },
     {
       id: "size",
@@ -316,7 +349,7 @@ export const initProducts = async () => {
       type: "size-grid",
       defaultOpen: true,
       options: mockFilters.sizes,
-      defaultValue: [29, 32],
+      defaultValue: urlParams.size || [],
     },
     {
       id: "length",
@@ -324,7 +357,7 @@ export const initProducts = async () => {
       type: "checkbox-list",
       defaultOpen: true,
       options: mockFilters.lengths,
-      defaultValue: [3, 4],
+      defaultValue: urlParams.length || [],
     },
     {
       id: "color",
@@ -332,7 +365,7 @@ export const initProducts = async () => {
       type: "color-grid",
       defaultOpen: true,
       options: mockFilters.colors,
-      defaultValue: [24, 21],
+      defaultValue: urlParams.color || [],
     },
     {
       id: "price",
@@ -340,7 +373,7 @@ export const initProducts = async () => {
       type: "price-range",
       defaultOpen: true,
       options: mockFilters.priceRange,
-      defaultValue: { min: 80, max: 150 },
+      defaultValue: urlParams.price || null,
     },
   ];
 
@@ -354,42 +387,23 @@ export const initProducts = async () => {
       { value: "price_asc", label: "Price (Low to High)" },
       { value: "price_desc", label: "Price (High to Low)" },
     ],
-    defaultValue: "price_desc",
-    onChange: (value) => {
-      console.log("Selected:", value);
-    },
+    defaultValue: queryState.sort,
+    onChange: (value) => applyNewParams({ ...urlParams, sort: value }),
   });
 
   Dropdown(".products__limit", {
     options: [
-      { value: "limit_48", label: "48" },
-      { value: "limit_24", label: "24" },
-      { value: "limit_8", label: "8" },
+      { value: "48", label: "48" },
+      { value: "24", label: "24" },
+      { value: "8", label: "8" },
     ],
-    defaultValue: "8",
-    onChange: (value) => {
-      console.log("Selected:", value);
-    },
+    defaultValue: String(queryState.limit),
+    onChange: (value) => applyNewParams({ ...urlParams, limit: Number(value) }),
   });
 
-  // filtersBar.onChange((filters) => {
-  //   console.log("filters change: ", filters);
-
-  //   // activeFilters = filters;
-  //   // // live preview при изменении фильтров
-  //   // loadProducts(true);
-  // });
-
-  // filtersBar.onApply((filters) => {
-  //   console.log("filters APPLY: ", filters);
-
-  //   // activeFilters = filters;
-  //   // loadProducts(true);
-  // });
-
-  let currentPage = 0;
-  const pageSize = 8;
-  let activeFilters = {};
+  filtersBar.onApply((filters) => {
+    applyNewParams(filters);
+  });
 
   // const loadProducts = async (reset = false) => {
   //   if (reset) {
@@ -412,7 +426,69 @@ export const initProducts = async () => {
   //   currentPage++;
   // };
 
-  // const productList = new ProductList(".products__products-list", [], loadProducts);
+  // const productList = new ProductList(
+  //   ".products__products-list",
+  //   [],
+  //   loadProducts
+  // );
 
   // await loadProducts();
+};
+
+const stringifyOptions = {
+  arrayFormat: "comma", // Можно использовать 'bracket', 'index' или 'comma'
+  skipEmptyString: true,
+  skipNull: true,
+};
+
+export const stringifyUrlParams = (params) => {
+  const flatParams = { ...params };
+
+  if (params.price) {
+    flatParams.minPrice = params.price.min;
+    flatParams.maxPrice = params.price.max;
+    delete flatParams.price;
+  }
+
+  return queryString.stringify(flatParams, stringifyOptions);
+};
+
+export const parseUrlParams = (query) => {
+  const parsed = queryString.parse(query, {
+    arrayFormat: "comma",
+    parseNumbers: true,
+    parseBooleans: true,
+  });
+
+  const result = { ...parsed };
+
+  if (result.minPrice !== undefined || result.maxPrice !== undefined) {
+    result.price = {
+      min: Number(result.minPrice) || 0,
+      max: Number(result.maxPrice) || 0,
+    };
+    delete result.minPrice;
+    delete result.maxPrice;
+  }
+
+  const arrayFields = ["brand", "size", "length", "color"];
+  arrayFields.forEach((field) => {
+    if (result[field] && !Array.isArray(result[field])) {
+      result[field] = [result[field]];
+    }
+  });
+
+  return result;
+};
+
+export const removeDefaultParams = (params, defaults) => {
+  const cleaned = { ...params };
+
+  Object.keys(defaults).forEach((key) => {
+    if (cleaned[key] === defaults[key]) {
+      delete cleaned[key];
+    }
+  });
+
+  return cleaned;
 };
