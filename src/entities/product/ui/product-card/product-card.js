@@ -8,9 +8,9 @@ export function createProductCard(product) {
     base_price: price,
     discount_percent: discountRate,
     images = [],
-    tag,
+    tags,
   } = product;
-
+  const tag = tags && tags.length > 0 ? tags[0].tag.name : "Uncategorized";
   const mainImage = images.find((img) => img.is_main) || images[0];
   const hasDiscount = discountRate > 0;
   const currentPrice = hasDiscount ? price * (1 - discountRate / 100) : price;
