@@ -3,12 +3,12 @@ import { supabase } from "@/shared/api/supabase/client.js";
 class Products {
   getAllProducts = async (filters = {}) => {
     const {
-      brands = [],
-      sizes = [],
-      colors = [],
-      lengths = [],
-      tags = [],
-      priceRange = {},
+      brand = [],
+      size = [],
+      color = [],
+      length = [],
+      tag = [],
+      price = {},
       sort = null,
       page = 0,
       limit = 8,
@@ -36,37 +36,43 @@ class Products {
       )
       .range(from, to);
 
-    if (brands.length) {
-      query = query.in("brand_id", brands);
+    if (brand.length) {
+      query = query.in("brand_id", brand);
     }
-    if (sizes.length) {
-      query = query.in("variants.size_id", sizes);
+    if (size.length) {
+      query = query.in("variants.size_id", size);
     }
-    if (colors.length) {
-      query = query.in("variants.color_id", colors);
+    if (color.length) {
+      query = query.in("variants.color_id", color);
     }
-    if (lengths.length) {
-      query = query.in("length_id", lengths);
+    if (length.length) {
+      query = query.in("length_id", length);
     }
-    if (tags.length) {
-      query = query.in("product_tags_mapping.tag_id", tags);
+    if (tag.length) {
+      query = query.in("product_tags_mapping.tag_id", tag);
     }
-    if (priceRange.min != null) {
-      query = query.gte("base_price", priceRange.min);
+    if (price.min != null) {
+      query = query.gte("final_price", price.min);
     }
-    if (priceRange.max != null) {
-      query = query.lte("base_price", priceRange.max);
+    if (price.max != null) {
+      query = query.lte("final_price", price.max);
     }
 
-    if (sort === "asc" || sort === "desc") {
-      query = query
-        .order("final_price", { ascending: sort === "asc" })
-        .order("id", { ascending: true });
-    } else {
-      query = query
-        .order("created_at", { ascending: false })
-        .order("id", { ascending: true });
+    switch (sort) {
+      case "price_asc":
+        query = query.order("final_price", { ascending: true });
+        break;
+      case "price_desc":
+        query = query.order("final_price", { ascending: false });
+        break;
+      case "new":
+      default:
+        query = query.order("created_at", { ascending: false });
+        break;
     }
+
+    // Добавляем вторичную сортировку по ID для стабильности пагинации
+    query = query.order("id", { ascending: true });
 
     const { data, error, count } = await query;
 
