@@ -1,11 +1,9 @@
-import { mockProducts } from "@/shared/helpers/mock-products";
 import { productsApi } from "@/entities/product/api/products";
 import { productFiltersApi } from "@/entities/product/api/filters";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
-import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 import queryString from "query-string";
-import { debounce } from "../../../../shared/helpers/debounce";
+import { debounce } from "@/shared/helpers/debounce";
 
 export const initProducts = async () => {
   const urlParams = parseUrlParams(window.location.search);
@@ -33,8 +31,6 @@ export const initProducts = async () => {
   };
 
   const tagFilters = await productFiltersApi.getTags();
-
-  console.log("tagFilters", tagFilters);
 
   const filterConfig = [
     {

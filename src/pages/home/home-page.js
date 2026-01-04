@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
   initHeroSection();
   initProducts();
-  // initFeaturedProductsSection();
+  initFeaturedProductsSection();
   initBlogSection();
   initPageFooter();
 

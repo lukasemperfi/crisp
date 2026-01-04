@@ -2,85 +2,7 @@ import { supabase } from "@/shared/api/supabase/client.js";
 
 class Products {
   getAllProducts = async (filters = {}) => {
-    const {
-      brand = [],
-      size = [],
-      color = [],
-      length = [],
-      tag = [],
-      price = {},
-      sort = null,
-      page = 0,
-      limit = 8,
-    } = filters;
-
-    const from = page * limit;
-    const to = from + limit - 1;
-
-    let query = supabase
-      .from("products")
-      .select(
-        `
-      *,
-      brand:brands (*),
-      images:product_images (*),
-      length:product_lengths (*),
-      variants:product_variants!inner (
-        id, stock, color:product_colors (*), size:product_sizes (*)
-      ),
-      tags:product_tags_mapping!inner (
-        tag:product_tags (*)
-      )
-    `,
-        { count: "exact" }
-      )
-      .range(from, to);
-
-    if (brand.length) {
-      query = query.in("brand_id", brand);
-    }
-    if (size.length) {
-      query = query.in("variants.size_id", size);
-    }
-    if (color.length) {
-      query = query.in("variants.color_id", color);
-    }
-    if (length.length) {
-      query = query.in("length_id", length);
-    }
-    if (tag.length) {
-      query = query.in("product_tags_mapping.tag_id", tag);
-    }
-    if (price.min != null) {
-      query = query.gte("final_price", price.min);
-    }
-    if (price.max != null) {
-      query = query.lte("final_price", price.max);
-    }
-
-    switch (sort) {
-      case "price_asc":
-        query = query.order("final_price", { ascending: true });
-        break;
-      case "price_desc":
-        query = query.order("final_price", { ascending: false });
-        break;
-      case "new":
-      default:
-        query = query.order("created_at", { ascending: false });
-        break;
-    }
-
-    // Добавляем вторичную сортировку по ID для стабильности пагинации
-    query = query.order("id", { ascending: true });
-
-    const { data, error, count } = await query;
-
-    if (error) {
-      throw error;
-    }
-
-    return { data, count };
+    return await productsApi._getFilteredProducts(filters);
   };
 
   getProductById = async (id) => {
@@ -142,6 +64,97 @@ class Products {
     }
 
     return data;
+  };
+
+  getFeaturedProducts = async (filters = {}) => {
+    return await this._getFilteredProducts(filters, "is_featured");
+  };
+
+  getPopularProducts = async (filters = {}) => {
+    return await this._getFilteredProducts(filters, "is_popular");
+  };
+
+  _getFilteredProducts = async (filters = {}, flagCondition = null) => {
+    const {
+      brand = [],
+      size = [],
+      color = [],
+      length = [],
+      tag = [],
+      price = {},
+      sort = null,
+      page = 0,
+      limit = 8,
+    } = filters;
+
+    const from = page * limit;
+    const to = from + limit - 1;
+
+    let query = supabase
+      .from("products")
+      .select(
+        `
+      *,
+      brand:brands (*),
+      images:product_images (*),
+      length:product_lengths (*),
+      variants:product_variants!inner (
+        id, stock, color:product_colors (*), size:product_sizes (*)
+      ),
+      tags:product_tags_mapping!inner (
+        tag:product_tags (*)
+      )
+    `,
+        { count: "exact" }
+      )
+      .range(from, to);
+
+    if (flagCondition) {
+      query = query.eq(flagCondition, true);
+    }
+
+    if (brand.length) {
+      query = query.in("brand_id", brand);
+    }
+    if (size.length) {
+      query = query.in("variants.size_id", size);
+    }
+    if (color.length) {
+      query = query.in("variants.color_id", color);
+    }
+    if (length.length) {
+      query = query.in("length_id", length);
+    }
+    if (tag.length) {
+      query = query.in("product_tags_mapping.tag_id", tag);
+    }
+
+    if (price.min != null) {
+      query = query.gte("final_price", price.min);
+    }
+    if (price.max != null) {
+      query = query.lte("final_price", price.max);
+    }
+
+    switch (sort) {
+      case "price_asc":
+        query = query.order("final_price", { ascending: true });
+        break;
+      case "price_desc":
+        query = query.order("final_price", { ascending: false });
+        break;
+      case "new":
+      default:
+        query = query.order("created_at", { ascending: false });
+        break;
+    }
+
+    query = query.order("id", { ascending: true });
+
+    const { data, error, count } = await query;
+    if (error) throw error;
+
+    return { data, count };
   };
 }
 

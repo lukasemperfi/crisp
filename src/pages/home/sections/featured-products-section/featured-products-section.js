@@ -2,9 +2,19 @@ import { renderSlider } from "@/shared/ui/slider/slider";
 import { mockProducts } from "@/shared/helpers/mock-products";
 import { createProductCard } from "@/entities/product/ui/product-card/product-card";
 import { Navigation } from "swiper/modules";
-// import { renderProductList } from "@/entities/product/ui/product-list/product-list";
+import { ProductList } from "@/entities/product/ui/product-list/product-list";
+import { productsApi } from "../../../../entities/product/api/products";
 
-export const initFeaturedProductsSection = () => {
+export const initFeaturedProductsSection = async () => {
+  const { data: featuredProducts, count: featuredCount } =
+    await productsApi.getFeaturedProducts({
+      limit: 8,
+    });
+  const { data: popularProducts, count: popularCount } =
+    await productsApi.getPopularProducts({
+      limit: 8,
+    });
+
   const BREAKPOINT = 470;
   let swipers = {
     featured: null,
@@ -41,12 +51,18 @@ export const initFeaturedProductsSection = () => {
         }
       });
 
-      // renderProductList(mockProducts, ".featured-slider__slider-container", 4);
-      // renderProductList(mockProducts, ".popular-slider__slider-container", 4);
+      const featuredList = new ProductList(
+        ".featured-slider__slider-container",
+        featuredProducts
+      );
+      const popularList = new ProductList(
+        ".popular-slider__slider-container",
+        popularProducts
+      );
     } else {
       swipers.featured = renderSlider({
         container: ".featured-slider__slider-container",
-        items: mockProducts,
+        items: featuredProducts,
         renderItem: (product) => createProductCard(product),
         swiperOptions: {
           ...commonSwiperOptions,
@@ -59,7 +75,7 @@ export const initFeaturedProductsSection = () => {
 
       swipers.popular = renderSlider({
         container: ".popular-slider__slider-container",
-        items: mockProducts,
+        items: popularProducts,
         renderItem: (product) => createProductCard(product),
         swiperOptions: {
           ...commonSwiperOptions,
