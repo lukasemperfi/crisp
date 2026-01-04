@@ -4,8 +4,8 @@ class ProductFilters {
   getTags = async () => {
     const { data, error } = await supabase
       .from("product_tags")
-      .select("id, name")
-      .order("name", { ascending: true });
+      .select("id, name, sort_order")
+      .order("sort_order", { ascending: true });
 
     if (error) {
       console.error("Error fetching tags:", error);
