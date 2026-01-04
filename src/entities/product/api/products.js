@@ -5,61 +5,35 @@ class Products {
     return await productsApi._getFilteredProducts(filters);
   };
 
-  getProductById = async (id) => {
+  getProductById = async (productId) => {
+    if (!productId) {
+      throw new Error("Product ID is required");
+    }
+
     const { data, error } = await supabase
       .from("products")
       .select(
         `
-      id,
-      name,
-      description,
-      base_price,
-      discount_percent,
-      created_at,
-      length:product_lengths (id, name),
-      brand:brands (
-        id,
-        name,
-        created_at
-      ),
-
-      images:product_images (
-        id,
-        product_id,
-        image_path_jpg,
-        image_path_webp,
-        is_main,
-        sort_order,
-        created_at
-      ),
-
-      variants:product_variants (
-        id,
-        product_id,
-        stock,
-        created_at,
-        color:product_colors (
-          id,
-          name,
-          hex_code
+        *,
+        brand:brands (*),
+        images:product_images (*),
+        length:product_lengths (*),
+        variants:product_variants (
+          id, 
+          stock, 
+          color:product_colors (*), 
+          size:product_sizes (*)
         ),
-        size:product_sizes (
-          id,
-          name,
-          sort_order
+        tags:product_tags_mapping (
+          tag:product_tags (*)
         )
-      ),
-
-      tags:product_tags_mapping (
-        tag:product_tags (*)
+      `
       )
-    `
-      )
-      .eq("id", id)
+      .eq("id", productId)
       .single();
 
     if (error) {
-      console.error("getProductById error:", error);
+      console.error("Error fetching product:", error.message);
       throw error;
     }
 

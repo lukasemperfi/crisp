@@ -2,4 +2,13 @@
 @use "@/app/styles/mixins" as mixins;
 
 .product-content {
+  &__card {
+    max-width: 1343px;
+    margin: 0 auto;
+  }
+
+  &__tabs {
+  }
+}
+.page-container-1920 {
 }
