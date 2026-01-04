@@ -162,7 +162,6 @@ export class ProductList {
     }
   }
 
-  // --- Методы лоадера ---
   showLoader() {
     if (this._loader) {
       this._loader.style.display = "";
@@ -175,5 +174,8 @@ export class ProductList {
       this._loader.style.display = "none";
       this._btn.style.display = "";
     }
+  }
+  setLoadMoreHandler(handler) {
+    this._onLoadMore = handler;
   }
 }
