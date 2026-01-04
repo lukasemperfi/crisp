@@ -16,6 +16,7 @@ export class FilterPanel {
       apply: [],
     };
     this._showSelectedFilters = options.showSelectedFilters !== false;
+    this._showApplyButton = options.showApplyButton !== false;
 
     this._handleChange = this._onChange.bind(this);
     this._handleClick = this._onClick.bind(this);
@@ -163,7 +164,9 @@ export class FilterPanel {
       filters.appendChild(accordion);
     });
 
-    filters.appendChild(this._createApplyButton());
+    if (this._showApplyButton) {
+      filters.appendChild(this._createApplyButton());
+    }
 
     this._panel.appendChild(selected);
     this._panel.appendChild(filters);

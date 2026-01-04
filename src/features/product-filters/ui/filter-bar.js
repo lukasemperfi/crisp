@@ -1,6 +1,7 @@
 import { FilterPanel } from "@/features/product-filters/ui/filter-panel";
 
 export function FiltersBar(container, filterConfig, filterOptions) {
+  const { showAboutDresses = true, ...restOptions } = filterOptions;
   const _container =
     typeof container === "string"
       ? document.querySelector(container)
@@ -28,10 +29,14 @@ export function FiltersBar(container, filterConfig, filterOptions) {
   const filterPanel = new FilterPanel(
     filtersBar.querySelector(".filters-bar__filters"),
     filterConfig,
-    filterOptions
+    restOptions
   );
 
-  AboutDresses(filtersBar.querySelector(".filters-bar__category-description"));
+  if (showAboutDresses) {
+    AboutDresses(
+      filtersBar.querySelector(".filters-bar__category-description")
+    );
+  }
 
   const toggleBtn = filtersBar.querySelector(".filters-bar__toggle");
 
