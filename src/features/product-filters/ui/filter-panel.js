@@ -106,6 +106,10 @@ export class FilterPanel {
   _updateCheckbox(input) {
     const { name, value, checked } = input;
 
+    // Находим конфиг этого фильтра по ID
+    const configItem = this._config.find((i) => i.id === name);
+    const isSingleSelect = configItem?.singleSelect === true;
+
     if (!Array.isArray(this._state[name])) {
       this._state[name] = [];
     }
@@ -113,8 +117,20 @@ export class FilterPanel {
     const val = isNaN(value) ? value : Number(value);
 
     if (checked) {
-      if (!this._state[name].includes(val)) {
-        this._state[name].push(val);
+      if (isSingleSelect) {
+        const wrapper = this._container.querySelector(
+          `[data-filter-id="${name}"]`
+        );
+        if (wrapper) {
+          wrapper.querySelectorAll("input[type='checkbox']").forEach((i) => {
+            if (i !== input) i.checked = false;
+          });
+        }
+        this._state[name] = [val];
+      } else {
+        if (!this._state[name].includes(val)) {
+          this._state[name].push(val);
+        }
       }
     } else {
       this._state[name] = this._state[name].filter((v) => v !== val);

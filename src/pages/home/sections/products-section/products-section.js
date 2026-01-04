@@ -336,6 +336,7 @@ export const initProducts = async () => {
       options: mockFilters.tags,
       defaultValue: urlParams.tag || [],
       accordion: false,
+      singleSelect: true,
     },
   ];
 
