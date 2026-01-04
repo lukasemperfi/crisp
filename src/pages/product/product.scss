@@ -1,0 +1,12 @@
+@use "@/app/styles/index.scss" as *;
+@use "swiper/css";
+@use "@/pages/product/sections/product-content/product-content.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
+
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
