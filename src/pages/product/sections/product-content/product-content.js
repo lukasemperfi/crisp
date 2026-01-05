@@ -15,7 +15,7 @@ export const initProductContent = async () => {
 const mockProduct = {
   id: "12d7e202-e133-403d-8560-129bc987ed98",
   brand_id: 15,
-  name: "Dress Model 53",
+  name: "Women Black Checked Fit and Flare Dress",
   description: "High-quality fabric and modern design for your perfect look.",
   base_price: 238.69,
   discount_percent: 20,
@@ -26,7 +26,7 @@ const mockProduct = {
   is_popular: false,
   brand: {
     id: 15,
-    name: "Cooper",
+    name: "Fendi",
     created_at: "2025-12-28T13:49:23.703911+00:00",
   },
   images: [
