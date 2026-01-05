@@ -18,17 +18,14 @@ export const ProductDetailsCard = ({ container, product }) => {
   }
 
   mountPoint.innerHTML = "";
-  // --- create root ---
   const root = document.createElement("div");
   root.className = "product-details-card";
 
-  // --- prepare images ---
   const images = product.images
     ?.slice()
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((img) => img.image_path_jpg);
 
-  // --- HTML ---
   root.innerHTML = `
     <div class="product-details-card__col product-details-card__col_media">
       <div class="product-details-card__slider"></div>
@@ -71,7 +68,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
   root.className = "card-slider";
 
   root.innerHTML = `
-  <div class="card-slider__col-1">
+ 
     <div class="card-slider__thumbs thumbs-slider swiper">
       <div class="swiper-wrapper">
         ${images
@@ -87,7 +84,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
           .join("")}
       </div>
     </div>
-  </div>
+
 
     <div class="card-slider__main main-slider swiper">
       <div class="swiper-wrapper">
@@ -112,7 +109,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
     direction: "vertical",
     slidesPerView: "auto",
     spaceBetween: 12,
-
+    freeMode: true,
     watchSlidesProgress: true,
   });
 
