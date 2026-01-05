@@ -99,14 +99,13 @@ export class FilterPanel {
       this._updateRange(input);
     }
 
-    this._renderSelectedFilters(); // <== обновляем выбранные фильтры
+    this._renderSelectedFilters();
     this._emit("change");
   }
 
   _updateCheckbox(input) {
     const { name, value, checked } = input;
 
-    // Находим конфиг этого фильтра по ID
     const configItem = this._config.find((i) => i.id === name);
     const isSingleSelect = configItem?.singleSelect === true;
 
