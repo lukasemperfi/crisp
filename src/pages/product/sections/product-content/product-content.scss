@@ -2,6 +2,10 @@
 @use "@/app/styles/mixins" as mixins;
 
 .product-content {
+  &__wrapper {
+    padding-top: 52px;
+  }
+
   &__card {
     max-width: 1343px;
     margin: 0 auto;

@@ -26,11 +26,10 @@ export const ProductDetailsCard = ({ container, product }) => {
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((img) => img.image_path_jpg);
 
-  root.innerHTML = `
-    <div class="product-details-card__col product-details-card__col_media">
-      <div class="product-details-card__slider"></div>
-    </div>
+  console.log(images);
 
+  root.innerHTML = `
+    <div class="product-details-card__col product-details-card__col_media"></div>
     <div class="product-details-card__col product-details-card__col_info">
       info
     </div>
@@ -39,7 +38,7 @@ export const ProductDetailsCard = ({ container, product }) => {
   mountPoint.appendChild(root);
 
   const slider = ProductDetailsCardSlider({
-    container: root.querySelector(".product-details-card__slider"),
+    container: root.querySelector(".product-details-card__col_media"),
     images,
   });
 
@@ -85,22 +84,25 @@ function ProductDetailsCardSlider({ container, images = [] }) {
       </div>
     </div>
 
-
-    <div class="card-slider__main main-slider swiper">
-      <div class="swiper-wrapper">
-        ${images
-          .map(
-            (src) => `
-            <div class="swiper-slide">
-              <div class="main-slider__card">
-                <img class="main-slider__img" src="${src}" alt="thumbs image" />
-              </div>
-          </div>
-        `
-          )
-          .join("")}
+    <div class="card-slider__main-wrapper">
+      <div class="card-slider__main main-slider swiper">
+        <div class="swiper-wrapper">
+          ${images
+            .map(
+              (src) => `
+              <div class="swiper-slide">
+                <div class="main-slider__card">
+                  <img class="main-slider__img" src="${src}" alt="thumbs image" />
+                </div>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
       </div>
+      <div>social block</div>    
     </div>
+
   `;
 
   mountPoint.appendChild(root);
@@ -108,7 +110,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
   const thumbsSwiper = new Swiper(root.querySelector(".card-slider__thumbs"), {
     direction: "vertical",
     slidesPerView: "auto",
-    spaceBetween: 12,
+    spaceBetween: 10,
     freeMode: true,
     watchSlidesProgress: true,
   });
