@@ -153,6 +153,19 @@
     margin-bottom: 36px;
   }
 
+  &__summary {
+    display: flex;
+    gap: 25px;
+  }
+
+  &__total-price {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 26px;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
   .breadcrumbs {
     font-family: var(--second-family);
     font-weight: 400;

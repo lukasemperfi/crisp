@@ -1,8 +1,9 @@
 import Swiper from "swiper";
 import { Thumbs } from "swiper/modules";
-import { ColorFilter } from "../../../../features/product-filters/ui/color/color";
-import { SizeFilter } from "../../../../features/product-filters/ui/size/size";
-import { Quantity } from "../../../../shared/ui/quantity/quantity";
+import { ColorFilter } from "@/features/product-filters/ui/color/color";
+import { SizeFilter } from "@/features/product-filters/ui/size/size";
+import { Quantity } from "@/shared/ui/quantity/quantity";
+import { formatPrice } from "../../../../shared/helpers/format-price";
 
 const mockColorData = [
   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
@@ -160,6 +161,8 @@ const mockSizeData = [
   },
 ];
 
+const totalPrice = 90;
+
 export const ProductDetailsCard = ({ container, product }) => {
   const mountPoint =
     typeof container === "string"
@@ -198,7 +201,12 @@ export const ProductDetailsCard = ({ container, product }) => {
           <div class="product-details-card__filter-title">Quantity</div>
           <div class="product-details-card__quantity-container"></div>
         </div>
-        <div class="product-details-card__total-price">total price component</div>
+        <div class="product-details-card__total-price">
+          <div class="product-details-card__filter-title">Price Total</div>
+          <div class="product-details-card__total-price">${formatPrice(
+            totalPrice
+          )} EUR</div>
+        </div>
       </div>
       <div class="product-details-card__actions">
         add ti bug buttin and wishlist button
