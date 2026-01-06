@@ -212,7 +212,24 @@ export const ProductDetailsCard = ({ container, product }) => {
         <button class="add-to-cart-button button button_solid button_black button_fill product-details-card__btn">Add to Bag</button>
         <button class="add-to-wishlist-button  button button_outlined button_gray product-details-card__btn">${heartIcon()}Save</button>
       </div>
-      <div class="product-details-card__promo">promo component</div>
+      <div class="product-details-card__promo">
+          <div class="promo">
+            <div class="promo__item promo__item_free-shipping">
+              <div class="promo__item-title">${checkmarkIcon()}</div>
+              <div class="promo__item-text">Free shipping</div>
+            </div>
+            <div class="promo__item">
+              <div class="promo__item-title">Product code:</div>
+              <div class="promo__item-text">RFKK1024</div>
+            </div>
+            <div class="promo__item">
+              <div class="promo__item-title">Tags:</div>
+              <div class="promo__item-text">${product.tags
+                .map((tag) => tag.tag.name)
+                .join(", ")}</div>
+            </div>
+          </div>
+      </div>
     </div>
   `;
 
@@ -489,5 +506,13 @@ const heartIcon = (className = "") => {
   <path d="M12.2402 2.60034C14.5081 2.60056 16.2997 4.29505 16.2998 6.47632C16.2998 7.80511 15.6703 9.00544 14.5879 10.2683C13.5064 11.5301 11.9613 12.868 10.1094 14.4695L9.06543 15.3757L9 15.4324L8.93457 15.3757L7.89062 14.4695C6.03866 12.8679 4.49258 11.5301 3.41113 10.2683C2.32884 9.0055 1.7002 7.80505 1.7002 6.47632C1.7003 4.29492 3.49167 2.60036 5.75977 2.60034C7.00282 2.60034 8.196 3.13584 9 3.98315C9.804 3.13595 10.9973 2.60034 12.2402 2.60034ZM12.2402 4.17358C11.1676 4.17358 10.1264 4.83912 9.76172 5.7312L9.73633 5.7937H8.2627L8.2373 5.7312C7.87257 4.83922 6.83233 4.17358 5.75977 4.17358C4.37056 4.1736 3.33995 5.16278 3.33984 6.47632C3.33984 7.42994 3.88319 8.39192 4.87207 9.49487C5.85957 10.5963 7.27457 11.8203 8.98633 13.3015L8.99707 13.3103L9.00293 13.3054L9.00684 13.3015C10.7221 11.8203 12.1386 10.5962 13.127 9.49487C14.1167 8.39194 14.6602 7.42992 14.6602 6.47632C14.6601 5.1629 13.6292 4.17379 12.2402 4.17358Z" fill="#3F3F3F" stroke="#3F3F3F" stroke-width="0.2"/>
 </svg>
 
+  `;
+};
+
+const checkmarkIcon = (className = "") => {
+  return `
+  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.848633 2.84863L5.84863 7.84863L12.8486 0.848633" stroke="#828282" stroke-width="2.4" />
+  </svg>
   `;
 };

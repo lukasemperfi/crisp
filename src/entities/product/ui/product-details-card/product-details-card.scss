@@ -171,6 +171,7 @@
     display: flex;
     gap: 19px;
     max-width: 460px;
+    margin-bottom: 12px;
   }
 
   &__btn {
@@ -219,6 +220,27 @@
     &__icon {
       width: 51px;
       height: 15px;
+    }
+  }
+
+  .promo {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    gap: 19px;
+
+    &__item {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--gray-1);
+    }
+
+    &__item-title {
+      font-weight: 500;
     }
   }
 }
