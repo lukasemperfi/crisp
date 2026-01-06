@@ -9,6 +9,7 @@
 @use "@/shared/ui/skeleton/skeleton.scss" as *;
 @use "@/entities/product/ui/product-details-card/product-details-card.scss" as *;
 @use "@/features/product-filters/ui/color/color.scss" as *;
+@use "@/features/product-filters/ui/size/size.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

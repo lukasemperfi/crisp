@@ -3,7 +3,7 @@
 
 .product-details-card {
   display: flex;
-  gap: 68px;
+  gap: 67px;
 
   &__col {
     &_media {
@@ -138,6 +138,10 @@
     letter-spacing: 0.005em;
     color: var(--black);
     margin-bottom: 31px;
+  }
+
+  &__color {
+    margin-bottom: 22px;
   }
 
   .breadcrumbs {

@@ -1,6 +1,7 @@
 import Swiper from "swiper";
 import { Thumbs } from "swiper/modules";
 import { ColorFilter } from "../../../../features/product-filters/ui/color/color";
+import { SizeFilter } from "../../../../features/product-filters/ui/size/size";
 
 const mockColorData = [
   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
@@ -13,6 +14,149 @@ const mockColorData = [
   { id: 8, name: "Soft Grey", hex_code: "#808080", available: true },
   { id: 9, name: "Violet", hex_code: "#8F00FF", available: true },
   { id: 10, name: "Orange", hex_code: "#FFA500", available: true },
+];
+
+const mockSizeData = [
+  {
+    id: 1,
+    name: "w26",
+    sort_order: 10,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 2,
+    name: "w27",
+    sort_order: 20,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 3,
+    name: "w28",
+    sort_order: 30,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 4,
+    name: "w29",
+    sort_order: 40,
+    availible: false,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 5,
+    name: "w30",
+    sort_order: 50,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 6,
+    name: "w31",
+    sort_order: 60,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 7,
+    name: "w32",
+    sort_order: 70,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 8,
+    name: "w33",
+    sort_order: 80,
+    availible: false,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 9,
+    name: "w34",
+    sort_order: 90,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 10,
+    name: "w35",
+    sort_order: 100,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 11,
+    name: "w36",
+    sort_order: 110,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 12,
+    name: "w38",
+    sort_order: 120,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 13,
+    name: "w40",
+    sort_order: 130,
+    availible: false,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 14,
+    name: "w42",
+    sort_order: 140,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 15,
+    name: "w44",
+    sort_order: 150,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 16,
+    name: "w46",
+    sort_order: 160,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 17,
+    name: "w48",
+    sort_order: 170,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 18,
+    name: "w50",
+    sort_order: 180,
+    availible: false,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 19,
+    name: "w52",
+    sort_order: 190,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
+  {
+    id: 20,
+    name: "w54",
+    sort_order: 200,
+    availible: true,
+    created_at: "2025-12-28T13:49:23Z",
+  },
 ];
 
 export const ProductDetailsCard = ({ container, product }) => {
@@ -74,6 +218,11 @@ export const ProductDetailsCard = ({ container, product }) => {
   ColorFilter(root.querySelector(".product-details-card__color"), {
     colors: mockColorData,
     title: "Select Color",
+    showTitle: true,
+  });
+  SizeFilter(root.querySelector(".product-details-card__size"), {
+    sizes: mockSizeData,
+    title: "Select size (Inches)",
     showTitle: true,
   });
 };
