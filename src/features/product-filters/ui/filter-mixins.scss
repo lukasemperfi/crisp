@@ -1,0 +1,8 @@
+@mixin filter-title-style {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 13px;
+}

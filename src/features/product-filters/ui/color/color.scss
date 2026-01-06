@@ -1,0 +1,66 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+@use "@/features/product-filters/ui/filter-mixins" as filter-mixins;
+
+.color-filter {
+  $selected-checkbox-border-width: 3px;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    @include filter-mixins.filter-title-style;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: $selected-checkbox-border-width;
+  }
+
+  &__item {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    user-select: none;
+    padding: 3px;
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked + .color-filter__box {
+      box-shadow: 0 0 0 $selected-checkbox-border-width var(--white),
+        0 0 0 5px var(--black);
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    width: functions.fluidValue(15px, 17px, 320px, 1920px);
+    height: functions.fluidValue(15px, 17px, 320px, 1920px);
+    box-shadow: 0 0 0 3px transparent, 0 0 0 4px transparent;
+    transition: box-shadow 0.2s;
+
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: 0 0 0 3px var(--white), 0 0 0 4px var(--divider);
+      }
+    }
+
+    &_selected-secondary {
+      box-shadow: 0 0 0 3px var(--white), 0 0 0 4px var(--divider);
+    }
+
+    &_is-white {
+      border: 1px solid var(--gray-1);
+    }
+  }
+}

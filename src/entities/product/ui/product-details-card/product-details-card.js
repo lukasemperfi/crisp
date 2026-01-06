@@ -1,5 +1,19 @@
 import Swiper from "swiper";
 import { Thumbs } from "swiper/modules";
+import { ColorFilter } from "../../../../features/product-filters/ui/color/color";
+
+const mockColorData = [
+  { id: 1, name: "Red", hex_code: "#FF0000", available: true },
+  { id: 2, name: "Deep Blue", hex_code: "#0000FF", available: true },
+  { id: 3, name: "Emerald", hex_code: "#50C878", available: true },
+  { id: 4, name: "White", hex_code: "#FFFFFF", available: true },
+  { id: 5, name: "Black", hex_code: "#000000", available: true },
+  { id: 6, name: "Golden", hex_code: "#FFD700", available: false },
+  { id: 7, name: "Hot Pink", hex_code: "#FF69B4", available: true },
+  { id: 8, name: "Soft Grey", hex_code: "#808080", available: true },
+  { id: 9, name: "Violet", hex_code: "#8F00FF", available: true },
+  { id: 10, name: "Orange", hex_code: "#FFA500", available: true },
+];
 
 export const ProductDetailsCard = ({ container, product }) => {
   const mountPoint =
@@ -57,6 +71,11 @@ export const ProductDetailsCard = ({ container, product }) => {
     root.querySelector(".product-details-card__brand"),
     product.brand?.name || ""
   );
+  ColorFilter(root.querySelector(".product-details-card__color"), {
+    colors: mockColorData,
+    title: "Select Color",
+    showTitle: true,
+  });
 };
 
 function ProductDetailsCardSlider({ container, images = [] }) {
