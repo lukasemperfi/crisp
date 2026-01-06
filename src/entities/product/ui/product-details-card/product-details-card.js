@@ -2,6 +2,7 @@ import Swiper from "swiper";
 import { Thumbs } from "swiper/modules";
 import { ColorFilter } from "../../../../features/product-filters/ui/color/color";
 import { SizeFilter } from "../../../../features/product-filters/ui/size/size";
+import { Quantity } from "../../../../shared/ui/quantity/quantity";
 
 const mockColorData = [
   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
@@ -193,7 +194,7 @@ export const ProductDetailsCard = ({ container, product }) => {
       <div class="product-details-card__color">color component</div>
       <div class="product-details-card__size">size component</div>
       <div class="product-details-card__summary">
-        <div class="product-details-card__quntity">quntity component</div>
+        <div class="product-details-card__quantity">quntity component</div>
         <div class="product-details-card__total-price">total price component</div>
       </div>
       <div class="product-details-card__actions">
@@ -224,6 +225,9 @@ export const ProductDetailsCard = ({ container, product }) => {
     sizes: mockSizeData,
     title: "Select size (Inches)",
     showTitle: true,
+  });
+  Quantity(root.querySelector(".product-details-card__quantity"), {
+    onChange: (obj) => console.log(obj),
   });
 };
 

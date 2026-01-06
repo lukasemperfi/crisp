@@ -1,0 +1,58 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+@use "@/features/product-filters/ui/filter-mixins" as filter-mixins;
+
+.quantity {
+  $transition-duration: 0.3s;
+
+  border: 1px solid var(--divider);
+  width: 119px;
+  height: 43px;
+  background-color: var(--white);
+  display: flex;
+  transition: border-color $transition-duration;
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: var(--gray-1);
+    }
+  }
+
+  &__decrease,
+  &__increase {
+    width: 41px;
+    height: 41px;
+    flex: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    transition: $transition-duration;
+
+    rect {
+      transition: $transition-duration;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--light-blue-hover);
+
+        rect {
+          fill: var(--gray-1);
+        }
+      }
+    }
+  }
+
+  &__input {
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: var(--black);
+
+    @include mixins.reset-autofill();
+  }
+}

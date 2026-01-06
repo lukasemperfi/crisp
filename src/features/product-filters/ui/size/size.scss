@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
 @use "@/features/product-filters/ui/filter-mixins" as filter-mixins;
@@ -95,10 +96,12 @@
         height: 100%;
         background: linear-gradient(
           45deg,
-          transparent calc(50% - #{$checkbox-border-width / 2}),
-          $checkbox-border-color calc(50% - #{$checkbox-border-width / 2}),
-          $checkbox-border-color calc(50% + #{$checkbox-border-width / 2}),
-          transparent calc(50% + #{$checkbox-border-width / 2})
+          transparent calc(50% - #{math.div($checkbox-border-width, 2)}),
+          $checkbox-border-color
+            calc(50% - #{math.div($checkbox-border-width, 2)}),
+          $checkbox-border-color
+            calc(50% + #{math.div($checkbox-border-width, 2)}),
+          transparent calc(50% + #{math.div($checkbox-border-width, 2)})
         );
       }
     }
