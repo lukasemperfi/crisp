@@ -188,13 +188,16 @@ export const ProductDetailsCard = ({ container, product }) => {
   root.innerHTML = `
     <div class="product-details-card__col product-details-card__col_media"></div>
     <div class="product-details-card__col product-details-card__col_info">
-      <div class="product-details-card__breadcrumbs">Breadcrumbs</div>
+      <div class="product-details-card__breadcrumbs"></div>
       <div class="product-details-card__brand"></div>
       <div class="product-details-card__title">${product.name}</div>
-      <div class="product-details-card__color">color component</div>
-      <div class="product-details-card__size">size component</div>
+      <div class="product-details-card__color"></div>
+      <div class="product-details-card__size"></div>
       <div class="product-details-card__summary">
-        <div class="product-details-card__quantity">quntity component</div>
+        <div class="product-details-card__quantity">
+          <div class="product-details-card__filter-title">Quantity</div>
+          <div class="product-details-card__quantity-container"></div>
+        </div>
         <div class="product-details-card__total-price">total price component</div>
       </div>
       <div class="product-details-card__actions">
@@ -226,7 +229,7 @@ export const ProductDetailsCard = ({ container, product }) => {
     title: "Select size (Inches)",
     showTitle: true,
   });
-  Quantity(root.querySelector(".product-details-card__quantity"), {
+  Quantity(root.querySelector(".product-details-card__quantity-container"), {
     onChange: (obj) => console.log(obj),
   });
 };

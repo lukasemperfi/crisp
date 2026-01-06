@@ -1,5 +1,6 @@
 @use "@/app/styles/functions" as functions;
 @use "@/app/styles/mixins" as mixins;
+@use "@/features/product-filters/ui/filter-mixins" as filter-mixins;
 
 .product-details-card {
   display: flex;
@@ -126,6 +127,10 @@
     }
   }
 
+  &__filter-title {
+    @include filter-mixins.filter-title-style;
+  }
+
   &__breadcrumbs {
     margin-bottom: 21px;
   }
@@ -142,6 +147,10 @@
 
   &__color {
     margin-bottom: 22px;
+  }
+
+  &__size {
+    margin-bottom: 36px;
   }
 
   .breadcrumbs {
