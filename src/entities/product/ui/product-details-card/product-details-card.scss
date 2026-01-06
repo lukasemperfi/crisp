@@ -156,6 +156,7 @@
   &__summary {
     display: flex;
     gap: 25px;
+    margin-bottom: 38px;
   }
 
   &__total-price {
@@ -164,6 +165,40 @@
     font-size: 26px;
     text-transform: uppercase;
     color: var(--black);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 19px;
+    max-width: 460px;
+  }
+
+  &__btn {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    flex: 1;
+    padding-inline: 0;
+  }
+
+  .add-to-cart-button {
+    color: var(--white);
+    border: 2px solid var(--black);
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--main-color-2);
+        border-color: var(--main-color-2);
+      }
+    }
+  }
+
+  .add-to-wishlist-button {
+    gap: 5px;
+    color: var(--black-2) !important;
   }
 
   .breadcrumbs {

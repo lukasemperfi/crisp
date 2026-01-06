@@ -13,6 +13,13 @@
   padding-inline: 46px;
   text-transform: uppercase;
 
+  &:disabled,
+  &[aria-disabled="true"],
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
   &_solid {
     background-color: var(--black);
     color: var(--white);
