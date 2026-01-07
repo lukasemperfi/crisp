@@ -69,3 +69,29 @@
     height: functions.fluidValue(30px, 41px, 470px, 1920px);
   }
 }
+
+.slider-nav-bullets {
+  &.swiper-pagination {
+    display: flex;
+    gap: 8px;
+    height: max-content;
+    align-items: center;
+  }
+
+  .swiper-pagination-bullet {
+    display: inline-flex;
+    box-shadow: 0 0 0 1px var(--gray-1);
+
+    width: functions.fluidValue(11px, 18px, 320, 1920px);
+    height: functions.fluidValue(11px, 18px, 320, 1920px);
+    transition: none;
+    background-color: transparent;
+  }
+
+  .swiper-pagination-bullet-active {
+    transition: transform 0.2s;
+    transform: scale(1.2);
+    background-color: var(--black);
+    box-shadow: 0 0 0 1px var(--black);
+  }
+}

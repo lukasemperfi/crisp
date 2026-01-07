@@ -1,5 +1,5 @@
 import Swiper from "swiper";
-import { Thumbs } from "swiper/modules";
+import { Thumbs, Pagination } from "swiper/modules";
 import { ColorFilter } from "@/features/product-filters/ui/color/color";
 import { SizeFilter } from "@/features/product-filters/ui/size/size";
 import { Quantity } from "@/shared/ui/quantity/quantity";
@@ -310,8 +310,11 @@ function ProductDetailsCardSlider({ container, images = [] }) {
             <span class="main-slider__text-zoom">Zoom</span>
         </button>
       </div>
-      <div class="card-slider__social-block">
-        ${createSocialBlock()}
+      <div class="card-slider__main-wrapper-bottom">
+        <div class="card-slider__main-wrapper-social-block">
+          ${createSocialBlock()}
+        </div>        
+        <div class="swiper-pagination main-slider__nav-bullets slider-nav-bullets"></div>
       </div>    
     </div>
 
@@ -328,10 +331,17 @@ function ProductDetailsCardSlider({ container, images = [] }) {
   });
 
   const mainSwiper = new Swiper(root.querySelector(".card-slider__main"), {
-    modules: [Thumbs],
+    modules: [Thumbs, Pagination],
     spaceBetween: 10,
     thumbs: {
       swiper: thumbsSwiper,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return `<span class="${className}"></span>`;
+      },
     },
   });
 
