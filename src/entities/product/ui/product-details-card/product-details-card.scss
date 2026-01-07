@@ -164,9 +164,7 @@
   }
 
   .social-block {
-    align-self: center;
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 12px;
 
@@ -317,6 +315,14 @@
 
     &__filter-title {
       @include filter-mixins.filter-title-style;
+    }
+
+    &__social-block {
+      display: none;
+
+      @include mixins.respond-to($bp-tablet) {
+        display: flex;
+      }
     }
   }
 

@@ -214,6 +214,7 @@ export const ProductDetailsCard = ({ container, product }) => {
           <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon()}Save</button>
         </div>
         <div class="info__promo promo">
+              ${createSocialBlock("info__social-block")}
               <div class="promo__item promo__item_free-shipping">
                 <div class="promo__item-title">${checkmarkIcon()}</div>
                 <div class="promo__item-text">Free shipping</div>
@@ -401,9 +402,9 @@ function Brand(container, brandName) {
   container.innerHTML = template;
 }
 
-const createSocialBlock = () => {
+const createSocialBlock = (className = "") => {
   return `
-          <div class="social-block">
+          <div class="social-block ${className}">
           <span class="social-block__text">Share:</span>
           <a href="#" class="social-block__link">${faceBookIcon()}</a>
           <a href="#" class="social-block__link">${twitterIcon()}</a>
