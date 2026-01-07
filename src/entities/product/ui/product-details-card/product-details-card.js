@@ -246,22 +246,9 @@ export const ProductDetailsCard = ({ container, product }) => {
   Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
   Brand(root.querySelector(".info__brand"), product.brand?.name || "");
 
-  // ColorFilter(root.querySelector(".info__color"), {
-  //   colors: mockColorData,
-  //   title: "Select Color",
-  //   showTitle: true,
-  // });
-
-  ColorFilter(root.querySelector(".info__color"), {
-    colors: mockColorData,
-    title: "Select Color",
-    showTitle: true,
-    maxVisibleColors: 3,
-  });
-
   const tabletQuery = window.matchMedia("(max-width: 1380px)");
 
-  const renderSizeSection = (e) => {
+  const renderFiltersSection = (e) => {
     const sizeContainer = root.querySelector(".info__size");
     if (!sizeContainer) {
       return;
@@ -270,6 +257,13 @@ export const ProductDetailsCard = ({ container, product }) => {
     sizeContainer.innerHTML = "";
 
     if (e.matches) {
+      ColorFilter(root.querySelector(".info__color"), {
+        colors: mockColorData,
+        title: "Select Color",
+        showTitle: true,
+        maxVisibleColors: 3,
+      });
+
       const sizeOptions = mockSizeData.map((size) => ({
         label: size.name,
         value: String(size.id),
@@ -280,6 +274,12 @@ export const ProductDetailsCard = ({ container, product }) => {
         defaultValue: sizeOptions[0]?.value,
       });
     } else {
+      ColorFilter(root.querySelector(".info__color"), {
+        colors: mockColorData,
+        title: "Select Color",
+        showTitle: true,
+      });
+
       SizeFilter(sizeContainer, {
         sizes: mockSizeData,
         title: "Select size (Inches)",
@@ -288,8 +288,8 @@ export const ProductDetailsCard = ({ container, product }) => {
     }
   };
 
-  tabletQuery.addEventListener("change", renderSizeSection);
-  renderSizeSection(tabletQuery);
+  tabletQuery.addEventListener("change", renderFiltersSection);
+  renderFiltersSection(tabletQuery);
 
   Quantity(root.querySelector(".info__quantity-container"), {
     onChange: (obj) => console.log(obj),

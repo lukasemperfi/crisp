@@ -17,7 +17,6 @@
   @include mixins.respond-to($bp-mobile) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: max-content max-content max-content;
-    row-gap: 20px;
     grid-template-areas:
       "breadcrumbs"
       "media"
@@ -28,12 +27,20 @@
     // width: 54%;
     max-height: 833px;
     grid-area: media;
+
+    @include mixins.respond-to($bp-mobile) {
+      margin-inline: -14px;
+    }
   }
 
   &__breadcrumbs {
     padding-top: 15px;
     padding-bottom: 21px;
     grid-area: breadcrumbs;
+
+    @include mixins.respond-to($bp-tablet) {
+      padding-block: 12px;
+    }
   }
 
   &__info {
@@ -91,6 +98,7 @@
 
       @include mixins.respond-to($bp-tablet) {
         width: 100%;
+        padding: 0;
       }
 
       .main-slider {
@@ -102,6 +110,11 @@
         &__card {
           width: 100%;
           height: 100%;
+
+          @include mixins.respond-to($bp-mobile) {
+            height: auto;
+            aspect-ratio: 320 / 255;
+          }
         }
 
         &__nav-bullets {
@@ -124,6 +137,10 @@
           align-items: center;
           justify-content: center;
           gap: 7px;
+
+          @include mixins.respond-to($bp-mobile) {
+            display: none;
+          }
         }
 
         &__text-zoom {
@@ -139,7 +156,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-top: 15px;
+        padding-top: functions.fluidValue(11px, 15px, 320px, 1920px);
       }
     }
 
@@ -179,10 +196,14 @@
 
   .info {
     &__header {
-      margin-bottom: 31px;
+      margin-bottom: functions.fluidValue(18px, 31px, 320px, 1920px);
 
       @include mixins.respond-to($bp-tablet) {
         display: flex;
+      }
+
+      @include mixins.respond-to($bp-mobile) {
+        padding-top: 9px;
       }
     }
 
@@ -206,11 +227,11 @@
     }
 
     &__color {
-      margin-bottom: 22px;
+      margin-bottom: functions.fluidValue(18px, 22px, 320px, 1920px);
     }
 
     &__size {
-      margin-bottom: 36px;
+      margin-bottom: functions.fluidValue(18px, 36px, 320px, 1920px);
     }
 
     &__grid {
@@ -218,7 +239,7 @@
       grid-template-columns: 1fr 1fr;
 
       @include mixins.respond-to($bp-tablet) {
-        gap: 19px;
+        gap: functions.fluidValue(14px, 19px, 320px, 1920px);
       }
     }
 
@@ -226,12 +247,13 @@
       display: grid;
       grid-template-columns: max-content 1fr;
       gap: 25px;
-      margin-bottom: 38px;
+      margin-bottom: functions.fluidValue(18px, 38px, 320px, 1920px);
       grid-column: 1/3;
 
       @include mixins.respond-to($bp-tablet) {
         grid-template-columns: subgrid;
         gap: inherit;
+        margin-bottom: 0;
       }
     }
 
@@ -255,6 +277,7 @@
         grid-template-columns: subgrid;
         max-width: 100%;
         gap: inherit;
+        margin-bottom: 0;
       }
     }
 
@@ -288,7 +311,7 @@
     &__btn {
       font-family: var(--font-family);
       font-weight: 500;
-      font-size: 14px;
+      font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
       letter-spacing: 0.04em;
       text-transform: uppercase;
       text-align: center;
@@ -331,19 +354,26 @@
     font-weight: 400;
     font-size: 14px;
     color: var(--gray-1);
+
+    @include mixins.respond-to(sm) {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 10px;
+      color: var(--gray-1);
+    }
   }
 
   .brand {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 75px;
-    height: 35px;
+    width: functions.fluidValue(48px, 75px, 320px, 1920px);
+    height: functions.fluidValue(22px, 35px, 320px, 1920px);
     background-color: var(--light-blue-hover);
 
     &__icon {
-      width: 51px;
-      height: 15px;
+      width: functions.fluidValue(33px, 51px, 320px, 1920px);
+      height: functions.fluidValue(9px, 15px, 320px, 1920px);
     }
   }
 }

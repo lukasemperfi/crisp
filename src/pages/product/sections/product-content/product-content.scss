@@ -2,8 +2,13 @@
 @use "@/app/styles/mixins" as mixins;
 
 .product-content {
+  $bp-mobile: 768px;
   &__wrapper {
-    padding-top: 52px;
+    padding-top: functions.fluidValue(20px, 52px, $bp-mobile, 1920px);
+
+    @include mixins.respond-to($bp-mobile) {
+      padding: 0;
+    }
   }
 
   &__card {
@@ -13,6 +18,4 @@
 
   &__tabs {
   }
-}
-.page-container-1920 {
 }

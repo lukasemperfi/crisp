@@ -82,8 +82,8 @@
     display: inline-flex;
     box-shadow: 0 0 0 1px var(--gray-1);
 
-    width: functions.fluidValue(11px, 18px, 320, 1920px);
-    height: functions.fluidValue(11px, 18px, 320, 1920px);
+    width: functions.fluidValue(9px, 18px, 320, 1920px);
+    height: functions.fluidValue(9px, 18px, 320, 1920px);
     transition: none;
     background-color: transparent;
   }
