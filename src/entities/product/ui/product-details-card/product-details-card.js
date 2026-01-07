@@ -4,6 +4,7 @@ import { ColorFilter } from "@/features/product-filters/ui/color/color";
 import { SizeFilter } from "@/features/product-filters/ui/size/size";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "../../../../shared/helpers/format-price";
+import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 
 const mockColorData = [
   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
@@ -244,16 +245,44 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
   Brand(root.querySelector(".info__brand"), product.brand?.name || "");
+
   ColorFilter(root.querySelector(".info__color"), {
     colors: mockColorData,
     title: "Select Color",
     showTitle: true,
   });
-  SizeFilter(root.querySelector(".info__size"), {
-    sizes: mockSizeData,
-    title: "Select size (Inches)",
-    showTitle: true,
-  });
+  const tabletQuery = window.matchMedia("(max-width: 1380px)");
+
+  const renderSizeSection = (e) => {
+    const sizeContainer = root.querySelector(".info__size");
+    if (!sizeContainer) {
+      return;
+    }
+
+    sizeContainer.innerHTML = "";
+
+    if (e.matches) {
+      const sizeOptions = mockSizeData.map((size) => ({
+        label: size.name,
+        value: String(size.id),
+        disabled: !size.availible,
+      }));
+      Dropdown(sizeContainer, {
+        options: sizeOptions,
+        defaultValue: sizeOptions[0]?.value,
+      });
+    } else {
+      SizeFilter(sizeContainer, {
+        sizes: mockSizeData,
+        title: "Select size (Inches)",
+        showTitle: true,
+      });
+    }
+  };
+
+  tabletQuery.addEventListener("change", renderSizeSection);
+  renderSizeSection(tabletQuery);
+
   Quantity(root.querySelector(".info__quantity-container"), {
     onChange: (obj) => console.log(obj),
   });

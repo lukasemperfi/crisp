@@ -48,7 +48,15 @@ export function Dropdown(container, props = {}) {
         ${name ? `name="${name}"` : ""}
       >
         ${options
-          .map((o) => `<option value="${o.value}">${o.label}</option>`)
+          .map(
+            (o) => `
+            <option 
+              value="${o.value}" 
+              ${o.disabled ? "disabled" : ""}
+            >
+              ${o.label}
+            </option>`
+          )
           .join("")}
       </select>
 
@@ -63,8 +71,11 @@ export function Dropdown(container, props = {}) {
             (o) => `
               <button
                 type="button"
-                class="dropdown__option"
+                class="dropdown__option ${
+                  o.disabled ? "dropdown__option_is-disabled" : ""
+                }"
                 data-value="${o.value}"
+                ${o.disabled ? "disabled" : ""}
               >
                 ${o.label}
               </button>
@@ -81,9 +92,13 @@ export function Dropdown(container, props = {}) {
   const valueEl = root.querySelector(".dropdown__value");
   const menu = root.querySelector(".dropdown__menu");
 
-  const hasDefault = options.some((o) => o.value === defaultValue);
+  // Ищем дефолтное значение только среди НЕ заблокированных опций
+  const availableOptions = options.filter((o) => !o.disabled);
+  const hasDefault = availableOptions.some((o) => o.value === defaultValue);
 
-  const initialValue = hasDefault ? defaultValue : options[0]?.value ?? "";
+  const initialValue = hasDefault
+    ? defaultValue
+    : availableOptions[0]?.value ?? "";
 
   setValue(initialValue, false);
 
@@ -91,7 +106,8 @@ export function Dropdown(container, props = {}) {
 
   menu.addEventListener("click", (e) => {
     const option = e.target.closest(".dropdown__option");
-    if (!option) return;
+    // Если опция не найдена или она disabled — ничего не делаем
+    if (!option || option.hasAttribute("disabled")) return;
 
     setValue(option.dataset.value);
     close();
