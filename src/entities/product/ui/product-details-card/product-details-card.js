@@ -191,45 +191,46 @@ export const ProductDetailsCard = ({ container, product }) => {
   root.innerHTML = `
     <div class="product-details-card__media"></div>
     <div class="product-details-card__breadcrumbs"></div>
-    <div class="product-details-card__info">
-      <div class="product-details-card__brand"></div>
-      <div class="product-details-card__title">${product.name}</div>
-      <div class="product-details-card__color"></div>
-      <div class="product-details-card__size"></div>
-      <div class="product-details-card__summary">
-        <div class="product-details-card__quantity">
-          <div class="product-details-card__filter-title">Quantity</div>
-          <div class="product-details-card__quantity-container"></div>
-        </div>
-        <div class="product-details-card__total-price">
-          <div class="product-details-card__filter-title">Price Total</div>
-          <div class="product-details-card__total-price">${formatPrice(
-            totalPrice
-          )} EUR</div>
-        </div>
+    <div class="product-details-card__info info">
+      <div class="info__header">
+        <div class="info__brand"></div>
+        <div class="info__title">${product.name}</div>
       </div>
-      <div class="product-details-card__actions">
-        <button class="add-to-cart-button button button_solid button_black button_fill product-details-card__btn">Add to Bag</button>
-        <button class="add-to-wishlist-button  button button_outlined button_gray product-details-card__btn">${heartIcon()}Save</button>
-      </div>
-      <div class="product-details-card__promo">
-          <div class="promo">
-            <div class="promo__item promo__item_free-shipping">
-              <div class="promo__item-title">${checkmarkIcon()}</div>
-              <div class="promo__item-text">Free shipping</div>
-            </div>
-            <div class="promo__item">
-              <div class="promo__item-title">Product code:</div>
-              <div class="promo__item-text">RFKK1024</div>
-            </div>
-            <div class="promo__item">
-              <div class="promo__item-title">Tags:</div>
-              <div class="promo__item-text">${product.tags
-                .map((tag) => tag.tag.name)
-                .join(", ")}</div>
-            </div>
+      <div class="info__color"></div>
+      <div class="info__size"></div>
+      <div class="info__grid">
+        <div class="info__summary">
+          <div class="info__quantity">
+            <div class="info__filter-title">Quantity</div>
+            <div class="info__quantity-container"></div>
           </div>
+          <div class="info__total-price">
+            <div class="info__filter-title">Price Total</div>
+            <div class="info__total-price">${formatPrice(totalPrice)} EUR</div>
+          </div>
+        </div>
+        <div class="info__actions">
+          <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon()}Save</button>
+        </div>
+        <div class="info__promo promo">
+              <div class="promo__item promo__item_free-shipping">
+                <div class="promo__item-title">${checkmarkIcon()}</div>
+                <div class="promo__item-text">Free shipping</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Product code:</div>
+                <div class="promo__item-text">RFKK1024</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Tags:</div>
+                <div class="promo__item-text">${product.tags
+                  .map((tag) => tag.tag.name)
+                  .join(", ")}</div>
+              </div>
+        </div>      
       </div>
+
     </div>
   `;
 
@@ -241,21 +242,18 @@ export const ProductDetailsCard = ({ container, product }) => {
   });
 
   Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
-  Brand(
-    root.querySelector(".product-details-card__brand"),
-    product.brand?.name || ""
-  );
-  ColorFilter(root.querySelector(".product-details-card__color"), {
+  Brand(root.querySelector(".info__brand"), product.brand?.name || "");
+  ColorFilter(root.querySelector(".info__color"), {
     colors: mockColorData,
     title: "Select Color",
     showTitle: true,
   });
-  SizeFilter(root.querySelector(".product-details-card__size"), {
+  SizeFilter(root.querySelector(".info__size"), {
     sizes: mockSizeData,
     title: "Select size (Inches)",
     showTitle: true,
   });
-  Quantity(root.querySelector(".product-details-card__quantity-container"), {
+  Quantity(root.querySelector(".info__quantity-container"), {
     onChange: (obj) => console.log(obj),
   });
 };
