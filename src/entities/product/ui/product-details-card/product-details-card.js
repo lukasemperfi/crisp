@@ -189,9 +189,9 @@ export const ProductDetailsCard = ({ container, product }) => {
     .map((img) => img.image_path_jpg);
 
   root.innerHTML = `
-    <div class="product-details-card__col product-details-card__col_media"></div>
-    <div class="product-details-card__col product-details-card__col_info">
-      <div class="product-details-card__breadcrumbs"></div>
+    <div class="product-details-card__media"></div>
+    <div class="product-details-card__breadcrumbs"></div>
+    <div class="product-details-card__info">
       <div class="product-details-card__brand"></div>
       <div class="product-details-card__title">${product.name}</div>
       <div class="product-details-card__color"></div>
@@ -236,7 +236,7 @@ export const ProductDetailsCard = ({ container, product }) => {
   mountPoint.appendChild(root);
 
   ProductDetailsCardSlider({
-    container: root.querySelector(".product-details-card__col_media"),
+    container: root.querySelector(".product-details-card__media"),
     images,
   });
 
