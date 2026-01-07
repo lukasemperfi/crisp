@@ -246,11 +246,19 @@ export const ProductDetailsCard = ({ container, product }) => {
   Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
   Brand(root.querySelector(".info__brand"), product.brand?.name || "");
 
+  // ColorFilter(root.querySelector(".info__color"), {
+  //   colors: mockColorData,
+  //   title: "Select Color",
+  //   showTitle: true,
+  // });
+
   ColorFilter(root.querySelector(".info__color"), {
     colors: mockColorData,
     title: "Select Color",
     showTitle: true,
+    maxVisibleColors: 3,
   });
+
   const tabletQuery = window.matchMedia("(max-width: 1380px)");
 
   const renderSizeSection = (e) => {
