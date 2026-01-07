@@ -16,3 +16,22 @@
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
+
+.product-page-contacts-btn {
+  position: fixed;
+  right: 0;
+  top: functions.fluidValue(190px, 310px, 320px, 1920px);
+  padding-inline: 0;
+  z-index: 100;
+  transform: rotate(-90deg);
+  transform-origin: right bottom;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--white);
+  width: functions.fluidValue(104px, 200px, 320px, 1920px);
+  height: functions.fluidValue(35px, 40px, 320px, 1920px);
+}

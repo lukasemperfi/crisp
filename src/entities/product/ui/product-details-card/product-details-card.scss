@@ -4,7 +4,7 @@
 
 .product-details-card {
   $bp-tablet: 1380px;
-  $bp-mobile: 768px;
+  $bp-mobile: 767px;
 
   display: grid;
   grid-template-columns: 54% 1fr;
@@ -27,8 +27,9 @@
     // width: 54%;
     max-height: 833px;
     grid-area: media;
+    margin-inline: 0px;
 
-    @include mixins.respond-to($bp-mobile) {
+    @media (max-width: $bp-mobile) {
       margin-inline: -14px;
     }
   }
@@ -200,6 +201,8 @@
 
       @include mixins.respond-to($bp-tablet) {
         display: flex;
+        justify-content: space-between;
+        gap: 10px;
       }
 
       @include mixins.respond-to($bp-mobile) {
