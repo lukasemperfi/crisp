@@ -6,8 +6,6 @@ const stringifyOptions = {
   skipNull: true,
 };
 
-// --- URL HELPERS ---
-
 export const parseUrlParams = (query) => {
   const parsed = queryString.parse(query, {
     arrayFormat: "comma",
@@ -49,7 +47,6 @@ export const stringifyUrlParams = (params) => {
 export const removeDefaultParams = (params, defaults) => {
   const cleaned = { ...params };
   Object.keys(defaults).forEach((key) => {
-    // Используем JSON.stringify для корректного сравнения массивов и объектов
     if (JSON.stringify(cleaned[key]) === JSON.stringify(defaults[key])) {
       delete cleaned[key];
     }
@@ -57,15 +54,7 @@ export const removeDefaultParams = (params, defaults) => {
   return cleaned;
 };
 
-// --- CORE LOGIC ---
-
-export const applyNewParams = ({
-  queryState, // База: { limit, sort }
-  newFilters, // Новые фильтры из FiltersBar или текущие urlParams при смене сортировки
-  defaults, // DEFAULT_QUERY
-}) => {
-  // Твоя логика: фильтры из newFilters полностью заменяют старые,
-  // но системные параметры (limit, sort) берутся из queryState
+export const applyNewParams = ({ queryState, newFilters, defaults }) => {
   const newState = {
     limit: queryState.limit,
     sort: queryState.sort,
@@ -89,7 +78,6 @@ export const createProductLoader = ({
   defaultParams = {},
   onUpdateUrl = null,
 }) => {
-  // Состояние страницы в замыкании для переиспользования
   let currentPage = initialParams.page ?? defaultParams.page ?? 0;
 
   return async (productListInstance) => {

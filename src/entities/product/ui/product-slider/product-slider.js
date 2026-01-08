@@ -1,21 +1,19 @@
-// universal-product-slider.js
 import { renderSlider } from "@/shared/ui/slider/slider";
 import { createProductCard } from "@/entities/product/ui/product-card/product-card";
 import { Navigation } from "swiper/modules";
 import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { createPaginationController } from "@/entities/product/model/pagination-controller";
 
-const BREAKPOINT = 470; // точка переключения mobile/desktop
+const BREAKPOINT = 470; 
 
 export const initProductSlider = async ({
   containerSelector,
-  fetchProducts, // async функция, возвращает { data: [], count: number }
+  fetchProducts, 
   totalLimit = 16,
   pageSizeMobile = 4,
   swiperOptions = {},
-  navSelectors = {}, // { prevEl, nextEl }
+  navSelectors = {}, 
 }) => {
-  // Получаем данные
   const { data: products } = await fetchProducts({ limit: totalLimit });
 
   let swiper = null;

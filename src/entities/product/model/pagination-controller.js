@@ -24,7 +24,6 @@ export const createPaginationController = ({
 
     const isLastPage = (currentPage + 1) * limit >= count;
 
-    // ⬇️ увеличиваем страницу ВСЕГДА после успешной загрузки
     currentPage++;
 
     onPageChange?.(currentPage);

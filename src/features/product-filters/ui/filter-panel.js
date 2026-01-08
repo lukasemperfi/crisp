@@ -39,29 +39,24 @@ export class FilterPanel {
   }
 
   reset() {
-    // Сброс состояния
     this._state = {};
 
-    // Сброс всех чекбоксов
     this._container
       .querySelectorAll("input[type='checkbox']")
       .forEach((i) => (i.checked = false));
 
-    // Сброс всех range фильтров
     this._container.querySelectorAll(".price-range").forEach((wrapper) => {
       const minInput = wrapper.querySelector(".price-range__input_min");
       const maxInput = wrapper.querySelector(".price-range__input_max");
       if (minInput && maxInput) {
         minInput.value = minInput.min;
         maxInput.value = maxInput.max;
-        this._updatePriceRangeUI(wrapper); // Обновляем UI ползунков
+        this._updatePriceRangeUI(wrapper);
       }
     });
 
-    // Обновляем панель выбранных фильтров
     this._renderSelectedFilters();
 
-    // Оповещаем слушателей
     this._emit("change");
   }
 

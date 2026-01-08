@@ -53,14 +53,12 @@ export class ProductList {
     this._btnWrapper = this._wrapper.querySelector(".catalog__actions");
     this._btn = this._wrapper.querySelector(".catalog__more-button");
 
-    // --- Добавляем спиннер ---
     this._loader = document.createElement("div");
     this._loader.className = "catalog__loader";
     this._loader.style.display = "none";
     this._loader.innerHTML = `<div class="spinner"></div>`;
     this._btnWrapper.appendChild(this._loader);
 
-    // --- Добавляем стили для спиннера ---
     const style = document.createElement("style");
     style.textContent = `
       .catalog__loader {
@@ -83,13 +81,12 @@ export class ProductList {
       }
     `;
     document.head.appendChild(style);
-    // --- Конец изменений ---
 
     this._btn.addEventListener("click", () => {
       if (typeof this._onLoadMore === "function") {
-        this.showLoader(); // показываем спиннер при нажатии
+        this.showLoader(); 
         this._onLoadMore().finally(() => {
-          this.hideLoader(); // скрываем спиннер после загрузки
+          this.hideLoader(); 
         });
       }
     });
