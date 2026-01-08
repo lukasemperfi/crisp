@@ -6,12 +6,14 @@
 
   &__top {
     padding-top: 12px;
-    padding-bottom: 33px;
+    padding-bottom: 27px;
   }
 
   &__sort-panel {
     display: flex;
     justify-content: flex-end;
+    gap: 20px;
+    padding-bottom: 20px;
 
     .dropdown__trigger {
       font-family: var(--font-family);
@@ -47,8 +49,8 @@
   &__aside {
     border-right: 1px solid var(--divider);
     flex: 1 1 394px;
-    margin-top: -5px;
-    padding-right: functions.fluidValue(14px, 29px, $bp-mobile, 1920px);
+    padding-top: 11px;
+    padding-right: functions.fluidValue(14px, 38px, $bp-mobile, 1920px);
 
     @include mixins.respond-to($bp-mobile) {
       padding-right: 0;

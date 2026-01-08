@@ -62,7 +62,7 @@ export function Dropdown(container, props = {}) {
 
       <button type="button" class="dropdown__trigger">
         <span class="dropdown__value"></span>
-        <span class="dropdown__icon">${createArrowIcon()}</span>
+       ${createArrowIcon("dropdown__icon")}
       </button>
 
       <div class="dropdown__menu">
@@ -92,7 +92,6 @@ export function Dropdown(container, props = {}) {
   const valueEl = root.querySelector(".dropdown__value");
   const menu = root.querySelector(".dropdown__menu");
 
-  // Ищем дефолтное значение только среди НЕ заблокированных опций
   const availableOptions = options.filter((o) => !o.disabled);
   const hasDefault = availableOptions.some((o) => o.value === defaultValue);
 
@@ -106,7 +105,6 @@ export function Dropdown(container, props = {}) {
 
   menu.addEventListener("click", (e) => {
     const option = e.target.closest(".dropdown__option");
-    // Если опция не найдена или она disabled — ничего не делаем
     if (!option || option.hasAttribute("disabled")) return;
 
     setValue(option.dataset.value);

@@ -28,7 +28,7 @@
       font-family: var(--font-family);
       font-weight: 400;
       font-size: functions.fluidValue(12px, 24px, 320px, 1920px);
-      line-height: functions.fluidValue(18px, 68px, 320px, 1920px);
+      // line-height: functions.fluidValue(18px, 68px, 320px, 1920px);
       color: var(--black);
     }
 
@@ -74,6 +74,9 @@
         grid-template-rows: 1fr;
         padding-bottom: 20px;
         padding-top: functions.fluidValue(15px, 11px, 320px, 1920px);
+
+        padding-top: 26px;
+        padding-bottom: 43px;
 
         @include mixins.respond-to($bp-mobile) {
           border-bottom: 2px solid var(--light-blue-hover);
