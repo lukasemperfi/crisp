@@ -29,6 +29,7 @@ export function createProductCard(product) {
         : ""
     }
 
+
     <div class="product-card__image">
         <img
           class="product-card__image"
@@ -40,7 +41,7 @@ export function createProductCard(product) {
     </div>
 
     <div class="product-card__category">${tag}</div>
-    <div class="product-card__name">${name}</div>
+    <a href="${baseUrl}product/" class="product-card__name">${name}</a>
     <div class="product-card__price price">
       <div class="price__current">
         ${formatPrice(currentPrice)}
