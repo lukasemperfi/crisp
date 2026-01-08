@@ -2,5 +2,15 @@
 @use "@/app/styles/functions" as functions;
 
 .hero {
-  padding-block: 17px;
+  padding-block: functions.fluidValue(11px, 17px, 320px, 1920px);
+
+  .banner__img {
+    @include mixins.respond-to(lg-sm) {
+      object-position: 65% 50%;
+    }
+
+    @include mixins.respond-to("650px") {
+      object-position: 100% 0%;
+    }
+  }
 }

@@ -1,21 +1,30 @@
-{%import "src/shared/ui/icons/icons.html" as icons%}
-{%from "src/shared/ui/picture/picture.html" import picture%}
-{%from "src/shared/ui/text-block/text-block.html" import textBlock%}
+{% import "src/shared/ui/icons/icons.html" as icons %}
+{% from "src/shared/ui/picture/picture.html" import picture %}
+{% from "src/shared/ui/text-block/text-block.html" import textBlock %}
 
-{% macro banner()%}
-<div class="banner">
+{% macro banner(
+pictureProps = {},
+textBlockProps = {},
+class = ""
+) %}
+<div class="banner {{ class }}">
     <div class="banner__wrapper">
+
         {{ picture(
-        jpgSrc="/images/home-page/banner.jpg",
-        webpSrc="/images/home-page/banner.webp",
-        mobileJpgSrc="/images/home-page/banner-mobile.jpg",
-        mobileWebpSrc="/images/home-page/banner-mobile.webp",
-        breakpoint=650,
-        alt="banner image",
+        jpgSrc = pictureProps.jpgSrc,
+        webpSrc = pictureProps.webpSrc,
+        mobileJpgSrc = pictureProps.mobileJpgSrc,
+        mobileWebpSrc = pictureProps.mobileWebpSrc,
+        breakpoint = pictureProps.breakpoint,
+        alt = pictureProps.alt,
         class="banner__img"
         ) }}
-        {{textBlock(title="shoping without limits.", text="You can choose the best option for you, and it does not
-        matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!")}}
+
+        {{ textBlock(
+        title = textBlockProps.title,
+        text = textBlockProps.text
+        ) }}
+
     </div>
 </div>
-{%endmacro%}
+{% endmacro %}
