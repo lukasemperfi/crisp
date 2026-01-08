@@ -224,10 +224,10 @@ function insertBannerIntoList(listSelector, index) {
   const bannerData = {
     className: "catalog__list-banner full-width",
     pictureProps: {
-      jpgSrc: "/images/catalog-page/hero-desktop.jpg",
-      webpSrc: "/images/catalog-page/hero-desktop.webp",
-      mobileJpgSrc: "/images/catalog-page/hero-mobile.jpg",
-      mobileWebpSrc: "/images/catalog-page/hero-mobile.webp",
+      jpgSrc: "images/catalog-page/hero-desktop.jpg",
+      webpSrc: "images/catalog-page/hero-desktop.webp",
+      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
+      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
       alt: "New Collection",
     },
     textBlockProps: {

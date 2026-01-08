@@ -1,3 +1,5 @@
+import { baseUrl } from "@/shared/helpers/base-url";
+
 export const Banner = ({
   pictureProps = {},
   textBlockProps = {},
@@ -24,15 +26,15 @@ export const Banner = ({
           <picture>
             ${
               mobileWebpSrc
-                ? `<source media="${mediaQuery}" type="image/webp" ${lazyAttr}srcset="${mobileWebpSrc}">`
+                ? `<source media="${mediaQuery}" type="image/webp" ${lazyAttr}srcset="${baseUrl}${mobileWebpSrc}">`
                 : ""
             }
             ${
               mobileJpgSrc
-                ? `<source media="${mediaQuery}" type="image/jpeg" ${lazyAttr}srcset="${mobileJpgSrc}">`
+                ? `<source media="${mediaQuery}" type="image/jpeg" ${lazyAttr}srcset="${baseUrl}${mobileJpgSrc}">`
                 : ""
             }
-            <source type="image/webp" ${lazyAttr}srcset="${webpSrc}">
+            <source type="image/webp" ${lazyAttr}srcset="${baseUrl}${webpSrc}">
             <img 
               class="${className} ${isLazy ? "lazy" : ""}" 
               alt="${alt}" 
