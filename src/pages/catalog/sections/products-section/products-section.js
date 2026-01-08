@@ -4,6 +4,7 @@ import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
 import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 import queryString from "query-string";
+import { Banner } from "../../../../widgets/banner/banner";
 
 export const initProducts = async () => {
   const urlParams = parseUrlParams(window.location.search);
@@ -130,6 +131,9 @@ export const initProducts = async () => {
 
     productList.appendProducts(data);
 
+    const middleIndex = Math.floor(data.length / 2);
+    insertBannerIntoList(".catalog__list", middleIndex);
+
     if (currentPage !== queryState.page || currentPage > 0) {
       updateUrlPage(currentPage);
     }
@@ -205,3 +209,39 @@ export const removeDefaultParams = (params, defaults) => {
 
   return cleaned;
 };
+
+function insertBannerIntoList(listSelector, index) {
+  const list = document.querySelector(listSelector);
+  if (!list) {
+    return;
+  }
+
+  if (list.querySelector(".catalog__list-banner")) {
+    return;
+  }
+
+  const items = list.children;
+  const bannerData = {
+    className: "catalog__list-banner full-width",
+    pictureProps: {
+      jpgSrc: "/images/catalog-page/hero-desktop.jpg",
+      webpSrc: "/images/catalog-page/hero-desktop.webp",
+      mobileJpgSrc: "/images/catalog-page/hero-mobile.jpg",
+      mobileWebpSrc: "/images/catalog-page/hero-mobile.webp",
+      alt: "New Collection",
+    },
+    textBlockProps: {
+      title: "Shopping without limits.",
+      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
+      buttonText: "Shop Now",
+    },
+  };
+
+  const banner = Banner(bannerData);
+
+  if (items.length === 0 || index >= items.length) {
+    list.appendChild(banner);
+  } else {
+    list.insertBefore(banner, items[index]);
+  }
+}

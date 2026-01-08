@@ -42,4 +42,8 @@
     justify-content: center;
     padding-block: 50px;
   }
+
+  .full-width {
+    grid-column: 1/-1;
+  }
 }
