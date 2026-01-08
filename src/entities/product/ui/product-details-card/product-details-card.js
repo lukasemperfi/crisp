@@ -250,6 +250,13 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   const renderFiltersSection = (e) => {
     const sizeContainer = root.querySelector(".info__size");
+    const colorCommonProps = {
+      colors: mockColorData,
+      title: "Select Color",
+      showTitle: true,
+      selectionMode: "single",
+    };
+
     if (!sizeContainer) {
       return;
     }
@@ -258,9 +265,7 @@ export const ProductDetailsCard = ({ container, product }) => {
 
     if (e.matches) {
       ColorFilter(root.querySelector(".info__color"), {
-        colors: mockColorData,
-        title: "Select Color",
-        showTitle: true,
+        ...colorCommonProps,
         maxVisibleColors: 3,
       });
 
@@ -275,9 +280,7 @@ export const ProductDetailsCard = ({ container, product }) => {
       });
     } else {
       ColorFilter(root.querySelector(".info__color"), {
-        colors: mockColorData,
-        title: "Select Color",
-        showTitle: true,
+        ...colorCommonProps,
       });
 
       SizeFilter(sizeContainer, {

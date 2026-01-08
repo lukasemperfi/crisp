@@ -1,4 +1,5 @@
 import { baseUrl } from "@/shared/helpers/base-url";
+import { ColorFilter } from "@/features/product-filters/ui/color/color";
 
 export function createProductCard(product) {
   const {
@@ -8,6 +9,7 @@ export function createProductCard(product) {
     base_price: price,
     discount_percent: discountRate,
     images = [],
+    variants,
     tags,
   } = product;
   const tag = tags && tags.length > 0 ? tags[0].tag.name : "Uncategorized";
@@ -28,7 +30,6 @@ export function createProductCard(product) {
     }
 
     <div class="product-card__image">
-
         <img
           class="product-card__image"
           src="${mainImage?.image_path_jpg || ""}"
@@ -38,11 +39,8 @@ export function createProductCard(product) {
         >
     </div>
 
-<div class="product-card__category">${tag}</div>
-
-
+    <div class="product-card__category">${tag}</div>
     <div class="product-card__name">${name}</div>
-
     <div class="product-card__price price">
       <div class="price__current">
         ${formatPrice(currentPrice)}
@@ -53,7 +51,26 @@ export function createProductCard(product) {
           : ""
       }
     </div>
+    <div class="product-card__color"></div
   `;
+
+  const uniqueColors = [
+    ...new Map(
+      variants.map((item) => [
+        item.color.id,
+        {
+          ...item.color,
+          available: true,
+        },
+      ])
+    ).values(),
+  ];
+
+  ColorFilter(card.querySelector(".product-card__color"), {
+    colors: uniqueColors,
+    showTitle: false,
+    selectionMode: "single",
+  });
 
   // const addButton = card.querySelector(".product-card__buy-button");
 

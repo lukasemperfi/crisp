@@ -1,11 +1,9 @@
 @use "@/app/styles/functions" as functions;
 @use "@/app/styles/mixins" as mixins;
 
-.product-card {
-  // display: grid;
-  // grid-template-rows: max-content max-content 1fr;
-  // grid-row: span 4;
+@use "@/features/product-filters/ui/color/color.scss" as *;
 
+.product-card {
   position: relative;
   width: 100%;
 
@@ -26,8 +24,6 @@
   &__image {
     position: relative;
     aspect-ratio: 344/450;
-    // max-width: 344px;
-    // background-color: pink;
     margin-bottom: functions.fluidValue(5px, 16px, 320px, 1920px);
 
     img {
@@ -91,5 +87,9 @@
       text-decoration: line-through;
       color: var(--gray-1);
     }
+  }
+
+  &__color {
+    margin-top: 10px;
   }
 }

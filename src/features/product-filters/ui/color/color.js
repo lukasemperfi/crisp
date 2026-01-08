@@ -5,6 +5,7 @@ export function ColorFilter(
     title = "Color",
     showTitle = true,
     maxVisibleColors = null,
+    selectionMode = "multiple",
   } = {}
 ) {
   if (!container || !Array.isArray(colors)) {
@@ -15,12 +16,15 @@ export function ColorFilter(
   const hasLimit = typeof maxVisibleColors === "number" && maxVisibleColors > 0;
   const visibleColors = hasLimit ? colors.slice(0, maxVisibleColors) : colors;
   const hiddenColors = hasLimit ? colors.slice(maxVisibleColors) : [];
+
   const visibleHtml = visibleColors
     .map((color) => createColorOptionHtml(color))
     .join("");
+
   const hiddenHtml = hiddenColors
     .map((color) => createColorOptionHtml(color, true))
     .join("");
+
   const moreButtonHtml =
     hasLimit && hiddenColors.length
       ? `<button class="color-filter__more-btn" type="button">…</button>`
@@ -50,6 +54,22 @@ export function ColorFilter(
         item.style.display = "";
       });
       moreBtn.remove();
+    });
+  }
+
+  if (selectionMode === "single") {
+    const inputs = container.querySelectorAll(".color-filter__input");
+
+    inputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+
+        inputs.forEach((other) => {
+          if (other !== input) {
+            other.checked = false;
+          }
+        });
+      });
     });
   }
 }
