@@ -108,7 +108,6 @@ export class Table {
   }
 }
 
-//////////////Fabrics/////////////////////////////
 
 export function createTableElement(classNames = ["table"]) {
   const table = document.createElement("div");
@@ -240,9 +239,6 @@ function createFooterElement(config, totalAmount) {
         element.textContent = config.text;
       }
 
-      // if (config.onClick && typeof config.onClick === "function") {
-      //   element.addEventListener("click", config.onClick);
-      // }
       break;
 
     case "total":

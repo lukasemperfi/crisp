@@ -2,7 +2,6 @@ import { initSwiper } from "@/shared/lib/swiper/init-swiper";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 
 import "swiper/css/effect-coverflow";
-// import "swiper/css/pagination";
 
 export const initHeroSection = () => {
   const swiper = initSwiper(".hero-slider", {

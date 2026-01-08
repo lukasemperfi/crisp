@@ -82,7 +82,7 @@ export const initProductSlider = async ({
   window.addEventListener("resize", updateView);
 
   return {
-    refresh: updateView, // можно вручную обновить при изменении данных
+    refresh: updateView, 
     getProducts: () => products,
   };
 };

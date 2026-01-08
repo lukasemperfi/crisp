@@ -73,19 +73,6 @@ export function createProductCard(product) {
     selectionMode: "single",
   });
 
-  // const addButton = card.querySelector(".product-card__buy-button");
-
-  // const addItemHandler = (id) => {
-  //   cartThunks.addItem(String(id));
-  //   showToast("Товар успешно добавлен в корзину!", "success");
-  // };
-
-  // const debouncedAddItem = debounce(addItemHandler, 300);
-
-  // addButton.addEventListener("click", () => {
-  //   debouncedAddItem(id);
-  // });
-
   return card;
 }
 
@@ -96,20 +83,4 @@ function formatPrice(value, currency = "EUR", locale = "de-DE") {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);
-}
-
-{
-  /* <picture>
-<source
-  type="image/webp"
-  srcset="${baseUrl}${mainImage?.image_path_webp || ""}"
->
-<img
-  class="product-card__image"
-  src="${baseUrl}${mainImage?.image_path_jpg || ""}"
-  loading="eager"
-  alt="${name}"
-  fetchpriority="high"
->
-</picture> */
 }

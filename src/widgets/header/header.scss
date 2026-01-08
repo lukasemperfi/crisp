@@ -235,7 +235,7 @@
   }
 }
 
-//////////////////////////////
+
 .auth {
   display: flex;
   gap: 14px;
@@ -458,10 +458,7 @@
     width: calc(100% - 24px);
   }
 
-  .cart {
-    // overflow-y: auto;
-    // max-height: 230px;
-  }
+
 
   .table {
     $padding-horizontal: 12px;

@@ -6,7 +6,6 @@ import { initProductContent } from "./sections/product-content/product-content.j
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  // const product = await fetchProductById(id);
 
   initHeader();
   initProductContent({});

@@ -30,7 +30,6 @@ export function initTabs(container, updateURL = false) {
       const url = new URL(window.location);
       url.hash = `#tab-${container.dataset.tabsId}-${index}`;
       window.history.pushState({}, "", url);
-      //   window.history.replaceState({}, '', url); To avoid cluttering browser history
     }
   }
 

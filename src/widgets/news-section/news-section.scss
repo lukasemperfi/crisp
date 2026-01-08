@@ -50,10 +50,6 @@
         bottom: 0;
       }
 
-      // @include mixins.respond-to(499px) {
-      //   bottom: auto;
-      //   top: -14%;
-      // }
     }
     &__prev,
     &__next {
@@ -104,7 +100,6 @@
     width: 100%;
     aspect-ratio: 408/270;
     max-width: 408px;
-    // background-color: #c4c4c4;
     margin-bottom: 23px;
 
     @include mixins.respond-to(lg-sm) {
@@ -136,7 +131,6 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 22px;
-    // letter-spacing: 0.01em;
     color: var(--muted-text);
     margin-bottom: 10px;
   }

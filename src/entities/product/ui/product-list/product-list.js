@@ -97,10 +97,8 @@ export class ProductList {
 
   appendProducts(products) {
     if (!products || products.length === 0) {
-      // if (this._initialized) {
       this._renderStructure();
       this._renderEmptyMessage();
-      // }
       return;
     }
 

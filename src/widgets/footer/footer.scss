@@ -138,7 +138,6 @@
     &__join-us {
       @include mixins.respond-to($bp-mobile) {
         margin-top: 8px;
-        // align-self: center;
       }
     }
   }

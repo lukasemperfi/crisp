@@ -10,7 +10,6 @@
   }
 
   &__content {
-    // display: flex;
     display: grid;
     grid-template-columns: 1fr minmax(0, 739px);
     gap: functions.fluidValue(24px, 50px, 360px, 1920px);
@@ -43,7 +42,6 @@
 
   &__info {
     display: grid;
-    // flex-direction: column;
     gap: functions.fluidValue(30px, 46px, 360px, 1920px);
 
     @include mixins.respond-to(lg-sm) {

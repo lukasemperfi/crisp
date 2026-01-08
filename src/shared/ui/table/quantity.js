@@ -127,7 +127,7 @@ export class QuantityComponent {
   }
 }
 
-///////Fabrics/////////////
+
 
 function createDecreaseIcon() {
   return `
