@@ -1,0 +1,768 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy the best.">
+    <title>Catalog Page</title>
+
+  <style>.product-details-card__media{max-height:833px;grid-area:media;margin-inline:0px}.product-details-card__breadcrumbs{padding-top:15px;padding-bottom:21px;grid-area:breadcrumbs}.product-details-card__info{grid-area:info}:root{--swiper-theme-color:#007aff}:host{position:relative;display:block;margin-left:auto;margin-right:auto;z-index:1}.offers__list-item:first-child{aspect-ratio:924/434;grid-area:col-1}.offers__list-item:nth-child(2){aspect-ratio:924/434;grid-area:col-2}.offers__list-item:nth-child(3){aspect-ratio:925/898;grid-area:col-3}.banner__wrapper{display:flex;position:relative;aspect-ratio:1878/467;padding-block:clamp(10px,1.875vw + 4px,40px)}.banner .text-block{left:269px;margin-block:auto;max-width:clamp(171px,29.3125vw + 77.2px,640px);padding-right:22px}@media (max-width:550px){.hero .page-container-1920{padding:0}}.hero .text-block{margin-block:auto;max-width:100%;padding-right:43px;padding-bottom:0;padding-top:23px}@media (max-width:1919px){.banner .text-block{left:clamp(23px,9.125vw + -6.2px,169px)}.hero .text-block{padding-right:clamp(10px,2.0625vw + 3.4px,43px);padding-top:clamp(10px,.8125vw + 7.4px,23px)}}@media (max-width:767px){.hero .text-block{padding:0;display:flex;flex-direction:column;align-items:center}.hero .text-block:after,.hero .text-block:before{display:none}}.hero .text-block__title{font-family:var(--font-family);font-weight:600;font-size:86px;line-height:96px;text-transform:uppercase;color:var(--black);margin-bottom:48px}@media (max-width:1919px){.hero .text-block__title{font-size:clamp(20px,4.125vw + 6.8px,86px);line-height:clamp(30px,4.125vw + 16.8px,96px);margin-bottom:clamp(14px,2.125vw + 7.2px,48px)}}.hero .text-block__text{display:none}.products__aside{border-right:1px solid var(--divider);flex:1 1 394px;margin-top:-5px;padding-right:clamp(14px,1.3020833333vw + 4px,29px)}.hero{margin-top:21px}@media (max-width:550px){.hero .text-block__title{font-size:32px;line-height:35px;white-space:normal;text-align:center;max-width:292px}.hero .text-block .button{font-weight:500;font-size:14px;letter-spacing:.04em;padding-inline:24px;padding-block:8px}.hero{margin-top:0}}.products{margin-top:31px}.banner{margin-top:clamp(12px,.6875vw + 9.8px,23px)}*{padding:0;margin:0;border:0}*,:after,:before{box-sizing:border-box}:active,:focus{outline:0}aside,footer,header,nav{display:block}body,html{min-height:100%;width:100%;font-size:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%}button,input{font-family:inherit;color:inherit}input::-ms-clear{display:none}button{background-color:transparent;display:inline-flex}button::-moz-focus-inner{padding:0;border:0}a{display:inline-flex}a,a:visited{text-decoration:none}ul li{list-style:none}img{vertical-align:top;max-width:100%}html{font-size:16px;font-size:100%}#toast-container{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px}body{font-family:var(--font-family);background-color:var(--white);color:var(--foreground);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}.page-container-1920{max-width:1920px;padding-inline:21px;margin:0 auto}@media (max-width:767px){.page-container-1920{padding-inline:14px}}.lazy{opacity:0!important;visibility:hidden!important}:root{--main-color:#e6f1fa;--main-color-2:#eb5757;--advanced:#57a4eb;--black:#000;--black-2:#3f3f3f;--white:#fff;--gray-1:#828282;--light-blue-hover:#f0f2f2;--divider:#c4c4c4;--link:#0f6db1;--font-family:"Oswald",sans-serif;--second-family:"Roboto",sans-serif;--third-family:"Roboto Medium",sans-serif;--font3:"Roboto Light",sans-serif;--font4:"Viga",sans-serif;--font5:"Roboto Black",sans-serif;--font6:"Inter",sans-serif;--z-index-sticky:100;--z-index-overlay:8000;--z-index-header:6000;--z-index-header-nav-mobile:5000}.header{position:sticky;top:0;left:0;right:0;width:100%;z-index:var(--z-index-header);background-color:var(--black);color:var(--white);padding-block:35.5px}.header__wrapper{display:flex;align-items:center;position:relative}.header__center-block{display:flex;align-items:center;gap:20px;order:2;position:absolute;left:50%;transform:translate(-50%)}@media (max-width:1919px){.header{padding-block:clamp(14px,1.34375vw + 9.7px,35.5px)}.header__center-block{position:static;left:auto;transform:none;margin-left:auto}}@media (max-width:1023px){.header__center-block{display:none}}.header__right-block{display:flex;align-items:center;margin-left:auto;order:3}.header__logo{order:1}@media (max-width:1023px){.header__logo{order:2;width:64px;height:37px;margin-left:auto}}.header .header__burger-btn{display:none}@media (max-width:1023px){.header .header__burger-btn{display:inline-flex;order:1;position:relative;width:20px;height:20px}}.header .header__burger-btn .header__burger-icon,.header .header__burger-btn .header__close-icon{position:absolute;top:50%;left:50%;transform-origin:center}.header .header__burger-btn .header__burger-icon{width:20px;height:15px;transform:translate(-50%,-50%) scale(1);opacity:1}.header .header__burger-btn .header__close-icon{width:17px;height:17px;transform:translate(-50%,-50%) scale(.8);opacity:0}.header .header-search{display:flex;align-items:center;gap:8px}@media (max-width:1023px){.header .header-search{display:none}}.header .header-search__label{font-family:var(--font-family);font-weight:600;font-size:14px;text-transform:uppercase;color:var(--white)}.header__mobile-search-btn{display:none}@media (max-width:600px){.header__logo{position:absolute;left:50%;transform:translate(-50%);margin-left:0}.header__mobile-search-btn{display:block;width:20px;height:20px}.header .auth{display:none}.header__wishlist-link{display:none}}.header__wishlist-link{margin-left:29px}.header .cart-item{margin-left:18px;display:flex;gap:10px;align-items:center}.header .cart-item__label{display:flex;flex-direction:column}@media (max-width:600px){.header .cart-item{margin-left:14px}.header .cart-item__label{display:none}}.header .cart-item__btn{display:inline-flex;position:relative}.header .cart-item__count{display:flex;justify-content:center;align-items:center;min-width:14px;height:14px;background-color:var(--main-color-2);padding:2px;font-family:var(--font-family);font-weight:500;font-size:10px;letter-spacing:.02em;text-align:center;color:var(--white);position:absolute;top:-2px;right:-5px;overflow:hidden}.header .cart-item__text{font-family:var(--third-family);font-weight:400;font-size:12px;letter-spacing:.01em;color:var(--white)}.header .cart-item__total{font-family:var(--second-family);font-weight:700;font-size:14px;letter-spacing:.01em;color:var(--white)}@media (max-width:1023px){.header .nav-menu{display:none}}.auth{display:flex;gap:14px;align-items:center}.auth__link{font-family:var(--font-family);font-weight:600;font-size:14px;text-transform:uppercase;color:var(--white);position:relative}.mobile-menu{display:flex;flex-direction:column;position:fixed;top:var(--header-height,50px);left:0;width:100vw;background-color:var(--black);z-index:var(--z-index-header-nav-mobile);transform:translateY(-100%);opacity:0;visibility:hidden;overflow-y:auto}.mobile-menu .page-container-1920{margin:0}.mobile-menu__wrapper{display:flex;flex-direction:column;align-items:center}.mobile-menu__nav-menu{margin-block:23px}.mobile-menu__nav-menu .nav-menu__list{display:flex;flex-direction:column;align-items:center;gap:17px}.mobile-menu__nav-menu .nav-menu__link{width:100%;font-family:var(--font-family);font-weight:500;font-size:18px;line-height:23px;text-transform:uppercase;text-align:center;color:var(--white)}.mobile-menu .search-group{margin-top:12px;display:inline-flex;background-color:#fff;font-family:Arial,sans-serif;overflow:hidden;width:100%;max-width:320px}.mobile-menu .search-group .search-input{border:none;font-size:16px;outline:0;width:72.5%;padding-block:11px;padding-inline:14px}.mobile-menu .search-group .search-button{width:27.5%;display:flex;align-items:center;justify-content:center;background-color:#f0f0f0;border:2px solid #d1d1d1;font-family:var(--font-family);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;text-align:center;color:var(--gray-1)}@media (max-width:700px){.cart-popup .table__cell_product-name{grid-area:product-name;justify-self:flex-start!important}.cart-popup .table__cell_delete-action{grid-area:delete-action;justify-self:flex-end!important}.cart-popup .table__cell_quantity{grid-area:quantity;justify-self:flex-start!important}.cart-popup .table__cell_total-cost{grid-area:total-cost;justify-self:flex-end!important}}.button{font-family:var(--font-family-primary);letter-spacing:.02em;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;width:fit-content;padding-block:10px;padding-inline:46px;text-transform:uppercase}.button_solid{background-color:var(--black);color:var(--white)}.button.button_solid.button_white{background-color:var(--white);color:var(--black)}.button_outlined{background-color:transparent;color:var(--foreground-secondary);border:2px solid var(--black);font-family:var(--font-family);font-weight:500;font-size:18px;padding-block:12px;padding-inline:46px;color:var(--black)}.button_fill{width:100%}.nav-menu_horizontal{display:flex;justify-content:center}.nav-menu_horizontal .nav-menu__list{display:flex;justify-content:center;flex-wrap:wrap;gap:9px}.nav-menu_horizontal .nav-menu__link{font-family:var(--font-family);font-weight:600;font-size:14px;text-transform:uppercase;color:var(--white);padding-inline:10px;padding-block:4px;position:relative}.benefits{background:var(--main-color);padding-block:39.5px}.benefits__list{display:grid;grid-template-columns:repeat(5,max-content);gap:20px;justify-content:space-evenly}@media (max-width:900px){.benefits__list{grid-template-columns:repeat(2,max-content)}}.benefits__item{display:flex;align-items:center;gap:22px}.benefits__name{font-family:var(--font-family);font-weight:400;font-size:14px;color:var(--black);white-space:nowrap}.page-footer{background-color:var(--black);color:var(--white);white-space:nowrap}.page-footer__content{display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid #4f4f4f;padding-top:64px;padding-bottom:118px}@media (max-width:500px){.benefits{padding-block:25px}.benefits__list{grid-template-columns:repeat(1,max-content)}.page-footer__content{flex-direction:column;gap:0;white-space:normal;padding-top:27px;padding-bottom:25px;border-bottom:none}.page-footer__logo-wrapper{margin-bottom:8px}}@media (max-width:1023px){.page-footer__logo{width:64px;height:37px}.text-block{padding-right:clamp(14px,1vw + 10.8px,30px)}}@media (max-width:1190px){.page-footer__logo-wrapper{flex:0 1 10%;text-align:center}.page-footer .page-footer-item{flex:1}}.page-footer .page-footer-item__title{font-family:var(--font-family);font-weight:600;font-size:18px;text-transform:uppercase;color:var(--white);margin-bottom:30px;display:flex;justify-content:space-between;align-items:center}.page-footer .page-footer-item__icon{display:none;width:18px;height:2px;background-color:var(--black-2);position:relative}.page-footer .page-footer-item__icon:after{content:"";position:absolute;width:100%;height:100%;background-color:inherit;transform:rotate(90deg)}@media (max-width:500px){.page-footer__logo{width:94px;height:44px}.page-footer .page-footer-item{border-bottom:1px solid #4f4f4f}.page-footer .page-footer-item__title{padding-block:13px;margin-bottom:0!important;font-weight:500;font-size:14px;letter-spacing:.04em}.page-footer .page-footer-item__icon{display:block}.page-footer .page-footer-item.js-accordion-title .page-footer-item__content{display:grid;grid-template-rows:0fr;overflow:hidden}.page-footer .page-footer-item.js-accordion-title .page-footer-item__content>*{min-height:0}.page-footer .page-footer-item__join-us{margin-top:8px}}.page-footer .footer-list{display:flex;flex-direction:column;gap:3px}.page-footer .footer-list__link{font-family:var(--third-family);font-weight:400;font-size:13px;text-transform:uppercase;color:var(--gray-1)}.page-footer .contacts-list{display:flex;flex-direction:column;gap:9px}.page-footer .contacts-list__item{display:flex;flex-direction:column;gap:4px}.page-footer .contacts-list__title{font-family:var(--font-family);font-weight:500;font-size:12px;text-transform:uppercase;color:var(--white)}.page-footer .contacts-list__info{font-family:var(--third-family);font-weight:400;font-size:12px;text-transform:uppercase;color:var(--gray-1)}@media (max-width:500px){.page-footer .footer-list__link{font-size:12px}.page-footer .contacts-list__title{font-size:12px}.page-footer .contacts-list__info{font-size:11px}}.page-footer .follow-us-list{display:flex;flex-direction:column;gap:25px}.page-footer .follow-us-list__link{font-family:var(--third-family);font-weight:400;font-size:13px;text-transform:uppercase;color:var(--gray-1);display:flex;align-items:center;gap:19px}.page-footer .join-us-form{display:flex;flex-direction:column;max-width:292px}@media (max-width:500px){.page-footer .follow-us-list__link{font-size:12px}.page-footer .join-us-form{max-width:100%}}.page-footer .join-us-form__label{font-family:var(--third-family);font-weight:400;font-size:13px;text-transform:uppercase;color:var(--gray-1);margin-bottom:11px}@media (max-width:500px){.page-footer .join-us-form__label{font-size:11px;margin-bottom:6px}}.page-footer .join-us-form__input{max-width:292px;height:40px;min-width:280px;border:1px solid var(--white);background-color:transparent;padding-inline:15px;margin-bottom:8px}.page-footer .join-us-form .button{font-family:var(--font-family);font-weight:400;font-size:14px;text-transform:uppercase;text-align:center;color:var(--black-2)}.page-footer__copyright{font-family:var(--second-family);font-weight:700;font-size:12px;text-transform:uppercase;color:var(--white);padding-top:20px;padding-bottom:40px}@media (max-width:500px){.page-footer .join-us-form__input{margin-bottom:11px;max-width:100%}.page-footer .join-us-form .button{font-size:13px}.page-footer__copyright{padding-bottom:24px}}.banner__wrapper{display:flex;position:relative;aspect-ratio:1878/467;padding-block:clamp(13px,1.6875vw + 7.6px,40px)}.banner__img{object-fit:cover;width:100%;height:100%;position:absolute;top:0;left:0}@media (max-width:1337px){.banner__img{object-position:100% 50%}.hero .banner__img{object-position:65% 50%}}.banner .text-block{left:269px;margin-block:auto;max-width:clamp(171px,29.3125vw + 77.2px,640px);padding-right:22px;padding-bottom:0}@media (max-width:1919px){.banner .text-block{left:clamp(20px,9.3125vw + -9.8px,169px)}}@media (max-width:767px){.banner__img{object-position:88% 50%}.banner .text-block{padding:0}.banner .text-block:after,.banner .text-block:before{display:none}}.banner .text-block__title{margin-bottom:clamp(4px,.5625vw + 2.2px,13px)}.banner .text-block__text{margin-bottom:clamp(13px,1.8125vw + 7.2px,42px)}.text-block{padding-block:15px;max-width:640px;position:relative;height:max-content}.text-block:after{content:"";position:absolute;top:0;right:0;height:2px;width:94%;background-color:var(--black)}.text-block:before{content:"";position:absolute;top:0;right:0;width:2px;height:29%;background-color:var(--black)}.text-block__title{font-family:var(--font-family);font-weight:500;font-size:clamp(14px,2.625vw + 5.6px,56px);text-transform:uppercase;color:var(--black);margin-bottom:clamp(10px,1.3125vw + 5.8px,31px);white-space:nowrap}.text-block__text{font-family:var(--font3);font-weight:400;font-size:clamp(10px,.9375vw + 7px,25px);letter-spacing:.01em;color:var(--black);margin-bottom:clamp(15px,1.25vw + 11px,35px);line-height:clamp(12px,1.4375vw + 7.4px,35px)}.text-block .button{font-size:clamp(10px,.5vw + 8.4px,18px);padding-inline:clamp(18px,1.75vw + 12.4px,46px)}@media (max-width:1023px){.text-block .button{padding-block:7px}}.hero{padding-block:clamp(11px,.375vw + 9.8px,17px)}@media (max-width:650px){.hero .banner__img{object-position:100% 0%}}.products__top{padding-top:clamp(5px,.4375vw + 3.6px,12px);padding-bottom:clamp(5px,1.375vw + .6px,27px)}.products__sort-panel{display:flex;justify-content:flex-end;gap:20px;padding-bottom:20px}.products__content{display:flex;gap:clamp(14px,1.3888888889vw + 3.3333333333px,30px)}@media (max-width:768px){.products__sort-panel{gap:clamp(14px,1.3888888889vw + 3.3333333333px,30px)}.products__sort-panel .products__sort{width:100%}.products__content{flex-direction:column}}.products__aside{border-right:1px solid var(--divider);flex:1 1 394px;padding-top:11px;padding-right:clamp(14px,2.0833333333vw + -2px,38px)}@media (max-width:768px){.products__aside{padding-right:0;border:none;flex:auto}}.products__main{flex:1 1 1454px}@media (max-width:768px){.products__main{flex:auto}}.product-card{position:relative;width:100%}.product-card__image{position:relative;aspect-ratio:344/450;margin-bottom:clamp(5px,.6875vw + 2.8px,16px)}.product-card__category{font-family:var(--font-family);font-weight:600;font-size:clamp(10px,.125vw + 9.6px,12px);text-transform:uppercase;color:#bdbdbd}.product-card__name{font-family:var(--font-family);font-weight:300;font-size:clamp(12px,.375vw + 10.8px,18px);line-height:clamp(18px,.5625vw + 16.2px,27px);color:var(--black);margin-bottom:clamp(1px,.6875vw + -1.2px,12px)}.product-card .price{display:flex;align-items:baseline;gap:14px;white-space:nowrap;flex-wrap:wrap;align-self:flex-start}@media (max-width:550px){.product-card .price{gap:8px;align-items:center}}.catalog__list{display:grid;grid-template-columns:repeat(4,1fr);column-gap:clamp(14px,.75vw + 11.6px,26px);row-gap:clamp(19px,1.375vw + 14.6px,41px)}@media (max-width:1080px){.catalog__list{grid-template-columns:repeat(auto-fill,minmax(139px,1fr))}}.skeleton{background:#bdbdbd;animation:3s cubic-bezier(.4,0,.6,1) infinite pulse;border-radius:2px;box-shadow:none;background-clip:padding-box;color:transparent;flex-shrink:0}@keyframes pulse{0%{opacity:1}50%{opacity:.5}to{opacity:1}}.breadcrumbs{font-family:var(--second-family);font-weight:400;font-size:14px;color:var(--gray-1)}@media (max-width:767px){.breadcrumbs{font-family:var(--second-family);font-weight:400;font-size:10px;color:var(--gray-1)}}</style>
+  <script type="module" crossorigin="" src="/crisp/assets/src/pages/catalog-ByY-lL8S.js"></script>
+  <link rel="modulepreload" crossorigin="" href="/crisp/assets/color-CyiGwVGT.js">
+  <link rel="modulepreload" crossorigin="" href="/crisp/assets/base-CBqjAGzD.js">
+  <link rel="modulepreload" crossorigin="" href="/crisp/assets/dropdown-WIquePbl.js">
+  <link rel="stylesheet" crossorigin="" href="/crisp/assets/base-tn0RQdqM.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" crossorigin="" href="/crisp/assets/catalog-DwIpJhmK.css" media="print" onload="this.media='all'">
+</head>
+
+<body>
+    
+
+<header class="header">
+    <div class="page-container-1920">
+        <div class="header__wrapper">
+            
+<svg class="header__logo" width="94" height="44" viewBox="0 0 94 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1.5" y="10.5" width="82" height="32" stroke="white" stroke-width="3" />
+    <path
+        d="M20.1054 35.22C18.9187 35.22 17.9854 34.9867 17.3054 34.52C16.6387 34.0533 16.1721 33.42 15.9054 32.62C15.6387 31.8067 15.5054 30.8733 15.5054 29.82V24.04C15.5054 22.9333 15.6387 21.9733 15.9054 21.16C16.1721 20.3467 16.6387 19.72 17.3054 19.28C17.9854 18.84 18.9187 18.62 20.1054 18.62C21.2254 18.62 22.0987 18.8133 22.7254 19.2C23.3654 19.5733 23.8187 20.1133 24.0854 20.82C24.3521 21.5267 24.4854 22.3467 24.4854 23.28V24.64H21.6454V23.24C21.6454 22.7867 21.6187 22.3733 21.5654 22C21.5254 21.6267 21.3987 21.3333 21.1854 21.12C20.9854 20.8933 20.6321 20.78 20.1254 20.78C19.6187 20.78 19.2454 20.9 19.0054 21.14C18.7787 21.3667 18.6321 21.68 18.5654 22.08C18.4987 22.4667 18.4654 22.9067 18.4654 23.4V30.44C18.4654 31.0267 18.5121 31.5133 18.6054 31.9C18.6987 32.2733 18.8654 32.56 19.1054 32.76C19.3587 32.9467 19.6987 33.04 20.1254 33.04C20.6187 33.04 20.9654 32.9267 21.1654 32.7C21.3787 32.46 21.5121 32.1467 21.5654 31.76C21.6187 31.3733 21.6454 30.94 21.6454 30.46V29H24.4854V30.3C24.4854 31.26 24.3587 32.1133 24.1054 32.86C23.8521 33.5933 23.4054 34.1733 22.7654 34.6C22.1387 35.0133 21.2521 35.22 20.1054 35.22ZM28.5462 35V18.8H32.4262C33.5195 18.8 34.4395 18.9333 35.1862 19.2C35.9462 19.4533 36.5195 19.8933 36.9062 20.52C37.3062 21.1467 37.5062 22 37.5062 23.08C37.5062 23.7333 37.4462 24.32 37.3262 24.84C37.2062 25.36 36.9995 25.8067 36.7062 26.18C36.4262 26.54 36.0328 26.82 35.5262 27.02L37.7862 35H34.8262L32.8662 27.58H31.5062V35H28.5462ZM31.5062 25.72H32.4262C32.9995 25.72 33.4528 25.64 33.7862 25.48C34.1328 25.3067 34.3795 25.04 34.5262 24.68C34.6728 24.3067 34.7462 23.8333 34.7462 23.26C34.7462 22.4467 34.5928 21.84 34.2862 21.44C33.9928 21.0267 33.4262 20.82 32.5862 20.82H31.5062V25.72ZM41.8371 35V18.8H44.7571V35H41.8371ZM53.3449 35.22C52.3716 35.22 51.5583 35.0333 50.9049 34.66C50.2516 34.2733 49.7583 33.7133 49.4249 32.98C49.0916 32.2467 48.9049 31.3467 48.8649 30.28L51.4049 29.78C51.4316 30.4067 51.5049 30.96 51.6249 31.44C51.7583 31.92 51.9516 32.2933 52.2049 32.56C52.4716 32.8133 52.8183 32.94 53.2449 32.94C53.7249 32.94 54.0649 32.8 54.2649 32.52C54.4649 32.2267 54.5649 31.86 54.5649 31.42C54.5649 30.7133 54.4049 30.1333 54.0849 29.68C53.7649 29.2267 53.3383 28.7733 52.8049 28.32L50.7649 26.52C50.1916 26.0267 49.7316 25.48 49.3849 24.88C49.0516 24.2667 48.8849 23.5133 48.8849 22.62C48.8849 21.34 49.2583 20.3533 50.0049 19.66C50.7516 18.9667 51.7716 18.62 53.0649 18.62C53.8249 18.62 54.4583 18.74 54.9649 18.98C55.4716 19.2067 55.8716 19.5267 56.1649 19.94C56.4716 20.3533 56.6983 20.8267 56.8449 21.36C56.9916 21.88 57.0849 22.4333 57.1249 23.02L54.6049 23.46C54.5783 22.9533 54.5183 22.5 54.4249 22.1C54.3449 21.7 54.1916 21.3867 53.9649 21.16C53.7516 20.9333 53.4316 20.82 53.0049 20.82C52.5649 20.82 52.2249 20.9667 51.9849 21.26C51.7583 21.54 51.6449 21.8933 51.6449 22.32C51.6449 22.8667 51.7583 23.32 51.9849 23.68C52.2116 24.0267 52.5383 24.3867 52.9649 24.76L54.9849 26.54C55.6516 27.1 56.2183 27.76 56.6849 28.52C57.1649 29.2667 57.4049 30.1733 57.4049 31.24C57.4049 32.0133 57.2316 32.7 56.8849 33.3C56.5516 33.9 56.0783 34.3733 55.4649 34.72C54.8649 35.0533 54.1583 35.22 53.3449 35.22ZM61.1477 35V18.8H65.9077C66.8811 18.8 67.6677 18.98 68.2677 19.34C68.8811 19.7 69.3277 20.2267 69.6077 20.92C69.9011 21.6 70.0477 22.4267 70.0477 23.4C70.0477 24.4533 69.8677 25.3067 69.5077 25.96C69.1477 26.6 68.6411 27.0667 67.9877 27.36C67.3477 27.6533 66.5877 27.8 65.7077 27.8H64.1077V35H61.1477ZM64.1077 25.72H65.2277C65.7611 25.72 66.1744 25.6467 66.4677 25.5C66.7744 25.34 66.9811 25.0933 67.0877 24.76C67.2077 24.4133 67.2677 23.9533 67.2677 23.38C67.2677 22.7933 67.2211 22.32 67.1277 21.96C67.0477 21.5867 66.8611 21.3133 66.5677 21.14C66.2877 20.9667 65.8411 20.88 65.2277 20.88H64.1077V25.72Z"
+        fill="white" />
+    <path d="M89.5 38V33.5H92.5V1.5H10.5V4.5H6.5" stroke="white" stroke-width="3" />
+</svg>
+
+            <button class="header__burger-btn">
+                
+<svg class="header__burger-icon" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="20" height="3" fill="white" />
+    <rect y="6" width="20" height="3" fill="white" />
+    <rect y="12" width="20" height="3" fill="white" />
+</svg>
+
+                
+<svg class="header__close-icon" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.848511 0.848633L15.8485 15.8486M15.8485 0.848633L0.848511 15.8486" stroke="white" stroke-width="2.4" />
+</svg>
+
+            </button>
+            <div class="header__center-block">
+                
+<nav class="nav-menu nav-menu_horizontal">
+    <ul class="nav-menu__list">
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link nav-menu__link_hover_secondary" href="/crisp/" name="Home"
+                aria-label="Home">Home</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link nav-menu__link_hover_secondary" href="/crisp/catalog/" name="Shop"
+                aria-label="Shop">Shop</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link nav-menu__link_hover_secondary" href="#" name="Blog"
+                aria-label="Blog">Blog</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link nav-menu__link_hover_secondary" href="#" name="Sale"
+                aria-label="Sale">Sale</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link nav-menu__link_hover_secondary" href="#" name="Contact us"
+                aria-label="Contact us">Contact us</a>
+        </li>
+        
+    </ul>
+</nav>
+
+                <div class="header__search header-search">
+                    
+<svg class="" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="6.15385" cy="6.15385" r="4.95385" stroke="white" stroke-width="2.4" />
+    <path d="M11.4872 11.4873L16 16.0001" stroke="white" stroke-width="2.4" />
+</svg>
+
+                    <div class="header-search__label">search</div>
+                </div>
+            </div>
+            <div class="header__right-block">
+                
+<svg class="header__mobile-search-btn" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="6.15385" cy="6.15385" r="4.95385" stroke="white" stroke-width="2.4" />
+    <path d="M11.4872 11.4873L16 16.0001" stroke="white" stroke-width="2.4" />
+</svg>
+
+                
+<div class="auth header__auth">
+    <a href="/crisp/login/" class="auth__login" name="login" aria-label="SIGN IN">
+        <span class="auth__link">SIGN IN</span>
+    </a>
+    <a href="/crisp/registration/" class="auth__link" name="registration" aria-label="CREATE AN ACCOUNT">CREATE AN
+        ACCOUNT</a>
+</div>
+
+                <a href="#" class="header__wishlist-link">
+                    
+<svg class="" width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M14.7252 1.19971C17.9598 1.19981 20.6002 3.66229 20.6002 6.896C20.6001 8.84688 19.6741 10.5189 18.3219 12.1099C16.9812 13.6871 15.0857 15.3378 12.9215 17.2251L11.69 18.3032L10.9 18.9946L10.11 18.3032L8.87852 17.2251C6.71432 15.3378 4.81876 13.6871 3.47813 12.1099C2.12594 10.5189 1.19986 8.84688 1.19981 6.896C1.19981 3.66229 3.84022 1.19981 7.07481 1.19971C8.47457 1.19971 9.8262 1.67813 10.9 2.48291C11.9738 1.67813 13.3254 1.19971 14.7252 1.19971Z"
+        stroke="white" stroke-width="2.4" />
+</svg>
+
+                </a>
+                <div class="cart-item">
+                    <div class="cart-item__btn">
+                        
+<svg class="" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.8682 5.40039L16.7266 20H1.27344L2.13184 5.40039H15.8682Z" stroke="white" stroke-width="2.4" />
+    <path d="M5 4.2002V2.2002C5 1.64791 5.44772 1.2002 6 1.2002H12C12.5523 1.2002 13 1.64791 13 2.2002V4.2002"
+        stroke="white" stroke-width="2.4" />
+</svg>
+
+                        <span class="cart-item__count">2</span>
+                    </div>
+
+                    <div class="cart-item__label">
+                        <div class="cart-item__text">Shopping Cart</div>
+                        <div class="cart-item__total">0,00 EUR</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main>
+        
+<section class="hero">
+    <div class="page-container-1920">
+        
+<div class="banner ">
+    <div class="banner__wrapper">
+
+        
+
+
+
+<picture>
+
+    
+    <source media="(max-width: 650px)" type="image/webp"  data-srcset="/images/catalog-page/hero-mobile.webp" >
+    
+
+    
+    <source media="(max-width: 650px)" type="image/jpeg"  data-srcset="/images/catalog-page/hero-mobile.jpg" >
+    
+
+    <source type="image/webp"  data-srcset="/images/catalog-page/hero-desktop.webp" >
+
+    <img class="banner__img lazy" alt="banner image"  fetchpriority="auto"  data-src="/images/catalog-page/hero-desktop.jpg" >
+</picture>
+
+
+        
+<div class="text-block">
+    <div class="text-block__title">Shopping without limits.</div>
+    <div class="text-block__text">You can choose the best option for you, and it does not matter whether you are in Prague or San
+        Francisco. We will deliver your purchase anywhere!</div>
+    <button class="button button_outlined">shop now</button>
+</div>
+
+
+    </div>
+</div>
+
+    </div>
+</section>
+
+        
+<section class="products">
+    <div class="page-container-1920">
+        <div class="products__top">
+            <nav aria-label="breadcrumb" class="breadcrumbs">
+                <div class="breadcrumbs__content">
+                    Home / Womens Dress / Best Choice
+                </div>
+            </nav>
+        </div>
+        <div class="products__content">
+            <aside class="products__aside"></aside>
+            <div class="products__main">
+                <div class="products__sort-panel">
+                    <div class="products__sort"></div>
+                    <div class="products__limit"></div>
+                </div>
+                <div class="products__list">
+<div class="catalog__list">
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+    
+<div class="product-card">
+    <div class="product-card__image">
+        
+<div class="skeleton " style="height: 100%; width: 100%; border-radius: 0px">
+</div>
+
+    </div>
+
+    <div class="product-card__category">
+        
+<div class="skeleton " style="height: 12px; width: 70px; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__name">
+        
+<div class="skeleton " style="height: 18px; width: 100%; margin-bottom: 8px;">
+</div>
+
+    </div>
+
+    <div class="product-card__price price">
+        
+<div class="skeleton " style="height: 18px; width: 70px; ">
+</div>
+
+    </div>
+</div>
+
+    
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
+<section class="benefits">
+    <div class="page-container-1920">
+        <ul class="benefits__list">
+            <li class="benefits__item">
+                
+<svg class="" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.717041 4.29702L5.96704 9.69702L14.717 0.697021" stroke="black" stroke-width="2" />
+</svg>
+
+                <span class="benefits__name">Duties and Taxes Guaranteed</span>
+            </li>
+            <li class="benefits__item">
+                
+<svg class="" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.717041 4.29702L5.96704 9.69702L14.717 0.697021" stroke="black" stroke-width="2" />
+</svg>
+
+                <span class="benefits__name">Free Express Shipping</span>
+            </li>
+            <li class="benefits__item">
+                
+<svg class="" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.717041 4.29702L5.96704 9.69702L14.717 0.697021" stroke="black" stroke-width="2" />
+</svg>
+
+                <span class="benefits__name">Customer Love</span>
+            </li>
+            <li class="benefits__item">
+                
+<svg class="" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.717041 4.29702L5.96704 9.69702L14.717 0.697021" stroke="black" stroke-width="2" />
+</svg>
+
+                <span class="benefits__name">Easy Returns</span>
+            </li>
+            <li class="benefits__item">
+                
+<svg class="" width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.717041 4.29702L5.96704 9.69702L14.717 0.697021" stroke="black" stroke-width="2" />
+</svg>
+
+                <span class="benefits__name">Secure Payment</span>
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+        
+<footer class="page-footer">
+    <div class="page-container-1920">
+        <div class="page-footer__wrapper">
+            <div class="page-footer__content">
+                <div class="page-footer__logo-wrapper">
+                    
+<svg class="page-footer__logo" width="94" height="44" viewBox="0 0 94 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1.5" y="10.5" width="82" height="32" stroke="white" stroke-width="3" />
+    <path
+        d="M20.1054 35.22C18.9187 35.22 17.9854 34.9867 17.3054 34.52C16.6387 34.0533 16.1721 33.42 15.9054 32.62C15.6387 31.8067 15.5054 30.8733 15.5054 29.82V24.04C15.5054 22.9333 15.6387 21.9733 15.9054 21.16C16.1721 20.3467 16.6387 19.72 17.3054 19.28C17.9854 18.84 18.9187 18.62 20.1054 18.62C21.2254 18.62 22.0987 18.8133 22.7254 19.2C23.3654 19.5733 23.8187 20.1133 24.0854 20.82C24.3521 21.5267 24.4854 22.3467 24.4854 23.28V24.64H21.6454V23.24C21.6454 22.7867 21.6187 22.3733 21.5654 22C21.5254 21.6267 21.3987 21.3333 21.1854 21.12C20.9854 20.8933 20.6321 20.78 20.1254 20.78C19.6187 20.78 19.2454 20.9 19.0054 21.14C18.7787 21.3667 18.6321 21.68 18.5654 22.08C18.4987 22.4667 18.4654 22.9067 18.4654 23.4V30.44C18.4654 31.0267 18.5121 31.5133 18.6054 31.9C18.6987 32.2733 18.8654 32.56 19.1054 32.76C19.3587 32.9467 19.6987 33.04 20.1254 33.04C20.6187 33.04 20.9654 32.9267 21.1654 32.7C21.3787 32.46 21.5121 32.1467 21.5654 31.76C21.6187 31.3733 21.6454 30.94 21.6454 30.46V29H24.4854V30.3C24.4854 31.26 24.3587 32.1133 24.1054 32.86C23.8521 33.5933 23.4054 34.1733 22.7654 34.6C22.1387 35.0133 21.2521 35.22 20.1054 35.22ZM28.5462 35V18.8H32.4262C33.5195 18.8 34.4395 18.9333 35.1862 19.2C35.9462 19.4533 36.5195 19.8933 36.9062 20.52C37.3062 21.1467 37.5062 22 37.5062 23.08C37.5062 23.7333 37.4462 24.32 37.3262 24.84C37.2062 25.36 36.9995 25.8067 36.7062 26.18C36.4262 26.54 36.0328 26.82 35.5262 27.02L37.7862 35H34.8262L32.8662 27.58H31.5062V35H28.5462ZM31.5062 25.72H32.4262C32.9995 25.72 33.4528 25.64 33.7862 25.48C34.1328 25.3067 34.3795 25.04 34.5262 24.68C34.6728 24.3067 34.7462 23.8333 34.7462 23.26C34.7462 22.4467 34.5928 21.84 34.2862 21.44C33.9928 21.0267 33.4262 20.82 32.5862 20.82H31.5062V25.72ZM41.8371 35V18.8H44.7571V35H41.8371ZM53.3449 35.22C52.3716 35.22 51.5583 35.0333 50.9049 34.66C50.2516 34.2733 49.7583 33.7133 49.4249 32.98C49.0916 32.2467 48.9049 31.3467 48.8649 30.28L51.4049 29.78C51.4316 30.4067 51.5049 30.96 51.6249 31.44C51.7583 31.92 51.9516 32.2933 52.2049 32.56C52.4716 32.8133 52.8183 32.94 53.2449 32.94C53.7249 32.94 54.0649 32.8 54.2649 32.52C54.4649 32.2267 54.5649 31.86 54.5649 31.42C54.5649 30.7133 54.4049 30.1333 54.0849 29.68C53.7649 29.2267 53.3383 28.7733 52.8049 28.32L50.7649 26.52C50.1916 26.0267 49.7316 25.48 49.3849 24.88C49.0516 24.2667 48.8849 23.5133 48.8849 22.62C48.8849 21.34 49.2583 20.3533 50.0049 19.66C50.7516 18.9667 51.7716 18.62 53.0649 18.62C53.8249 18.62 54.4583 18.74 54.9649 18.98C55.4716 19.2067 55.8716 19.5267 56.1649 19.94C56.4716 20.3533 56.6983 20.8267 56.8449 21.36C56.9916 21.88 57.0849 22.4333 57.1249 23.02L54.6049 23.46C54.5783 22.9533 54.5183 22.5 54.4249 22.1C54.3449 21.7 54.1916 21.3867 53.9649 21.16C53.7516 20.9333 53.4316 20.82 53.0049 20.82C52.5649 20.82 52.2249 20.9667 51.9849 21.26C51.7583 21.54 51.6449 21.8933 51.6449 22.32C51.6449 22.8667 51.7583 23.32 51.9849 23.68C52.2116 24.0267 52.5383 24.3867 52.9649 24.76L54.9849 26.54C55.6516 27.1 56.2183 27.76 56.6849 28.52C57.1649 29.2667 57.4049 30.1733 57.4049 31.24C57.4049 32.0133 57.2316 32.7 56.8849 33.3C56.5516 33.9 56.0783 34.3733 55.4649 34.72C54.8649 35.0533 54.1583 35.22 53.3449 35.22ZM61.1477 35V18.8H65.9077C66.8811 18.8 67.6677 18.98 68.2677 19.34C68.8811 19.7 69.3277 20.2267 69.6077 20.92C69.9011 21.6 70.0477 22.4267 70.0477 23.4C70.0477 24.4533 69.8677 25.3067 69.5077 25.96C69.1477 26.6 68.6411 27.0667 67.9877 27.36C67.3477 27.6533 66.5877 27.8 65.7077 27.8H64.1077V35H61.1477ZM64.1077 25.72H65.2277C65.7611 25.72 66.1744 25.6467 66.4677 25.5C66.7744 25.34 66.9811 25.0933 67.0877 24.76C67.2077 24.4133 67.2677 23.9533 67.2677 23.38C67.2677 22.7933 67.2211 22.32 67.1277 21.96C67.0477 21.5867 66.8611 21.3133 66.5677 21.14C66.2877 20.9667 65.8411 20.88 65.2277 20.88H64.1077V25.72Z"
+        fill="white" />
+    <path d="M89.5 38V33.5H92.5V1.5H10.5V4.5H6.5" stroke="white" stroke-width="3" />
+</svg>
+
+                </div>
+                <div class="page-footer__item page-footer-item js-accordion-title">
+                    <div class="page-footer-item__title">
+                        features
+                        <span class="page-footer-item__icon"></span>
+                    </div>
+                    <div class="page-footer-item__content">
+                        <ul class="page-footer-item__list footer-list">
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">men</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">women</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">boys</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">girls</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">new arrivals</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">shoes</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">clothes</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">accessories</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item js-accordion-title">
+                    <div class="page-footer-item__title">
+                        menu
+                        <span class="page-footer-item__icon"></span>
+                    </div>
+                    <div class="page-footer-item__content">
+                        <ul class="page-footer-item__list footer-list">
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">about us</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">contact us</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">my account</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">orders history</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">my wishlist</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">blog</a>
+                            </li>
+                            <li class="footer-list__item">
+                                <a href="#" class="footer-list__link">login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item js-accordion-title">
+                    <div class="page-footer-item__title">
+                        contact us
+                        <span class="page-footer-item__icon"></span>
+                    </div>
+                    <div class="page-footer-item__content">
+                        <ul class="contacts-list">
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">address</div>
+                                <div class="contacts-list__info">123 STREET NAME, CITY, ENGLAND</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">phone</div>
+                                <div class="contacts-list__info">(123) 456-7890</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">email</div>
+                                <div class="contacts-list__info">MAIL@EXAMPLE.COM</div>
+                            </li>
+                            <li class="contacts-list__item">
+                                <div class="contacts-list__title">working days/hours</div>
+                                <div class="contacts-list__info">MON - SUN / 9:00AM - 8:00PM</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item js-accordion-title">
+                    <div class="page-footer-item__title">
+                        follow us
+                        <span class="page-footer-item__icon"></span>
+                    </div>
+                    <div class="page-footer-item__content">
+                        <ul class="follow-us-list">
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    
+<svg class="" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_8479_9627)">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M0 0V21H21V0H0ZM13.8925 5.77925H12.2511C11.926 5.77925 11.5979 6.11525 11.5979 6.36522V8.03894H13.8893C13.797 9.32234 13.6076 10.4959 13.6076 10.4959H11.5861V17.7692H8.57386V10.4952H7.10751V8.04766H8.57386V6.04662C8.57386 5.68071 8.49974 3.23082 11.6603 3.23082H13.8925V5.77925H13.8925Z"
+            fill="white" />
+    </g>
+    <defs>
+        <clipPath id="clip0_8479_9627">
+            <rect width="21" height="21" fill="white" />
+        </clipPath>
+    </defs>
+</svg>
+
+                                    <span class="follow-us-list__text">facebook</span>
+                                </a>
+                            </li>
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    
+<svg class="" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_8479_9634)">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M0 0V21H21V0H0ZM16.2808 7.53503C16.2865 7.66302 16.2894 7.79169 16.2894 7.92088C16.2894 11.8626 13.2893 16.4075 7.80295 16.4075C6.11852 16.4075 4.55068 15.9138 3.23072 15.0673C3.46408 15.095 3.70145 15.1092 3.94228 15.1092C5.33972 15.1092 6.6258 14.6323 7.64668 13.8322C6.34145 13.8082 5.23985 12.9458 4.86023 11.7608C5.04245 11.7957 5.22932 11.8145 5.42151 11.8145C5.69354 11.8145 5.95708 11.7778 6.20737 11.7098C4.84292 11.4357 3.81471 10.2302 3.81471 8.78511C3.81471 8.77251 3.81471 8.76 3.81498 8.74754C4.21708 8.97092 4.67695 9.10514 5.16595 9.12065C4.36555 8.58577 3.83912 7.67275 3.83912 6.63803C3.83912 6.09134 3.98622 5.57903 4.24302 5.1384C5.71408 6.94306 7.91192 8.13046 10.3908 8.25498C10.3399 8.03658 10.3134 7.80891 10.3134 7.57518C10.3134 5.92805 11.649 4.59258 13.2962 4.59258C14.1541 4.59258 14.9293 4.95475 15.4734 5.5344C16.1527 5.40078 16.7911 5.15243 17.3675 4.81066C17.1448 5.50722 16.6719 6.09162 16.056 6.46085C16.6594 6.38871 17.2342 6.22832 17.7691 5.99109C17.3694 6.5892 16.8637 7.11457 16.2808 7.53503Z"
+            fill="white" />
+    </g>
+    <defs>
+        <clipPath id="clip0_8479_9634">
+            <rect width="21" height="21" fill="white" />
+        </clipPath>
+    </defs>
+</svg>
+
+                                    <span class="follow-us-list__text">twiter</span>
+                                </a>
+                            </li>
+                            <li class="follow-us-list__item">
+                                <a href="#" class="follow-us-list__link">
+                                    
+<svg class="" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_8479_9630)">
+        <path
+            d="M3.82933 21H17.1723H18.3073H21.0006V18.3063V17.6161V3.38399V2.69324V0H18.3073H17.1723H3.82933H2.69434H0.000823975V2.69324V3.38422V17.616V18.3063V21H2.69407H3.82933V21ZM14.3563 3.28109C14.3563 3.02582 14.4472 2.80538 14.6298 2.61775C14.8119 2.43136 15.035 2.3379 15.2997 2.3379H17.6786C17.9428 2.3379 18.1661 2.43133 18.3485 2.61775C18.5307 2.80511 18.622 3.02582 18.622 3.28109V5.53693C18.622 5.80116 18.5307 6.02493 18.3485 6.20664C18.1661 6.38928 17.9428 6.48012 17.6786 6.48012H15.2995C15.035 6.48012 14.8117 6.38928 14.6296 6.20664C14.4471 6.02497 14.3561 5.80116 14.3561 5.53693V3.28109H14.3563ZM13.5016 8.37238C14.3263 9.16981 14.7388 10.1336 14.7388 11.2636C14.7388 12.3942 14.3263 13.3581 13.5016 14.1551C12.6765 14.953 11.6808 15.3514 10.5143 15.3514C9.35659 15.3514 8.36562 14.953 7.54075 14.1551C6.71561 13.3584 6.30352 12.3944 6.30352 11.2636C6.30352 10.1336 6.71584 9.16957 7.54075 8.37238C8.36562 7.57491 9.35682 7.17608 10.5143 7.17608C11.681 7.17608 12.6765 7.57518 13.5016 8.37238ZM5.64637 3.28109C5.64637 3.02582 5.7372 2.80538 5.91984 2.61775C6.10198 2.43136 6.32532 2.3379 6.58979 2.3379H7.09059C7.35483 2.3379 7.57813 2.43133 7.76054 2.61775C7.94291 2.80511 8.03401 3.02582 8.03401 3.28109V5.53693C8.03401 5.80116 7.94294 6.02493 7.76054 6.20664C7.57813 6.38928 7.35483 6.48012 7.09059 6.48012H6.58979C6.32532 6.48012 6.10198 6.38928 5.91984 6.20664C5.73747 6.02497 5.64637 5.80116 5.64637 5.53693V3.28109ZM2.33876 3.28109C2.33876 3.02582 2.42983 2.80538 2.61224 2.61775C2.79437 2.43136 3.01748 2.3379 3.28218 2.3379H3.78298C4.04722 2.3379 4.27052 2.43133 4.45293 2.61775C4.6353 2.80511 4.72641 3.02582 4.72641 3.28109V5.53693C4.72641 5.80116 4.63534 6.02493 4.45293 6.20664C4.27052 6.38928 4.04722 6.48012 3.78298 6.48012H3.28218C3.01772 6.48012 2.79437 6.38928 2.61224 6.20664C2.42987 6.02497 2.33876 5.80116 2.33876 5.53693V3.28109V3.28109ZM2.33876 18.2826V9.42318H4.2665C4.0841 9.99731 3.99303 10.5949 3.99303 11.2144C3.99303 12.964 4.63082 14.4572 5.90705 15.6918C7.18305 16.9267 8.7188 17.5438 10.5145 17.5438C11.6992 17.5438 12.7929 17.2619 13.7957 16.6962C14.7982 16.1318 15.5912 15.3632 16.1745 14.3928C16.7577 13.422 17.0494 12.3625 17.0494 11.2142C17.0494 10.5946 16.9583 9.99708 16.7759 9.42295H18.6215V18.2827C18.6215 18.5197 18.5395 18.718 18.3755 18.8771C18.2116 19.0373 18.0155 19.1163 17.7877 19.1163H3.17264C2.93561 19.1163 2.73736 19.0373 2.57791 18.8771C2.41847 18.7179 2.33876 18.5197 2.33876 18.2826Z"
+            fill="white" />
+    </g>
+    <defs>
+        <clipPath id="clip0_8479_9630">
+            <rect width="21" height="21" fill="white" />
+        </clipPath>
+    </defs>
+</svg>
+
+                                    <span class="follow-us-list__text">instagram</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-footer__item page-footer-item page-footer-item__join-us">
+                    <div class="page-footer-item__title">join us</div>
+                    <div class="page-footer-item__content">
+                        <form action="#" class="join-us-form">
+                            <label for="join-us-form__input" class="join-us-form__label">
+                                Subscribe to our newsletters
+                            </label>
+                            <input id="join-us-form__input" type="text" class="join-us-form__input"
+                                placeholder="Email Address" />
+                            <button type="button"
+                                class="button button_solid button_white button_fill">subscribe!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer__copyright">© 2019. Crisp theme Developed by Belvg</div>
+        </div>
+    </div>
+</footer>
+
+    </main>
+    <div class="portal-root">
+        
+
+
+<div class="mobile-menu">
+    <div class="page-container-1920">
+        <div class="mobile-menu__wrapper">
+            <div class="search-group">
+                <input type="text" class="search-input" placeholder="Type something...">
+                <button type="button" class="search-button">FIND</button>
+            </div>
+            
+<nav class="nav-menu mobile-menu__nav-menu">
+    <ul class="nav-menu__list">
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link " href="/crisp/" name="Home"
+                aria-label="Home">Home</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link " href="/crisp/catalog/" name="Shop"
+                aria-label="Shop">Shop</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link " href="#" name="Blog"
+                aria-label="Blog">Blog</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link " href="#" name="Sale"
+                aria-label="Sale">Sale</a>
+        </li>
+        
+        <li class="nav-menu__item">
+            <a class="nav-menu__link " href="#" name="Contact us"
+                aria-label="Contact us">Contact us</a>
+        </li>
+        
+    </ul>
+</nav>
+
+        </div>
+    </div>
+</div>
+
+        <div id="toast-container"></div>
+    </div>
+        <noscript><link rel="stylesheet" crossorigin="" href="/crisp/assets/base-tn0RQdqM.css"></noscript>
+        <noscript><link rel="stylesheet" crossorigin="" href="/crisp/assets/catalog-DwIpJhmK.css"></noscript>
+    </body>
+
+</html>
