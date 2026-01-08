@@ -47,7 +47,7 @@
   &__icon {
     position: absolute;
     right: 15px;
-    top: 50%;
+    top: calc(50% + 2px);
     transform: translateY(-50%) rotate(0);
     transition: 0.3s;
   }
