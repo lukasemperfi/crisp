@@ -2,7 +2,38 @@
 @use "@/app/styles/mixins" as mixins;
 
 .products {
-  $bp-mobile: 768px;
+  $bp-mobile: 767px;
+
+  &__top {
+    padding-top: 12px;
+    padding-bottom: 33px;
+  }
+
+  &__sort-panel {
+    display: flex;
+    justify-content: flex-end;
+
+    .dropdown__trigger {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--black);
+      padding-block: 11px;
+    }
+
+    .products__sort {
+      .dropdown {
+        width: 255px;
+      }
+    }
+
+    .products__limit {
+      .dropdown {
+        width: 69px;
+      }
+    }
+  }
 
   &__content {
     display: flex;

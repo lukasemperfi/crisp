@@ -6,15 +6,21 @@
 {%macro productsSection()%}
 <section class="products">
     <div class="page-container-1920">
+        <div class="products__top">
+            <nav aria-label="breadcrumb" class="breadcrumbs">
+                <div class="breadcrumbs__content">
+                    Home / Womens Dress / Best Choice
+                </div>
+            </nav>
+        </div>
         <div class="products__content">
             <aside class="products__aside"></aside>
             <div class="products__main">
                 <div class="products__sort-panel">
                     <div class="products__sort"></div>
                     <div class="products__limit"></div>
-                    <div class="products__list">{{productListSkeleton(8)}}</div>
                 </div>
-
+                <div class="products__list">{{productListSkeleton(8)}}</div>
             </div>
         </div>
     </div>

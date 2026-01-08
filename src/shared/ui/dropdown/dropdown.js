@@ -124,8 +124,8 @@ export function Dropdown(container, props = {}) {
 
 function createArrowIcon(className = "") {
   return `
-  <svg class="${className}" width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.353516 0.353516L4.35352 4.35352L8.35352 0.353516" stroke="black" />
-  </svg>
+  <svg class="${className}" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0.353516 0.353516L5.35352 5.35352L10.3535 0.353516" stroke="black" />
+</svg>
   `;
 }

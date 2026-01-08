@@ -9,8 +9,8 @@ export const initProducts = async () => {
   const urlParams = parseUrlParams(window.location.search);
   const DEFAULT_QUERY = {
     page: 0,
-    limit: 8,
-    sort: "new",
+    limit: 48,
+    sort: "price_desc",
   };
 
   let queryState = {
