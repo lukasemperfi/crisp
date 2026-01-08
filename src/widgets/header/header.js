@@ -1,26 +1,11 @@
 import { initActiveLink } from "@/shared/ui/nav-menu/nav-menu";
-import { store } from "@/app/store";
-import { AUTH_STATUS } from "@/entities/auth/model/auth-slice";
-import { logoutUser } from "@/entities/auth/model/auth-slice";
-import { getSession } from "@/app/providers/auth-guard";
-import { CartPopup } from "@/features/cart/ui/cart-popup";
-import { selectCartCount } from "@/features/cart/model/cart-slice";
-import { supabase } from "../../shared/api/supabase/client";
-import { userProfileApi } from "../../entities/profile/api/profile";
-import { baseUrl } from "@/shared/helpers/base-url";
 
 export async function initHeader() {
   initMenu();
   initResizeHandler();
   initActiveLink(".nav-menu__link");
-  // initHeaderAuth();
-  // initCartPopup();
-  observeHeaderHeight();
 
-  // store.subscribe("cart", async (newState) => {
-  //   const cartCount = selectCartCount(newState);
-  //   updateCartCounter(cartCount);
-  // });
+  observeHeaderHeight();
 }
 
 function initMenu() {
