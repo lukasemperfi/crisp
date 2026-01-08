@@ -1,0 +1,22 @@
+{%from "src/entities/product/ui/product-list/product-list-skeleton.html" import productListSkeleton%}
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+{% from "src/shared/ui/skeleton/skeleton.html" import skeleton%}
+
+{%macro productsSection()%}
+<section class="products">
+    <div class="page-container-1920">
+        <div class="products__content">
+            <aside class="products__aside"></aside>
+            <div class="products__main">
+                <div class="products__sort-panel">
+                    <div class="products__sort"></div>
+                    <div class="products__limit"></div>
+                    <div class="products__list">{{productListSkeleton(8)}}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{%endmacro%}

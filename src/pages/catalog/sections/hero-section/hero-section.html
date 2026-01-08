@@ -1,0 +1,58 @@
+{%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+{%from "src/shared/ui/text-block/text-block.html" import textBlock%}
+{%import "src/shared/ui/slider/slider.html" as slider%}
+
+{% macro heroSection()%}
+<section class="hero">
+    <div class="page-container-1920">
+        <div class="hero__wrapper">
+            {{ picture(
+            jpgSrc="/images/home-page/hero-background.jpg",
+            webpSrc="/images/home-page/hero-background.webp",
+            breakpoint=650,
+            alt="hero background image",
+            class="hero__hero-background-img"
+            ) }}
+            <div class="hero__content">
+                {{textBlock(title="SUMMER SALE<br /> GEt 30% OFF<br /> On all dress.", text="")}}
+                <div class="hero__slider">
+                    <div class="swiper hero-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-1.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-2.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-1.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-2.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-1.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-2.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-1.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/home-page/hero-slider-2.jpg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slider__nav">
+                <div class="swiper-pagination hero-slider__nav-bullets"></div>
+                {{slider.sliderLeftNav(class="hero-slider__nav-left")}}
+                {{slider.sliderRightNav(class="hero-slider__nav-right")}}
+            </div>
+        </div>
+    </div>
+</section>
+{%endmacro%}
