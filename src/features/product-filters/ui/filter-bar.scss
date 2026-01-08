@@ -23,6 +23,7 @@
       color: var(--black);
       border: 1px solid var(--divider);
       padding: 10px;
+      position: relative;
     }
   }
 
@@ -43,20 +44,24 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-1px);
       transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
       overflow-y: auto;
+      pointer-events: none;
     }
   }
 
   &__icon {
-    transform: rotateX(0);
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0);
     transition: 0.3s;
   }
 
   &_is-open &__icon {
     @include mixins.respond-to($bp-mobile) {
-      transform: rotateX(180deg);
+      transform: translateY(-50%) rotateX(180deg);
       transition: 0.3s;
 
       path {
@@ -78,6 +83,7 @@
       max-height: 1000px;
       opacity: 1;
       transform: translateY(0);
+      pointer-events: auto;
     }
   }
 

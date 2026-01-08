@@ -2,7 +2,7 @@
 @use "@/app/styles/mixins" as mixins;
 
 .products {
-  $bp-mobile: 767px;
+  $bp-mobile: 768px;
 
   &__top {
     padding-top: 12px;
@@ -22,11 +22,30 @@
       text-transform: uppercase;
       color: var(--black);
       padding-block: 11px;
+
+      @include mixins.respond-to($bp-mobile) {
+        font-size: 12px;
+        padding-block: 10px;
+      }
+
+      .dropdown__icon {
+        @include mixins.respond-to($bp-mobile) {
+          width: 9px;
+          height: 6px;
+        }
+      }
     }
 
     .products__sort {
+      @include mixins.respond-to($bp-mobile) {
+        width: 100%;
+      }
       .dropdown {
         width: 255px;
+
+        @include mixins.respond-to($bp-mobile) {
+          width: 100%;
+        }
       }
     }
 

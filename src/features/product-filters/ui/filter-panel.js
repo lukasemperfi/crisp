@@ -241,29 +241,6 @@ export class FilterPanel {
     return wrapper;
   }
 
-  // _createFilterItem({ title, content, isOpen = true }) {
-  //   const item = document.createElement("div");
-  //   item.className = "filter-panel__item filter-item";
-  //   if (isOpen) item.classList.add("filter-item_is-open");
-
-  //   item.innerHTML = `
-  //       <div class="filter-item__header">
-  //         <h3 class="filter-item__title">${title}</h3>
-  //         <span class="filter-item__icon"></span>
-  //       </div>
-  //       <div class="filter-item__body">
-  //         <div class="filter-item__content"></div>
-  //       </div>
-  //     `;
-  //   item.querySelector(".filter-item__content").appendChild(content);
-
-  //   item.querySelector(".filter-item__header").addEventListener("click", () => {
-  //     item.classList.toggle("filter-item_is-open");
-  //   });
-
-  //   return item;
-  // }
-
   _createAccordionItem({ title, content, isOpen }) {
     const item = document.createElement("div");
     item.className = "filter-panel__item filter-item";

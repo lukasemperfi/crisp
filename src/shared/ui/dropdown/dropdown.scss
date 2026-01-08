@@ -38,8 +38,10 @@
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(-10px);
+    visibility: hidden;
+    transform: translateY(-1px);
     transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
   }
 
   &__icon {
@@ -91,6 +93,8 @@
       opacity: 1;
       transform: translateY(0);
       overflow-y: auto;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .dropdown__icon {

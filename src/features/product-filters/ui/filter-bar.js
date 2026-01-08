@@ -15,7 +15,7 @@ export function FiltersBar(container, filterConfig, filterOptions) {
     <div class="filters-bar">
       <button class="filters-bar__toggle">
         <span class="filters-bar__value">Filter</span>
-        <span class="filters-bar__icon">${createArrowIcon()}</span>
+       ${createArrowIcon("filters-bar__icon")}
       </button>
       <div class="filters-bar__content">
         <div class="filters-bar__filters"></div>
