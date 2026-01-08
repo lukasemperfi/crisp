@@ -6,7 +6,7 @@
     display: flex;
     position: relative;
     aspect-ratio: 1878/467;
-    padding-block: functions.fluidValue(10px, 40px, 320px, 1920px);
+    padding-block: functions.fluidValue(13px, 40px, 320px, 1920px);
   }
 
   &__img {
@@ -34,7 +34,7 @@
     padding-bottom: 0;
 
     @include mixins.respond-to(xl) {
-      left: functions.fluidValue(23px, 169px, 320px, 1920px);
+      left: functions.fluidValue(20px, 169px, 320px, 1920px);
     }
     @include mixins.respond-to(sm) {
       padding: 0;
@@ -46,11 +46,11 @@
     }
 
     &__title {
-      margin-bottom: functions.fluidValue(10px, 13px, 320px, 1920px);
+      margin-bottom: functions.fluidValue(4px, 13px, 320px, 1920px);
     }
 
     &__text {
-      margin-bottom: functions.fluidValue(15px, 42px, 320px, 1920px);
+      margin-bottom: functions.fluidValue(13px, 42px, 320px, 1920px);
     }
   }
 }

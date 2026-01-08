@@ -91,5 +91,9 @@
 
   &__color {
     margin-top: 10px;
+
+    .color-filter__grid {
+      gap: 6px;
+    }
   }
 }
