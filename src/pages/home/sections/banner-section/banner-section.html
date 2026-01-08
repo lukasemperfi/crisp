@@ -1,6 +1,20 @@
 {%import "src/shared/ui/icons/icons.html" as icons%}
 {%from "src/shared/ui/picture/picture.html" import picture%}
 {%from "src/shared/ui/text-block/text-block.html" import textBlock%}
+{%from "src/widgets/banner/banner.html" import banner%}
+
+{% macro bannerSection()%}
+<section class="banner">
+    <div class="page-container-1920">
+        {{banner()}}
+    </div>
+</section>
+{%endmacro%}
+
+
+<!-- {%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/shared/ui/picture/picture.html" import picture%}
+{%from "src/shared/ui/text-block/text-block.html" import textBlock%}
 
 {% macro bannerSection()%}
 <section class="banner">
@@ -21,4 +35,4 @@
 
     </div>
 </section>
-{%endmacro%}
+{%endmacro%} -->
