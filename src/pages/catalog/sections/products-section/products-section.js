@@ -124,10 +124,10 @@ export const initProducts = async () => {
   const bannerData = {
     className: "catalog__list-banner full-width",
     pictureProps: {
-      jpgSrc: "images/catalog-page/hero-desktop.jpg",
-      webpSrc: "images/catalog-page/hero-desktop.webp",
-      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
-      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
+      jpgSrc: "images/catalog-page/list-banner-desktop.jpg",
+      webpSrc: "images/catalog-page/list-banner-desktop.webp",
+      mobileJpgSrc: "images/catalog-page/list-banner-mobile.jpg",
+      mobileWebpSrc: "images/catalog-page/list-banner-mobile.webp",
       alt: "New Collection",
     },
     textBlockProps: {
