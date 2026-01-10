@@ -5,8 +5,46 @@ import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
 import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 import queryString from "query-string";
 import { Banner } from "../../../../widgets/banner/banner";
+import { mockProducts } from "../../../../shared/helpers/mock-products";
+import { debounce } from "../../../../shared/helpers/debounce";
 
 export const initProducts = async () => {
+  const products = mockProducts.slice(0, mockProducts.length - 0);
+  const productList2 = new ProductList(".products__list", products);
+
+  const bannerData = {
+    className: "catalog__list-banner full-width",
+    pictureProps: {
+      jpgSrc: "images/catalog-page/hero-desktop.jpg",
+      webpSrc: "images/catalog-page/hero-desktop.webp",
+      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
+      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
+      alt: "New Collection",
+    },
+    textBlockProps: {
+      title: "Shopping without limits.",
+      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
+      buttonText: "Shop Now",
+    },
+  };
+
+  const banner = Banner(bannerData);
+
+  const insertBanner = () => {
+    insertBannerIntoList({
+      listSelector: ".catalog__list",
+      element: banner,
+      insertAfterRow: 2,
+    });
+  };
+
+  insertBanner();
+
+  // const debouncedInsertBanner = debounce(insertBanner, 150);
+
+  window.addEventListener("resize", insertBanner);
+
+  return;
   const urlParams = parseUrlParams(window.location.search);
   const DEFAULT_QUERY = {
     page: 0,
@@ -131,9 +169,6 @@ export const initProducts = async () => {
 
     productList.appendProducts(data);
 
-    const middleIndex = Math.floor(data.length / 2);
-    insertBannerIntoList(".catalog__list", middleIndex);
-
     if (currentPage !== queryState.page || currentPage > 0) {
       updateUrlPage(currentPage);
     }
@@ -210,38 +245,110 @@ export const removeDefaultParams = (params, defaults) => {
   return cleaned;
 };
 
-function insertBannerIntoList(listSelector, index) {
+export function insertBannerIntoList({
+  listSelector,
+  element,
+  insertAfterRow = 2,
+}) {
   const list = document.querySelector(listSelector);
   if (!list) {
+    console.error("insertBannerIntoList: container not found.");
     return;
   }
 
-  if (list.querySelector(".catalog__list-banner")) {
+  if (!element) {
+    console.error("insertBannerIntoList: element not found.");
     return;
   }
 
-  const items = list.children;
-  const bannerData = {
-    className: "catalog__list-banner full-width",
-    pictureProps: {
-      jpgSrc: "images/catalog-page/hero-desktop.jpg",
-      webpSrc: "images/catalog-page/hero-desktop.webp",
-      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
-      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
-      alt: "New Collection",
-    },
-    textBlockProps: {
-      title: "Shopping without limits.",
-      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
-      buttonText: "Shop Now",
-    },
-  };
+  const items = Array.from(list.children).filter((el) => el !== element);
 
-  const banner = Banner(bannerData);
+  if (items.length === 0) {
+    return;
+  }
 
-  if (items.length === 0 || index >= items.length) {
-    list.appendChild(banner);
-  } else {
-    list.insertBefore(banner, items[index]);
+  // if (list.contains(element)) {
+  //   return;
+  // }
+
+  if (list.contains(element)) {
+    list.removeChild(element);
+  }
+
+  const rows = getRows(items);
+
+  if (rows.length < insertAfterRow) {
+    return;
+  }
+
+  const lastItemInRow = rows[insertAfterRow - 1].slice(-1)[0];
+
+  list.insertBefore(element, lastItemInRow.nextSibling);
+
+  function getRows(items) {
+    const rows = [];
+
+    let currentRowTop = null;
+    let currentRow = [];
+
+    items.forEach((item) => {
+      const top = Math.round(item.getBoundingClientRect().top);
+
+      if (currentRowTop === null) {
+        currentRowTop = top;
+        currentRow.push(item);
+        return;
+      }
+
+      if (top === currentRowTop) {
+        currentRow.push(item);
+      } else {
+        rows.push(currentRow);
+        currentRow = [item];
+        currentRowTop = top;
+      }
+    });
+
+    if (currentRow.length) {
+      rows.push(currentRow);
+    }
+
+    return rows;
   }
 }
+
+// function insertBannerIntoList(listSelector, index) {
+//   const list = document.querySelector(listSelector);
+//   if (!list) {
+//     return;
+//   }
+
+//   if (list.querySelector(".catalog__list-banner")) {
+//     return;
+//   }
+
+//   const items = list.children;
+//   const bannerData = {
+//     className: "catalog__list-banner full-width",
+//     pictureProps: {
+//       jpgSrc: "images/catalog-page/hero-desktop.jpg",
+//       webpSrc: "images/catalog-page/hero-desktop.webp",
+//       mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
+//       mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
+//       alt: "New Collection",
+//     },
+//     textBlockProps: {
+//       title: "Shopping without limits.",
+//       text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
+//       buttonText: "Shop Now",
+//     },
+//   };
+
+//   const banner = Banner(bannerData);
+
+//   if (items.length === 0 || index >= items.length) {
+//     list.appendChild(banner);
+//   } else {
+//     list.insertBefore(banner, items[index]);
+//   }
+// }
