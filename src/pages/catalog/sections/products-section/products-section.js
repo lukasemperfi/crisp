@@ -9,42 +9,6 @@ import { mockProducts } from "../../../../shared/helpers/mock-products";
 import { debounce } from "../../../../shared/helpers/debounce";
 
 export const initProducts = async () => {
-  const products = mockProducts.slice(0, mockProducts.length - 0);
-  const productList2 = new ProductList(".products__list", products);
-
-  const bannerData = {
-    className: "catalog__list-banner full-width",
-    pictureProps: {
-      jpgSrc: "images/catalog-page/hero-desktop.jpg",
-      webpSrc: "images/catalog-page/hero-desktop.webp",
-      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
-      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
-      alt: "New Collection",
-    },
-    textBlockProps: {
-      title: "Shopping without limits.",
-      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
-      buttonText: "Shop Now",
-    },
-  };
-
-  const banner = Banner(bannerData);
-
-  const insertBanner = () => {
-    insertBannerIntoList({
-      listSelector: ".catalog__list",
-      element: banner,
-      insertAfterRow: 2,
-    });
-  };
-
-  insertBanner();
-
-  // const debouncedInsertBanner = debounce(insertBanner, 150);
-
-  window.addEventListener("resize", insertBanner);
-
-  return;
   const urlParams = parseUrlParams(window.location.search);
   const DEFAULT_QUERY = {
     page: 0,
@@ -157,6 +121,23 @@ export const initProducts = async () => {
   };
 
   let currentPage = queryState.page;
+  const bannerData = {
+    className: "catalog__list-banner full-width",
+    pictureProps: {
+      jpgSrc: "images/catalog-page/hero-desktop.jpg",
+      webpSrc: "images/catalog-page/hero-desktop.webp",
+      mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
+      mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
+      alt: "New Collection",
+    },
+    textBlockProps: {
+      title: "Shopping without limits.",
+      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
+      buttonText: "Shop Now",
+    },
+  };
+
+  const banner = Banner(bannerData);
 
   const loadProducts = async () => {
     const { data, count } = await productsApi.getAllProducts({
@@ -168,6 +149,8 @@ export const initProducts = async () => {
     console.log("data", data);
 
     productList.appendProducts(data);
+
+    initCatalogListBanner(banner);
 
     if (currentPage !== queryState.page || currentPage > 0) {
       updateUrlPage(currentPage);
@@ -261,18 +244,14 @@ export function insertBannerIntoList({
     return;
   }
 
-  const items = Array.from(list.children).filter((el) => el !== element);
+  if (list.contains(element)) {
+    list.removeChild(element);
+  }
+
+  const items = Array.from(list.children);
 
   if (items.length === 0) {
     return;
-  }
-
-  // if (list.contains(element)) {
-  //   return;
-  // }
-
-  if (list.contains(element)) {
-    list.removeChild(element);
   }
 
   const rows = getRows(items);
@@ -317,38 +296,26 @@ export function insertBannerIntoList({
   }
 }
 
-// function insertBannerIntoList(listSelector, index) {
-//   const list = document.querySelector(listSelector);
-//   if (!list) {
-//     return;
-//   }
+function initCatalogListBanner(banner) {
+  const insertBanner = () => {
+    insertBannerIntoList({
+      listSelector: ".catalog__list",
+      element: banner,
+      insertAfterRow: 1,
+    });
+  };
 
-//   if (list.querySelector(".catalog__list-banner")) {
-//     return;
-//   }
+  const list = document.querySelector(".catalog__list");
 
-//   const items = list.children;
-//   const bannerData = {
-//     className: "catalog__list-banner full-width",
-//     pictureProps: {
-//       jpgSrc: "images/catalog-page/hero-desktop.jpg",
-//       webpSrc: "images/catalog-page/hero-desktop.webp",
-//       mobileJpgSrc: "images/catalog-page/hero-mobile.jpg",
-//       mobileWebpSrc: "images/catalog-page/hero-mobile.webp",
-//       alt: "New Collection",
-//     },
-//     textBlockProps: {
-//       title: "Shopping without limits.",
-//       text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
-//       buttonText: "Shop Now",
-//     },
-//   };
+  if (!list) {
+    return;
+  }
 
-//   const banner = Banner(bannerData);
+  insertBanner();
 
-//   if (items.length === 0 || index >= items.length) {
-//     list.appendChild(banner);
-//   } else {
-//     list.insertBefore(banner, items[index]);
-//   }
-// }
+  const observer = new ResizeObserver(() => {
+    insertBanner();
+  });
+
+  observer.observe(list);
+}
