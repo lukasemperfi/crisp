@@ -27,7 +27,7 @@ export const initProductContent = async () => {
     },
   ];
 
-  Accordion(".product-content__desription", footerContent);
+  Accordion(".description__col-2", footerContent);
 };
 
 const mockProduct = {

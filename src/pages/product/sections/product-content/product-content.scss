@@ -2,6 +2,7 @@
 @use "@/app/styles/mixins" as mixins;
 
 .product-content {
+  $bp-tablet: 1380px;
   $bp-mobile: 767px;
 
   &__wrapper {
@@ -16,5 +17,26 @@
   &__card {
     max-width: 1343px;
     margin: 0 auto;
+  }
+
+  .description {
+    display: flex;
+    justify-content: center;
+
+    &__col-1 {
+      flex: 0 1 98px;
+
+      @include mixins.respond-to($bp-tablet) {
+        display: none;
+      }
+    }
+
+    &__col-2 {
+      flex: 0 1 1242px;
+
+      @include mixins.respond-to($bp-tablet) {
+        flex: 1;
+      }
+    }
   }
 }

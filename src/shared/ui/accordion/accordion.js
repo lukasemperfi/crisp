@@ -1,13 +1,19 @@
 export const Accordion = (containerSelector, items, config = {}) => {
-  const root = document.querySelector(containerSelector);
-  if (!root) return;
+  const container = document.querySelector(containerSelector);
+  if (!container) {
+    console.error(`Accordion: Container '${containerSelector}' not found`);
+    return;
+  }
 
   const { isSingleOpen = true } = config;
 
-  root.innerHTML = items
+  const accordionRoot = document.createElement("div");
+  accordionRoot.className = "accordion";
+
+  accordionRoot.innerHTML = items
     .map(
       (item) => `
-    <div class="accordion">
+    <div class="accordion__item">
       <button class="accordion__title" type="button">
         ${item.title}
         <span class="accordion__icon"></span>
@@ -22,19 +28,22 @@ export const Accordion = (containerSelector, items, config = {}) => {
     )
     .join("");
 
-  const accordions = root.querySelectorAll(".accordion");
+  container.innerHTML = "";
+  container.appendChild(accordionRoot);
 
-  accordions.forEach((el) => {
-    const btn = el.querySelector(".accordion__title");
+  const itemElements = accordionRoot.querySelectorAll(".accordion__item");
+
+  itemElements.forEach((itemEl) => {
+    const btn = itemEl.querySelector(".accordion__title");
 
     btn.addEventListener("click", () => {
-      const isActive = el.classList.contains("is-active");
+      const isActive = itemEl.classList.contains("is-active");
 
       if (isSingleOpen && !isActive) {
-        accordions.forEach((item) => item.classList.remove("is-active"));
+        itemElements.forEach((el) => el.classList.remove("is-active"));
       }
 
-      el.classList.toggle("is-active");
+      itemEl.classList.toggle("is-active");
     });
   });
 };
