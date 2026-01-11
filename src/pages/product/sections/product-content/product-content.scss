@@ -39,4 +39,49 @@
       }
     }
   }
+
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__item {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+      background-color: #f8f9fb;
+
+      &.is-active {
+        .accordion__button {
+        }
+
+        .accordion__content {
+        }
+        .accordion__inner {
+          border-top: 1px solid var(--divider);
+          padding-top: 32px;
+          padding-bottom: 19px;
+        }
+      }
+    }
+
+    &__button {
+      padding-block: 25px;
+      padding-inline: 28px;
+      transition: 0.3s;
+    }
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    &__content {
+      padding-inline: 28px;
+    }
+
+    &__inner {
+    }
+  }
 }

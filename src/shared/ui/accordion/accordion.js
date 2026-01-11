@@ -14,8 +14,8 @@ export const Accordion = (containerSelector, items, config = {}) => {
     .map(
       (item) => `
     <div class="accordion__item">
-      <button class="accordion__title" type="button">
-        ${item.title}
+      <button class="accordion__button" type="button">
+        <span class="accordion__title">${item.title}</span> 
         <span class="accordion__icon"></span>
       </button>
       <div class="accordion__content">
@@ -34,7 +34,7 @@ export const Accordion = (containerSelector, items, config = {}) => {
   const itemElements = accordionRoot.querySelectorAll(".accordion__item");
 
   itemElements.forEach((itemEl) => {
-    const btn = itemEl.querySelector(".accordion__title");
+    const btn = itemEl.querySelector(".accordion__button");
 
     btn.addEventListener("click", () => {
       const isActive = itemEl.classList.contains("is-active");

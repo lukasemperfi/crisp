@@ -1,9 +1,5 @@
 .accordion {
-  // Контейнер может иметь свои отступы, если нужно
-
   &__item {
-    border-bottom: 1px solid #4f4f4f;
-
     &.is-active {
       .accordion__icon::after {
         transform: translate(-50%, -50%) rotate(90deg);
@@ -13,25 +9,19 @@
       .accordion__content {
         grid-template-rows: 1fr;
       }
-
-      .accordion__inner {
-        padding-bottom: 20px;
-      }
     }
   }
 
-  &__title {
+  &__button {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
     background: none;
     border: none;
     cursor: pointer;
     font: inherit;
     color: inherit;
-    text-transform: uppercase;
     text-align: left;
   }
 
@@ -45,7 +35,7 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: currentColor;
+      background-color: var(--gray-1);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -66,12 +56,12 @@
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
-    transition: grid-template-rows 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   &__inner {
     min-height: 0;
     padding-bottom: 0;
-    transition: padding 0.3s ease;
+    transition: all 0.3s ease;
   }
 }

@@ -14,7 +14,7 @@ export const initProductContent = async () => {
 
   const footerContent = [
     {
-      title: "features",
+      title: "Details",
       content: `
       <ul class="footer-list">
         <li><a href="#" class="footer-list__link">men</a></li>
@@ -22,7 +22,11 @@ export const initProductContent = async () => {
       </ul>`,
     },
     {
-      title: "contact us",
+      title: "Other information",
+      content: `<div class="contacts-info">City, Street, 123</div>`,
+    },
+    {
+      title: "Another tab",
       content: `<div class="contacts-info">City, Street, 123</div>`,
     },
   ];
