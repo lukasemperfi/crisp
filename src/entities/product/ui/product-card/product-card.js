@@ -41,7 +41,7 @@ export function createProductCard(product) {
     </div>
 
     <div class="product-card__category">${tag}</div>
-    <a href="${baseUrl}product/" class="product-card__name">${name}</a>
+    <a href="${baseUrl}product/?id=${id}" class="product-card__name">${name}</a>
     <div class="product-card__price price">
       <div class="price__current">
         ${formatPrice(currentPrice)}

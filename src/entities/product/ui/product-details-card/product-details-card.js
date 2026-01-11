@@ -6,18 +6,18 @@ import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "../../../../shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 
-const mockColorData = [
-  { id: 1, name: "Red", hex_code: "#FF0000", available: true },
-  { id: 2, name: "Deep Blue", hex_code: "#0000FF", available: true },
-  { id: 3, name: "Emerald", hex_code: "#50C878", available: true },
-  { id: 4, name: "White", hex_code: "#FFFFFF", available: true },
-  { id: 5, name: "Black", hex_code: "#000000", available: true },
-  { id: 6, name: "Golden", hex_code: "#FFD700", available: false },
-  { id: 7, name: "Hot Pink", hex_code: "#FF69B4", available: true },
-  { id: 8, name: "Soft Grey", hex_code: "#808080", available: true },
-  { id: 9, name: "Violet", hex_code: "#8F00FF", available: true },
-  { id: 10, name: "Orange", hex_code: "#FFA500", available: true },
-];
+// const mockColorData = [
+//   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
+//   { id: 2, name: "Deep Blue", hex_code: "#0000FF", available: true },
+//   { id: 3, name: "Emerald", hex_code: "#50C878", available: true },
+//   { id: 4, name: "White", hex_code: "#FFFFFF", available: true },
+//   { id: 5, name: "Black", hex_code: "#000000", available: true },
+//   { id: 6, name: "Golden", hex_code: "#FFD700", available: false },
+//   { id: 7, name: "Hot Pink", hex_code: "#FF69B4", available: true },
+//   { id: 8, name: "Soft Grey", hex_code: "#808080", available: true },
+//   { id: 9, name: "Violet", hex_code: "#8F00FF", available: true },
+//   { id: 10, name: "Orange", hex_code: "#FFA500", available: true },
+// ];
 
 const mockSizeData = [
   {
@@ -165,6 +165,17 @@ const mockSizeData = [
 const totalPrice = 90;
 
 export const ProductDetailsCard = ({ container, product }) => {
+  console.log(product);
+  const variants = [...product.variants];
+
+  const uniqueColors = [
+    ...new Map(
+      variants.map((v) => [v.color.id, { ...v.color, available: v.stock > 0 }])
+    ).values(),
+  ];
+
+  console.log(uniqueColors);
+
   const mountPoint =
     typeof container === "string"
       ? document.querySelector(container)
@@ -189,78 +200,6 @@ export const ProductDetailsCard = ({ container, product }) => {
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((img) => img.image_path_jpg);
 
-  // ==========================================================
-  // 1. VARIANTS NORMALIZATION
-  // ==========================================================
-  const variants = product.variants;
-
-  // Map<colorId, { color, sizes: Map<sizeId, variant> }>
-  const colorMap = new Map();
-
-  variants.forEach((v) => {
-    if (!colorMap.has(v.color.id)) {
-      colorMap.set(v.color.id, {
-        color: v.color,
-        sizes: new Map(),
-      });
-    }
-
-    colorMap.get(v.color.id).sizes.set(v.size.id, v);
-  });
-
-  const allColors = [...colorMap.values()].map((c) => c.color);
-
-  const allSizes = [
-    ...new Map(variants.map((v) => [v.size.id, v.size])).values(),
-  ].sort((a, b) => a.sort_order - b.sort_order);
-
-  // ==========================================================
-  // 2. SELECTION STATE
-  // ==========================================================
-  const state = {
-    colorId: null,
-    sizeId: null,
-  };
-
-  const getSelectedVariant = () => {
-    if (!state.colorId || !state.sizeId) {
-      return null;
-    }
-
-    const group = colorMap.get(state.colorId);
-    return group?.sizes.get(state.sizeId) || null;
-  };
-
-  // ==========================================================
-  // 3. DATA FOR FILTERS
-  // ==========================================================
-  const getColorOptions = () => {
-    return allColors.map((color) => ({
-      ...color,
-      available: colorMap.get(color.id).sizes.size > 0,
-      active: color.id === state.colorId,
-    }));
-  };
-
-  const getSizeOptions = () => {
-    if (!state.colorId) {
-      return allSizes.map((size) => ({
-        ...size,
-        availible: false,
-      }));
-    }
-
-    const sizeMap = colorMap.get(state.colorId).sizes;
-
-    return allSizes.map((size) => ({
-      ...size,
-      availible: sizeMap.has(size.id),
-    }));
-  };
-
-  // ==========================================================
-  // UI
-  // ==========================================================
   root.innerHTML = `
     <div class="product-details-card__media"></div>
     <div class="product-details-card__breadcrumbs"></div>
@@ -279,27 +218,32 @@ export const ProductDetailsCard = ({ container, product }) => {
           </div>
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
-            <div class="info__total-price">${formatPrice(
-              product.final_price
-            )} EUR</div>
+            <div class="info__total-price">${formatPrice(totalPrice)} EUR</div>
           </div>
         </div>
-
-        <div class="info__validation-message"></div>
-
         <div class="info__actions">
-          <button class="add-to-cart-button button button_solid button_black button_fill info__btn" disabled>
-            Add to Bag
-          </button>
-          <button class="add-to-wishlist-button button button_outlined button_gray button_fill info__btn">
-            ${heartIcon()}Save
-          </button>
+          <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon()}Save</button>
         </div>
-
         <div class="info__promo promo">
-          ${createSocialBlock("info__social-block")}
-        </div>
+              ${createSocialBlock("info__social-block")}
+              <div class="promo__item promo__item_free-shipping">
+                <div class="promo__item-title">${checkmarkIcon()}</div>
+                <div class="promo__item-text">Free shipping</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Product code:</div>
+                <div class="promo__item-text">RFKK1024</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Tags:</div>
+                <div class="promo__item-text">${product.tags
+                  .map((tag) => tag.tag.name)
+                  .join(", ")}</div>
+              </div>
+        </div>      
       </div>
+
     </div>
   `;
 
@@ -313,116 +257,56 @@ export const ProductDetailsCard = ({ container, product }) => {
   Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
   Brand(root.querySelector(".info__brand"), product.brand?.name || "");
 
-  // ==========================================================
-  // CTA LOGIC
-  // ==========================================================
-  const updateCTA = () => {
-    const btn = root.querySelector(".add-to-cart-button");
-    const msg = root.querySelector(".info__validation-message");
-    const variant = getSelectedVariant();
-
-    if (!state.colorId && !state.sizeId) {
-      btn.disabled = true;
-      msg.textContent = "Please select color and size";
-    } else if (!state.colorId) {
-      btn.disabled = true;
-      msg.textContent = "Please select a color";
-    } else if (!state.sizeId) {
-      btn.disabled = true;
-      msg.textContent = "Please select a size";
-    } else if (!variant) {
-      btn.disabled = true;
-      msg.textContent = "This combination is not available";
-    } else {
-      btn.disabled = false;
-      msg.textContent = "";
-    }
-  };
-
-  // ==========================================================
-  // FILTER RENDERING
-  // ==========================================================
   const tabletQuery = window.matchMedia("(max-width: 1380px)");
 
   const renderFiltersSection = (e) => {
-    const colorContainer = root.querySelector(".info__color");
     const sizeContainer = root.querySelector(".info__size");
-
-    colorContainer.innerHTML = "";
-    sizeContainer.innerHTML = "";
-
     const colorCommonProps = {
-      colors: getColorOptions(),
+      colors: uniqueColors,
       title: "Select Color",
       showTitle: true,
       selectionMode: "single",
-      onChange: (colorId) => {
-        state.colorId = Number(colorId);
-        state.sizeId = null;
-        renderFiltersSection(tabletQuery);
-        updateCTA();
-      },
     };
 
-    if (e.matches) {
-      ColorFilter(colorContainer, { ...colorCommonProps, maxVisibleColors: 3 });
-
-      const sizeOptions = getSizeOptions().map((s) => ({
-        label: s.name,
-        value: String(s.id),
-        disabled: !s.availible,
-      }));
-
-      Dropdown(sizeContainer, {
-        options: sizeOptions,
-        onChange: (sizeId) => {
-          state.sizeId = Number(sizeId);
-          updateCTA();
-        },
-      });
-    } else {
-      ColorFilter(colorContainer, colorCommonProps);
-
-      SizeFilter(sizeContainer, {
-        sizes: getSizeOptions(),
-        title: "Select size (Inches)",
-        showTitle: true,
-        selectionMode: "single",
-        onChange: (sizeId) => {
-          state.sizeId = Number(sizeId);
-          updateCTA();
-        },
-      });
+    if (!sizeContainer) {
+      return;
     }
 
-    updateCTA();
+    sizeContainer.innerHTML = "";
+
+    if (e.matches) {
+      ColorFilter(root.querySelector(".info__color"), {
+        ...colorCommonProps,
+        maxVisibleColors: 3,
+      });
+
+      const sizeOptions = mockSizeData.map((size) => ({
+        label: size.name,
+        value: String(size.id),
+        disabled: !size.availible,
+      }));
+      Dropdown(sizeContainer, {
+        options: sizeOptions,
+        defaultValue: sizeOptions[0]?.value,
+      });
+    } else {
+      ColorFilter(root.querySelector(".info__color"), {
+        ...colorCommonProps,
+      });
+
+      SizeFilter(sizeContainer, {
+        sizes: mockSizeData,
+        title: "Select size (Inches)",
+        showTitle: true,
+      });
+    }
   };
 
   tabletQuery.addEventListener("change", renderFiltersSection);
   renderFiltersSection(tabletQuery);
 
-  // ==========================================================
-  // ADD TO CART
-  // ==========================================================
-  root.querySelector(".add-to-cart-button").addEventListener("click", () => {
-    const variant = getSelectedVariant();
-
-    if (!variant) {
-      updateCTA();
-      return;
-    }
-
-    console.log("ADD TO CART", {
-      productId: product.id,
-      variantId: variant.id,
-      color: variant.color.name,
-      size: variant.size.name,
-      price: product.final_price,
-    });
-  });
-
   Quantity(root.querySelector(".info__quantity-container"), {
-    onChange: () => {},
+    onChange: (obj) => console.log(obj),
   });
 };
 
