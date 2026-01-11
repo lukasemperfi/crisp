@@ -1,0 +1,18 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.recomendation-section {
+  &__popular-slider {
+    margin-top: functions.fluidValue(1px, 24px, 470px, 1920px);
+  }
+
+  @include mixins.respond-to(470px) {
+    .slider-nav {
+      display: none;
+    }
+  }
+
+  .product-card__color {
+    display: none;
+  }
+}

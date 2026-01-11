@@ -14,6 +14,12 @@
 @use "@/shared/ui/slider/slider.scss" as *;
 @use "@/shared/ui/dropdown/dropdown.scss" as *;
 @use "@/shared/ui/accordion/accordion.scss" as *;
+@use "@/pages/product/sections/recomendation-section/recomendation-section.scss"
+  as *;
+@use "@/entities/product/ui/product-card/product-card.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/entities/product/ui/product-list/product-list.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
@@ -35,4 +41,10 @@
   color: var(--white);
   width: functions.fluidValue(104px, 200px, 320px, 1920px);
   height: functions.fluidValue(35px, 40px, 320px, 1920px);
+}
+
+.product-page {
+  .benefits {
+    margin-top: functions.fluidValue(15px, 25px, 320px, 1920px);
+  }
 }

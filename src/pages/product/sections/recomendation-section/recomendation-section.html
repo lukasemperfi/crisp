@@ -1,0 +1,13 @@
+{%import "src/shared/ui/slider/slider.html" as slider%}
+
+{%macro recomendationSection()%}
+<section class="recomendation-section">
+    <div class="page-container-1920">
+        <div class="recomendation-section__featured-slider">
+            {{slider.slider(class="featured-slider",title="Featured Items",
+            sliderContainerClass="featured-slider__slider-container", leftNavClass="featured-slider__left-nav",
+            rightNavClass="featured-slider__right-nav")}}
+        </div>
+    </div>
+</section>
+{%endmacro%}

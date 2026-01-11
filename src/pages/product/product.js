@@ -2,6 +2,7 @@ import { initHeader } from "@/widgets/header/header.js";
 import { initPageFooter } from "@/widgets/footer/footer.js";
 import { lazyLoadElements } from "@/shared/helpers/lazy-loading/lazy-loading.js";
 import { initProductContent } from "./sections/product-content/product-content.js";
+import { initRecomendationSection } from "./sections/recomendation-section/recomendation-section.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initHeader();
   initProductContent({});
+  initRecomendationSection();
   initPageFooter();
   lazyLoadElements(".lazy", { rootMargin: "200px 0px" });
 });
