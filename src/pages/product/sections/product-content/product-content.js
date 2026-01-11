@@ -1,5 +1,6 @@
 import { productsApi } from "@/entities/product/api/products";
 import { ProductDetailsCard } from "@/entities/product/ui/product-details-card/product-details-card";
+import { Accordion } from "../../../../shared/ui/accordion/accordion";
 
 export const initProductContent = async () => {
   // const product = await productsApi.getProductById(
@@ -10,6 +11,23 @@ export const initProductContent = async () => {
     container: ".product-content__card",
     product: mockProduct,
   });
+
+  const footerContent = [
+    {
+      title: "features",
+      content: `
+      <ul class="footer-list">
+        <li><a href="#" class="footer-list__link">men</a></li>
+        <li><a href="#" class="footer-list__link">women</a></li>
+      </ul>`,
+    },
+    {
+      title: "contact us",
+      content: `<div class="contacts-info">City, Street, 123</div>`,
+    },
+  ];
+
+  Accordion(".product-content__desription", footerContent);
 };
 
 const mockProduct = {
