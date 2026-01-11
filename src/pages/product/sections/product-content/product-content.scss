@@ -4,6 +4,7 @@
 .product-content {
   $bp-tablet: 1380px;
   $bp-mobile: 767px;
+  padding-bottom: functions.fluidValue(20px, 30px, 320px, 1920px);
 
   &__wrapper {
     padding-top: functions.fluidValue(20px, 52px, $bp-mobile, 1920px);
@@ -17,6 +18,10 @@
   &__card {
     max-width: 1343px;
     margin: 0 auto;
+  }
+
+  &__description {
+    margin-top: functions.fluidValue(24px, 38px, 320px, 1920px);
   }
 
   .description {
@@ -45,10 +50,16 @@
     flex-direction: column;
     gap: 20px;
 
+    @include mixins.respond-to($bp-mobile) {
+      margin-inline: -14px;
+      gap: 2px;
+      background-color: var(--light-blue-hover);
+    }
+
     &__item {
       font-family: var(--font-family);
       font-weight: 400;
-      font-size: 24px;
+      font-size: functions.fluidValue(12px, 24px, 320px, 1920px);
       color: var(--black);
       background-color: #f8f9fb;
 
@@ -62,6 +73,12 @@
           border-top: 1px solid var(--divider);
           padding-top: 32px;
           padding-bottom: 19px;
+
+          @include mixins.respond-to($bp-mobile) {
+            border: none;
+            padding-top: 0;
+            padding-bottom: functions.fluidValue(14px, 25px, 320px, $bp-mobile);
+          }
         }
       }
     }
@@ -70,18 +87,93 @@
       padding-block: 25px;
       padding-inline: 28px;
       transition: 0.3s;
+
+      @include mixins.respond-to($bp-tablet) {
+        padding: functions.fluidValue(14px, 25px, 320px, $bp-tablet);
+      }
     }
 
     &__icon {
       width: 16px;
       height: 16px;
+
+      @include mixins.respond-to($bp-tablet) {
+        width: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        height: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+      }
     }
 
     &__content {
       padding-inline: 28px;
+
+      @include mixins.respond-to($bp-mobile) {
+        padding-inline: functions.fluidValue(14px, 25px, 320px, $bp-mobile);
+      }
     }
 
     &__inner {
+    }
+  }
+
+  .accordion-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "about-product shipping"
+      "advantages shipping"
+      "advantages-2 shipping";
+    column-gap: functions.fluidValue(20px, 50px, 320px, 1920px);
+    row-gap: functions.fluidValue(10px, 15px, 320px, 1920px);
+
+    @include mixins.respond-to($bp-tablet) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "about-product"
+        "shipping"
+        "advantages"
+        "advantages-2";
+    }
+
+    &__item {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
+      color: var(--black);
+
+      &_about-product {
+        grid-area: about-product;
+      }
+      &_shipping {
+        grid-area: shipping;
+
+        .accordion-content__content {
+          display: flex;
+          flex-direction: column;
+          gap: functions.fluidValue(10px, 20px, 320px, 1920px);
+        }
+      }
+      &_advantages {
+        grid-area: advantages;
+      }
+      &_advantages-2 {
+        grid-area: advantages-2;
+      }
+    }
+
+    &__title {
+      text-transform: uppercase;
+      margin-bottom: functions.fluidValue(3px, 12px, 320px, 1920px);
+    }
+
+    &__content {
+      color: var(--black-2);
+      font-family: var(--second-family);
+      line-height: functions.fluidValue(18px, 25px, 320px, 1920px);
+    }
+
+    &__list-item {
+      list-style-position: inside;
+      list-style-type: square;
     }
   }
 }

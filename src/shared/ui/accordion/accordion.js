@@ -13,7 +13,7 @@ export const Accordion = (containerSelector, items, config = {}) => {
   accordionRoot.innerHTML = items
     .map(
       (item) => `
-    <div class="accordion__item">
+    <div class="accordion__item ${item.isActive ? "is-active" : ""}">
       <button class="accordion__button" type="button">
         <span class="accordion__title">${item.title}</span> 
         <span class="accordion__icon"></span>
