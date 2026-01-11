@@ -85,6 +85,17 @@
     }
   }
 
+  &.button_outlined.button_white {
+    border: 2px solid var(--white);
+    color: var(--white);
+
+    @media (hover: hover) {
+      &:hover {
+        border: 2px solid var(--gray-1);
+      }
+    }
+  }
+
   &_fill {
     width: 100%;
   }

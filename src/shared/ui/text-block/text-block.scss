@@ -2,6 +2,7 @@
 @use "@/app/styles/functions" as functions;
 
 .text-block {
+  --color: var(--black);
   padding-block: 15px;
   max-width: 640px;
   position: relative;
@@ -18,7 +19,7 @@
     right: 0;
     height: 2px;
     width: 94%;
-    background-color: var(--black);
+    background-color: var(--color);
   }
 
   &::before {
@@ -28,7 +29,7 @@
     right: 0;
     width: 2px;
     height: 29%;
-    background-color: var(--black);
+    background-color: var(--color);
   }
 
   &__title {
@@ -36,7 +37,7 @@
     font-weight: 500;
     font-size: functions.fluidValue(14px, 56px, 320px, 1920px);
     text-transform: uppercase;
-    color: var(--black);
+    color: var(--color);
     margin-bottom: functions.fluidValue(10px, 31px, 320px, 1920px);
     white-space: nowrap;
   }
@@ -46,7 +47,7 @@
     font-weight: 400;
     font-size: functions.fluidValue(10px, 25px, 320px, 1920px);
     letter-spacing: 0.01em;
-    color: var(--black);
+    color: var(--color);
     margin-bottom: functions.fluidValue(15px, 35px, 320px, 1920px);
     line-height: functions.fluidValue(12px, 35px, 320px, 1920px);
   }

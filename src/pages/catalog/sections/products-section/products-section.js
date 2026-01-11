@@ -12,7 +12,7 @@ export const initProducts = async () => {
   const urlParams = parseUrlParams(window.location.search);
   const DEFAULT_QUERY = {
     page: 0,
-    limit: 48,
+    limit: 24,
     sort: "price_desc",
   };
 
@@ -132,7 +132,7 @@ export const initProducts = async () => {
     },
     textBlockProps: {
       title: "Shopping without limits.",
-      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.",
+      text: "You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!",
       buttonText: "Shop Now",
     },
   };
@@ -301,7 +301,7 @@ function initCatalogListBanner(banner) {
     insertBannerIntoList({
       listSelector: ".catalog__list",
       element: banner,
-      insertAfterRow: 1,
+      insertAfterRow: 2,
     });
   };
 

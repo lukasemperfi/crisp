@@ -1,5 +1,6 @@
 @use "@/app/styles/functions" as functions;
 @use "@/app/styles/mixins" as mixins;
+@use "@/shared/ui/button/_mixins" as buttonMixins;
 
 .products {
   $bp-mobile: 768px;
@@ -91,6 +92,40 @@
 
     @include mixins.respond-to($bp-mobile) {
       flex: auto;
+    }
+  }
+
+  .catalog__list-banner {
+    .banner {
+      &__wrapper {
+        aspect-ratio: 1454/430;
+        .text-block {
+          --color: var(--white);
+
+          @media (min-width: 769px) and (max-width: 1200px) {
+            left: functions.fluidValue(30px, 60px, 769px, 1200px);
+            padding: 0;
+            &::after,
+            &::before {
+              display: none;
+            }
+          }
+
+          .button {
+            @include buttonMixins.button-outlined-color("white");
+          }
+        }
+      }
+
+      &__img {
+        @include mixins.respond-to(lg-sm) {
+          object-position: initial;
+        }
+
+        @media (min-width: 769px) and (max-width: 1200px) {
+          object-position: 70% 50%;
+        }
+      }
     }
   }
 }
