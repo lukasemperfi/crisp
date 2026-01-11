@@ -1,6 +1,11 @@
 export function SizeFilter(
   container,
-  { sizes = [], title = "Size", showTitle = true } = {}
+  {
+    sizes = [],
+    title = "Size",
+    showTitle = true,
+    selectionMode = "multiple",
+  } = {}
 ) {
   if (!container || !sizes || !Array.isArray(sizes)) {
     console.error("SizeFilter Error: container or sizes array not found.");
@@ -26,6 +31,22 @@ export function SizeFilter(
   `;
 
   container.innerHTML = template;
+
+  if (selectionMode === "single") {
+    const inputs = container.querySelectorAll(".size-filter__input");
+
+    inputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+
+        inputs.forEach((other) => {
+          if (other !== input) {
+            other.checked = false;
+          }
+        });
+      });
+    });
+  }
 }
 
 function createSizeOptionHtml(size) {
@@ -36,7 +57,7 @@ function createSizeOptionHtml(size) {
       <input type="checkbox" 
              class="size-filter__input" 
              name="filter-size" 
-             value="${size.id}">
+             value="${size.name}" ${!size.availible ? "disabled" : ""} />
       <span class="size-filter__box ${disabledClass}">
         ${size.name}
       </span>

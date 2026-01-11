@@ -140,7 +140,7 @@ const mockProduct = {
       id: 671,
       size: {
         id: 34,
-        name: "w32",
+        name: "w34",
         created_at: "2025-12-28T13:49:23.703911+00:00",
         sort_order: 80,
       },

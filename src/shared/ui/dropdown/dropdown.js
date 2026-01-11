@@ -4,6 +4,7 @@ export function Dropdown(container, props = {}) {
     defaultValue = "",
     onChange = () => {},
     name = "",
+    placeholder = "Не выбрано",
   } = props;
 
   const root =
@@ -19,7 +20,7 @@ export function Dropdown(container, props = {}) {
   let isOpen = false;
 
   const getLabelByValue = (val) =>
-    options.find((o) => o.value === val)?.label ?? "";
+    options.find((o) => o.value === val)?.label ?? placeholder;
 
   const open = () => {
     isOpen = true;
@@ -35,8 +36,11 @@ export function Dropdown(container, props = {}) {
 
   const setValue = (val, emit = true) => {
     currentValue = val;
-    nativeSelect.value = val;
+    if (nativeSelect) nativeSelect.value = val;
+
     valueEl.textContent = getLabelByValue(val);
+
+    trigger.classList.toggle("dropdown__trigger_is-empty", !val);
 
     if (emit) onChange(val);
   };
@@ -47,6 +51,7 @@ export function Dropdown(container, props = {}) {
         class="dropdown__native"
         ${name ? `name="${name}"` : ""}
       >
+        <option value="">${placeholder}</option>
         ${options
           .map(
             (o) => `
@@ -62,7 +67,7 @@ export function Dropdown(container, props = {}) {
 
       <button type="button" class="dropdown__trigger">
         <span class="dropdown__value"></span>
-       ${createArrowIcon("dropdown__icon")}
+        ${createArrowIcon("dropdown__icon")}
       </button>
 
       <div class="dropdown__menu">
@@ -123,7 +128,7 @@ export function Dropdown(container, props = {}) {
 function createArrowIcon(className = "") {
   return `
   <svg class="${className}" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0.353516 0.353516L5.35352 5.35352L10.3535 0.353516" stroke="black" />
-</svg>
+    <path d="M0.353516 0.353516L5.35352 5.35352L10.3535 0.353516" stroke="currentColor" />
+  </svg>
   `;
 }
