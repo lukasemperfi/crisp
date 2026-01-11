@@ -50,14 +50,15 @@ export function SizeFilter(
 }
 
 function createSizeOptionHtml(size) {
-  const disabledClass = size.availible ? "" : "size-filter__box_disabled";
+  console.log(size);
+  const disabledClass = size.available ? "" : "size-filter__box_disabled";
 
   return `
     <label class="size-filter__item" title="${size.name}">
       <input type="checkbox" 
              class="size-filter__input" 
              name="filter-size" 
-             value="${size.name}" ${!size.availible ? "disabled" : ""} />
+             value="${size.name}" ${!size.available ? "disabled" : ""} />
       <span class="size-filter__box ${disabledClass}">
         ${size.name}
       </span>
