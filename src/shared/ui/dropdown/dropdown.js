@@ -1,79 +1,41 @@
-export function Dropdown(container, props = {}) {
-  const {
-    options = [],
-    defaultValue = "",
-    onChange = () => {},
-    name = "",
-    placeholder = "Не выбрано",
-  } = props;
+import { createComponent } from "@/shared/lib/core/core";
 
-  const root =
-    typeof container === "string"
-      ? document.querySelector(container)
-      : container;
+export function Dropdown(props) {
+  return createComponent(props, {
+    tag: "div",
+    render(el, props, emit) {
+      const {
+        options = [],
+        defaultValue = "",
+        name = "",
+        placeholder = "Не выбрано",
+      } = props;
 
-  if (!root) {
-    throw new Error("Dropdown: container not found");
-  }
+      el.className = "dropdown-wrapper";
 
-  let currentValue = "";
-  let isOpen = false;
+      el.innerHTML = `
+        <div class="dropdown">
+          <select class="dropdown__native" ${name ? `name="${name}"` : ""}>
+            <option value="">${placeholder}</option>
+            ${options
+              .map(
+                (o) =>
+                  `<option value="${o.value}" ${o.disabled ? "disabled" : ""}>${
+                    o.label
+                  }</option>`
+              )
+              .join("")}
+          </select>
 
-  const getLabelByValue = (val) =>
-    options.find((o) => o.value === val)?.label ?? placeholder;
+          <button type="button" class="dropdown__trigger">
+            <span class="dropdown__value"></span>
+            ${createArrowIcon("dropdown__icon")}
+          </button>
 
-  const open = () => {
-    isOpen = true;
-    dropdown.classList.add("dropdown_is-open");
-  };
-
-  const close = () => {
-    isOpen = false;
-    dropdown.classList.remove("dropdown_is-open");
-  };
-
-  const toggle = () => (isOpen ? close() : open());
-
-  const setValue = (val, emit = true) => {
-    currentValue = val;
-    if (nativeSelect) nativeSelect.value = val;
-
-    valueEl.textContent = getLabelByValue(val);
-
-    trigger.classList.toggle("dropdown__trigger_is-empty", !val);
-
-    if (emit) onChange(val);
-  };
-
-  root.innerHTML = `
-    <div class="dropdown">
-      <select
-        class="dropdown__native"
-        ${name ? `name="${name}"` : ""}
-      >
-        <option value="">${placeholder}</option>
-        ${options
-          .map(
-            (o) => `
-            <option 
-              value="${o.value}" 
-              ${o.disabled ? "disabled" : ""}
-            >
-              ${o.label}
-            </option>`
-          )
-          .join("")}
-      </select>
-
-      <button type="button" class="dropdown__trigger">
-        <span class="dropdown__value"></span>
-        ${createArrowIcon("dropdown__icon")}
-      </button>
-
-      <div class="dropdown__menu">
-        ${options
-          .map(
-            (o) => `
+          <div class="dropdown__menu">
+            ${options
+              .map(
+                (o) => `
               <button
                 type="button"
                 class="dropdown__option ${
@@ -85,43 +47,72 @@ export function Dropdown(container, props = {}) {
                 ${o.label}
               </button>
             `
-          )
-          .join("")}
-      </div>
-    </div>
-  `;
+              )
+              .join("")}
+          </div>
+        </div>
+      `;
 
-  const dropdown = root.querySelector(".dropdown");
-  const nativeSelect = root.querySelector(".dropdown__native");
-  const trigger = root.querySelector(".dropdown__trigger");
-  const valueEl = root.querySelector(".dropdown__value");
-  const menu = root.querySelector(".dropdown__menu");
+      const dropdown = el.querySelector(".dropdown");
+      const nativeSelect = el.querySelector(".dropdown__native");
+      const trigger = el.querySelector(".dropdown__trigger");
+      const valueEl = el.querySelector(".dropdown__value");
+      const menu = el.querySelector(".dropdown__menu");
 
-  const availableOptions = options.filter((o) => !o.disabled);
-  const hasDefault = availableOptions.some((o) => o.value === defaultValue);
+      let isOpen = false;
 
-  const initialValue = hasDefault
-    ? defaultValue
-    : availableOptions[0]?.value ?? "";
+      const open = () => {
+        isOpen = true;
+        dropdown.classList.add("dropdown_is-open");
+      };
 
-  setValue(initialValue, false);
+      const close = () => {
+        isOpen = false;
+        dropdown.classList.remove("dropdown_is-open");
+      };
 
-  trigger.addEventListener("click", toggle);
+      const toggle = () => (isOpen ? close() : open());
 
-  menu.addEventListener("click", (e) => {
-    const option = e.target.closest(".dropdown__option");
-    if (!option || option.hasAttribute("disabled")) return;
+      const getLabelByValue = (val) =>
+        options.find((o) => o.value == val)?.label ?? placeholder;
 
-    setValue(option.dataset.value);
-    close();
-  });
+      const setValue = (val, emitEvent = true) => {
+        props.value = val;
+        nativeSelect.value = val;
+        valueEl.textContent = getLabelByValue(val);
+        trigger.classList.toggle("dropdown__trigger_is-empty", !val);
 
-  nativeSelect.addEventListener("change", (e) => {
-    setValue(e.target.value);
-  });
+        if (emitEvent) {
+          emit("onChange", val); // только через CustomEvent
+        }
+      };
 
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) close();
+      // Устанавливаем значение по умолчанию
+      if (defaultValue) {
+        setValue(defaultValue, false);
+      } else {
+        valueEl.textContent = placeholder;
+        trigger.classList.add("dropdown__trigger_is-empty");
+      }
+
+      // События
+      trigger.addEventListener("click", toggle);
+
+      menu.addEventListener("click", (e) => {
+        const option = e.target.closest(".dropdown__option");
+        if (!option || option.disabled) return;
+        setValue(option.dataset.value);
+        close();
+      });
+
+      nativeSelect.addEventListener("change", (e) => {
+        setValue(e.target.value);
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) close();
+      });
+    },
   });
 }
 

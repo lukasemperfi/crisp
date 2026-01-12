@@ -16,6 +16,8 @@ export const ProductDetailsCard = ({ container, product }) => {
   let selectedSizeId = null;
   let uniqueSizes = getSizesWithAvailability(selectedColorId);
 
+  console.log("start", selectedColorId, selectedSizeId);
+
   const findCurrentVariant = (colorId, sizeId) => {
     if (!colorId || !sizeId) return null;
     return (
@@ -176,6 +178,7 @@ export const ProductDetailsCard = ({ container, product }) => {
       sizes: uniqueSizes,
       selectionMode: "single",
       title: "Select size (Inches)",
+      selectedId: selectedSizeId,
     });
 
     if (!sizeContainer || !colorContainer) {
@@ -222,37 +225,31 @@ export const ProductDetailsCard = ({ container, product }) => {
     });
 
     if (e.matches) {
-      // Tablet mode
       colorFilter.update({ maxVisibleColors: 3 });
       colorContainer.append(colorFilter);
 
       const sizeOptions = uniqueSizes.map((size) => ({
         label: size.name,
-        value: size.name,
+        value: size.id,
         disabled: !size.available,
       }));
 
-      Dropdown(sizeContainer, {
+      const dropdown = Dropdown({
         options: sizeOptions,
-        defaultValue: sizeOptions[0]?.value,
-        onChange: (sizeName) => {
-          const sizeObj = uniqueSizes.find((s) => s.name === sizeName);
-          selectedSizeId = sizeObj?.id || null;
+        defaultValue: String(selectedSizeId) || String(sizeOptions[0]?.value),
+      });
 
-          uniqueColors = getColorsWithAvailability(selectedSizeId);
+      sizeContainer.append(dropdown);
 
-          const currentVariant = findCurrentVariant(
-            selectedColorId,
-            selectedSizeId
-          );
+      dropdown.addEventListener("onChange", (e) => {
+        const sizeId = Number(e.detail);
 
-          if (!currentVariant) {
-            selectedColorId = null;
-          }
+        const sizeObj = uniqueSizes.find((s) => s.id === sizeId);
+        selectedSizeId = sizeObj?.id || null;
 
-          renderFiltersSection(tabletQuery);
-          updateAddToCartButton();
-        },
+        console.log("size dropdown onChange", selectedColorId, selectedSizeId);
+
+        updateAddToCartButton();
       });
     } else {
       colorContainer.append(colorFilter);

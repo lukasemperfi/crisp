@@ -9,6 +9,7 @@ export function SizeFilter(props) {
         title = "Size",
         showTitle = true,
         selectionMode = "multiple",
+        selectedId = null,
       } = props;
 
       if (!sizes || !Array.isArray(sizes)) {
@@ -20,7 +21,9 @@ export function SizeFilter(props) {
         (a, b) => a.sort_order - b.sort_order
       );
 
-      const optionsHtml = sortedSizes.map(createSizeOptionHtml).join("");
+      const optionsHtml = sortedSizes
+        .map((size) => createSizeOptionHtml(size, selectedId))
+        .join("");
 
       el.className = "size-filter";
       el.innerHTML = `
@@ -34,6 +37,12 @@ export function SizeFilter(props) {
       `;
 
       const inputs = el.querySelectorAll(".size-filter__input");
+
+      if (selectionMode === "single" && selectedId != null) {
+        inputs.forEach((input) => {
+          input.checked = Number(input.value) === Number(selectedId);
+        });
+      }
 
       if (selectionMode === "single") {
         inputs.forEach((input) => {
@@ -62,149 +71,23 @@ export function SizeFilter(props) {
   });
 }
 
-function createSizeOptionHtml(size) {
+function createSizeOptionHtml(size, selectedId) {
   const disabledClass = size.available ? "" : "size-filter__box_disabled";
+  const checked = size.id === selectedId ? "checked" : "";
 
   return `
     <label class="size-filter__item" title="${size.name}">
-      <input type="checkbox"
-             class="size-filter__input"
-             name="filter-size"
-             value="${size.id}" ${!size.available ? "disabled" : ""} />
+      <input
+        type="checkbox"
+        class="size-filter__input"
+        name="filter-size"
+        value="${size.id}"
+        ${checked}
+        ${!size.available ? "disabled" : ""}
+      />
       <span class="size-filter__box ${disabledClass}">
         ${size.name}
       </span>
     </label>
   `;
 }
-
-// import { createComponent } from "@/shared/lib/core/core";
-
-// export function SizeFilter(props) {
-//   return createComponent(props, {
-//     tag: "div",
-//     render(el, props) {
-//       const {
-//         sizes = [],
-//         title = "Size",
-//         showTitle = true,
-//         selectionMode = "multiple",
-//       } = props;
-
-//       el.className = "size-filter";
-
-//       const sortedSizes = [...sizes].sort(
-//         (a, b) => a.sort_order - b.sort_order
-//       );
-
-//       const optionsHtml = sortedSizes
-//         .map((size) => createSizeOptionHtml(size))
-//         .join("");
-
-//       el.innerHTML = `
-//           <div class="size-filter__header">
-//             ${showTitle ? `<div class="size-filter__title">${title}</div>` : ""}
-//           <a class="size-filter__guide" href="#" name="size guide">Size guide</a>
-//           </div>
-//             <div class="size-filter__grid">${optionsHtml}</div>
-//       `;
-
-//       if (selectionMode === "single") {
-//         const inputs = el.querySelectorAll(".size-filter__input");
-
-//         inputs.forEach((input) => {
-//           input.addEventListener("change", () => {
-//             if (!input.checked) return;
-
-//             inputs.forEach((other) => {
-//               if (other !== input) {
-//                 other.checked = false;
-//               }
-//             });
-//           });
-//         });
-//       }
-
-//       const emitChange = () => {
-//         el.dispatchEvent(
-//           new CustomEvent("onChange", {
-//             detail: { header: headerEl.innerHTML },
-//             bubbles: true,
-//           })
-//         );
-//       };
-//     },
-//   });
-// }
-
-// export function SizeFilter(
-//   container,
-//   {
-//     sizes = [],
-//     title = "Size",
-//     showTitle = true,
-//     selectionMode = "multiple",
-//     onChange = null,
-//   } = {}
-// ) {
-//   if (!container || !sizes || !Array.isArray(sizes)) {
-//     console.error("SizeFilter Error: container or sizes array not found.");
-//     return;
-//   }
-
-// const sortedSizes = [...sizes].sort((a, b) => a.sort_order - b.sort_order);
-
-// const optionsHtml = sortedSizes
-//   .map((size) => createSizeOptionHtml(size))
-//   .join("");
-
-//   const template = `
-//     <div class="size-filter">
-//     <div class="size-filter__header">
-//      ${showTitle ? `<div class="size-filter__title">${title}</div>` : ""}
-//      <a class="size-filter__guide" href="#" name="size guide">Size guide</a>
-//     </div>
-//       <div class="size-filter__grid">
-//         ${optionsHtml}
-//       </div>
-//     </div>
-//   `;
-
-//   container.innerHTML = template;
-
-//   if (selectionMode === "single") {
-//     const inputs = container.querySelectorAll(".size-filter__input");
-
-//     inputs.forEach((input) => {
-//       input.addEventListener("change", () => {
-//         if (!input.checked) return;
-
-//         inputs.forEach((other) => {
-//           if (other !== input) {
-//             other.checked = false;
-//           }
-//         });
-
-//         if (typeof onChange === "function") {
-//           onChange(Number(input.value));
-//         }
-//       });
-//     });
-//   }
-// }
-
-// function createSizeOptionHtml(size) {
-//   const disabledClass = size.available ? "" : "size-filter__box_disabled";
-
-//   return `
-//     <label class="size-filter__item" title="${size.name}">
-//       <input type="checkbox"
-//              class="size-filter__input"
-//              name="filter-size"
-//              value="${size.id}" ${!size.available ? "disabled" : ""} />
-//       <span class="size-filter__box ${disabledClass}">
-//         ${size.name}
-//       </span>
-//     </label>
-//   `;
-// }
