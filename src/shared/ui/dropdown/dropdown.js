@@ -35,18 +35,19 @@ export function Dropdown(props) {
           <div class="dropdown__menu">
             ${options
               .map(
-                (o) => `
+                (o) => ` 
               <button
                 type="button"
                 class="dropdown__option ${
                   o.disabled ? "dropdown__option_is-disabled" : ""
+                } ${
+                  o.value === defaultValue ? "dropdown__option_selected" : ""
                 }"
                 data-value="${o.value}"
                 ${o.disabled ? "disabled" : ""}
               >
                 ${o.label}
-              </button>
-            `
+              </button>`
               )
               .join("")}
           </div>
@@ -58,6 +59,7 @@ export function Dropdown(props) {
       const trigger = el.querySelector(".dropdown__trigger");
       const valueEl = el.querySelector(".dropdown__value");
       const menu = el.querySelector(".dropdown__menu");
+      const optionButtons = menu.querySelectorAll(".dropdown__option");
 
       let isOpen = false;
 
@@ -76,18 +78,28 @@ export function Dropdown(props) {
       const getLabelByValue = (val) =>
         options.find((o) => o.value == val)?.label ?? placeholder;
 
+      const highlightSelected = (val) => {
+        optionButtons.forEach((btn) => {
+          btn.classList.toggle(
+            "dropdown__option_selected",
+            btn.dataset.value === val
+          );
+        });
+      };
+
       const setValue = (val, emitEvent = true) => {
         props.value = val;
         nativeSelect.value = val;
         valueEl.textContent = getLabelByValue(val);
         trigger.classList.toggle("dropdown__trigger_is-empty", !val);
 
+        highlightSelected(val);
+
         if (emitEvent) {
-          emit("onChange", val); // только через CustomEvent
+          emit("onChange", val);
         }
       };
 
-      // Устанавливаем значение по умолчанию
       if (defaultValue) {
         setValue(defaultValue, false);
       } else {
@@ -95,7 +107,6 @@ export function Dropdown(props) {
         trigger.classList.add("dropdown__trigger_is-empty");
       }
 
-      // События
       trigger.addEventListener("click", toggle);
 
       menu.addEventListener("click", (e) => {

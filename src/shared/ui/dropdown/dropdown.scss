@@ -81,6 +81,10 @@
     }
   }
 
+  &__option_selected {
+    background-color: var(--light-blue-hover);
+  }
+
   &_is-open {
     .dropdown__trigger {
       color: var(--white);
