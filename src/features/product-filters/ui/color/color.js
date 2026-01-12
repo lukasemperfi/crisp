@@ -1,80 +1,99 @@
-export function ColorFilter(
-  container,
-  {
-    colors = [],
-    title = "Color",
-    showTitle = true,
-    maxVisibleColors = null,
-    selectionMode = "multiple",
-    onChange = null,
-  } = {}
-) {
-  if (!container || !Array.isArray(colors)) {
-    console.error("ColorFilter Error: container or colors array not found.");
-    return;
-  }
+import { createComponent } from "@/shared/lib/core/core";
 
-  const hasLimit = typeof maxVisibleColors === "number" && maxVisibleColors > 0;
-  const visibleColors = hasLimit ? colors.slice(0, maxVisibleColors) : colors;
-  const hiddenColors = hasLimit ? colors.slice(maxVisibleColors) : [];
+export function ColorFilter(props) {
+  return createComponent(props, {
+    tag: "div",
+    render(el, props, emit) {
+      const {
+        colors = [],
+        title = "Color",
+        showTitle = true,
+        maxVisibleColors = null,
+        selectionMode = "multiple",
+      } = props;
 
-  const visibleHtml = visibleColors
-    .map((color) => createColorOptionHtml(color))
-    .join("");
+      if (!Array.isArray(colors)) {
+        console.error("ColorFilter Error: colors array not found.");
+        return;
+      }
 
-  const hiddenHtml = hiddenColors
-    .map((color) => createColorOptionHtml(color, true))
-    .join("");
+      const hasLimit =
+        typeof maxVisibleColors === "number" && maxVisibleColors > 0;
 
-  const moreButtonHtml =
-    hasLimit && hiddenColors.length
-      ? `<button class="color-filter__more-btn" type="button">…</button>`
-      : "";
+      const visibleColors = hasLimit
+        ? colors.slice(0, maxVisibleColors)
+        : colors;
+      const hiddenColors = hasLimit ? colors.slice(maxVisibleColors) : [];
 
-  const template = `
-    <div class="color-filter">
-      ${showTitle ? `<div class="color-filter__title">${title}</div>` : ""}
-      <div class="color-filter__grid">
-        ${visibleHtml}
-        ${moreButtonHtml}
-        ${hiddenHtml}
-      </div>
-    </div>
-  `;
+      const visibleHtml = visibleColors
+        .map((color) => createColorOptionHtml(color))
+        .join("");
 
-  container.innerHTML = template;
+      const hiddenHtml = hiddenColors
+        .map((color) => createColorOptionHtml(color, true))
+        .join("");
 
-  if (hasLimit && hiddenColors.length) {
-    const moreBtn = container.querySelector(".color-filter__more-btn");
-    const hiddenItems = container.querySelectorAll(
-      ".color-filter__item_is-hidden"
-    );
+      const moreButtonHtml =
+        hasLimit && hiddenColors.length
+          ? `<button class="color-filter__more-btn" type="button">…</button>`
+          : "";
 
-    moreBtn.addEventListener("click", () => {
-      hiddenItems.forEach((item) => {
-        item.style.display = "";
-      });
-      moreBtn.remove();
-    });
-  }
-  const inputs = container.querySelectorAll(".color-filter__input");
-  if (selectionMode === "single") {
-    inputs.forEach((input) => {
-      input.addEventListener("change", () => {
-        if (!input.checked) return;
+      el.className = "color-filter";
 
-        inputs.forEach((other) => {
-          if (other !== input) {
-            other.checked = false;
-          }
-        });
+      el.innerHTML = `
+        ${showTitle ? `<div class="color-filter__title">${title}</div>` : ""}
+        <div class="color-filter__grid">
+          ${visibleHtml}
+          ${moreButtonHtml}
+          ${hiddenHtml}
+        </div>
+      `;
 
-        if (typeof onChange === "function") {
-          onChange(Number(input.value));
+      if (hasLimit && hiddenColors.length) {
+        const moreBtn = el.querySelector(".color-filter__more-btn");
+        const hiddenItems = el.querySelectorAll(
+          ".color-filter__item_is-hidden"
+        );
+
+        if (moreBtn) {
+          moreBtn.addEventListener("click", () => {
+            hiddenItems.forEach((item) => {
+              item.style.display = "";
+            });
+            moreBtn.remove();
+          });
         }
-      });
-    });
-  }
+      }
+
+      const inputs = el.querySelectorAll(".color-filter__input");
+
+      if (selectionMode === "single") {
+        inputs.forEach((input) => {
+          input.addEventListener("change", () => {
+            if (!input.checked) return;
+
+            inputs.forEach((other) => {
+              if (other !== input) {
+                other.checked = false;
+              }
+            });
+
+            emit("onChange", { selected: Number(input.value) });
+          });
+        });
+      } else {
+        inputs.forEach((input) => {
+          input.addEventListener("change", () => {
+            const selected = Array.from(inputs)
+              .filter((i) => i.checked)
+              .map((i) => Number(i.value));
+
+            emit("onChange", { selected });
+          });
+        });
+      }
+    },
+  });
 }
 
 function createColorOptionHtml(color, isHidden = false) {

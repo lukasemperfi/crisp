@@ -167,7 +167,6 @@ export const ProductDetailsCard = ({ container, product }) => {
           selectedSizeId = null;
         }
 
-        //TODO: Add update SizeFilter
         sizeFilter.update({ sizes: uniqueSizes });
         console.log(selectedColorId, selectedSizeId, currentVariant);
 
