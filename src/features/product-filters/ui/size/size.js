@@ -5,6 +5,7 @@ export function SizeFilter(
     title = "Size",
     showTitle = true,
     selectionMode = "multiple",
+    onChange = null,
   } = {}
 ) {
   if (!container || !sizes || !Array.isArray(sizes)) {
@@ -44,13 +45,16 @@ export function SizeFilter(
             other.checked = false;
           }
         });
+
+        if (typeof onChange === "function") {
+          onChange(Number(input.value));
+        }
       });
     });
   }
 }
 
 function createSizeOptionHtml(size) {
-  console.log(size);
   const disabledClass = size.available ? "" : "size-filter__box_disabled";
 
   return `
@@ -58,7 +62,7 @@ function createSizeOptionHtml(size) {
       <input type="checkbox" 
              class="size-filter__input" 
              name="filter-size" 
-             value="${size.name}" ${!size.available ? "disabled" : ""} />
+             value="${size.id}" ${!size.available ? "disabled" : ""} />
       <span class="size-filter__box ${disabledClass}">
         ${size.name}
       </span>

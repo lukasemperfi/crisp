@@ -6,181 +6,56 @@ import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "../../../../shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 
-// const mockColorData = [
-//   { id: 1, name: "Red", hex_code: "#FF0000", available: true },
-//   { id: 2, name: "Deep Blue", hex_code: "#0000FF", available: true },
-//   { id: 3, name: "Emerald", hex_code: "#50C878", available: true },
-//   { id: 4, name: "White", hex_code: "#FFFFFF", available: true },
-//   { id: 5, name: "Black", hex_code: "#000000", available: true },
-//   { id: 6, name: "Golden", hex_code: "#FFD700", available: false },
-//   { id: 7, name: "Hot Pink", hex_code: "#FF69B4", available: true },
-//   { id: 8, name: "Soft Grey", hex_code: "#808080", available: true },
-//   { id: 9, name: "Violet", hex_code: "#8F00FF", available: true },
-//   { id: 10, name: "Orange", hex_code: "#FFA500", available: true },
-// ];
-
-// const mockSizeData = [
-//   {
-//     id: 1,
-//     name: "w26",
-//     sort_order: 10,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 2,
-//     name: "w27",
-//     sort_order: 20,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 3,
-//     name: "w28",
-//     sort_order: 30,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 4,
-//     name: "w29",
-//     sort_order: 40,
-//     available: false,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 5,
-//     name: "w30",
-//     sort_order: 50,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 6,
-//     name: "w31",
-//     sort_order: 60,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 7,
-//     name: "w32",
-//     sort_order: 70,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 8,
-//     name: "w33",
-//     sort_order: 80,
-//     available: false,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 9,
-//     name: "w34",
-//     sort_order: 90,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 10,
-//     name: "w35",
-//     sort_order: 100,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 11,
-//     name: "w36",
-//     sort_order: 110,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 12,
-//     name: "w38",
-//     sort_order: 120,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 13,
-//     name: "w40",
-//     sort_order: 130,
-//     available: false,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 14,
-//     name: "w42",
-//     sort_order: 140,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 15,
-//     name: "w44",
-//     sort_order: 150,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 16,
-//     name: "w46",
-//     sort_order: 160,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 17,
-//     name: "w48",
-//     sort_order: 170,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 18,
-//     name: "w50",
-//     sort_order: 180,
-//     available: false,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 19,
-//     name: "w52",
-//     sort_order: 190,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-//   {
-//     id: 20,
-//     name: "w54",
-//     sort_order: 200,
-//     available: true,
-//     created_at: "2025-12-28T13:49:23Z",
-//   },
-// ];
-
 const totalPrice = 90;
 
 export const ProductDetailsCard = ({ container, product }) => {
-  console.log(product);
   const variants = [...product.variants];
 
-  const uniqueColors = [
-    ...new Map(
-      variants.map((v) => [v.color.id, { ...v.color, available: v.stock > 0 }])
-    ).values(),
-  ];
+  let selectedColorId = null;
+  let selectedSizeId = null;
 
-  const uniqueSizes = [
-    ...new Map(
-      variants.map((v) => [v.size.id, { ...v.size, available: v.stock > 0 }])
-    ).values(),
-  ];
+  const findCurrentVariant = (colorId, sizeId) => {
+    if (!colorId || !sizeId) return null;
+    return (
+      variants.find((v) => v.color.id === colorId && v.size.id === sizeId) ||
+      null
+    );
+  };
 
-  console.log(uniqueColors, uniqueSizes);
+  const getColorsWithAvailability = (sizeId = null) => {
+    return [
+      ...new Map(
+        variants.map((v) => [
+          v.color.id,
+          {
+            id: v.color.id,
+            name: v.color.name,
+            hex_code: v.color.hex_code,
+            available: v.stock > 0 && (!sizeId || v.size.id === sizeId),
+          },
+        ])
+      ).values(),
+    ];
+  };
+
+  const getSizesWithAvailability = (colorId = null) => {
+    return [
+      ...new Map(
+        variants.map((v) => [
+          v.size.id,
+          {
+            id: v.size.id,
+            name: v.size.name,
+            sort_order: v.size.sort_order,
+            available: v.stock > 0 && (!colorId || v.color.id === colorId),
+          },
+        ])
+      ).values(),
+    ];
+  };
+
+  let uniqueColors = getColorsWithAvailability();
+  let uniqueSizes = getSizesWithAvailability();
 
   const mountPoint =
     typeof container === "string"
@@ -272,6 +147,25 @@ export const ProductDetailsCard = ({ container, product }) => {
       title: "Select Color",
       showTitle: true,
       selectionMode: "single",
+      selectedId: selectedColorId,
+      onChange: (colorId) => {
+        selectedColorId = colorId;
+
+        uniqueSizes = getSizesWithAvailability(selectedColorId);
+
+        const currentVariant = findCurrentVariant(
+          selectedColorId,
+          selectedSizeId
+        );
+        if (!currentVariant) {
+          selectedSizeId = null;
+        }
+
+        //TODO: Add update SizeFilter
+
+        // renderFiltersSection(tabletQuery);
+        updateAddToCartButton();
+      },
     };
 
     if (!sizeContainer) {
@@ -294,6 +188,23 @@ export const ProductDetailsCard = ({ container, product }) => {
       Dropdown(sizeContainer, {
         options: sizeOptions,
         defaultValue: sizeOptions[0]?.value,
+        onChange: (sizeName) => {
+          const sizeObj = uniqueSizes.find((s) => s.name === sizeName);
+          selectedSizeId = sizeObj?.id || null;
+
+          uniqueColors = getColorsWithAvailability(selectedSizeId);
+
+          const currentVariant = findCurrentVariant(
+            selectedColorId,
+            selectedSizeId
+          );
+          if (!currentVariant) {
+            selectedColorId = null;
+          }
+
+          renderFiltersSection(tabletQuery);
+          updateAddToCartButton();
+        },
       });
     } else {
       ColorFilter(root.querySelector(".info__color"), {
@@ -304,12 +215,47 @@ export const ProductDetailsCard = ({ container, product }) => {
         sizes: uniqueSizes,
         title: "Select size (Inches)",
         showTitle: true,
+        selectionMode: "single",
+
+        onChange: (sizeId) => {
+          selectedSizeId = sizeId;
+
+          uniqueColors = getColorsWithAvailability(selectedSizeId);
+
+          const currentVariant = findCurrentVariant(
+            selectedColorId,
+            selectedSizeId
+          );
+          if (!currentVariant) {
+            selectedColorId = null;
+          }
+
+          renderFiltersSection(tabletQuery);
+          updateAddToCartButton();
+        },
       });
+    }
+  };
+
+  const updateAddToCartButton = () => {
+    const btn = root.querySelector(".add-to-cart-button");
+    const currentVariant = findCurrentVariant(selectedColorId, selectedSizeId);
+
+    if (currentVariant && currentVariant.stock > 0) {
+      btn.disabled = false;
+      btn.textContent = "Add to Bag";
+    } else if (selectedColorId && selectedSizeId) {
+      btn.disabled = true;
+      btn.textContent = "Not Available";
+    } else {
+      btn.disabled = true;
+      btn.textContent = "Select Color and Size";
     }
   };
 
   tabletQuery.addEventListener("change", renderFiltersSection);
   renderFiltersSection(tabletQuery);
+  updateAddToCartButton();
 
   Quantity(root.querySelector(".info__quantity-container"), {
     onChange: (obj) => console.log(obj),

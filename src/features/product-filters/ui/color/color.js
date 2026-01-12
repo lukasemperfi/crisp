@@ -6,6 +6,7 @@ export function ColorFilter(
     showTitle = true,
     maxVisibleColors = null,
     selectionMode = "multiple",
+    onChange = null,
   } = {}
 ) {
   if (!container || !Array.isArray(colors)) {
@@ -56,10 +57,8 @@ export function ColorFilter(
       moreBtn.remove();
     });
   }
-
+  const inputs = container.querySelectorAll(".color-filter__input");
   if (selectionMode === "single") {
-    const inputs = container.querySelectorAll(".color-filter__input");
-
     inputs.forEach((input) => {
       input.addEventListener("change", () => {
         if (!input.checked) return;
@@ -69,6 +68,10 @@ export function ColorFilter(
             other.checked = false;
           }
         });
+
+        if (typeof onChange === "function") {
+          onChange(Number(input.value));
+        }
       });
     });
   }
@@ -86,7 +89,7 @@ function createColorOptionHtml(color, isHidden = false) {
     <label
       class="color-filter__item ${hiddenClass}"
       title="${color.name}"
-      style="${!color.available ? "display: none;" : hiddenStyle}"
+      style="${!color.available ? "opacity: 0.2; pointer-events: none;" : ""}"
     >
       <input
         type="checkbox"
