@@ -142,6 +142,12 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   const renderFiltersSection = (e) => {
     const sizeContainer = root.querySelector(".info__size");
+    const sizeFilter = SizeFilter({
+      sizes: uniqueSizes,
+      selectionMode: "single",
+      title: "Select size (Inches)",
+    });
+
     const colorCommonProps = {
       colors: uniqueColors,
       title: "Select Color",
@@ -162,6 +168,8 @@ export const ProductDetailsCard = ({ container, product }) => {
         }
 
         //TODO: Add update SizeFilter
+        sizeFilter.update({ sizes: uniqueSizes });
+        console.log(selectedColorId, selectedSizeId, currentVariant);
 
         // renderFiltersSection(tabletQuery);
         updateAddToCartButton();
@@ -210,30 +218,30 @@ export const ProductDetailsCard = ({ container, product }) => {
       ColorFilter(root.querySelector(".info__color"), {
         ...colorCommonProps,
       });
+      sizeContainer.appendChild(sizeFilter);
+      // SizeFilter(sizeContainer, {
+      //   sizes: uniqueSizes,
+      //   title: "Select size (Inches)",
+      //   showTitle: true,
+      //   selectionMode: "single",
 
-      SizeFilter(sizeContainer, {
-        sizes: uniqueSizes,
-        title: "Select size (Inches)",
-        showTitle: true,
-        selectionMode: "single",
+      //   onChange: (sizeId) => {
+      //     selectedSizeId = sizeId;
 
-        onChange: (sizeId) => {
-          selectedSizeId = sizeId;
+      //     uniqueColors = getColorsWithAvailability(selectedSizeId);
 
-          uniqueColors = getColorsWithAvailability(selectedSizeId);
+      //     const currentVariant = findCurrentVariant(
+      //       selectedColorId,
+      //       selectedSizeId
+      //     );
+      //     if (!currentVariant) {
+      //       selectedColorId = null;
+      //     }
 
-          const currentVariant = findCurrentVariant(
-            selectedColorId,
-            selectedSizeId
-          );
-          if (!currentVariant) {
-            selectedColorId = null;
-          }
-
-          renderFiltersSection(tabletQuery);
-          updateAddToCartButton();
-        },
-      });
+      //     renderFiltersSection(tabletQuery);
+      //     updateAddToCartButton();
+      //   },
+      // });
     }
   };
 
