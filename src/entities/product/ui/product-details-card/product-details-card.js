@@ -10,9 +10,11 @@ const totalPrice = 90;
 
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
+  let uniqueColors = getColorsWithAvailability();
+  let selectedColorId = uniqueColors[0].id;
 
-  let selectedColorId = null;
   let selectedSizeId = null;
+  let uniqueSizes = getSizesWithAvailability(selectedColorId);
 
   const findCurrentVariant = (colorId, sizeId) => {
     if (!colorId || !sizeId) return null;
@@ -22,40 +24,58 @@ export const ProductDetailsCard = ({ container, product }) => {
     );
   };
 
-  const getColorsWithAvailability = (sizeId = null) => {
-    return [
-      ...new Map(
-        variants.map((v) => [
-          v.color.id,
-          {
-            id: v.color.id,
-            name: v.color.name,
-            hex_code: v.color.hex_code,
-            available: v.stock > 0 && (!sizeId || v.size.id === sizeId),
-          },
-        ])
-      ).values(),
-    ];
-  };
+  console.log(variants);
 
-  const getSizesWithAvailability = (colorId = null) => {
-    return [
-      ...new Map(
-        variants.map((v) => [
-          v.size.id,
-          {
-            id: v.size.id,
-            name: v.size.name,
-            sort_order: v.size.sort_order,
-            available: v.stock > 0 && (!colorId || v.color.id === colorId),
-          },
-        ])
-      ).values(),
-    ];
-  };
+  function getColorsWithAvailability(sizeId = null) {
+    const map = new Map();
 
-  let uniqueColors = getColorsWithAvailability();
-  let uniqueSizes = getSizesWithAvailability();
+    variants.forEach((v) => {
+      const colorId = v.color.id;
+
+      const matchesSize = !sizeId || v.size.id === sizeId;
+      const isAvailable = v.stock > 0 && matchesSize;
+
+      if (!map.has(colorId)) {
+        map.set(colorId, {
+          id: v.color.id,
+          name: v.color.name,
+          hex_code: v.color.hex_code,
+          available: false,
+        });
+      }
+
+      if (isAvailable) {
+        map.get(colorId).available = true;
+      }
+    });
+
+    return [...map.values()];
+  }
+  function getSizesWithAvailability(colorId = null) {
+    const map = new Map();
+
+    variants.forEach((v) => {
+      const sizeId = v.size.id;
+
+      const matchesColor = !colorId || v.color.id === colorId;
+      const isAvailable = v.stock > 0 && matchesColor;
+
+      if (!map.has(sizeId)) {
+        map.set(sizeId, {
+          id: v.size.id,
+          name: v.size.name,
+          sort_order: v.size.sort_order,
+          available: false,
+        });
+      }
+
+      if (isAvailable) {
+        map.get(sizeId).available = true;
+      }
+    });
+
+    return [...map.values()].sort((a, b) => a.sort_order - b.sort_order);
+  }
 
   const mountPoint =
     typeof container === "string"
@@ -142,56 +162,76 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   const renderFiltersSection = (e) => {
     const sizeContainer = root.querySelector(".info__size");
+    const colorContainer = root.querySelector(".info__color");
+
+    const colorFilter = ColorFilter({
+      colors: uniqueColors,
+      title: "Select Color",
+      showTitle: true,
+      selectionMode: "single",
+      selectedId: selectedColorId,
+    });
+
     const sizeFilter = SizeFilter({
       sizes: uniqueSizes,
       selectionMode: "single",
       title: "Select size (Inches)",
     });
 
-    const colorCommonProps = {
-      colors: uniqueColors,
-      title: "Select Color",
-      showTitle: true,
-      selectionMode: "single",
-      selectedId: selectedColorId,
-      onChange: (colorId) => {
-        selectedColorId = colorId;
-
-        uniqueSizes = getSizesWithAvailability(selectedColorId);
-
-        const currentVariant = findCurrentVariant(
-          selectedColorId,
-          selectedSizeId
-        );
-        if (!currentVariant) {
-          selectedSizeId = null;
-        }
-
-        sizeFilter.update({ sizes: uniqueSizes });
-        console.log(selectedColorId, selectedSizeId, currentVariant);
-
-        // renderFiltersSection(tabletQuery);
-        updateAddToCartButton();
-      },
-    };
-
-    if (!sizeContainer) {
+    if (!sizeContainer || !colorContainer) {
       return;
     }
 
     sizeContainer.innerHTML = "";
+    colorContainer.innerHTML = "";
+
+    colorFilter.addEventListener("onChange", (e) => {
+      const colorId = e.detail.selected;
+      selectedColorId = colorId;
+      selectedSizeId = null;
+
+      uniqueSizes = getSizesWithAvailability(selectedColorId);
+
+      const currentVariant = findCurrentVariant(
+        selectedColorId,
+        selectedSizeId
+      );
+
+      if (!currentVariant) {
+        selectedSizeId = null;
+      }
+
+      sizeFilter.update({ sizes: uniqueSizes });
+
+      console.log(
+        "color onChange",
+        selectedColorId,
+        selectedSizeId,
+        currentVariant
+      );
+
+      updateAddToCartButton();
+    });
+
+    sizeFilter.addEventListener("onChange", (e) => {
+      selectedSizeId = e.detail.selected;
+
+      console.log("size onChange", selectedColorId, selectedSizeId);
+
+      updateAddToCartButton();
+    });
 
     if (e.matches) {
-      ColorFilter(root.querySelector(".info__color"), {
-        ...colorCommonProps,
-        maxVisibleColors: 3,
-      });
+      // Tablet mode
+      colorFilter.update({ maxVisibleColors: 3 });
+      colorContainer.append(colorFilter);
 
       const sizeOptions = uniqueSizes.map((size) => ({
         label: size.name,
         value: size.name,
         disabled: !size.available,
       }));
+
       Dropdown(sizeContainer, {
         options: sizeOptions,
         defaultValue: sizeOptions[0]?.value,
@@ -205,6 +245,7 @@ export const ProductDetailsCard = ({ container, product }) => {
             selectedColorId,
             selectedSizeId
           );
+
           if (!currentVariant) {
             selectedColorId = null;
           }
@@ -214,33 +255,8 @@ export const ProductDetailsCard = ({ container, product }) => {
         },
       });
     } else {
-      ColorFilter(root.querySelector(".info__color"), {
-        ...colorCommonProps,
-      });
-      sizeContainer.appendChild(sizeFilter);
-      // SizeFilter(sizeContainer, {
-      //   sizes: uniqueSizes,
-      //   title: "Select size (Inches)",
-      //   showTitle: true,
-      //   selectionMode: "single",
-
-      //   onChange: (sizeId) => {
-      //     selectedSizeId = sizeId;
-
-      //     uniqueColors = getColorsWithAvailability(selectedSizeId);
-
-      //     const currentVariant = findCurrentVariant(
-      //       selectedColorId,
-      //       selectedSizeId
-      //     );
-      //     if (!currentVariant) {
-      //       selectedColorId = null;
-      //     }
-
-      //     renderFiltersSection(tabletQuery);
-      //     updateAddToCartButton();
-      //   },
-      // });
+      colorContainer.append(colorFilter);
+      sizeContainer.append(sizeFilter);
     }
   };
 

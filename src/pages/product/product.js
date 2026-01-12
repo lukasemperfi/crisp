@@ -108,6 +108,25 @@ const mockProduct = {
       },
       stock: 7,
     },
+
+    /* 👇 NEW Red + w26 variant */
+    {
+      id: 675,
+      size: {
+        id: 28,
+        name: "w26",
+        created_at: "2025-12-28T13:49:23.703911+00:00",
+        sort_order: 20,
+      },
+      color: {
+        id: 19,
+        name: "Red",
+        hex_code: "#FF0000",
+        created_at: "2025-12-28T13:49:23.703911+00:00",
+      },
+      stock: 9,
+    },
+
     {
       id: 673,
       size: {

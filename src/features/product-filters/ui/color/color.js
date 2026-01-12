@@ -10,6 +10,7 @@ export function ColorFilter(props) {
         showTitle = true,
         maxVisibleColors = null,
         selectionMode = "multiple",
+        selectedId = null,
       } = props;
 
       if (!Array.isArray(colors)) {
@@ -26,11 +27,11 @@ export function ColorFilter(props) {
       const hiddenColors = hasLimit ? colors.slice(maxVisibleColors) : [];
 
       const visibleHtml = visibleColors
-        .map((color) => createColorOptionHtml(color))
+        .map((color) => createColorOptionHtml(color, false, selectedId))
         .join("");
 
       const hiddenHtml = hiddenColors
-        .map((color) => createColorOptionHtml(color, true))
+        .map((color) => createColorOptionHtml(color, true, selectedId))
         .join("");
 
       const moreButtonHtml =
@@ -67,6 +68,12 @@ export function ColorFilter(props) {
 
       const inputs = el.querySelectorAll(".color-filter__input");
 
+      if (selectionMode === "single" && selectedId != null) {
+        inputs.forEach((input) => {
+          input.checked = Number(input.value) === Number(selectedId);
+        });
+      }
+
       if (selectionMode === "single") {
         inputs.forEach((input) => {
           input.addEventListener("change", () => {
@@ -96,13 +103,13 @@ export function ColorFilter(props) {
   });
 }
 
-function createColorOptionHtml(color, isHidden = false) {
+function createColorOptionHtml(color, isHidden = false, selectedId = null) {
   const hex = (color.hex_code || "").toLowerCase();
   const isWhite = hex === "#ffffff" || hex === "#fff" || hex === "white";
 
   const whiteModifier = isWhite ? "color-filter__box_is-white" : "";
   const hiddenClass = isHidden ? "color-filter__item_is-hidden" : "";
-  const hiddenStyle = isHidden ? "display: none;" : "";
+  const isChecked = Number(color.id) === Number(selectedId);
 
   return `
     <label
@@ -115,6 +122,7 @@ function createColorOptionHtml(color, isHidden = false) {
         class="color-filter__input"
         name="filter-color"
         value="${color.id}"
+        ${isChecked ? "checked" : ""}
       />
       <span
         class="color-filter__box ${whiteModifier}"
