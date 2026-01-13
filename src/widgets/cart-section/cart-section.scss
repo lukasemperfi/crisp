@@ -1,0 +1,19 @@
+.cart-section {
+  .page-container-1920 {
+    max-width: 1496px;
+  }
+
+  &__content {
+    display: flex;
+    gap: 71px;
+  }
+
+  &__col-1 {
+    flex: 1 1 883px;
+    background-color: rgba(255, 0, 0, 0.443);
+  }
+  &__col-2 {
+    flex: 1 1 500px;
+    background-color: rgba(0, 0, 255, 0.434);
+  }
+}
