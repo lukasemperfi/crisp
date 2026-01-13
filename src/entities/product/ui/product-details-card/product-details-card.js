@@ -6,8 +6,6 @@ import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "../../../../shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 
-const totalPrice = 90;
-
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
   let uniqueColors = getColorsWithAvailability();
@@ -15,19 +13,253 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   let selectedSizeId = null;
   let uniqueSizes = getSizesWithAvailability(selectedColorId);
+  let currentQuantity = 1;
 
   console.log("start", selectedColorId, selectedSizeId);
 
-  const findCurrentVariant = (colorId, sizeId) => {
-    if (!colorId || !sizeId) return null;
-    return (
-      variants.find((v) => v.color.id === colorId && v.size.id === sizeId) ||
-      null
-    );
-  };
-
   console.log(variants);
 
+  const mountPoint =
+    typeof container === "string"
+      ? document.querySelector(container)
+      : container;
+
+  if (!mountPoint) {
+    console.error("ProductDetailsCard: container not found");
+    return;
+  }
+
+  if (!product) {
+    console.error("ProductDetailsCard: product is required");
+    return;
+  }
+
+  mountPoint.innerHTML = "";
+  const root = document.createElement("div");
+  root.className = "product-details-card";
+
+  const images = product.images
+    ?.slice()
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map((img) => img.image_path_jpg);
+
+  root.innerHTML = `
+    <div class="product-details-card__media"></div>
+    <div class="product-details-card__breadcrumbs"></div>
+    <div class="product-details-card__info info">
+      <div class="info__header">
+        <div class="info__brand"></div>
+        <div class="info__title">${product.name}</div>
+      </div>
+      <div class="info__color"></div>
+      <div class="info__size"></div>
+      <div class="info__grid">
+        <div class="info__summary">
+          <div class="info__quantity">
+            <div class="info__filter-title">Quantity</div>
+            <div class="info__quantity-container"></div>
+          </div>
+          <div class="info__total-price">
+            <div class="info__filter-title">Price Total</div>
+            <div class="info__price-value">${formatPrice(
+              product.final_price * currentQuantity
+            )} EUR</div>
+          </div>
+        </div>
+        <div class="info__actions">
+          <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon()}Save</button>
+        </div>
+        <div class="info__promo promo">
+              ${createSocialBlock("info__social-block")}
+              <div class="promo__item promo__item_free-shipping">
+                <div class="promo__item-title">${checkmarkIcon()}</div>
+                <div class="promo__item-text">Free shipping</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Product code:</div>
+                <div class="promo__item-text">RFKK1024</div>
+              </div>
+              <div class="promo__item">
+                <div class="promo__item-title">Tags:</div>
+                <div class="promo__item-text">${product.tags
+                  .map((tag) => tag.tag.name)
+                  .join(", ")}</div>
+              </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  mountPoint.appendChild(root);
+
+  ProductDetailsCardSlider({
+    container: root.querySelector(".product-details-card__media"),
+    images,
+  });
+
+  Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
+  Brand(root.querySelector(".info__brand"), product.brand?.name || "");
+
+  const tabletQuery = window.matchMedia("(max-width: 1380px)");
+
+  const renderFiltersSection = (e) => {
+    const sizeContainer = root.querySelector(".info__size");
+    const colorContainer = root.querySelector(".info__color");
+
+    if (!sizeContainer || !colorContainer) {
+      return;
+    }
+
+    const colorFilter = ColorFilter({
+      colors: uniqueColors,
+      title: "Select Color",
+      showTitle: true,
+      selectionMode: "single",
+      selectedId: selectedColorId,
+    });
+
+    const sizeFilter = SizeFilter({
+      sizes: uniqueSizes,
+      selectionMode: "single",
+      title: "Select size (Inches)",
+      selectedId: selectedSizeId,
+    });
+
+    const dropdown = Dropdown({
+      options: [],
+      defaultValue: String(selectedSizeId) || String(sizeOptions[0]?.value),
+    });
+
+    sizeContainer.innerHTML = "";
+    colorContainer.innerHTML = "";
+
+    colorFilter.addEventListener("onChange", (e) => {
+      const colorId = e.detail.selected;
+      selectedColorId = colorId;
+      selectedSizeId = null;
+
+      uniqueSizes = getSizesWithAvailability(selectedColorId);
+
+      const currentVariant = findCurrentVariant(
+        selectedColorId,
+        selectedSizeId
+      );
+
+      if (!currentVariant) {
+        selectedSizeId = null;
+      }
+
+      const sizeOptions = uniqueSizes.map((size) => ({
+        label: size.name,
+        value: size.id,
+        disabled: !size.available,
+      }));
+
+      sizeFilter.update({ sizes: uniqueSizes });
+      dropdown.update({ options: sizeOptions });
+
+      console.log(
+        "color onChange",
+        selectedColorId,
+        selectedSizeId,
+        currentVariant
+      );
+
+      updateAddToCartButton();
+    });
+
+    sizeFilter.addEventListener("onChange", (e) => {
+      selectedSizeId = e.detail.selected;
+
+      console.log("size onChange", selectedColorId, selectedSizeId);
+
+      updateAddToCartButton();
+    });
+
+    if (e.matches) {
+      colorFilter.update({ maxVisibleColors: 3 });
+      colorContainer.append(colorFilter);
+
+      const sizeOptions = uniqueSizes.map((size) => ({
+        label: size.name,
+        value: size.id,
+        disabled: !size.available,
+      }));
+
+      dropdown.update({ options: sizeOptions });
+
+      sizeContainer.append(dropdown);
+
+      dropdown.addEventListener("onChange", (e) => {
+        const sizeId = Number(e.detail);
+
+        const sizeObj = uniqueSizes.find((s) => s.id === sizeId);
+        selectedSizeId = sizeObj?.id || null;
+
+        console.log("size dropdown onChange", selectedColorId, selectedSizeId);
+
+        updateAddToCartButton();
+      });
+    } else {
+      colorContainer.append(colorFilter);
+      sizeContainer.append(sizeFilter);
+    }
+  };
+
+  const updateAddToCartButton = () => {
+    const btn = root.querySelector(".add-to-cart-button");
+    const currentVariant = findCurrentVariant(selectedColorId, selectedSizeId);
+    console.log("currentVariant", currentVariant);
+
+    if (currentVariant && currentVariant.stock > 0) {
+      btn.disabled = false;
+      btn.textContent = "Add to Bag";
+    } else if (selectedColorId && selectedSizeId) {
+      btn.disabled = true;
+      btn.textContent = "Not Available";
+    } else {
+      btn.disabled = true;
+      btn.textContent = "Select Color and Size";
+    }
+  };
+
+  tabletQuery.addEventListener("change", renderFiltersSection);
+  renderFiltersSection(tabletQuery);
+  updateAddToCartButton();
+
+  const qtyContainer = root.querySelector(".info__quantity-container");
+  const priceContainer = root.querySelector(".info__price-value");
+  const qty = Quantity({ itemId: product.id });
+  qtyContainer.append(qty);
+
+  const qualityOnChange = (e) => {
+    const quantity = e.detail.value;
+    currentQuantity = quantity;
+
+    priceContainer.textContent = `${formatPrice(
+      product.final_price * quantity
+    )} EUR`;
+  };
+
+  qty.addEventListener("onChange", qualityOnChange);
+
+  const addToCartButton = root.querySelector(".add-to-cart-button");
+  addToCartButton.addEventListener("click", (e) => {
+    const cartItem = getCartItem();
+    console.log("cartItem", cartItem);
+  });
+
+  function getCartItem() {
+    const currentVariant = findCurrentVariant(selectedColorId, selectedSizeId);
+
+    return {
+      productId: product.id,
+      variantId: currentVariant.id,
+      quantity: currentQuantity,
+    };
+  }
   function getColorsWithAvailability(sizeId = null) {
     const map = new Map();
 
@@ -78,208 +310,13 @@ export const ProductDetailsCard = ({ container, product }) => {
 
     return [...map.values()].sort((a, b) => a.sort_order - b.sort_order);
   }
-
-  const mountPoint =
-    typeof container === "string"
-      ? document.querySelector(container)
-      : container;
-
-  if (!mountPoint) {
-    console.error("ProductDetailsCard: container not found");
-    return;
+  function findCurrentVariant(colorId, sizeId) {
+    if (!colorId || !sizeId) return null;
+    return (
+      variants.find((v) => v.color.id === colorId && v.size.id === sizeId) ||
+      null
+    );
   }
-
-  if (!product) {
-    console.error("ProductDetailsCard: product is required");
-    return;
-  }
-
-  mountPoint.innerHTML = "";
-  const root = document.createElement("div");
-  root.className = "product-details-card";
-
-  const images = product.images
-    ?.slice()
-    .sort((a, b) => a.sort_order - b.sort_order)
-    .map((img) => img.image_path_jpg);
-
-  root.innerHTML = `
-    <div class="product-details-card__media"></div>
-    <div class="product-details-card__breadcrumbs"></div>
-    <div class="product-details-card__info info">
-      <div class="info__header">
-        <div class="info__brand"></div>
-        <div class="info__title">${product.name}</div>
-      </div>
-      <div class="info__color"></div>
-      <div class="info__size"></div>
-      <div class="info__grid">
-        <div class="info__summary">
-          <div class="info__quantity">
-            <div class="info__filter-title">Quantity</div>
-            <div class="info__quantity-container"></div>
-          </div>
-          <div class="info__total-price">
-            <div class="info__filter-title">Price Total</div>
-            <div class="info__total-price">${formatPrice(totalPrice)} EUR</div>
-          </div>
-        </div>
-        <div class="info__actions">
-          <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
-          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon()}Save</button>
-        </div>
-        <div class="info__promo promo">
-              ${createSocialBlock("info__social-block")}
-              <div class="promo__item promo__item_free-shipping">
-                <div class="promo__item-title">${checkmarkIcon()}</div>
-                <div class="promo__item-text">Free shipping</div>
-              </div>
-              <div class="promo__item">
-                <div class="promo__item-title">Product code:</div>
-                <div class="promo__item-text">RFKK1024</div>
-              </div>
-              <div class="promo__item">
-                <div class="promo__item-title">Tags:</div>
-                <div class="promo__item-text">${product.tags
-                  .map((tag) => tag.tag.name)
-                  .join(", ")}</div>
-              </div>
-        </div>      
-      </div>
-
-    </div>
-  `;
-
-  mountPoint.appendChild(root);
-
-  ProductDetailsCardSlider({
-    container: root.querySelector(".product-details-card__media"),
-    images,
-  });
-
-  Breadcrumbs(root.querySelector(".product-details-card__breadcrumbs"));
-  Brand(root.querySelector(".info__brand"), product.brand?.name || "");
-
-  const tabletQuery = window.matchMedia("(max-width: 1380px)");
-
-  const renderFiltersSection = (e) => {
-    const sizeContainer = root.querySelector(".info__size");
-    const colorContainer = root.querySelector(".info__color");
-
-    const colorFilter = ColorFilter({
-      colors: uniqueColors,
-      title: "Select Color",
-      showTitle: true,
-      selectionMode: "single",
-      selectedId: selectedColorId,
-    });
-
-    const sizeFilter = SizeFilter({
-      sizes: uniqueSizes,
-      selectionMode: "single",
-      title: "Select size (Inches)",
-      selectedId: selectedSizeId,
-    });
-
-    if (!sizeContainer || !colorContainer) {
-      return;
-    }
-
-    sizeContainer.innerHTML = "";
-    colorContainer.innerHTML = "";
-
-    colorFilter.addEventListener("onChange", (e) => {
-      const colorId = e.detail.selected;
-      selectedColorId = colorId;
-      selectedSizeId = null;
-
-      uniqueSizes = getSizesWithAvailability(selectedColorId);
-
-      const currentVariant = findCurrentVariant(
-        selectedColorId,
-        selectedSizeId
-      );
-
-      if (!currentVariant) {
-        selectedSizeId = null;
-      }
-
-      sizeFilter.update({ sizes: uniqueSizes });
-
-      console.log(
-        "color onChange",
-        selectedColorId,
-        selectedSizeId,
-        currentVariant
-      );
-
-      updateAddToCartButton();
-    });
-
-    sizeFilter.addEventListener("onChange", (e) => {
-      selectedSizeId = e.detail.selected;
-
-      console.log("size onChange", selectedColorId, selectedSizeId);
-
-      updateAddToCartButton();
-    });
-
-    if (e.matches) {
-      colorFilter.update({ maxVisibleColors: 3 });
-      colorContainer.append(colorFilter);
-
-      const sizeOptions = uniqueSizes.map((size) => ({
-        label: size.name,
-        value: size.id,
-        disabled: !size.available,
-      }));
-
-      const dropdown = Dropdown({
-        options: sizeOptions,
-        defaultValue: String(selectedSizeId) || String(sizeOptions[0]?.value),
-      });
-
-      sizeContainer.append(dropdown);
-
-      dropdown.addEventListener("onChange", (e) => {
-        const sizeId = Number(e.detail);
-
-        const sizeObj = uniqueSizes.find((s) => s.id === sizeId);
-        selectedSizeId = sizeObj?.id || null;
-
-        console.log("size dropdown onChange", selectedColorId, selectedSizeId);
-
-        updateAddToCartButton();
-      });
-    } else {
-      colorContainer.append(colorFilter);
-      sizeContainer.append(sizeFilter);
-    }
-  };
-
-  const updateAddToCartButton = () => {
-    const btn = root.querySelector(".add-to-cart-button");
-    const currentVariant = findCurrentVariant(selectedColorId, selectedSizeId);
-
-    if (currentVariant && currentVariant.stock > 0) {
-      btn.disabled = false;
-      btn.textContent = "Add to Bag";
-    } else if (selectedColorId && selectedSizeId) {
-      btn.disabled = true;
-      btn.textContent = "Not Available";
-    } else {
-      btn.disabled = true;
-      btn.textContent = "Select Color and Size";
-    }
-  };
-
-  tabletQuery.addEventListener("change", renderFiltersSection);
-  renderFiltersSection(tabletQuery);
-  updateAddToCartButton();
-
-  Quantity(root.querySelector(".info__quantity-container"), {
-    onChange: (obj) => console.log(obj),
-  });
 };
 
 function ProductDetailsCardSlider({ container, images = [] }) {
