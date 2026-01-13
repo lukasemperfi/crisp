@@ -1,0 +1,26 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.cart-product-card {
+  margin-block: 50px;
+  display: grid;
+  grid-template-columns: repeat(6, max-content);
+  column-gap: 40px;
+  align-items: center;
+  background-color: var(--white);
+
+  .product {
+    display: grid;
+    grid-template-columns: 84px minmax(177px, 187px);
+    column-gap: 17px;
+
+    &__image {
+      aspect-ratio: 84/103;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

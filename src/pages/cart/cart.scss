@@ -9,6 +9,7 @@
 @use "@/shared/ui/accordion/accordion.scss" as *;
 @use "@/widgets/benefits-section/benefits-section.scss" as *;
 @use "@/widgets/cart-section/cart-section.scss" as *;
+@use "@/features/cart/ui/cart-product-card/cart-product-card.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

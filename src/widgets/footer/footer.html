@@ -1,8 +1,10 @@
 {%import "src/shared/ui/icons/icons.html" as icons%}
+{%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 
 {%macro footer(baseUrl)%}
 <footer class="page-footer">
-    <div class="page-container-1920">
+    {{benefitsSection()}}
+    <div class="page-footer__container page-container-1920">
         <div class="page-footer__wrapper">
             <div class="page-footer__content">
                 <div class="page-footer__logo-wrapper">

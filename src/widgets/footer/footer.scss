@@ -5,9 +5,11 @@
   $bp-tablet: 1190px;
   $bp-mobile: 500px;
 
-  background-color: var(--black);
-  color: var(--white);
-  white-space: nowrap;
+  .page-footer__container {
+    background-color: var(--black);
+    color: var(--white);
+    white-space: nowrap;
+  }
 
   &__content {
     display: flex;

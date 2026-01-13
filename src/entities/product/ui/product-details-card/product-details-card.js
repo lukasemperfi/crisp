@@ -3,7 +3,7 @@ import { Thumbs, Pagination } from "swiper/modules";
 import { ColorFilter } from "@/features/product-filters/ui/color/color";
 import { SizeFilter } from "@/features/product-filters/ui/size/size";
 import { Quantity } from "@/shared/ui/quantity/quantity";
-import { formatPrice } from "../../../../shared/helpers/format-price";
+import { formatPrice } from "@/shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 
 export const ProductDetailsCard = ({ container, product }) => {

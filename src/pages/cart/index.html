@@ -1,7 +1,7 @@
 {%from "src/widgets/header/header.html" import header%}
 {%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
 {%from "src/widgets/footer/footer.html" import footer%}
-{%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
+
 {%from "src/pages/cart/sections/cart-content/cart-content.html" import cartContent%}
 
 <!DOCTYPE html>
@@ -19,9 +19,8 @@
     {{header(baseUrl)}}
     <main class="cart-page">
         {{cartContent()}}
-        {{benefitsSection()}}
-        {{footer(baseUrl)}}
     </main>
+    {{footer(baseUrl)}}
     <div class="portal-root">
         {{mobileMenu(baseUrl)}}
         <div id="toast-container"></div>
