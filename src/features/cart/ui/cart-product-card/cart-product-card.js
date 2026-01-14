@@ -1,54 +1,3 @@
-// import { createComponent } from "@/shared/lib/core/core";
-// import { formatPrice } from "../../../../shared/helpers/format-price";
-// import { Quantity } from "../../../../shared/ui/quantity/quantity";
-
-// export function CartProductCard(props) {
-//   return createComponent(props, {
-//     tag: "div",
-//     render(el, props, emit) {
-//       const {} = props;
-//       const { id, images, name, final_price, variant, quantity } = {
-//         ...mockProduct,
-//       };
-//       const mainImage = images.filter(
-//         (imageObj) => imageObj.is_main === true
-//       )[0];
-//       const totalPrice = formatPrice(quantity * final_price);
-
-//       el.className = "cart-product-card";
-//       el.innerHTML = `
-//         <div class="cart-product-card__product product">
-//           <div class="product__image">
-//               <img src="${
-//                 mainImage.image_path_webp
-//               }" alt="cart product card image">
-//           </div>
-//           <div class="product__details">${name}</div>
-//         </div>
-//         <div class="cart-product-card__price">${formatPrice(
-//           final_price
-//         )} EUR</div>
-//         <div class="cart-product-card__size">${variant.size.name}</div>
-//         <div class="cart-product-card__quantity"></div>
-//         <div class="cart-product-card__total-price">${totalPrice} EUR</div>
-//         <div class="cart-product-card__actions">actions</div>
-//       `;
-
-//       const quantityContainer = el.querySelector(
-//         ".cart-product-card__quantity"
-//       );
-//       const quantityComponent = Quantity({
-//         itemId: id,
-//         initialValue: quantity,
-//       });
-
-//       quantityContainer.append(quantityComponent);
-
-//       quantityComponent.addEventListener("onChange", (e) => {});
-//     },
-//   });
-// }
-
 import { createComponent } from "@/shared/lib/core/core";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
@@ -63,11 +12,10 @@ export function CartProductCard(initialProps) {
     {
       tag: "div",
 
-      render(el, props, emit) {
+      render(el, props, emit, { runOnce }) {
         const { id, images, name, final_price, variant, quantity } = props;
 
-        /* -------------------- mount (run once) -------------------- */
-        if (!el._mounted) {
+        if (runOnce) {
           el.className = "cart-product-card";
 
           el.innerHTML = `
@@ -100,18 +48,15 @@ export function CartProductCard(initialProps) {
 
           quantityComponent.addEventListener("onChange", (e) => {
             el.update({ quantity: e.detail.value });
-            emit("onQuantityChange", {
-              id,
-              quantity: e.detail.value,
-            });
+
+            // emit("cart:quantity-change", {
+            //   id,
+            //   quantity: e.detail.value,
+            // });
           });
 
           el._els.quantity.append(quantityComponent);
-
-          el._mounted = true;
         }
-
-        /* -------------------- update data -------------------- */
 
         const mainImage = images.find((img) => img.is_main);
         const totalPrice = formatPrice(quantity * final_price);

@@ -2,13 +2,21 @@ export function createComponent(initialProps, { tag = "div", create, render }) {
   let props = { ...initialProps };
   const el = create ? create() : document.createElement(tag);
 
+  el._mounted = el._mounted || false;
+
   function emit(event, detail) {
     el.dispatchEvent(new CustomEvent(event, { detail }));
   }
 
   el.update = (nextProps = {}) => {
     props = { ...props, ...nextProps };
-    render(el, props, emit);
+
+    if (!el._mounted) {
+      render(el, props, emit, { runOnce: true });
+      el._mounted = true;
+    } else {
+      render(el, props, emit, { runOnce: false });
+    }
   };
 
   el.getState = () => ({ ...props });
@@ -17,7 +25,7 @@ export function createComponent(initialProps, { tag = "div", create, render }) {
     el.remove();
   };
 
-  render(el, props, emit);
+  el.update();
 
   return el;
 }
