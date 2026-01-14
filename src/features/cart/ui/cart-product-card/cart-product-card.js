@@ -1,6 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
+import { ColorFilter } from "../../../product-filters/ui/color/color";
 
 export function CartProductCard(initialProps) {
   return createComponent(
@@ -13,34 +14,9 @@ export function CartProductCard(initialProps) {
       tag: "div",
 
       render(el, props, emit, { runOnce }) {
-        const { id, images, name, final_price, variant, quantity } = props;
+        const { id, images, name, final_price, sku, variant, quantity } = props;
 
-        if (runOnce) {
-          el.className = "cart-product-card";
-
-          el.innerHTML = `
-            <div class="cart-product-card__product product">
-              <div class="product__image">
-                <img />
-              </div>
-              <div class="product__details"></div>      
-            </div>
-            <div class="cart-product-card__price"></div>
-            <div class="cart-product-card__size"></div>
-            <div class="cart-product-card__quantity"></div>
-            <div class="cart-product-card__total-price"></div>
-            <div class="cart-product-card__actions">actions</div>
-          `;
-
-          el._els = {
-            image: el.querySelector(".product__image img"),
-            name: el.querySelector(".product__details"),
-            price: el.querySelector(".cart-product-card__price"),
-            size: el.querySelector(".cart-product-card__size"),
-            quantity: el.querySelector(".cart-product-card__quantity"),
-            total: el.querySelector(".cart-product-card__total-price"),
-          };
-
+        function initQuantity() {
           const quantityComponent = Quantity({
             itemId: id,
             initialValue: quantity,
@@ -58,6 +34,54 @@ export function CartProductCard(initialProps) {
           el._els.quantity.append(quantityComponent);
         }
 
+        if (runOnce) {
+          el.className = "cart-product-card";
+
+          el.innerHTML = `
+            <div class="cart-product-card__product product">
+              <div class="product__image">
+                <img />
+              </div>
+              <div class="product__details">
+                <div class="product-details">
+                  <div class="product-details__title"></div>
+                  <div class="product-details__item">
+                    <div class="product-details__sub-title">Size:</div>
+                    <div class="product-details__value product-details__size-value"></div>
+                  </div>
+                  <div class="product-details__item">
+                    <div class="product-details__sub-title">Art.No.:</div>
+                    <div class="product-details__value product-details__sku-value"></div>
+                  </div>
+                  <div class="product-details__item">
+                    <div class="product-details__sub-title">Color:</div>
+                    <div class="product-details__value product-details__color-value"></div>
+                  </div>
+                </div>
+              </div>      
+            </div>
+            <div class="cart-product-card__price"></div>
+            <div class="cart-product-card__size"></div>
+            <div class="cart-product-card__quantity"></div>
+            <div class="cart-product-card__total-price"></div>
+            <div class="cart-product-card__actions">actions</div>
+          `;
+
+          el._els = {
+            image: el.querySelector(".product__image img"),
+            name: el.querySelector(".product-details__title"),
+            sku: el.querySelector(".product-details__sku-value"),
+            detailsSize: el.querySelector(".product-details__size-value"),
+            color: el.querySelector(".product-details__color-value"),
+            price: el.querySelector(".cart-product-card__price"),
+            size: el.querySelector(".cart-product-card__size"),
+            quantity: el.querySelector(".cart-product-card__quantity"),
+            total: el.querySelector(".cart-product-card__total-price"),
+          };
+
+          initQuantity();
+        }
+
         const mainImage = images.find((img) => img.is_main);
         const totalPrice = formatPrice(quantity * final_price);
 
@@ -66,18 +90,31 @@ export function CartProductCard(initialProps) {
         el._els.price.textContent = `${formatPrice(final_price)} EUR`;
         el._els.size.textContent = variant.size.name;
         el._els.total.textContent = `${totalPrice} EUR`;
+
+        el._els.detailsSize.textContent = variant.size.name;
+        el._els.sku.textContent = sku;
+        el._els.color.innerHTML = createColorItem(variant.color);
       },
     }
   );
 }
 
+function createColorItem(colorObj) {
+  return `
+    <div class="color-filter__item " title="${colorObj.name}">
+      <span class="color-filter__box " style="background-color: ${colorObj.hex_code};"></span>
+    </div>
+  `;
+}
+
 const mockProduct = {
   id: "12d7e202-e133-403d-8560-129bc987ed98",
   brand_id: 15,
-  name: "Women Black Checked Fit and Flare Dress",
+  name: "Angels malu zip jeans slim black used",
   description: "High-quality fabric and modern design for your perfect look.",
   base_price: 238.69,
   discount_percent: 20,
+  sku: 434536465,
   created_at: "2025-12-28T13:49:23.703911+00:00",
   length_id: 1,
   final_price: 190.95,
@@ -137,6 +174,13 @@ const mockProduct = {
       created_at: "2025-12-28T13:49:23.703911+00:00",
       sort_order: 80,
     },
+    color: {
+      id: 19,
+      name: "Red",
+      hex_code: "#FF0000",
+      created_at: "2025-12-28T13:49:23.703911+00:00",
+    },
+    stock: 21,
   },
 
   quantity: 3,
