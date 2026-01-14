@@ -1,7 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
-import { ColorFilter } from "../../../product-filters/ui/color/color";
+import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 
 export function CartProductCard(initialProps) {
   return createComponent(
@@ -64,7 +64,19 @@ export function CartProductCard(initialProps) {
             <div class="cart-product-card__size"></div>
             <div class="cart-product-card__quantity"></div>
             <div class="cart-product-card__total-price"></div>
-            <div class="cart-product-card__actions">actions</div>
+            <div class="cart-product-card__actions">
+              <div class="actions">
+                <button class="actions__btn actions__btn_add-to-fav">
+                  ${IconHeart()}
+                </button>
+                <button class="actions__btn actions__btn_edit">
+                  ${IconEdit()}
+                </button>
+                <button class="actions__btn actions__btn_remove">
+                  ${IconCross()}
+                </button>
+              </div>            
+            </div>
           `;
 
           el._els = {

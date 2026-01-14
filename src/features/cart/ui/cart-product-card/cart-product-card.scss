@@ -4,7 +4,7 @@
 .cart-product-card {
   margin-block: 50px;
   display: grid;
-  grid-template-columns: repeat(6, max-content);
+  grid-template-columns: repeat(4, max-content) 1fr max-content;
   column-gap: 40px;
   align-items: center;
   background-color: var(--white);
@@ -26,6 +26,42 @@
     .product-details {
       &__item {
         display: flex;
+      }
+    }
+  }
+
+  &__total-price {
+    justify-self: center;
+  }
+
+  &__actions {
+    .actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: var(--main-color);
+
+        &_add-to-fav svg {
+          width: 11px;
+          height: 11px;
+        }
+        &_edit svg {
+          width: 11px;
+          height: 11px;
+        }
+        &_remove svg {
+          width: 9px;
+          height: 9px;
+        }
       }
     }
   }
