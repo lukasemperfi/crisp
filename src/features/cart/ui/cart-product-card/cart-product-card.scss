@@ -7,9 +7,8 @@ $container-media: "882px";
   overflow: hidden;
 
   &__wrapper {
-    margin-block: 50px;
     display: grid;
-    grid-template-columns: repeat(4, max-content) minmax(120px, 1fr) max-content;
+    grid-template-columns: repeat(4, max-content) minmax(120px, max-content) max-content;
     column-gap: 32px;
     align-items: center;
     justify-content: space-between;
@@ -25,7 +24,7 @@ $container-media: "882px";
       grid-template-areas:
         "product actions"
         "quantity-total quantity-total";
-      gap: 0;
+      gap: 8px;
       padding-block: 14px;
       border-bottom: 2px solid var(--light-blue-hover);
     }
@@ -177,6 +176,7 @@ $container-media: "882px";
       display: flex;
       align-items: baseline;
       gap: 5px;
+      padding-bottom: 10px;
     }
 
     .cart-product-card__sub-title {
