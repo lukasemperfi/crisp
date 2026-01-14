@@ -48,15 +48,15 @@ export function CartProductCard(initialProps) {
                   <div class="product-details__title"></div>
                   <div class="product-details__items">
                     <div class="product-details__item">
-                      <div class="product-details__sub-title">Size:</div>
+                      <div class="cart-product-card__sub-title">Size:</div>
                       <div class="product-details__value product-details__size-value"></div>
                     </div>
                     <div class="product-details__item">
-                      <div class="product-details__sub-title">Art.No.:</div>
+                      <div class="cart-product-card__sub-title">Art.No.:</div>
                       <div class="product-details__value product-details__sku-value"></div>
                     </div>
                     <div class="product-details__item product-details__item_color">
-                      <div class="product-details__sub-title">Color:</div>
+                      <div class="cart-product-card__sub-title">Color:</div>
                       <div class="product-details__value product-details__color-value"></div>
                     </div>                  
                   </div>
@@ -65,8 +65,15 @@ export function CartProductCard(initialProps) {
             </div>
             <div class="cart-product-card__price"></div>
             <div class="cart-product-card__size"></div>
-            <div class="cart-product-card__quantity"></div>
-            <div class="cart-product-card__total-price"></div>
+            <div class="cart-product-card__quantity-total">
+              <div class="cart-product-card__quantity">
+                <div class="cart-product-card__sub-title cart-product-card__sub-title_quantity">Quantity</div>
+              </div>
+              <div class="cart-product-card__total-price">
+                <div class="cart-product-card__sub-title">Price:</div>   
+                <div class="cart-product-card__total-price-value"></div>
+              </div>           
+            </div>
             <div class="cart-product-card__actions">
               <div class="actions">
                 <button class="actions__btn actions__btn_add-to-fav">
@@ -92,7 +99,7 @@ export function CartProductCard(initialProps) {
             price: el.querySelector(".cart-product-card__price"),
             size: el.querySelector(".cart-product-card__size"),
             quantity: el.querySelector(".cart-product-card__quantity"),
-            total: el.querySelector(".cart-product-card__total-price"),
+            total: el.querySelector(".cart-product-card__total-price-value"),
           };
 
           initQuantity();
@@ -105,7 +112,7 @@ export function CartProductCard(initialProps) {
         el._els.name.textContent = name;
         el._els.price.textContent = `${formatPrice(final_price)} EUR`;
         el._els.size.textContent = variant.size.name;
-        el._els.total.textContent = `${totalPrice} EUR`;
+        el._els.total.append(`${totalPrice} EUR`);
 
         el._els.detailsSize.textContent = variant.size.name;
         el._els.sku.textContent = sku;
