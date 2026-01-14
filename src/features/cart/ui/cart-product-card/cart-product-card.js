@@ -3,41 +3,36 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 
-export function CartProductCard(initialProps) {
-  return createComponent(
-    {
-      ...mockProduct,
-      ...initialProps,
-      quantity: initialProps?.quantity ?? mockProduct.quantity,
-    },
-    {
-      tag: "div",
+export function CartProductCard(props) {
+  return createComponent(props, {
+    tag: "div",
 
-      render(el, props, emit, { runOnce }) {
-        const { id, images, name, final_price, sku, variant, quantity } = props;
+    render(el, props, emit, { runOnce }) {
+      const { product = null, variant = null, quantity = 1 } = props;
+      const { id, images, name, final_price, sku } = product;
 
-        function initQuantity() {
-          const quantityComponent = Quantity({
-            itemId: id,
-            initialValue: quantity,
-          });
+      function initQuantity() {
+        const quantityComponent = Quantity({
+          itemId: id,
+          initialValue: quantity,
+        });
 
-          quantityComponent.addEventListener("onChange", (e) => {
-            el.update({ quantity: e.detail.value });
+        quantityComponent.addEventListener("onChange", (e) => {
+          el.update({ quantity: e.detail.value });
 
-            // emit("cart:quantity-change", {
-            //   id,
-            //   quantity: e.detail.value,
-            // });
-          });
+          // emit("cart:quantity-change", {
+          //   id,
+          //   quantity: e.detail.value,
+          // });
+        });
 
-          el._els.quantity.append(quantityComponent);
-        }
+        el._els.quantity.append(quantityComponent);
+      }
 
-        if (runOnce) {
-          el.className = "cart-product-card";
+      if (runOnce) {
+        el.className = "cart-product-card";
 
-          el.innerHTML = `
+        el.innerHTML = `
           <div class="cart-product-card__wrapper">
             <div class="cart-product-card__product product">
               <div class="product__image">
@@ -90,36 +85,35 @@ export function CartProductCard(initialProps) {
           </div>
           `;
 
-          el._els = {
-            image: el.querySelector(".product__image img"),
-            name: el.querySelector(".product-details__title"),
-            sku: el.querySelector(".product-details__sku-value"),
-            detailsSize: el.querySelector(".product-details__size-value"),
-            color: el.querySelector(".product-details__color-value"),
-            price: el.querySelector(".cart-product-card__price"),
-            size: el.querySelector(".cart-product-card__size"),
-            quantity: el.querySelector(".cart-product-card__quantity"),
-            total: el.querySelector(".cart-product-card__total-price-value"),
-          };
+        el._els = {
+          image: el.querySelector(".product__image img"),
+          name: el.querySelector(".product-details__title"),
+          sku: el.querySelector(".product-details__sku-value"),
+          detailsSize: el.querySelector(".product-details__size-value"),
+          color: el.querySelector(".product-details__color-value"),
+          price: el.querySelector(".cart-product-card__price"),
+          size: el.querySelector(".cart-product-card__size"),
+          quantity: el.querySelector(".cart-product-card__quantity"),
+          total: el.querySelector(".cart-product-card__total-price-value"),
+        };
 
-          initQuantity();
-        }
+        initQuantity();
+      }
 
-        const mainImage = images.find((img) => img.is_main);
-        const totalPrice = formatPrice(quantity * final_price);
+      const mainImage = images.find((img) => img.is_main);
+      const totalPrice = formatPrice(quantity * final_price);
 
-        el._els.image.src = mainImage?.image_path_webp || "";
-        el._els.name.textContent = name;
-        el._els.price.textContent = `${formatPrice(final_price)} EUR`;
-        el._els.size.textContent = variant.size.name;
-        el._els.total.append(`${totalPrice} EUR`);
+      el._els.image.src = mainImage?.image_path_webp || "";
+      el._els.name.textContent = name;
+      el._els.price.textContent = `${formatPrice(final_price)} EUR`;
+      el._els.size.textContent = variant.size.name;
+      el._els.total.append(`${totalPrice} EUR`);
 
-        el._els.detailsSize.textContent = variant.size.name;
-        el._els.sku.textContent = sku;
-        el._els.color.innerHTML = createColorItem(variant.color);
-      },
-    }
-  );
+      el._els.detailsSize.textContent = variant.size.name;
+      el._els.sku.textContent = sku;
+      el._els.color.innerHTML = createColorItem(variant.color);
+    },
+  });
 }
 
 function createColorItem(colorObj) {
