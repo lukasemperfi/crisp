@@ -2,18 +2,19 @@
 @use "@/app/styles/functions" as functions;
 
 .cart-product-card {
-  margin-block: 50px;
-  display: grid;
-  grid-template-columns: repeat(4, max-content) 1fr max-content;
-  column-gap: 40px;
-  align-items: center;
-  background-color: var(--white);
-  font-family: var(--third-family);
-  font-weight: 400;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: var(--black);
-
+  &__wrapper {
+    margin-block: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, max-content) minmax(120px, 1fr) max-content;
+    column-gap: 32px;
+    align-items: center;
+    background-color: var(--white);
+    font-family: var(--third-family);
+    font-weight: 400;
+    font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
+    text-transform: uppercase;
+    color: var(--black);
+  }
   .product {
     display: grid;
     grid-template-columns: 84px minmax(177px, 187px);
@@ -32,8 +33,8 @@
       &__title {
         font-family: var(--font-family);
         font-weight: 500;
-        font-size: 18px;
-        line-height: 24px;
+        font-size: functions.fluidValue(16px, 18px, 320px, 1920px);
+        line-height: functions.fluidValue(18px, 24px, 320px, 1920px);
         letter-spacing: 0.03em;
         text-transform: uppercase;
         color: var(--black);

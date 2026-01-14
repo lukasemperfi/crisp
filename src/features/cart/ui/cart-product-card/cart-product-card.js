@@ -38,6 +38,7 @@ export function CartProductCard(initialProps) {
           el.className = "cart-product-card";
 
           el.innerHTML = `
+          <div class="cart-product-card__wrapper">
             <div class="cart-product-card__product product">
               <div class="product__image">
                 <img />
@@ -78,7 +79,8 @@ export function CartProductCard(initialProps) {
                   ${IconCross()}
                 </button>
               </div>            
-            </div>
+            </div>        
+          </div>
           `;
 
           el._els = {
