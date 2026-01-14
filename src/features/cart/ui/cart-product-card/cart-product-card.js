@@ -45,17 +45,19 @@ export function CartProductCard(initialProps) {
               <div class="product__details">
                 <div class="product-details">
                   <div class="product-details__title"></div>
-                  <div class="product-details__item">
-                    <div class="product-details__sub-title">Size:</div>
-                    <div class="product-details__value product-details__size-value"></div>
-                  </div>
-                  <div class="product-details__item">
-                    <div class="product-details__sub-title">Art.No.:</div>
-                    <div class="product-details__value product-details__sku-value"></div>
-                  </div>
-                  <div class="product-details__item">
-                    <div class="product-details__sub-title">Color:</div>
-                    <div class="product-details__value product-details__color-value"></div>
+                  <div class="product-details__items">
+                    <div class="product-details__item">
+                      <div class="product-details__sub-title">Size:</div>
+                      <div class="product-details__value product-details__size-value"></div>
+                    </div>
+                    <div class="product-details__item">
+                      <div class="product-details__sub-title">Art.No.:</div>
+                      <div class="product-details__value product-details__sku-value"></div>
+                    </div>
+                    <div class="product-details__item product-details__item_color">
+                      <div class="product-details__sub-title">Color:</div>
+                      <div class="product-details__value product-details__color-value"></div>
+                    </div>                  
                   </div>
                 </div>
               </div>      
