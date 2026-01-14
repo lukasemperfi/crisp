@@ -20,14 +20,10 @@ export function CartTable(props) {
              <div class="cart-table-header__col-5">Total</div> 
              <div class="cart-table-header__col-6"></div>   
           </header>
-          <div class="cart-table__body">
-            <div class="cart-table__list"></div> 
-          </div>
+          <div class="cart-table__list"></div> 
           <footer class="cart-table__footer">
-            <div class="cart-table__actions">
                 <button class="button button_elevated button_gray">continue shopping</button>
                 <button class="button button_elevated button_gray">clear shopping cart</button>
-            </div> 
           </footer>
           `;
 

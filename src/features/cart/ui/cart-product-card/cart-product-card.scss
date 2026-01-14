@@ -168,7 +168,7 @@ $container-media: "882px";
   }
 
   &__total-price {
-    justify-self: center;
+    justify-self: flex-start;
     white-space: nowrap;
 
     @container (max-width: 882px) {
@@ -201,6 +201,7 @@ $container-media: "882px";
   &__actions {
     @container (max-width: 882px) {
       grid-area: actions;
+      justify-self: flex-end;
     }
     .actions {
       display: flex;
