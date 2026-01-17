@@ -1,45 +1,32 @@
-import{g as F,b as M,e as x,S as g,P as y,C as w,i as Z,a as k,l as S}from"../../color-CyiGwVGT.js";import{D as T}from"../../dropdown-WIquePbl.js";function z({swiper:e,extendParams:l,on:c}){l({thumbs:{swiper:null,multipleActiveThumbs:!0,autoScrollOffset:0,slideThumbActiveClass:"swiper-slide-thumb-active",thumbsContainerClass:"swiper-thumbs"}});let s=!1,m=!1;e.thumbs={swiper:null};function v(){const i=e.thumbs.swiper;if(!i||i.destroyed)return;const a=i.clickedIndex,d=i.clickedSlide;if(d&&d.classList.contains(e.params.thumbs.slideThumbActiveClass)||typeof a>"u"||a===null)return;let n;i.params.loop?n=parseInt(i.clickedSlide.getAttribute("data-swiper-slide-index"),10):n=a,e.params.loop?e.slideToLoop(n):e.slideTo(n)}function u(){const{thumbs:i}=e.params;if(s)return!1;s=!0;const a=e.constructor;if(i.swiper instanceof a){if(i.swiper.destroyed)return s=!1,!1;e.thumbs.swiper=i.swiper,Object.assign(e.thumbs.swiper.originalParams,{watchSlidesProgress:!0,slideToClickedSlide:!1}),Object.assign(e.thumbs.swiper.params,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper.update()}else if(M(i.swiper)){const d=Object.assign({},i.swiper);Object.assign(d,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper=new a(d),m=!0}return e.thumbs.swiper.el.classList.add(e.params.thumbs.thumbsContainerClass),e.thumbs.swiper.on("tap",v),!0}function r(i){const a=e.thumbs.swiper;if(!a||a.destroyed)return;const d=a.params.slidesPerView==="auto"?a.slidesPerViewDynamic():a.params.slidesPerView;let n=1;const p=e.params.thumbs.slideThumbActiveClass;if(e.params.slidesPerView>1&&!e.params.centeredSlides&&(n=e.params.slidesPerView),e.params.thumbs.multipleActiveThumbs||(n=1),n=Math.floor(n),a.slides.forEach(t=>t.classList.remove(p)),a.params.loop||a.params.virtual&&a.params.virtual.enabled)for(let t=0;t<n;t+=1)x(a.slidesEl,`[data-swiper-slide-index="${e.realIndex+t}"]`).forEach(C=>{C.classList.add(p)});else for(let t=0;t<n;t+=1)a.slides[e.realIndex+t]&&a.slides[e.realIndex+t].classList.add(p);const h=e.params.thumbs.autoScrollOffset,_=h&&!a.params.loop;if(e.realIndex!==a.realIndex||_){const t=a.activeIndex;let C,o;if(a.params.loop){const f=a.slides.find(L=>L.getAttribute("data-swiper-slide-index")===`${e.realIndex}`);C=a.slides.indexOf(f),o=e.activeIndex>e.previousIndex?"next":"prev"}else C=e.realIndex,o=C>e.previousIndex?"next":"prev";_&&(C+=o==="next"?h:-1*h),a.visibleSlidesIndexes&&a.visibleSlidesIndexes.indexOf(C)<0&&(a.params.centeredSlides?C>t?C=C-Math.floor(d/2)+1:C=C+Math.floor(d/2)-1:C>t&&a.params.slidesPerGroup,a.slideTo(C,i?0:void 0))}}c("beforeInit",()=>{const{thumbs:i}=e.params;if(!(!i||!i.swiper))if(typeof i.swiper=="string"||i.swiper instanceof HTMLElement){const a=F(),d=()=>{const p=typeof i.swiper=="string"?a.querySelector(i.swiper):i.swiper;if(p&&p.swiper)i.swiper=p.swiper,u(),r(!0);else if(p){const h=`${e.params.eventsPrefix}init`,_=t=>{i.swiper=t.detail[0],p.removeEventListener(h,_),u(),r(!0),i.swiper.update(),e.update()};p.addEventListener(h,_)}return p},n=()=>{if(e.destroyed)return;d()||requestAnimationFrame(n)};requestAnimationFrame(n)}else u(),r(!0)}),c("slideChange update resize observerUpdate",()=>{r()}),c("setTransition",(i,a)=>{const d=e.thumbs.swiper;!d||d.destroyed||d.setTransition(a)}),c("beforeDestroy",()=>{const i=e.thumbs.swiper;!i||i.destroyed||m&&i.destroy()}),Object.assign(e.thumbs,{init:u,update:r})}function $(e,{sizes:l=[],title:c="Size",showTitle:s=!0}={}){if(!e||!l||!Array.isArray(l)){console.error("SizeFilter Error: container or sizes array not found.");return}const v=[...l].sort((r,i)=>r.sort_order-i.sort_order).map(r=>I(r)).join(""),u=`
-    <div class="size-filter">
-    <div class="size-filter__header">
-     ${s?`<div class="size-filter__title">${c}</div>`:""}
-     <a class="size-filter__guide" href="#" name="size guide">Size guide</a>
-    </div>
-      <div class="size-filter__grid">
-        ${v}
-      </div>
-    </div>
-  `;e.innerHTML=u}function I(e){const l=e.availible?"":"size-filter__box_disabled";return`
+import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i as D,e as R,S as I,P as U,C as W,p as Q}from"../../product-list-Cfs14K5W.js";import{f as $,Q as G}from"../../format-price-upoCZm_v.js";import{D as K}from"../../dropdown-Dc_O7ixp.js";import{i as J}from"../../product-slider-C1HXpHY0.js";function X({swiper:e,extendParams:s,on:p}){s({thumbs:{swiper:null,multipleActiveThumbs:!0,autoScrollOffset:0,slideThumbActiveClass:"swiper-slide-thumb-active",thumbsContainerClass:"swiper-thumbs"}});let d=!1,r=!1;e.thumbs={swiper:null};function l(){const i=e.thumbs.swiper;if(!i||i.destroyed)return;const t=i.clickedIndex,_=i.clickedSlide;if(_&&_.classList.contains(e.params.thumbs.slideThumbActiveClass)||typeof t>"u"||t===null)return;let c;i.params.loop?c=parseInt(i.clickedSlide.getAttribute("data-swiper-slide-index"),10):c=t,e.params.loop?e.slideToLoop(c):e.slideTo(c)}function m(){const{thumbs:i}=e.params;if(d)return!1;d=!0;const t=e.constructor;if(i.swiper instanceof t){if(i.swiper.destroyed)return d=!1,!1;e.thumbs.swiper=i.swiper,Object.assign(e.thumbs.swiper.originalParams,{watchSlidesProgress:!0,slideToClickedSlide:!1}),Object.assign(e.thumbs.swiper.params,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper.update()}else if(D(i.swiper)){const _=Object.assign({},i.swiper);Object.assign(_,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper=new t(_),r=!0}return e.thumbs.swiper.el.classList.add(e.params.thumbs.thumbsContainerClass),e.thumbs.swiper.on("tap",l),!0}function u(i){const t=e.thumbs.swiper;if(!t||t.destroyed)return;const _=t.params.slidesPerView==="auto"?t.slidesPerViewDynamic():t.params.slidesPerView;let c=1;const a=e.params.thumbs.slideThumbActiveClass;if(e.params.slidesPerView>1&&!e.params.centeredSlides&&(c=e.params.slidesPerView),e.params.thumbs.multipleActiveThumbs||(c=1),c=Math.floor(c),t.slides.forEach(h=>h.classList.remove(a)),t.params.loop||t.params.virtual&&t.params.virtual.enabled)for(let h=0;h<c;h+=1)R(t.slidesEl,`[data-swiper-slide-index="${e.realIndex+h}"]`).forEach(f=>{f.classList.add(a)});else for(let h=0;h<c;h+=1)t.slides[e.realIndex+h]&&t.slides[e.realIndex+h].classList.add(a);const v=e.params.thumbs.autoScrollOffset,g=v&&!t.params.loop;if(e.realIndex!==t.realIndex||g){const h=t.activeIndex;let f,F;if(t.params.loop){const T=t.slides.find(x=>x.getAttribute("data-swiper-slide-index")===`${e.realIndex}`);f=t.slides.indexOf(T),F=e.activeIndex>e.previousIndex?"next":"prev"}else f=e.realIndex,F=f>e.previousIndex?"next":"prev";g&&(f+=F==="next"?v:-1*v),t.visibleSlidesIndexes&&t.visibleSlidesIndexes.indexOf(f)<0&&(t.params.centeredSlides?f>h?f=f-Math.floor(_/2)+1:f=f+Math.floor(_/2)-1:f>h&&t.params.slidesPerGroup,t.slideTo(f,i?0:void 0))}}p("beforeInit",()=>{const{thumbs:i}=e.params;if(!(!i||!i.swiper))if(typeof i.swiper=="string"||i.swiper instanceof HTMLElement){const t=N(),_=()=>{const a=typeof i.swiper=="string"?t.querySelector(i.swiper):i.swiper;if(a&&a.swiper)i.swiper=a.swiper,m(),u(!0);else if(a){const v=`${e.params.eventsPrefix}init`,g=h=>{i.swiper=h.detail[0],a.removeEventListener(v,g),m(),u(!0),i.swiper.update(),e.update()};a.addEventListener(v,g)}return a},c=()=>{if(e.destroyed)return;_()||requestAnimationFrame(c)};requestAnimationFrame(c)}else m(),u(!0)}),p("slideChange update resize observerUpdate",()=>{u()}),p("setTransition",(i,t)=>{const _=e.thumbs.swiper;!_||_.destroyed||_.setTransition(t)}),p("beforeDestroy",()=>{const i=e.thumbs.swiper;!i||i.destroyed||r&&i.destroy()}),Object.assign(e.thumbs,{init:m,update:u})}function Y(e){return B(e,{tag:"div",render(s,p,d){const{sizes:r=[],title:l="Size",showTitle:m=!0,selectionMode:u="multiple",selectedId:i=null}=p;if(!r||!Array.isArray(r)){console.error("SizeFilter Error: sizes array not found.");return}const _=[...r].sort((a,v)=>a.sort_order-v.sort_order).map(a=>e1(a,i)).join("");s.className="size-filter",s.innerHTML=`
+        <div class="size-filter__header">
+          ${m?`<div class="size-filter__title">${l}</div>`:""}
+          <a class="size-filter__guide" href="#" name="size guide">Size guide</a>
+        </div>
+        <div class="size-filter__grid">
+          ${_}
+        </div>
+      `;const c=s.querySelectorAll(".size-filter__input");u==="single"&&i!=null&&c.forEach(a=>{a.checked=Number(a.value)===Number(i)}),u==="single"?c.forEach(a=>{a.addEventListener("change",()=>{a.checked&&(c.forEach(v=>{v!==a&&(v.checked=!1)}),d("onChange",{selected:Number(a.value)}))})}):c.forEach(a=>{a.addEventListener("change",()=>{const v=Array.from(c).filter(g=>g.checked).map(g=>Number(g.value));d("onChange",{selected:v})})})}})}function e1(e,s){const p=e.available?"":"size-filter__box_disabled",d=e.id===s?"checked":"";return`
     <label class="size-filter__item" title="${e.name}">
-      <input type="checkbox" 
-             class="size-filter__input" 
-             name="filter-size" 
-             value="${e.id}">
-      <span class="size-filter__box ${l}">
+      <input
+        type="checkbox"
+        class="size-filter__input"
+        name="filter-size"
+        value="${e.id}"
+        ${d}
+        ${e.available?"":"disabled"}
+      />
+      <span class="size-filter__box ${p}">
         ${e.name}
       </span>
     </label>
-  `}function P(e,{initialValue:l=1,itemId:c,min:s=1,max:m=99,onChange:v=null}={}){if(!e){console.error("Quantity Error: container not found.");return}const u=`
-        <div class="quantity">
-          <button class="quantity__decrease" type="button">${q()}</button>
-          <input class="quantity__input" type="text" value="${l}" name="quantity-input"/>
-          <button class="quantity__increase" type="button">${B()}</button>
-        </div>
-      `;e.innerHTML=u;const r=e.querySelector(".quantity__input"),i=e.querySelector(".quantity__increase"),a=e.querySelector(".quantity__decrease"),d=t=>{typeof v=="function"&&v({itemId:c,value:t})},n=t=>{let C=Number(r.value),o=C+t;o=Math.max(s,o),o=Math.min(m,o),o!==C&&(r.value=o,d(o))},p=t=>{let C=String(t).replace(/[^0-9]/g,""),o=Math.floor(Number(C));o=Math.max(s,o),o=Math.min(m,o),r.value=o,d(o)},h=t=>{[8,9,27,13,46].includes(t.keyCode)||t.keyCode===65&&(t.ctrlKey===!0||t.metaKey===!0)||t.keyCode===67&&(t.ctrlKey===!0||t.metaKey===!0)||t.keyCode===86&&(t.ctrlKey===!0||t.metaKey===!0)||t.keyCode===88&&(t.ctrlKey===!0||t.metaKey===!0)||t.keyCode>=37&&t.keyCode<=40||(t.keyCode<48||t.keyCode>57)&&(t.keyCode<96||t.keyCode>105)&&t.preventDefault()},_=t=>{t.preventDefault();const o=(t.clipboardData||window.clipboardData).getData("Text");if(!/^[0-9]+$/.test(o))return;const f=Number(o);f>=s&&f<=m&&(document.execCommand("insertText",!1,o),p(r.value))};a.addEventListener("click",()=>n(-1)),i.addEventListener("click",()=>n(1)),r.addEventListener("keydown",h),r.addEventListener("paste",_),r.addEventListener("change",t=>p(t.target.value))}const q=()=>`
-      <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="10" height="2" fill="#C4C4C4"/>
-      </svg>
-  `,B=()=>`
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect y="5" width="12" height="2" fill="#C4C4C4"/>
-      <rect x="7" width="12" height="2" transform="rotate(90 7 0)" fill="#C4C4C4"/>
-    </svg>
-  `,D=(e,l="ru-RU")=>new Intl.NumberFormat(l,{minimumFractionDigits:2,maximumFractionDigits:2}).format(e),E=[{id:1,name:"Red",hex_code:"#FF0000",available:!0},{id:2,name:"Deep Blue",hex_code:"#0000FF",available:!0},{id:3,name:"Emerald",hex_code:"#50C878",available:!0},{id:4,name:"White",hex_code:"#FFFFFF",available:!0},{id:5,name:"Black",hex_code:"#000000",available:!0},{id:6,name:"Golden",hex_code:"#FFD700",available:!1},{id:7,name:"Hot Pink",hex_code:"#FF69B4",available:!0},{id:8,name:"Soft Grey",hex_code:"#808080",available:!0},{id:9,name:"Violet",hex_code:"#8F00FF",available:!0},{id:10,name:"Orange",hex_code:"#FFA500",available:!0}],H=[{id:1,name:"w26",sort_order:10,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:2,name:"w27",sort_order:20,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:3,name:"w28",sort_order:30,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:4,name:"w29",sort_order:40,availible:!1,created_at:"2025-12-28T13:49:23Z"},{id:5,name:"w30",sort_order:50,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:6,name:"w31",sort_order:60,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:7,name:"w32",sort_order:70,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:8,name:"w33",sort_order:80,availible:!1,created_at:"2025-12-28T13:49:23Z"},{id:9,name:"w34",sort_order:90,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:10,name:"w35",sort_order:100,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:11,name:"w36",sort_order:110,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:12,name:"w38",sort_order:120,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:13,name:"w40",sort_order:130,availible:!1,created_at:"2025-12-28T13:49:23Z"},{id:14,name:"w42",sort_order:140,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:15,name:"w44",sort_order:150,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:16,name:"w46",sort_order:160,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:17,name:"w48",sort_order:170,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:18,name:"w50",sort_order:180,availible:!1,created_at:"2025-12-28T13:49:23Z"},{id:19,name:"w52",sort_order:190,availible:!0,created_at:"2025-12-28T13:49:23Z"},{id:20,name:"w54",sort_order:200,availible:!0,created_at:"2025-12-28T13:49:23Z"}],j=90,A=({container:e,product:l})=>{const c=document.querySelector(e);if(!c){console.error("ProductDetailsCard: container not found");return}if(!l){console.error("ProductDetailsCard: product is required");return}c.innerHTML="";const s=document.createElement("div");s.className="product-details-card";const m=l.images?.slice().sort((r,i)=>r.sort_order-i.sort_order).map(r=>r.image_path_jpg);s.innerHTML=`
+  `}const t1=({container:e,product:s})=>{const p=[...s.variants];let d=E(),r=d[0].id,l=null,m=Z(r),u=1;console.log("start",r,l),console.log(p);const i=document.querySelector(e);if(!i){console.error("ProductDetailsCard: container not found");return}if(!s){console.error("ProductDetailsCard: product is required");return}i.innerHTML="";const t=document.createElement("div");t.className="product-details-card";const _=s.images?.slice().sort((o,n)=>o.sort_order-n.sort_order).map(o=>o.image_path_jpg);t.innerHTML=`
     <div class="product-details-card__media"></div>
     <div class="product-details-card__breadcrumbs"></div>
     <div class="product-details-card__info info">
       <div class="info__header">
         <div class="info__brand"></div>
-        <div class="info__title">${l.name}</div>
+        <div class="info__title">${s.name}</div>
       </div>
       <div class="info__color"></div>
       <div class="info__size"></div>
@@ -51,17 +38,17 @@ import{g as F,b as M,e as x,S as g,P as y,C as w,i as Z,a as k,l as S}from"../..
           </div>
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
-            <div class="info__total-price">${D(j)} EUR</div>
+            <div class="info__price-value">${$(s.final_price*u)} EUR</div>
           </div>
         </div>
         <div class="info__actions">
           <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
-          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${J()}Save</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${c1()}Save</button>
         </div>
         <div class="info__promo promo">
-              ${V("info__social-block")}
+              ${P("info__social-block")}
               <div class="promo__item promo__item_free-shipping">
-                <div class="promo__item-title">${X()}</div>
+                <div class="promo__item-title">${C1()}</div>
                 <div class="promo__item-text">Free shipping</div>
               </div>
               <div class="promo__item">
@@ -70,20 +57,20 @@ import{g as F,b as M,e as x,S as g,P as y,C as w,i as Z,a as k,l as S}from"../..
               </div>
               <div class="promo__item">
                 <div class="promo__item-title">Tags:</div>
-                <div class="promo__item-text">${l.tags.map(r=>r.tag.name).join(", ")}</div>
+                <div class="promo__item-text">${s.tags.map(o=>o.tag.name).join(", ")}</div>
               </div>
-        </div>      
+        </div>
       </div>
 
     </div>
-  `,c.appendChild(s),N({container:s.querySelector(".product-details-card__media"),images:m}),O(s.querySelector(".product-details-card__breadcrumbs")),K(s.querySelector(".info__brand"),l.brand?.name||"");const v=window.matchMedia("(max-width: 1380px)"),u=r=>{const i=s.querySelector(".info__size"),a={colors:E,title:"Select Color",showTitle:!0,selectionMode:"single"};if(i)if(i.innerHTML="",r.matches){w(s.querySelector(".info__color"),{...a,maxVisibleColors:3});const d=H.map(n=>({label:n.name,value:String(n.id),disabled:!n.availible}));T(i,{options:d,defaultValue:d[0]?.value})}else w(s.querySelector(".info__color"),{...a}),$(i,{sizes:H,title:"Select size (Inches)",showTitle:!0})};v.addEventListener("change",u),u(v),P(s.querySelector(".info__quantity-container"),{onChange:r=>console.log(r)})};function N({container:e,images:l=[]}){const c=typeof e=="string"?document.querySelector(e):e;if(!c){console.error("ProductDetailsCardSlider: container not found");return}const s=document.createElement("div");s.className="card-slider",s.innerHTML=`
+  `,i.appendChild(t),i1({container:t.querySelector(".product-details-card__media"),images:_}),s1(t.querySelector(".product-details-card__breadcrumbs")),a1(t.querySelector(".info__brand"),s.brand?.name||"");const c=window.matchMedia("(max-width: 1380px)"),a=o=>{const n=t.querySelector(".info__size"),C=t.querySelector(".info__color");if(!n||!C)return;const b=W({colors:d,title:"Select Color",showTitle:!0,selectionMode:"single",selectedId:r}),w=Y({sizes:m,selectionMode:"single",title:"Select size (Inches)",selectedId:l}),H=K({options:[],defaultValue:String(l)||String(sizeOptions[0]?.value)});if(n.innerHTML="",C.innerHTML="",b.addEventListener("onChange",M=>{r=M.detail.selected,l=null,m=Z(r);const k=y(r,l);k||(l=null);const A=m.map(S=>({label:S.name,value:S.id,disabled:!S.available}));w.update({sizes:m}),H.update({options:A}),console.log("color onChange",r,l,k),v()}),w.addEventListener("onChange",M=>{l=M.detail.selected,console.log("size onChange",r,l),v()}),o.matches){b.update({maxVisibleColors:3}),C.append(b);const M=m.map(L=>({label:L.name,value:L.id,disabled:!L.available}));H.update({options:M}),n.append(H),H.addEventListener("onChange",L=>{const k=Number(L.detail);l=m.find(S=>S.id===k)?.id||null,console.log("size dropdown onChange",r,l),v()})}else C.append(b),n.append(w)},v=()=>{const o=t.querySelector(".add-to-cart-button"),n=y(r,l);console.log("currentVariant",n),n&&n.stock>0?(o.disabled=!1,o.textContent="Add to Bag"):r&&l?(o.disabled=!0,o.textContent="Not Available"):(o.disabled=!0,o.textContent="Select Color and Size")};c.addEventListener("change",a),a(c),v();const g=t.querySelector(".info__quantity-container"),h=t.querySelector(".info__price-value"),f=G({itemId:s.id});g.append(f);const F=o=>{const n=o.detail.value;u=n,h.textContent=`${$(s.final_price*n)} EUR`};f.addEventListener("onChange",F),t.querySelector(".add-to-cart-button").addEventListener("click",o=>{const n=x();console.log("cartItem",n)});function x(){const o=y(r,l);return{productId:s.id,variantId:o.id,quantity:u}}function E(o=null){const n=new Map;return p.forEach(C=>{const b=C.color.id,w=!o||C.size.id===o,H=C.stock>0&&w;n.has(b)||n.set(b,{id:C.color.id,name:C.color.name,hex_code:C.color.hex_code,available:!1}),H&&(n.get(b).available=!0)}),[...n.values()]}function Z(o=null){const n=new Map;return p.forEach(C=>{const b=C.size.id,w=!o||C.color.id===o,H=C.stock>0&&w;n.has(b)||n.set(b,{id:C.size.id,name:C.size.name,sort_order:C.size.sort_order,available:!1}),H&&(n.get(b).available=!0)}),[...n.values()].sort((C,b)=>C.sort_order-b.sort_order)}function y(o,n){return!o||!n?null:p.find(C=>C.color.id===o&&C.size.id===n)||null}};function i1({container:e,images:s=[]}){const p=typeof e=="string"?document.querySelector(e):e;if(!p){console.error("ProductDetailsCardSlider: container not found");return}const d=document.createElement("div");d.className="card-slider",d.innerHTML=`
  
     <div class="card-slider__thumbs thumbs-slider swiper">
       <div class="swiper-wrapper">
-        ${l.map(u=>`
+        ${s.map(m=>`
           <div class="swiper-slide">
             <div class="thumbs-slider__card">
-              <img class="thumbs-slider__img" src="${u}" alt="thumbs image" />
+              <img class="thumbs-slider__img" src="${m}" alt="thumbs image" />
             </div>
           </div>
         `).join("")}
@@ -93,46 +80,46 @@ import{g as F,b as M,e as x,S as g,P as y,C as w,i as Z,a as k,l as S}from"../..
     <div class="card-slider__main-wrapper">
       <div class="card-slider__main main-slider swiper">
         <div class="swiper-wrapper">
-          ${l.map(u=>`
+          ${s.map(m=>`
               <div class="swiper-slide">
                 <div class="main-slider__card">
-                  <img class="main-slider__img" src="${u}" alt="thumbs image" />
+                  <img class="main-slider__img" src="${m}" alt="thumbs image" />
                 </div>
             </div>
           `).join("")}
         </div>
         <button class="main-slider__zoom-btn">
-            <span class="main-slider__icon-zoom">${R()}</span>
+            <span class="main-slider__icon-zoom">${o1()}</span>
             <span class="main-slider__text-zoom">Zoom</span>
         </button>
       </div>
       <div class="card-slider__main-wrapper-bottom">
         <div class="card-slider__main-wrapper-social-block">
-          ${V()}
+          ${P()}
         </div>        
         <div class="swiper-pagination main-slider__nav-bullets slider-nav-bullets"></div>
       </div>    
     </div>
 
-  `,c.appendChild(s);const m=new g(s.querySelector(".card-slider__thumbs"),{direction:"vertical",slidesPerView:"auto",spaceBetween:10,freeMode:!0,watchSlidesProgress:!0}),v=new g(s.querySelector(".card-slider__main"),{modules:[z,y],spaceBetween:10,thumbs:{swiper:m},pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(u,r){return`<span class="${r}"></span>`}}});return{root:s,thumbsSwiper:m,mainSwiper:v,destroy(){m.destroy(),v.destroy(),s.remove()}}}function O(e){if(!e){console.error("Breadcrumbs Error: container not found.");return}const l=`
+  `,p.appendChild(d);const r=new I(d.querySelector(".card-slider__thumbs"),{direction:"vertical",slidesPerView:"auto",spaceBetween:10,freeMode:!0,watchSlidesProgress:!0}),l=new I(d.querySelector(".card-slider__main"),{modules:[X,U],spaceBetween:10,thumbs:{swiper:r},pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(m,u){return`<span class="${u}"></span>`}}});return{root:d,thumbsSwiper:r,mainSwiper:l,destroy(){r.destroy(),l.destroy(),d.remove()}}}function s1(e){if(!e){console.error("Breadcrumbs Error: container not found.");return}const s=`
     <nav aria-label="Breadcrumb" class="breadcrumbs">
       <div class="breadcrumbs__content">
         Home / Womens Dress / Angels malu
       </div>
     </nav>
-  `;e.innerHTML=l}function K(e,l){if(!e){console.error("Brand Error: container not found.");return}const c=l.trim().toLowerCase(),m=`
+  `;e.innerHTML=s}function a1(e,s){if(!e){console.error("Brand Error: container not found.");return}const p=s.trim().toLowerCase(),r=`
     <div class="brand">
-      ${{fendi:b.fendi("brand__icon"),armani:b.armani("brand__icon"),burberry:b.burberry("brand__icon"),chanel:b.chanel("brand__icon"),versace:b.versace("brand__icon"),dior:b.dior("brand__icon"),gucci:b.gucci("brand__icon")}[c]||""}
+      ${{fendi:V.fendi("brand__icon"),armani:V.armani("brand__icon"),burberry:V.burberry("brand__icon"),chanel:V.chanel("brand__icon"),versace:V.versace("brand__icon"),dior:V.dior("brand__icon"),gucci:V.gucci("brand__icon")}[p]||""}
     </div>
-  `;e.innerHTML=m}const V=(e="")=>`
+  `;e.innerHTML=r}const P=(e="")=>`
           <div class="social-block ${e}">
           <span class="social-block__text">Share:</span>
-          <a href="#" class="social-block__link">${Q()}</a>
-          <a href="#" class="social-block__link">${U()}</a>
-          <a href="#" class="social-block__link">${W()}</a>
-          <a href="#" class="social-block__link">${G()}</a>        
+          <a href="#" class="social-block__link">${n1()}</a>
+          <a href="#" class="social-block__link">${r1()}</a>
+          <a href="#" class="social-block__link">${l1()}</a>
+          <a href="#" class="social-block__link">${d1()}</a>        
         </div>
-  `,b={chanel:(e="")=>`
+  `,V={chanel:(e="")=>`
     <svg class="${e}" width="143" height="23" viewBox="0 0 143 23" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5204 16.3828C20.5029 16.4169 20.469 16.4849 20.4523 16.5363C18.6133 20.0103 15.0025 22.3769 10.8815 22.3769C4.90411 22.3769 0 17.37 0 11.1884C0 5.04098 4.90411 0 10.8815 0C15.0199 0 18.6473 2.41807 20.469 5.94344C20.5204 6.01148 20.537 6.0455 20.5884 6.14755C20.6058 6.16497 17.1145 8.68501 17.0804 8.63439C17.063 8.56635 17.0464 8.51492 17.0124 8.4809C16.0071 5.97746 13.6238 4.30853 10.8815 4.35996C7.22004 4.39398 4.20568 7.42495 4.20568 11.1884C4.20568 14.986 7.22004 18.0518 10.8815 18.0518C13.5384 18.0518 15.8544 16.4169 16.9095 14.1008C16.961 14.0155 16.9784 13.9474 17.0124 13.8794L20.5204 16.3828Z" fill="#3F3F3F" />
         <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0332 0.205078H29.2223V8.02156H40.224V0.205078H44.4471V21.9515H40.224V12.398H29.2223V21.9515H25.0332V0.205078Z" fill="#3F3F3F" />
@@ -172,32 +159,86 @@ import{g as F,b as M,e as x,S as g,P as y,C as w,i as Z,a as k,l as S}from"../..
     </svg>`,armani:(e="")=>`
     <svg class="${e}" width="169" height="30" viewBox="0 0 169 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M144.285 1.18068L145.575 1.22517C146.458 1.22517 147.103 1.25898 147.465 1.31414C147.837 1.37019 148.109 1.48141 148.29 1.62643C148.529 1.7937 148.686 2.08376 148.742 2.47346C148.788 2.87473 148.822 3.65414 148.822 4.82413V22.0129L131.505 0.435085H122.288V1.18157H125.807L126.608 1.70473V26.1804C126.608 26.2355 126.597 26.3023 126.587 26.3574C126.577 26.4126 126.565 26.458 126.565 26.4909C126.474 27.45 126.281 28.1049 125.998 28.4634C125.716 28.8078 124.969 28.9759 123.759 28.943H120.151L108.965 0H108.343L106.919 3.91038L98.9907 25.6554C98.8552 26.0567 98.707 26.4251 98.5941 26.7258C98.4812 27.0372 98.3574 27.3166 98.2427 27.539C97.8814 28.241 97.4523 28.6636 96.9428 28.7971C96.5472 28.8976 95.9139 28.9537 95.0323 28.9537V28.943H90.7126V1.18068H95.0332V0.434195H86.392L77.31 22.4141L67.602 0.434195H59.3113V1.18068H63.0556L63.4512 1.97165V26.2685C63.4512 27.3495 63.2588 28.0844 62.8749 28.4403C62.4901 28.8069 61.7439 28.9759 60.6473 28.9421H59.1433V29.6877H68.8919V28.9421L67.6029 28.9857C65.9634 28.9857 64.9896 28.7179 64.6734 28.1725C64.3681 27.6369 64.2091 26.8254 64.2091 25.7435V25.3894V25.0433C64.177 24.9195 64.1618 24.792 64.1639 24.6643V3.59808L75.3498 29.1201L86.3884 2.67365V28.943H82.113V29.6886H103.626V28.943L102.246 28.9866C101.172 28.9866 100.413 28.8861 99.9509 28.709C99.4974 28.5195 99.2608 28.1734 99.2608 27.7169C99.2608 27.5728 99.305 27.3379 99.3944 27.0167C99.4866 26.6938 99.6221 26.2471 99.791 25.7008L101.838 20.1311H111.995L115.421 28.943H110.977V29.6886H131.945V28.9866C129.696 28.9866 128.35 28.7971 127.93 28.3958C127.524 28.0061 127.308 26.6368 127.308 24.2968V2.49481L149.228 29.9101H149.487V4.86862C149.487 3.75467 149.51 3.03043 149.533 2.67365C149.556 2.32843 149.659 2.03838 149.805 1.83819C149.828 1.83819 149.861 1.81595 149.872 1.79371C149.891 1.76114 149.914 1.73096 149.941 1.70384C150.087 1.50365 150.336 1.37019 150.698 1.31414C151.049 1.25898 151.672 1.20292 152.564 1.18068H153.808V0.434195H144.284V1.18068H144.285ZM106.917 19.3837H102.11L106.782 6.40608L106.917 6.75129L111.723 19.3846H106.917V19.3837ZM169 1.18068V0.434195H155.914V1.18068H160.222V28.943H155.914V29.6886H169V28.943H164.679V1.18068H169ZM56.3484 29.0311C56.156 29.0862 55.9871 29.1201 55.8389 29.1201C55.7486 29.1423 55.6583 29.1654 55.5679 29.1654H55.2617C54.2897 29.1654 53.6447 28.5853 53.362 27.45C53.0793 26.3138 52.8869 24.9979 52.7622 23.5049C52.7396 23.3608 52.7062 23.2149 52.6945 23.0708C52.6827 22.9266 52.6719 22.77 52.6719 22.6259C52.5945 21.6116 52.4548 20.6029 52.2536 19.6053C52.0612 18.6372 51.7225 17.8445 51.2473 17.2332C50.6602 16.4423 49.8671 15.8417 48.8951 15.4297C47.9231 15.016 46.5085 14.6824 44.6648 14.4261C44.756 14.4261 44.8346 14.4146 44.9132 14.4039C44.9917 14.3901 45.0711 14.3827 45.1508 14.3816C47.2664 14.0925 49.1887 13.4572 50.942 12.499C52.6945 11.5292 53.5653 9.81375 53.5653 7.36343C53.5653 4.87929 52.6945 3.14076 50.9646 2.17273C49.2338 1.19224 47.3224 0.635273 45.2411 0.523167C45.0547 0.491588 44.8657 0.476696 44.6766 0.478678C44.495 0.478678 44.3035 0.456439 44.1337 0.434195H28.7736V1.18068H33.0932V28.943H25.8667L14.6916 0H14.0702L12.6447 3.91038L4.71625 25.6554C4.56901 26.0567 4.43351 26.4251 4.32059 26.7258C4.20768 27.0372 4.08302 27.3166 3.95927 27.539C3.60878 28.241 3.17879 28.6636 2.67022 28.7971C2.17249 28.9208 1.2782 28.9759 0 28.943V29.6886H9.34217V28.943L7.96189 28.9866C6.89868 28.9866 6.14079 28.8861 5.67829 28.709C5.21398 28.5195 4.98815 28.1734 4.98815 27.7169C4.98815 27.5728 5.03332 27.3379 5.12365 27.0167C5.20224 26.6938 5.33864 26.2471 5.5193 25.7008L7.56623 20.1311H17.7241L21.1513 28.943H16.6952V29.6886H42.0416V28.943H37.45V14.7713L39.1916 14.8167C40.7977 14.8167 42.1436 14.9155 43.2186 15.1281C44.598 15.3853 45.5483 15.8194 46.046 16.4209C46.9285 17.4895 47.5392 19.3837 47.8671 22.1018C47.924 22.448 47.98 22.8038 48.0026 23.1597C48.0369 23.5058 48.0812 23.8742 48.1381 24.2514C48.3757 26.3806 48.9186 27.8851 49.7668 28.7312C50.6033 29.5658 51.9718 30 53.8381 30C54.3132 30 54.754 29.9795 55.1497 29.9342C55.5453 29.8888 55.941 29.8007 56.3258 29.6895C56.5074 29.6895 56.6772 29.6566 56.8461 29.6005C57.0198 29.5401 57.1897 29.4694 57.3547 29.3888L57.0837 28.8087C56.7892 28.8976 56.5399 28.9759 56.3484 29.0311ZM12.6447 19.3837H7.83813L12.5092 6.40608L12.6447 6.75129L17.4513 19.3846H12.6447V19.3837ZM41.1021 13.9919C40.4797 14.0471 39.8465 14.0809 39.2241 14.0925C38.6134 14.104 38.0145 14.104 37.4491 14.0702V1.18068L39.01 1.22517C40.7182 1.22517 42.1202 1.28033 43.2177 1.40311C43.8735 1.48141 44.4164 1.57038 44.8464 1.68159C45.9999 1.99389 46.9502 2.62828 47.6855 3.59808C47.9574 3.9433 48.1941 4.36681 48.3865 4.86862C48.5789 5.35886 48.7379 5.85978 48.8508 6.36159C48.8734 6.58402 48.9068 6.8287 48.9411 7.06359C48.9637 7.28602 48.9863 7.50845 48.9863 7.7211C48.9863 10.0486 48.1607 11.6537 46.5094 12.5007C45.4682 13.032 44.3619 13.4288 43.2177 13.6814C42.5275 13.8362 41.8257 13.9359 41.1021 13.9919Z" fill="#3F3F3F" />
-    </svg>`},R=(e="")=>`<svg class="${e}" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    </svg>`},o1=(e="")=>`<svg class="${e}" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M0.5 6.5V10.5H4.5" stroke="black" />
   <path d="M0.5 4.5V0.5H4.5" stroke="black" />
   <path d="M6.5 0.5H10.5V4.5" stroke="black" />
   <path d="M10.5 6.5V10.5H6.5" stroke="black" />
   <path d="M0.5 0.5L10.5 10.5" stroke="black" />
   <path d="M10.5 0.5L0.5 10.5" stroke="black" stroke-width="1.4" />
-</svg>`,Q=(e="")=>`<svg width="6" height="13" viewBox="0 0 6 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg>`,n1=(e="")=>`<svg width="6" height="13" viewBox="0 0 6 13" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M4 4.22501V3.08754C4 2.51879 4.07692 2.19376 4.92308 2.19376H6V0H4.23077C2.07692 0 1.38462 1.05628 1.38462 2.92503V4.30629H0V6.5H1.30769V13H4V6.5H5.76923L6 4.22501H4Z" fill="black" />
-</svg>`,U=(e="")=>`<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg>`,r1=(e="")=>`<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M13 1.15326C12.5135 1.36079 12.0041 1.49145 11.4795 1.53757C12.0117 1.23012 12.4222 0.738223 12.6199 0.15408C12.0953 0.438465 11.5328 0.64598 10.9474 0.768958C10.4076 0.269362 9.70058 -0.00733705 8.97076 0.000349035C7.54912 -0.0227092 6.37076 1.0995 6.30994 2.5368C6.29473 2.72126 6.31755 2.90569 6.38597 3.07478C4.28012 3.02098 2.2959 2.06793 0.912278 0.461542C0.661401 0.853533 0.532161 1.30702 0.532161 1.76819C0.547366 2.62903 1.00351 3.42066 1.74853 3.84339C1.33041 3.82033 0.912278 3.72044 0.532161 3.53598C0.554968 4.76575 1.45205 5.80338 2.66082 5.99553C2.44035 6.05702 2.20468 6.08775 1.97661 6.07238C1.79415 6.08006 1.6193 6.05702 1.44445 5.99553C1.80936 7.07159 2.82807 7.79407 3.95321 7.76332C2.98772 8.48582 1.80935 8.86241 0.608184 8.83935H0C1.24678 9.57721 2.66082 9.97689 4.10526 9.99226C8.1193 10.1767 11.5175 7.04081 11.7 2.98255C11.7 2.93644 11.7 2.89033 11.7076 2.84421V2.5368C12.1942 2.12943 12.6351 1.66823 13 1.15326Z" fill="black" />
 </svg>
-`,W=(e="")=>`<svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+`,l1=(e="")=>`<svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M5.91874 9.43848C5.29547 9.31706 4.7046 9.04185 4.21893 8.62903C3.89515 10.4098 3.49043 12.1096 2.19532 13C1.7906 10.3288 2.76192 8.30522 3.16664 6.11973C2.43814 4.90556 3.24758 2.39631 4.78553 2.96292C6.72819 3.69142 3.08569 7.57674 5.51402 8.06241C8.0233 8.54808 9.07557 3.69139 7.53763 2.0725C5.27119 -0.193938 0.981135 1.99156 1.4668 5.31028C1.62869 6.11973 2.43815 6.36257 1.7906 7.49579C0.333599 7.17201 -0.0711326 6.03878 0.00981179 4.50084C0.187889 2.15345 2.03342 0.275539 4.38081 0.0488948C7.13291 -0.274883 9.64219 1.02025 10.0469 3.61047C10.4516 6.52447 8.83274 9.68131 5.91874 9.43848Z" fill="black" />
-</svg>`,G=(e="")=>`
+</svg>`,d1=(e="")=>`
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M5.99999 3.56201C4.65569 3.56201 3.56201 4.65565 3.56201 5.99996C3.56201 7.34426 4.65569 8.43795 5.99999 8.43795C7.3443 8.43795 8.43796 7.34426 8.43796 5.99996C8.43796 4.65565 7.35189 3.56201 5.99999 3.56201Z" fill="black" />
   <path d="M11.9544 3.04558C11.9241 2.33165 11.8025 1.94428 11.7038 1.68605C11.5747 1.34428 11.4152 1.10126 11.157 0.843027C10.8987 0.584799 10.6557 0.425328 10.3139 0.296214C10.0557 0.19748 9.66837 0.0759476 8.95444 0.0455678C8.17976 0.00759309 7.95191 0 6.00001 0C4.04811 0 3.82026 0.00759309 3.04558 0.0455678C2.33165 0.0759476 1.94431 0.19748 1.68608 0.296214C1.34431 0.425328 1.10127 0.584799 0.843039 0.843027C0.584811 1.10126 0.425316 1.34428 0.296202 1.68605C0.197468 1.94428 0.0759592 2.33165 0.0455794 3.04558C0.00760468 3.82026 0 4.04808 0 5.99998C0 7.95188 0.00760468 8.17974 0.0455794 8.95442C0.0759592 9.66835 0.197468 10.0557 0.296202 10.3139C0.425316 10.6557 0.584811 10.8987 0.843039 11.157C1.10127 11.4152 1.34431 11.5747 1.68608 11.7038C1.94431 11.8025 2.33165 11.9241 3.04558 11.9544C3.81267 11.9924 4.04811 12 6.00001 12C7.95191 12 8.18735 11.9924 8.95444 11.9544C9.66837 11.9241 10.0557 11.8025 10.3139 11.7038C10.6557 11.5747 10.8987 11.4152 11.157 11.157C11.4152 10.8987 11.5747 10.6557 11.7038 10.3139C11.8025 10.0557 11.9241 9.66835 11.9544 8.95442C11.9924 8.17974 12 7.95188 12 5.99998C12 4.04808 11.9924 3.82026 11.9544 3.04558ZM6.00001 9.75188C3.92659 9.75188 2.24811 8.0734 2.24811 5.99998C2.24811 3.92656 3.92659 2.24807 6.00001 2.24807C8.07343 2.24807 9.75191 3.92656 9.75191 5.99998C9.75951 8.0734 8.07343 9.75188 6.00001 9.75188ZM9.90381 2.9772C9.41774 2.9772 9.0228 2.58229 9.0228 2.09621C9.0228 1.61014 9.41774 1.21517 9.90381 1.21517C10.3899 1.21517 10.7848 1.61014 10.7848 2.09621C10.7848 2.58229 10.3899 2.9772 9.90381 2.9772Z" fill="black" />
 </svg>
-  `,J=(e="")=>`
+  `,c1=(e="")=>`
 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.2402 2.60034C14.5081 2.60056 16.2997 4.29505 16.2998 6.47632C16.2998 7.80511 15.6703 9.00544 14.5879 10.2683C13.5064 11.5301 11.9613 12.868 10.1094 14.4695L9.06543 15.3757L9 15.4324L8.93457 15.3757L7.89062 14.4695C6.03866 12.8679 4.49258 11.5301 3.41113 10.2683C2.32884 9.0055 1.7002 7.80505 1.7002 6.47632C1.7003 4.29492 3.49167 2.60036 5.75977 2.60034C7.00282 2.60034 8.196 3.13584 9 3.98315C9.804 3.13595 10.9973 2.60034 12.2402 2.60034ZM12.2402 4.17358C11.1676 4.17358 10.1264 4.83912 9.76172 5.7312L9.73633 5.7937H8.2627L8.2373 5.7312C7.87257 4.83922 6.83233 4.17358 5.75977 4.17358C4.37056 4.1736 3.33995 5.16278 3.33984 6.47632C3.33984 7.42994 3.88319 8.39192 4.87207 9.49487C5.85957 10.5963 7.27457 11.8203 8.98633 13.3015L8.99707 13.3103L9.00293 13.3054L9.00684 13.3015C10.7221 11.8203 12.1386 10.5962 13.127 9.49487C14.1167 8.39194 14.6602 7.42992 14.6602 6.47632C14.6601 5.1629 13.6292 4.17379 12.2402 4.17358Z" fill="#3F3F3F" stroke="#3F3F3F" stroke-width="0.2"/>
 </svg>
 
-  `,X=(e="")=>`
+  `,C1=(e="")=>`
   <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0.848633 2.84863L5.84863 7.84863L12.8486 0.848633" stroke="#828282" stroke-width="2.4" />
   </svg>
-  `,Y=async()=>{A({container:".product-content__card",product:e1})},e1={name:"Women Black Checked Fit and Flare Dress",brand:{id:15,name:"Fendi",created_at:"2025-12-28T13:49:23.703911+00:00"},images:[{id:302,is_main:!0,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:1,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.webp"},{id:303,is_main:!1,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:2,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.webp"},{id:320,is_main:!1,created_at:"2026-01-04T23:08:21.851541+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:3,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.webp"}],tags:[{tag:{id:15,name:"Top Women",sort_order:3}},{tag:{id:16,name:"Collection: Summer",sort_order:4}}]};document.addEventListener("DOMContentLoaded",async()=>{new URLSearchParams(window.location.search).get("id"),Z(),Y(),k(),S(".lazy",{rootMargin:"200px 0px"})});
+  `,u1=(e,s,p={})=>{const d=document.querySelector(e);if(!d){console.error(`Accordion: Container '${e}' not found`);return}const{isSingleOpen:r=!0}=p,l=document.createElement("div");l.className="accordion",l.innerHTML=s.map(u=>`
+    <div class="accordion__item ${u.isActive?"is-active":""}">
+      <button class="accordion__button" type="button">
+        <span class="accordion__title">${u.title}</span> 
+        <span class="accordion__icon"></span>
+      </button>
+      <div class="accordion__content">
+        <div class="accordion__inner">
+          ${u.content}
+        </div>
+      </div>
+    </div>
+  `).join(""),d.innerHTML="",d.appendChild(l);const m=l.querySelectorAll(".accordion__item");m.forEach(u=>{u.querySelector(".accordion__button").addEventListener("click",()=>{const t=u.classList.contains("is-active");r&&!t&&m.forEach(_=>_.classList.remove("is-active")),u.classList.toggle("is-active")})})},m1=async e=>{t1({container:".product-content__card",product:e});const s=[{title:"Details",content:z(),isActive:!0},{title:"Other information",content:z()},{title:"Another tab",content:z()}];u1(".description__col-2",s)},z=()=>`
+    <div class="accordion-content">
+      <div class="accordion-content__item accordion-content__item_about-product">
+        <div class="accordion-content__title">ABOUT PRODUCT</div>
+        <div class="accordion-content__content">
+          Cool off this summer in the Mini Ruffle Smocked Tank Top from our very own LA Hearts. This tank features a smocked body, adjustable straps, scoop neckline, ruffled hems, and a cropped fit.
+        </div>
+      </div>
+      <div class="accordion-content__item accordion-content__item_shipping">
+        <div class="accordion-content__title">SHIPPING</div>
+        <div class="accordion-content__content">
+          <p>We offer Free Standard Shipping for all orders over $75 to the 50 states and the District of Columbia. The minimum order value must be $75 before taxes, shipping and handling. Shipping fees are non-refundable.</p>
+          <p>Please allow up to 2 business days (excluding weekends, holidays, and sale days) to process your order.</p> 
+          <p>Processing Time + Shipping Time = Delivery Time</p> 
+        </div>
+      </div>      
+      <div class="accordion-content__item accordion-content__item_advantages">
+        <div class="accordion-content__title">ADVANTAGES</div>
+        <div class="accordion-content__content">
+          <ul class="accordion-content__list">
+            <li class="accordion-content__list-item">Smocked body</li>
+            <li class="accordion-content__list-item">Adjustable straps</li>
+            <li class="accordion-content__list-item">Scoop neckline</li>
+            <li class="accordion-content__list-item">Ruffled hems</li>
+            <li class="accordion-content__list-item">Cropped length</li>
+            <li class="accordion-content__list-item">Model is wearing a small</li>
+            <li class="accordion-content__list-item">100% rayon</li>
+            <li class="accordion-content__list-item">Machine washable</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accordion-content__item accordion-content__item_advantages-2">
+        <div class="accordion-content__title">ADVANTAGES</div>
+        <div class="accordion-content__content">
+          <ul class="accordion-content__list">
+            <li class="accordion-content__list-item">Smocked body</li>
+            <li class="accordion-content__list-item">Adjustable straps</li>
+            <li class="accordion-content__list-item">Scoop neckline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `,p1=async()=>{J({...{totalLimit:16,pageSizeMobile:4,swiperOptions:{breakpoints:{471:{slidesPerView:3,spaceBetween:16},1024:{slidesPerView:4,spaceBetween:20},1920:{slidesPerView:5,spaceBetween:27}}}},containerSelector:".featured-slider__slider-container",fetchProducts:Q.getFeaturedProducts,navSelectors:{prevEl:".featured-slider__left-nav",nextEl:".featured-slider__right-nav"}})};document.addEventListener("DOMContentLoaded",async()=>{new URLSearchParams(window.location.search).get("id"),q(),m1(_1),p1(),j(),O(".lazy",{rootMargin:"200px 0px"})});const _1={id:"12d7e202-e133-403d-8560-129bc987ed98",name:"Women Black Checked Fit and Flare Dress",final_price:190.95,brand:{id:15,name:"Fendi",created_at:"2025-12-28T13:49:23.703911+00:00"},images:[{id:302,is_main:!0,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:1,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.webp"},{id:303,is_main:!1,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:2,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.webp"},{id:320,is_main:!1,created_at:"2026-01-04T23:08:21.851541+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:3,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.webp"}],variants:[{id:671,size:{id:34,name:"w34",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:80},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:21},{id:672,size:{id:46,name:"w52",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:200},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:7},{id:675,size:{id:28,name:"w26",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:20},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:9},{id:673,size:{id:35,name:"w33",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:90},color:{id:16,name:"Black",hex_code:"#000000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:12},{id:674,size:{id:28,name:"w26",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:20},color:{id:16,name:"Black",hex_code:"#000000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:14}],tags:[{tag:{id:15,name:"Top Women",sort_order:3}},{tag:{id:16,name:"Collection: Summer",sort_order:4}}]};
