@@ -1,0 +1,38 @@
+.cart-order-summary {
+  @mixin layout() {
+    border: 2px solid var(--divider);
+    background-color: var(--light-blue-hover);
+    padding: 28px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__options {
+    @include layout();
+  }
+  &__order-total {
+    @include layout();
+  }
+
+  &__promo-code {
+  }
+
+  &__shipping-estimator {
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button,
+    a {
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

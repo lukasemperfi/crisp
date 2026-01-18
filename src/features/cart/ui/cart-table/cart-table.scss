@@ -4,19 +4,38 @@
 // functions.fluidValue(12px, 14px, 320px, 1920px)
 
 .cart-table {
-  background-color: yellowgreen;
+  background-color: white;
   display: grid;
   grid-template-columns: repeat(4, max-content) minmax(120px, max-content) max-content;
   column-gap: 32px;
   align-items: center;
   justify-content: space-between;
+  row-gap: 19px;
 
   &__header {
     display: contents;
   }
 
+  .cart-table-header {
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--gray-1);
+      line-height: 1;
+    }
+  }
+
   &__list {
-    display: contents;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    row-gap: 18px;
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    padding-block: 24px;
   }
 
   &__footer {

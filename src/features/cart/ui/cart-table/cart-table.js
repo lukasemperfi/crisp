@@ -13,12 +13,12 @@ export function CartTable(props) {
 
         el.innerHTML = `
           <header class="cart-table__header cart-table-header">
-             <div class="cart-table-header__col-1">Product</div> 
-             <div class="cart-table-header__col-2">Price</div> 
-             <div class="cart-table-header__col-3">Size</div> 
-             <div class="cart-table-header__col-4">Quantity</div> 
-             <div class="cart-table-header__col-5">Total</div> 
-             <div class="cart-table-header__col-6"></div>   
+             <div class="cart-table-header__title">Product</div> 
+             <div class="cart-table-header__title">Price</div> 
+             <div class="cart-table-header__title">Size</div> 
+             <div class="cart-table-header__title">Quantity</div> 
+             <div class="cart-table-header__title">Total</div> 
+             <div class="cart-table-header__title"></div>   
           </header>
           <div class="cart-table__list"></div> 
           <footer class="cart-table__footer">

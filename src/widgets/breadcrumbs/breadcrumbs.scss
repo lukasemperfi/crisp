@@ -7,11 +7,12 @@
 
   &__link {
     display: inline-flex;
-    color: var(--foreground-secondary);
-    font-weight: 600;
     font-size: functions.fluidValue(11px, 14px, 360px, 1920px);
     letter-spacing: 0.02em;
     padding-block: 5px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    color: var(--gray-1);
 
     @media (hover: hover) {
       &:not(.breadcrumbs__link_current):hover {
@@ -25,10 +26,15 @@
     align-items: center;
   }
 
-  &__icon {
-    width: functions.fluidValue(9px, 12px, 360px, 1920px);
-    height: functions.fluidValue(9px, 12px, 360px, 1920px);
-    margin-inline: functions.fluidValue(4px, 10px, 360px, 1920px);
+  &__separator {
+    display: inline-flex;
+    font-size: functions.fluidValue(11px, 14px, 360px, 1920px);
+    letter-spacing: 0.02em;
+    padding-block: 5px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    color: var(--gray-1);
+    margin-inline: 2px;
   }
 
   &_color_muted {

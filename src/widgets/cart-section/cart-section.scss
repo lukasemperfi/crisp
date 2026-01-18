@@ -1,4 +1,6 @@
 .cart-section {
+  margin-bottom: 116px;
+
   .page-container-1920 {
     max-width: 1496px;
   }
@@ -10,10 +12,27 @@
 
   &__col-1 {
     flex: 1 1 883px;
-    background-color: rgba(255, 0, 0, 0.443);
+    overflow-x: auto;
   }
   &__col-2 {
     flex: 1 1 500px;
     background-color: rgba(0, 0, 255, 0.434);
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    justify-content: center;
+    padding-block: 18px;
+  }
+
+  &__header {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 48px;
+    text-align: center;
+    color: var(--black);
+    line-height: 68px;
+    padding-block: 11px;
+    margin-bottom: 56px;
   }
 }
