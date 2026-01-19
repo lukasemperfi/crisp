@@ -1,113 +1,112 @@
-@use "@/app/styles/functions" as functions;
-@use "@/app/styles/mixins" as mixins;
-
 .form-field {
-  $dropdown-border-size: 0.5px;
-  $dropdown-active-border-size: 1px;
+  &__label {
+    font-family: var(--second-family);
+    font-size: 14px;
+    color: var(--black);
+  }
 
-  $dropdown-border-color: rgba(0, 0, 0, 0.15);
-  $dropdown-border: 0 0 0 $dropdown-border-size $dropdown-border-color;
-
-  $dropdown-active-border-color: var(--accent);
-  $dropdown-active-border: 0 0 0 $dropdown-active-border-size
-    $dropdown-active-border-color;
-
-  $dropdown-error-border: 0 0 0 $dropdown-active-border-size var(--error);
-
-  $padding-inline: 17px;
-  $padding-block: 13px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: relative;
-  position: relative;
+  &__control {
+    position: relative;
+  }
 
   &__input {
-    padding-block: $padding-block;
-    padding-inline: $padding-inline;
-    box-shadow: $dropdown-border;
-    transition: box-shadow 0.15s ease;
-    font-family: var(--font-family-secondary);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: var(--foreground);
-
-    @include mixins.respond-to(sm) {
-      font-size: 12px;
-    }
-
-    @media (hover: hover) {
-      &:hover {
-        background-color: rgba(51, 125, 90, 0.1);
-      }
-    }
-
-    &:focus:not(.form-field__input_error) {
-      box-shadow: $dropdown-active-border;
-    }
+    width: 100%;
+    padding-block: 12px;
+    padding-inline: 16px;
+    line-height: 20px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    box-shadow: inset 0 0 0 1px var(--divider);
+    outline: none;
 
     &::placeholder {
-      font-family: var(--font-family-secondary);
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 17px;
-      color: var(--foreground);
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--divider);
+    }
 
-      @include mixins.respond-to(sm) {
-        font-size: 12px;
-      }
+    &:focus {
+      box-shadow: inset 0 0 0 2px var(--divider);
     }
 
     &_error {
-      box-shadow: $dropdown-error-border;
+      box-shadow: inset 0 0 0 1px var(--main-color-2);
 
-      &[type="checkbox"] + label::before {
-        border-color: var(--error);
+      &:focus {
+        box-shadow: inset 0 0 0 2px var(--main-color-2);
       }
     }
   }
 
   &__error {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    font-size: 12px;
-    font-family: var(--font-family-secondary);
-    color: var(--error);
-    line-height: 1.2;
-    white-space: nowrap;
+    display: none;
+  }
 
-    @include mixins.respond-to(sm) {
-      font-size: 10px;
+  .error {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 6px;
+
+    &__text {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--main-color-2);
+    }
+
+    &__icon {
+      display: none;
     }
   }
 
-  &__icon-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 14px;
-    pointer-events: none;
+  &_password {
+    .error {
+      background-color: #ffe3e3;
+      padding-inline: 17px;
 
-    & .form-field__icon {
-      width: 14px;
-      height: 14px;
-      transform: translateY(0) rotateX(0);
-      transition: all 0.3s ease;
+      &__text {
+        color: var(--black-2);
+      }
 
-      path {
-        fill: var(--border-color-secondary);
+      &__icon {
+        display: block;
       }
     }
   }
 
-  &__selected {
-    max-width: 80%;
+  &_with-button {
+    .form-field__control {
+      position: relative;
+    }
+
+    .form-field__input {
+      padding-right: 132px;
+    }
+
+    .form-field__action {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      background: none;
+      border: none;
+      padding: 0;
+
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--black-2);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 }

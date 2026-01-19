@@ -1,4 +1,5 @@
-import { createComponent, createSlot } from "@/shared/lib/core/core";
+import { createComponent } from "@/shared/lib/core/core";
+import { createFormField } from "../../../../shared/ui/form-field/form-field";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
@@ -14,20 +15,9 @@ export function CartOrderSummary(props) {
         <div class="order-summary__section ">
           <div class="order-summary__block order-summary__block_discount">
             <h3 class="order-summary__title">Apply Discount Code</h3>
-      
             <div class="order-summary__discount">
-              <div class="order-summary__field">
-                <input
-                  type="text"
-                  class="order-summary__input"
-                  placeholder="Enter discount code"
-                />
-                <button type="button" class="order-summary__button">
-                  Apply Discount
-                </button>
-              </div>            
+              ${createFormField({ placeholder: "Enter discount code", withButton: true, buttonText: "Apply Discount" })}
             </div>
-
           </div>
       
           <div class="order-summary__block">
@@ -122,17 +112,7 @@ export function CartOrderSummary(props) {
 
         </div> 
         `;
-
-        el._els = {
-          subtotal: el.querySelector(".js-subtotal"),
-          tax: el.querySelector(".js-tax"),
-          total: el.querySelector(".js-total"),
-        };
       }
-
-      //   el._els.subtotal.textContent = `${currency}${subtotal.toFixed(2)}`;
-      //   el._els.tax.textContent = `${currency}${tax.toFixed(2)}`;
-      //   el._els.total.textContent = `${currency}${total.toFixed(2)}`;
     },
   });
 }
