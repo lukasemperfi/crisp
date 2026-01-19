@@ -1,6 +1,6 @@
-export const createFormField = ({
+export const FormField = ({
   placeholder = "",
-  errorText = "",
+  messageText = "",
   buttonText = "",
   withButton = false,
 }) => {
@@ -24,9 +24,9 @@ export const createFormField = ({
         ${buttonHTML}
       </div>
 
-      <div class="form-field__error">
-        <span class="error__text">${errorText}</span>
-        <span class="error__icon">X</span>
+      <div class="form-field__message">
+        <span class="form-field__message-text">${messageText}</span>
+        <span class="form-field__message-icon">X</span>
       </div>
     </div>
   `;

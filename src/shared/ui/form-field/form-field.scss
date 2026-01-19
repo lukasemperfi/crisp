@@ -1,4 +1,8 @@
 .form-field {
+  /* =========================
+     BASE ELEMENTS
+     ========================= */
+
   &__label {
     font-family: var(--second-family);
     font-size: 14px;
@@ -30,8 +34,75 @@
     &:focus {
       box-shadow: inset 0 0 0 2px var(--divider);
     }
+  }
 
-    &_error {
+  /* =========================
+     MESSAGE (BASE)
+     ========================= */
+
+  &__message {
+    padding-inline: 17px;
+    padding-block: 6px;
+    display: none;
+    justify-content: space-between;
+  }
+
+  &__message-text {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--main-color-2);
+  }
+
+  &__message-icon {
+    display: none;
+  }
+
+  &_message-default,
+  &_message-primary,
+  &_message-secondary,
+  &_message-success {
+    .form-field__message {
+      display: flex;
+    }
+  }
+
+  &_message-default {
+    .form-field__message {
+      padding-inline: 0;
+      background-color: transparent;
+    }
+
+    .form-field__message-icon {
+      display: none;
+    }
+  }
+
+  &_message-primary {
+    .form-field__message {
+      background-color: var(--light-blue-hover);
+    }
+
+    .form-field__message-text {
+      color: var(--black-2);
+    }
+
+    .form-field__message-icon {
+      display: block;
+    }
+  }
+
+  &_message-secondary {
+    .form-field__message {
+      background-color: #ffe3e3;
+    }
+
+    .form-field__message-icon {
+      display: block;
+    }
+
+    .form-field__input {
       box-shadow: inset 0 0 0 1px var(--main-color-2);
 
       &:focus {
@@ -40,39 +111,20 @@
     }
   }
 
-  &__error {
-    display: none;
-  }
-
-  .error {
-    display: flex;
-    justify-content: space-between;
-    padding-block: 6px;
-
-    &__text {
-      font-family: var(--second-family);
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--main-color-2);
+  &_message-success {
+    .form-field__message {
+      background-color: #e3ffe9;
     }
 
-    &__icon {
-      display: none;
+    .form-field__message-icon {
+      display: block;
     }
-  }
 
-  &_password {
-    .error {
-      background-color: #ffe3e3;
-      padding-inline: 17px;
+    .form-field__input {
+      box-shadow: inset 0 0 0 1px #27ae60;
 
-      &__text {
-        color: var(--black-2);
-      }
-
-      &__icon {
-        display: block;
+      &:focus {
+        box-shadow: inset 0 0 0 2px #27ae60;
       }
     }
   }

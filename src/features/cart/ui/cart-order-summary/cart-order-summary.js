@@ -1,5 +1,5 @@
 import { createComponent } from "@/shared/lib/core/core";
-import { createFormField } from "../../../../shared/ui/form-field/form-field";
+import { FormField } from "../../../../shared/ui/form-field/form-field";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
@@ -16,7 +16,12 @@ export function CartOrderSummary(props) {
           <div class="order-summary__block order-summary__block_discount">
             <h3 class="order-summary__title">Apply Discount Code</h3>
             <div class="order-summary__discount">
-              ${createFormField({ placeholder: "Enter discount code", withButton: true, buttonText: "Apply Discount" })}
+              ${FormField({
+                placeholder: "Enter discount code",
+                withButton: true,
+                buttonText: "Apply Discount",
+                messageText: "Some error",
+              })}
             </div>
           </div>
       
