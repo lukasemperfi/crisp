@@ -11,26 +11,29 @@ export function CartOrderSummary(props) {
         el.className = "order-summary";
 
         el.innerHTML = `
-        <div class="order-summary__section order-summary__section--top">
-          <div class="order-summary__block">
+        <div class="order-summary__section ">
+          <div class="order-summary__block order-summary__block_discount">
             <h3 class="order-summary__title">Apply Discount Code</h3>
       
-            <div class="order-summary__field order-summary__field--inline">
-              <input
-                type="text"
-                class="order-summary__input"
-                placeholder="Enter discount code"
-              />
-              <button type="button" class="order-summary__button">
-                Apply Discount
-              </button>
+            <div class="order-summary__discount">
+              <div class="order-summary__field">
+                <input
+                  type="text"
+                  class="order-summary__input"
+                  placeholder="Enter discount code"
+                />
+                <button type="button" class="order-summary__button">
+                  Apply Discount
+                </button>
+              </div>            
             </div>
+
           </div>
       
           <div class="order-summary__block">
             <div class="order-summary__header">
               <h3 class="order-summary__title">Estimate Shipping and Tax</h3>
-              <span class="order-summary__icon order-summary__icon--collapse"></span>
+              <span class="order-summary__icon"></span>
             </div>
       
             <p class="order-summary__description">
@@ -66,7 +69,7 @@ export function CartOrderSummary(props) {
                 <span class="order-summary__radio-control"></span>
       
                 <div class="order-summary__radio-content">
-                  <span class="order-summary__radio-title">Flat Rate</span>
+                  <span class="order-summary__radio-title order-summary__subtitle">Flat Rate</span>
                   <span class="order-summary__radio-text">Fixed 5.00 EUR</span>
                 </div>
               </label>
@@ -76,8 +79,8 @@ export function CartOrderSummary(props) {
                 <span class="order-summary__radio-control"></span>
       
                 <div class="order-summary__radio-content">
-                  <span class="order-summary__radio-title">Best Way</span>
-                  <span class="order-summary__radio-text order-summary__radio-text--muted">
+                  <span class="order-summary__radio-title order-summary__subtitle">Best Way</span>
+                  <span class="order-summary__radio-text order-summary__radio-text">
                     Table Rate 10.00 EUR
                   </span>
                 </div>
@@ -86,36 +89,38 @@ export function CartOrderSummary(props) {
           </div>
         </div>
       
-        <div class="order-summary__section order-summary__section--bottom">
+        <div class="order-summary__section order-summary__section_bottom">
           <div class="order-summary__totals">
-            <div class="order-summary__row">
+            <div class="order-summary__row order-summary__subtitle">
               <span>Subtotal</span>
               <span>120.00 EUR</span>
             </div>
       
-            <div class="order-summary__row order-summary__row--muted">
+            <div class="order-summary__row order-summary__subtitle  order-summary__row_muted">
               <span>Tax</span>
               <span>0.00 EUR</span>
             </div>
       
-            <div class="order-summary__divider"></div>
-      
-            <div class="order-summary__row order-summary__row--total">
+            <div class="order-summary__row order-summary__row--total order-summary__title">
               <span>Order Total</span>
               <span>120.00 EUR</span>
             </div>
           </div>
-      
-          <button class="order-summary__link">
-            Check Out with Multiple Addresses
-          </button>
-      
-          <button class="order-summary__cta">
-            Proceed to checkout
-          </button>
-        </div>
 
-            
+           <div class="order-summary__divider"></div>
+      
+
+           <div class="order-summary__actions">
+              <button class="button order-summary__link order-summary__link_muted">
+                Check Out with Multiple Addresses
+              </button>
+          
+              <button class="order-summary__cta button button_solid button_black">
+                Proceed to checkout
+              </button>           
+           </div>
+
+        </div> 
         `;
 
         el._els = {

@@ -1,45 +1,38 @@
 .order-summary {
-  max-width: 500px;
-  background: var(--light-blue-hover);
-  border: 2px solid var(--divider);
-  font-family: var(--second-family);
+  $section-padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 24px;
 
   &__section {
-    padding: 24px;
+    border: 2px solid var(--divider);
+    background-color: var(--light-blue-hover);
+    padding: $section-padding;
 
-    &--bottom {
-      border-top: 2px solid var(--divider);
-    }
-  }
-
-  &__block {
-    & + & {
-      margin-top: 32px;
+    &_bottom {
+      padding-bottom: 0;
     }
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 
   &__title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
     color: var(--black);
-    font-family: var(--third-family);
   }
 
-  &__description {
-    font-size: 14px;
-    color: var(--gray-1);
-    margin-bottom: 16px;
-    font-family: var(--second-family);
+  &__subtitle {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--black);
+  }
+
+  &__discount {
+    margin-top: 18px;
   }
 
   &__field {
@@ -62,15 +55,10 @@
     }
   }
 
-  &__button {
-    padding: 0 16px;
-    background: none;
-    border: none;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    color: var(--link);
-    font-family: var(--second-family);
+  &__block {
+    &_discount {
+      margin-bottom: 19px;
+    }
   }
 
   &__form {
@@ -111,10 +99,6 @@
   }
 
   &__shipping {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 
   &__radio {
@@ -156,101 +140,45 @@
   &__radio-text {
     font-size: 14px;
     font-family: var(--second-family);
-
-    &--muted {
-      color: var(--gray-1);
-    }
   }
 
   &__totals {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 19px;
+    margin-bottom: 22px;
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    font-family: var(--second-family);
-
-    &--muted {
-      color: var(--gray-1);
-    }
-
-    &--total {
-      font-weight: 700;
-      font-size: 16px;
-      font-family: var(--third-family);
-      color: var(--black);
-    }
   }
 
   &__divider {
-    height: 1px;
-    background: var(--divider);
-    margin: 12px 0;
+    border: 1px solid var(--divider);
   }
 
-  &__link {
-    margin-top: 16px;
-    background: none;
-    border: none;
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-inline: -$section-padding;
+
+    button {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--white);
+      padding-block: 19px;
+    }
+  }
+
+  [class$="_muted"] {
     color: var(--gray-1);
-    font-size: 13px;
-    cursor: pointer;
-    font-family: var(--second-family);
-  }
-
-  &__cta {
-    margin-top: 16px;
-    background: var(--black);
-    color: var(--white);
-    border: none;
-    padding: 16px;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--third-family);
   }
 }
-
-// .cart-order-summary {
-//   @mixin layout() {
-//     border: 2px solid var(--divider);
-//     background-color: var(--light-blue-hover);
-//     padding: 28px;
-//   }
-
-//   display: flex;
-//   flex-direction: column;
-//   gap: 24px;
-
-//   &__options {
-//     @include layout();
-//   }
-//   &__order-total {
-//     @include layout();
-//   }
-
-//   &__promo-code {
-//   }
-
-//   &__shipping-estimator {
-//   }
-
-//   &__footer {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-
-//     button,
-//     a {
-//       width: 100%;
-//       text-align: center;
-//       display: flex;
-//       justify-content: center;
-//     }
-//   }
-// }
