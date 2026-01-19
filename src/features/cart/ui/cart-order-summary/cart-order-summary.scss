@@ -1,5 +1,13 @@
 .order-summary {
   $section-padding: 28px;
+
+  @mixin title() {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+  }
+
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -14,14 +22,8 @@
     }
   }
 
-  &__header {
-  }
-
   &__title {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    color: var(--black);
+    @include title();
   }
 
   &__subtitle {
@@ -98,7 +100,15 @@
     transform: rotate(-45deg);
   }
 
-  &__shipping {
+  .accordion {
+    &__title {
+      @include title();
+    }
+
+    &__icon {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &__radio {

@@ -1,5 +1,6 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { FormField } from "../../../../shared/ui/form-field/form-field";
+import { Accordion2 } from "../../../../shared/ui/accordion/accordion";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
@@ -25,64 +26,7 @@ export function CartOrderSummary(props) {
             </div>
           </div>
       
-          <div class="order-summary__block">
-          
-            <div class="order-summary__header">
-              <h3 class="order-summary__title">Estimate Shipping and Tax</h3>
-              <span class="order-summary__icon"></span>
-            </div>
-      
-            <p class="order-summary__description">
-              Enter your destination to get a shipping estimate.
-            </p>
-      
-            <div class="order-summary__form">
-              <label class="order-summary__label">
-                Country <span class="order-summary__required">*</span>
-                <div class="order-summary__select">
-                  <span>United States</span>
-                  <span class="order-summary__chevron"></span>
-                </div>
-              </label>
-      
-              <label class="order-summary__label">
-                State/Province <span class="order-summary__required">*</span>
-                <div class="order-summary__select">
-                  <span>Alaska</span>
-                  <span class="order-summary__chevron"></span>
-                </div>
-              </label>
-      
-              <label class="order-summary__label">
-                Zip/Postal Code
-                <input type="text" class="order-summary__input" />
-              </label>
-            </div>
-      
-            <div class="order-summary__shipping">
-              <label class="order-summary__radio">
-                <input type="radio" name="shipping" checked />
-                <span class="order-summary__radio-control"></span>
-      
-                <div class="order-summary__radio-content">
-                  <span class="order-summary__radio-title order-summary__subtitle">Flat Rate</span>
-                  <span class="order-summary__radio-text">Fixed 5.00 EUR</span>
-                </div>
-              </label>
-      
-              <label class="order-summary__radio">
-                <input type="radio" name="shipping" />
-                <span class="order-summary__radio-control"></span>
-      
-                <div class="order-summary__radio-content">
-                  <span class="order-summary__radio-title order-summary__subtitle">Best Way</span>
-                  <span class="order-summary__radio-text order-summary__radio-text">
-                    Table Rate 10.00 EUR
-                  </span>
-                </div>
-              </label>
-            </div>
-          </div>
+          <div class="order-summary__block order-summary__block_shipping-estimate"></div>
         </div>
       
         <div class="order-summary__section order-summary__section_bottom">
@@ -118,7 +62,82 @@ export function CartOrderSummary(props) {
 
         </div> 
         `;
+
+        el._els = {
+          accordionContainer: el.querySelector(
+            ".order-summary__block_shipping-estimate"
+          ),
+          shippingAccordion: Accordion2({
+            items: [
+              {
+                title: "Estimate Shipping and Tax",
+                content: createShipingEstimateContent(),
+                isActive: false,
+              },
+            ],
+            isSingleOpen: true,
+          }),
+        };
       }
+
+      el._els.accordionContainer.append(el._els.shippingAccordion);
     },
   });
 }
+
+const createShipingEstimateContent = () => {
+  return `
+    <div>
+      <p class="order-summary__description">
+        Enter your destination to get a shipping estimate.
+      </p>
+
+      <div class="order-summary__form">
+        <label class="order-summary__label">
+          Country <span class="order-summary__required">*</span>
+          <div class="order-summary__select">
+            <span>United States</span>
+            <span class="order-summary__chevron"></span>
+          </div>
+        </label>
+
+        <label class="order-summary__label">
+          State/Province <span class="order-summary__required">*</span>
+          <div class="order-summary__select">
+            <span>Alaska</span>
+            <span class="order-summary__chevron"></span>
+          </div>
+        </label>
+
+        <label class="order-summary__label">
+          Zip/Postal Code
+          <input type="text" class="order-summary__input" />
+        </label>
+      </div>
+
+      <div class="order-summary__shipping">
+        <label class="order-summary__radio">
+          <input type="radio" name="shipping" checked />
+          <span class="order-summary__radio-control"></span>
+
+          <div class="order-summary__radio-content">
+            <span class="order-summary__radio-title order-summary__subtitle">Flat Rate</span>
+            <span class="order-summary__radio-text">Fixed 5.00 EUR</span>
+          </div>
+        </label>
+
+        <label class="order-summary__radio">
+          <input type="radio" name="shipping" />
+          <span class="order-summary__radio-control"></span>
+
+          <div class="order-summary__radio-content">
+            <span class="order-summary__radio-title order-summary__subtitle">Best Way</span>
+            <span class="order-summary__radio-text order-summary__radio-text">
+              Table Rate 10.00 EUR
+            </span>
+          </div>
+        </label>
+      </div>
+    </div>
+  `;
+};
