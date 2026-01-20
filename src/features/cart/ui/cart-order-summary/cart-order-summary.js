@@ -27,7 +27,7 @@ export function CartOrderSummary(props) {
               <h3 class="order-summary__title">Apply Discount Code</h3>
               <div class="order-summary__discount">
                 ${FormField({
-                  placeholder: "Enter discount code",
+                  inputProps: { placeholder: "Enter discount code" },
                   withButton: true,
                   buttonText: "Apply Discount",
                   messageText: "Some error",

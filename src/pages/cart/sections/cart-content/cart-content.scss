@@ -1,7 +1,75 @@
 @use "@/app/styles/functions" as functions;
 @use "@/app/styles/mixins" as mixins;
 
-.cart-content {
+.cart-section {
+  $bp-tablet: 1550px;
+  $bp-mobile: 924px;
+  $bp-mobile-sm: 450px;
+
   .order-summary {
+    &__title {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
+      }
+    }
+
+    &__subtitle {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(12px, 18px, 320px, $bp-tablet);
+      }
+    }
+
+    &__actions .button {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+      }
+    }
+
+    .accordion {
+      &__title {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
+        }
+      }
+
+      &__icon {
+        @include mixins.respond-to($bp-tablet) {
+          width: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          height: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        }
+      }
+    }
+
+    .form-field {
+      &__input {
+        &::placeholder {
+          @include mixins.respond-to($bp-tablet) {
+            font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          }
+        }
+      }
+
+      &__action {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+        }
+      }
+    }
+
+    .shipping-estimate {
+      &__description {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(10px, 16px, 320px, $bp-tablet);
+        }
+      }
+
+      .radio {
+        &__label {
+          @include mixins.respond-to($bp-tablet) {
+            font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+          }
+        }
+      }
+    }
   }
 }
