@@ -31,7 +31,7 @@ export function CartOrderSummary(props) {
                   withButton: true,
                   buttonText: "Apply Discount",
                   messageText: "Some error",
-                })}
+                }).toHTML()}
               </div>
             </div>
 
@@ -122,7 +122,9 @@ const createShipingEstimateContent = () => {
                 <div class="shipping-estimate__label">
                   Zip/Postal Code
                 </div>
-                <div class="shipping-estimate__control_postal-code"></div>
+                <div class="shipping-estimate__control_postal-code">
+                  ${FormField().toHTML()}
+                </div>
               </div>
             </div>
 

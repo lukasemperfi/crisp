@@ -25,6 +25,15 @@ export function createComponent(initialProps, { tag = "div", create, render }) {
     el.remove();
   };
 
+  el.toHTML = (overrideProps = {}) => {
+    const tempEl = create ? create() : document.createElement(tag);
+    const tempProps = { ...props, ...overrideProps };
+
+    render(tempEl, tempProps, () => {}, { runOnce: true });
+
+    return tempEl.outerHTML;
+  };
+
   el.update();
 
   return el;

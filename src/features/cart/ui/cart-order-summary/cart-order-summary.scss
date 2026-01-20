@@ -120,6 +120,13 @@
       }
     }
   }
+
+  .dropdown {
+    &__trigger {
+      background-color: var(--white);
+      color: var(--black-2);
+    }
+  }
 }
 
 .radio {
