@@ -37,6 +37,40 @@ export function CartOrderSummary(props) {
 
             <div class="order-summary__block order-summary__block_shipping-estimate"></div>
           </div>
+
+          <div class="order-summary__section order-summary__section_bottom">
+            <div class="order-summary__totals">
+              <div class="order-summary__row order-summary__subtitle">
+                <span>Subtotal</span>
+                <span>120.00 EUR</span>
+              </div>
+        
+              <div class="order-summary__row order-summary__subtitle  order-summary__row_muted">
+                <span>Tax</span>
+                <span>0.00 EUR</span>
+              </div>
+        
+              <div class="order-summary__row order-summary__row--total order-summary__title">
+                <span>Order Total</span>
+                <span>120.00 EUR</span>
+              </div>
+            </div>
+
+            <div class="order-summary__divider"></div>
+        
+
+            <div class="order-summary__actions">
+                <button class="button order-summary__link order-summary__link_muted">
+                  Check Out with Multiple Addresses
+                </button>
+            
+                <button class="order-summary__cta button button_solid button_black">
+                  Proceed to checkout
+                </button>           
+          </div>
+          
+
+
         `;
 
         el._els = {
