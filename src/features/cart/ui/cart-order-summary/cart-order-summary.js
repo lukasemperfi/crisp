@@ -65,14 +65,14 @@ export function CartOrderSummary(props) {
 
         el._els = {
           accordionContainer: el.querySelector(
-            ".order-summary__block_shipping-estimate"
+            ".order-summary__block_shipping-estimate",
           ),
           shippingAccordion: Accordion2({
             items: [
               {
                 title: "Estimate Shipping and Tax",
                 content: createShipingEstimateContent(),
-                isActive: false,
+                isActive: true,
               },
             ],
             isSingleOpen: true,
@@ -87,57 +87,50 @@ export function CartOrderSummary(props) {
 
 const createShipingEstimateContent = () => {
   return `
-    <div>
-      <p class="order-summary__description">
+    <div class="order-summary__shipping-estimate-content shipping-estimate-content">
+      <p class="shipping-estimate-content__description">
         Enter your destination to get a shipping estimate.
       </p>
 
-      <div class="order-summary__form">
-        <label class="order-summary__label">
-          Country <span class="order-summary__required">*</span>
-          <div class="order-summary__select">
-            <span>United States</span>
-            <span class="order-summary__chevron"></span>
+      <div class="shipping-estimate-content__shipping shipping">
+        <div class="shipping__field shipping__field_country"></div>
+        <div class="shipping__field shipping__field_region"></div>
+        <div class="shipping__field shipping__field_zip-code"></div>
+
+        <div class="shipping__field shipping__field_flat-rate">
+          <div class="shipping__subtitle order-summary__subtitle">Flat Rate</div>
+
+          <div class="shipping__radio radio">
+            <input
+              type="radio"
+              id="shipping-flat"
+              name="shipping"
+              checked
+            />
+            <label for="shipping-flat" class="radio__label">
+              Fixed 5.00 EUR
+            </label>
           </div>
-        </label>
+        </div>
 
-        <label class="order-summary__label">
-          State/Province <span class="order-summary__required">*</span>
-          <div class="order-summary__select">
-            <span>Alaska</span>
-            <span class="order-summary__chevron"></span>
-          </div>
-        </label>
+        <div class="shipping__field shipping__field_best-way">
+          <div class="shipping__subtitle order-summary__subtitle">Best Way</div>
 
-        <label class="order-summary__label">
-          Zip/Postal Code
-          <input type="text" class="order-summary__input" />
-        </label>
-      </div>
-
-      <div class="order-summary__shipping">
-        <label class="order-summary__radio">
-          <input type="radio" name="shipping" checked />
-          <span class="order-summary__radio-control"></span>
-
-          <div class="order-summary__radio-content">
-            <span class="order-summary__radio-title order-summary__subtitle">Flat Rate</span>
-            <span class="order-summary__radio-text">Fixed 5.00 EUR</span>
-          </div>
-        </label>
-
-        <label class="order-summary__radio">
-          <input type="radio" name="shipping" />
-          <span class="order-summary__radio-control"></span>
-
-          <div class="order-summary__radio-content">
-            <span class="order-summary__radio-title order-summary__subtitle">Best Way</span>
-            <span class="order-summary__radio-text order-summary__radio-text">
+          <div class="shipping__radio radio">
+            <input
+              type="radio"
+              id="shipping-best"
+              name="shipping"
+            />
+            <label for="shipping-best" class="radio__label">
               Table Rate 10.00 EUR
-            </span>
+            </label>
           </div>
-        </label>
-      </div>
+        </div>
+
+
+
+        </div>
     </div>
   `;
 };
