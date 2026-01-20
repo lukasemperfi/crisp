@@ -4,16 +4,29 @@
 // functions.fluidValue(12px, 14px, 320px, 1920px)
 
 .cart-table {
+  $bp-mobile: 950px;
+  $bp-mobile-sm: 450px;
+
   background-color: white;
   display: grid;
-  grid-template-columns: repeat(4, max-content) minmax(120px, max-content) max-content;
+  grid-template-columns:
+    repeat(4, max-content) minmax(120px, max-content)
+    max-content;
   column-gap: 32px;
   align-items: center;
   justify-content: space-between;
   row-gap: 19px;
 
+  @include mixins.respond-to($bp-mobile) {
+    display: block;
+  }
+
   &__header {
     display: contents;
+
+    @include mixins.respond-to($bp-mobile) {
+      display: none;
+    }
   }
 
   .cart-table-header {
@@ -36,20 +49,49 @@
     border-top: 1px solid var(--divider);
     border-bottom: 1px solid var(--divider);
     padding-block: 24px;
+
+    @include mixins.respond-to($bp-mobile) {
+      grid-template-columns: none;
+      border: none;
+    }
+
+    @include mixins.respond-to($bp-mobile-sm) {
+      padding-block: 0;
+      row-gap: 0;
+    }
+    .cart-product-card:last-child .cart-product-card__wrapper {
+      @include mixins.respond-to($bp-mobile) {
+        border: none;
+      }
+    }
   }
 
   &__footer {
     grid-column: 1/-1;
     display: flex;
     justify-content: space-between;
+
+    @include mixins.respond-to($bp-mobile) {
+      display: none;
+    }
   }
 
   .cart-product-card {
     display: contents;
 
+    @include mixins.respond-to($bp-mobile) {
+      display: block;
+    }
+
     &__wrapper {
       grid-column: 1/-1;
       grid-template-columns: subgrid;
+
+      @include mixins.respond-to($bp-mobile) {
+        grid-template-columns:
+          repeat(4, max-content) minmax(120px, max-content)
+          max-content;
+      }
     }
   }
 }

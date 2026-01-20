@@ -8,7 +8,10 @@ $container-media: "882px";
 
   &__wrapper {
     display: grid;
-    grid-template-columns: repeat(4, max-content) minmax(120px, max-content) max-content;
+    grid-template-columns: repeat(4, max-content) minmax(
+        120px,
+        max-content
+      ) max-content;
     column-gap: 32px;
     align-items: center;
     justify-content: space-between;
@@ -20,7 +23,7 @@ $container-media: "882px";
     color: var(--black);
 
     @container (max-width: 882px) {
-      grid-template-columns: max-content max-content;
+      grid-template-columns: max-content max-content !important;
       grid-template-areas:
         "product actions"
         "quantity-total quantity-total";
