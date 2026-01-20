@@ -153,6 +153,8 @@
       font-size: 15px;
       font-family: var(--second-family);
       padding-inline: $dropdown-inline-padding;
+      padding-block: 12px;
+      text-transform: none;
     }
   }
   .form-field__input {

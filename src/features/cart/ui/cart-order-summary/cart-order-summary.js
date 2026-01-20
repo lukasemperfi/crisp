@@ -22,14 +22,14 @@ export function CartOrderSummary(props) {
         el.className = "order-summary";
 
         el.innerHTML = `
-          <div class="order-summary__section">
+          <div class="order-summary__section order-summary__section_top">
             <div class="order-summary__block order-summary__block_discount">
               <h3 class="order-summary__title">Apply Discount Code</h3>
               <div class="order-summary__discount">
                 ${FormField({
                   inputProps: { placeholder: "Enter discount code" },
                   withButton: true,
-                  buttonText: "Apply Discount",
+                  buttonText: `<span class="order-summary__discount-button mobile">Apply</span><span class="order-summary__discount-button desktop">Apply Discount</span>`,
                   messageText: "Some error",
                 }).toHTML()}
               </div>
@@ -75,7 +75,7 @@ export function CartOrderSummary(props) {
 
         el._els = {
           shippingContainer: el.querySelector(
-            ".order-summary__block_shipping-estimate",
+            ".order-summary__block_shipping-estimate"
           ),
         };
 
@@ -93,10 +93,10 @@ export function CartOrderSummary(props) {
         el._els.shippingContainer.append(el._els.shippingAccordion);
 
         const countryControl = el.querySelector(
-          ".shipping-estimate__control_country",
+          ".shipping-estimate__control_country"
         );
         const stateControl = el.querySelector(
-          ".shipping-estimate__control_state",
+          ".shipping-estimate__control_state"
         );
 
         if (countryControl) {
@@ -108,7 +108,7 @@ export function CartOrderSummary(props) {
                 { value: "us", label: "United States" },
                 { value: "ca", label: "Canada" },
               ],
-            }),
+            })
           );
         }
 
@@ -121,7 +121,7 @@ export function CartOrderSummary(props) {
                 { value: "al", label: "Alaska" },
                 { value: "ny", label: "New York" },
               ],
-            }),
+            })
           );
         }
       }
