@@ -234,13 +234,33 @@
       position-anchor: --cart-btn;
       position: absolute;
       inset: auto;
-      top: anchor(bottom);
-      right: anchor(right);
-      margin-block-start: 15px;
+      top: calc(var(--header-height) + 1px);
+      right: 15px;
+      // margin-block-start: 15px;
       width: 500px;
       height: 587px;
       background-color: var(--white);
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.14);
+
+      @include mixins.respond-to(765px) {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        margin-block-start: 0;
+      }
+
+      .mini-cart {
+        @include mixins.respond-to(765px) {
+          --layout-padding: 15px;
+        }
+
+        &__header {
+          @include mixins.respond-to(765px) {
+            padding-top: 15px;
+          }
+        }
+      }
     }
   }
 
@@ -382,6 +402,12 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
+  }
+}
+
+body:has(.cart-item__popover:popover-open) {
+  @include mixins.respond-to(765px) {
+    overflow: hidden;
   }
 }
 

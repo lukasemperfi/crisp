@@ -4,7 +4,7 @@
 // functions.fluidValue(12px, 14px, 320px, 1920px)
 
 .mini-cart {
-  $layout-padding: 30px;
+  --layout-padding: 30px;
 
   display: flex;
   flex-direction: column;
@@ -24,20 +24,20 @@
 
   &__header {
     @include sticky(top);
-    padding: $layout-padding;
+    padding: var(--layout-padding);
     padding-top: 45px;
     padding-bottom: 0;
   }
 
   &__body {
-    padding: $layout-padding;
+    padding: var(--layout-padding);
     flex: 1;
   }
 
   &__footer {
     @include sticky(bottom);
     border-top: 2px solid var(--light-blue-hover);
-    padding: $layout-padding;
+    padding: var(--layout-padding);
     padding-top: 20px;
 
     .mini-cart__total {
