@@ -1,0 +1,57 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+// functions.fluidValue(12px, 14px, 320px, 1920px)
+
+.mini-cart {
+  @mixin sticky($position, $z-index: 2, $bg: var(--white)) {
+    position: sticky;
+    z-index: $z-index;
+    background-color: $bg;
+
+    @if $position == top {
+      top: 0;
+    } @else if $position == bottom {
+      bottom: 0;
+    }
+  }
+  &__header {
+    @include sticky(top);
+  }
+
+  &__footer {
+    @include sticky(bottom);
+
+    .button {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      padding-block: 12px;
+      line-height: 22px;
+    }
+  }
+  &__close-icon {
+    color: var(--divider);
+  }
+
+  &__close {
+  }
+
+  &__body {
+  }
+
+  &__items {
+  }
+
+  &__item {
+  }
+
+  &__total {
+  }
+
+  &__checkout {
+  }
+}

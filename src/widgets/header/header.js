@@ -1,9 +1,13 @@
 import { initActiveLink } from "@/shared/ui/nav-menu/nav-menu";
+import { MiniCart } from "../../features/cart/ui/mini-cart/mini-cart";
+import { mockProducts } from "@/shared/helpers/mock-products";
 
 export async function initHeader() {
   initMenu();
   initResizeHandler();
   initActiveLink(".nav-menu__link");
+
+  initMiniCart();
 
   observeHeaderHeight();
 }
@@ -80,3 +84,22 @@ function observeHeaderHeight(selector = ".header") {
 
   return observer;
 }
+
+function initMiniCart() {
+  const miniCart = MiniCart({ items: products });
+  const miniCartContainer = document.querySelector(".cart-item__popover");
+
+  miniCartContainer.append(miniCart);
+}
+
+const products = mockProducts
+  .map((product) => {
+    const { variants, ...rest } = product;
+    return {
+      ...rest,
+      sku: 434536465,
+      quantity: 3,
+      variant: variants[0],
+    };
+  })
+  .slice(0, 5);

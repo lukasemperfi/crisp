@@ -33,10 +33,11 @@
                     {{icons.heart()}}
                 </a>
                 <div class="cart-item">
-                    <div class="cart-item__btn">
+                    <button class="cart-item__btn" popovertarget="cart-item__popover">
                         {{icons.cart()}}
                         <span class="cart-item__count">2</span>
-                    </div>
+                    </button>
+                    <div class="cart-item__popover" id="cart-item__popover" popover></div>
 
                     <div class="cart-item__label">
                         <div class="cart-item__text">Shopping Cart</div>

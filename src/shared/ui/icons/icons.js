@@ -46,3 +46,11 @@ export const IconCross = ({ className = "", size = null } = {}) => `
     stroke-linecap="round"
   />
 </svg>`;
+
+export const IconCross2 = ({ className = "", size = null } = {}) => `
+<svg ${getAttrs(
+  className,
+  size
+)} width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0.707031 0.707031L21.707 21.707M21.707 0.707031L0.707031 21.707" stroke="currentColor" stroke-width="2" />
+</svg>`;
