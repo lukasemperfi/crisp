@@ -34,8 +34,8 @@ export function MiniCart(props) {
             
               <footer class="mini-cart__footer">
                 <div class="mini-cart__total">
-                  <span>Cart Subtotal</span>
-                  <strong>$123.00</strong>
+                  <span>Cart Subtotal:</span>
+                  <span>$123.00</span>
                 </div>
             
                 <button class="mini-cart__cart-btn button button_outlined button_gray button_fill" type="button">

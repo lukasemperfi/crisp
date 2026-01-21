@@ -4,6 +4,8 @@
 // functions.fluidValue(12px, 14px, 320px, 1920px)
 
 .mini-cart {
+  $layout-padding: 30px;
+
   @mixin sticky($position, $z-index: 2, $bg: var(--white)) {
     position: sticky;
     z-index: $z-index;
@@ -15,12 +17,33 @@
       bottom: 0;
     }
   }
+
   &__header {
     @include sticky(top);
+    padding: $layout-padding;
+    padding-top: 45px;
+    padding-bottom: 0;
+  }
+
+  &__body {
+    padding: $layout-padding;
   }
 
   &__footer {
     @include sticky(bottom);
+    border-top: 2px solid var(--light-blue-hover);
+    padding: $layout-padding;
+    padding-top: 20px;
+
+    .mini-cart__total {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--black);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
 
     .button {
       font-family: var(--font-family);
@@ -32,26 +55,13 @@
       padding-block: 12px;
       line-height: 22px;
     }
+
+    .mini-cart__cart-btn {
+      margin-bottom: 17px;
+    }
   }
+
   &__close-icon {
     color: var(--divider);
-  }
-
-  &__close {
-  }
-
-  &__body {
-  }
-
-  &__items {
-  }
-
-  &__item {
-  }
-
-  &__total {
-  }
-
-  &__checkout {
   }
 }
