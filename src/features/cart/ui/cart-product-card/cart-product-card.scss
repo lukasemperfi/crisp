@@ -126,6 +126,10 @@ $container-media: "882px";
             box-shadow: none;
           }
         }
+
+        &_price {
+          display: none;
+        }
       }
 
       &__value {

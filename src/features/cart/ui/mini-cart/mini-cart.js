@@ -1,6 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { CartProductCard } from "@/features/cart/ui/cart-product-card/cart-product-card";
 import { IconCross2 } from "../../../../shared/ui/icons/icons";
+import { OrderCard } from "../order-card/order-card";
 
 export function MiniCart(props) {
   return createComponent(props, {
@@ -65,7 +66,7 @@ function renderList(container, products) {
   }
 
   products.forEach((product) => {
-    const productCard = CartProductCard({ product });
+    const productCard = OrderCard({ product });
 
     container.appendChild(productCard);
   });

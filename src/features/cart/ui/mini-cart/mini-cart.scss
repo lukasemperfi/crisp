@@ -6,6 +6,10 @@
 .mini-cart {
   $layout-padding: 30px;
 
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
   @mixin sticky($position, $z-index: 2, $bg: var(--white)) {
     position: sticky;
     z-index: $z-index;
@@ -27,6 +31,7 @@
 
   &__body {
     padding: $layout-padding;
+    flex: 1;
   }
 
   &__footer {
@@ -58,6 +63,21 @@
 
     .mini-cart__cart-btn {
       margin-bottom: 17px;
+    }
+  }
+
+  &__items {
+    .cart-product-card:first-child {
+      .cart-product-card__wrapper {
+        padding-top: 0 !important;
+      }
+    }
+
+    .cart-product-card:last-child {
+      .cart-product-card__wrapper {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+      }
     }
   }
 

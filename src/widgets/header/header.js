@@ -102,4 +102,4 @@ const products = mockProducts
       variant: variants[0],
     };
   })
-  .slice(0, 5);
+  .slice(0, 6);

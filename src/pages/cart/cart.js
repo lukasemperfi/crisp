@@ -10,21 +10,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   initCartContent();
   initPageFooter();
   lazyLoadElements(".lazy", { rootMargin: "200px 0px" });
-
-  const container = document.querySelector(".cart-page");
-  const miniCart = MiniCart({ items: products });
-
-  container.append(miniCart);
 });
-
-const products = mockProducts
-  .map((product) => {
-    const { variants, ...rest } = product;
-    return {
-      ...rest,
-      sku: 434536465,
-      quantity: 3,
-      variant: variants[0],
-    };
-  })
-  .slice(0, 5);

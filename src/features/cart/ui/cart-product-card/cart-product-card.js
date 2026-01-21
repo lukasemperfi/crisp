@@ -13,7 +13,7 @@ export function CartProductCard(props) {
       tag: "div",
 
       render(el, props, emit, { runOnce }) {
-        const { product, quantity } = props;
+        const { product, quantity, className = "" } = props;
         const { id, images, name, final_price, sku, variant } = product;
 
         function initQuantity() {
@@ -35,7 +35,7 @@ export function CartProductCard(props) {
         }
 
         if (runOnce) {
-          el.className = "cart-product-card";
+          el.className = `cart-product-card ${className ? className : ""}`;
 
           el.innerHTML = `
           <div class="cart-product-card__wrapper">
@@ -47,18 +47,21 @@ export function CartProductCard(props) {
                 <div class="product-details">
                   <div class="product-details__title"></div>
                   <div class="product-details__items">
-                    <div class="product-details__item">
+                    <div class="product-details__item product-details__item_size">
                       <div class="cart-product-card__sub-title">Size:</div>
                       <div class="product-details__value product-details__size-value"></div>
                     </div>
-                    <div class="product-details__item">
+                    <div class="product-details__item product-details__item_sku">
                       <div class="cart-product-card__sub-title">Art.No.:</div>
                       <div class="product-details__value product-details__sku-value"></div>
                     </div>
                     <div class="product-details__item product-details__item_color">
                       <div class="cart-product-card__sub-title">Color:</div>
                       <div class="product-details__value product-details__color-value"></div>
-                    </div>                  
+                    </div>   
+                    <div class="product-details__item product-details__item_price">
+                      <div class="product-details__value product-details__price-value"></div>
+                    </div>                 
                   </div>
                 </div>
               </div>      
@@ -100,6 +103,7 @@ export function CartProductCard(props) {
             size: el.querySelector(".cart-product-card__size"),
             quantity: el.querySelector(".cart-product-card__quantity"),
             total: el.querySelector(".cart-product-card__total-price-value"),
+            totalDetails: el.querySelector(".product-details__price-value"),
           };
 
           initQuantity();
@@ -113,6 +117,7 @@ export function CartProductCard(props) {
         el._els.price.textContent = `${formatPrice(final_price)} EUR`;
         el._els.size.textContent = variant.size.name;
         el._els.total.innerHTML = `${totalPrice} EUR`;
+        el._els.totalDetails.innerHTML = `1 X ${totalPrice} EUR`;
 
         el._els.detailsSize.textContent = variant.size.name;
         el._els.sku.textContent = sku;
