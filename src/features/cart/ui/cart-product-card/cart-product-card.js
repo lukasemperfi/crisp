@@ -2,6 +2,7 @@ import { createComponent } from "@/shared/lib/core/core";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
+import { cartThunks } from "../../model/cart-slice";
 
 export function CartProductCard(props) {
   return createComponent(
@@ -97,9 +98,14 @@ export function CartProductCard(props) {
             quantity: el.querySelector(".cart-product-card__quantity"),
             total: el.querySelector(".cart-product-card__total-price-value"),
             totalDetails: el.querySelector(".product-details__price-value"),
+            removeBtn: el.querySelector(".actions__btn_remove"),
           };
 
           initQuantity();
+
+          el._els.removeBtn.addEventListener("click", (e) => {
+            cartThunks.removeItem(cartItemId);
+          });
         }
 
         const mainImage = images.find((img) => img.is_main);
