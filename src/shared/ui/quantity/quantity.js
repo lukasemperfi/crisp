@@ -23,10 +23,11 @@ export function Quantity(props = {}) {
       const increaseButton = el.querySelector(".quantity__increase");
       const decreaseButton = el.querySelector(".quantity__decrease");
 
-      const notifyChange = (newValue) => {
+      const notifyChange = (newValue, type = "manual") => {
         emit("onChange", {
           itemId,
           value: newValue,
+          type,
         });
       };
 
@@ -42,7 +43,9 @@ export function Quantity(props = {}) {
 
         if (newValue !== currentValue) {
           input.value = newValue;
-          notifyChange(newValue);
+
+          const type = delta > 0 ? "increment" : "decrement";
+          notifyChange(newValue, type);
         }
       };
 
@@ -53,7 +56,7 @@ export function Quantity(props = {}) {
         newValue = clamp(newValue);
 
         input.value = newValue;
-        notifyChange(newValue);
+        notifyChange(newValue, "manual");
       };
 
       const handleKeyDown = (e) => {

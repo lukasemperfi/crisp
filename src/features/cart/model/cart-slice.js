@@ -254,6 +254,14 @@ export const cartThunks = {
     store.dispatch({ type: "cart/decrementQuantity", payload: { cartItemId } });
     fetchCartProducts();
   },
+
+  setQuantity: ({ cartItemId, quantity }) => {
+    store.dispatch({
+      type: "cart/setQuantity",
+      payload: { cartItemId, quantity },
+    });
+    fetchCartProducts();
+  },
 };
 
 export const selectCartProductIds = (state) => [

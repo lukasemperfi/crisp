@@ -7,6 +7,7 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 import { store } from "../../../../app/store";
 import { cartThunks } from "../../../../features/cart/model/cart-slice";
+import { debounce } from "../../../../shared/helpers/debounce";
 
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
@@ -232,12 +233,15 @@ export const ProductDetailsCard = ({ container, product }) => {
 
   qty.addEventListener("onChange", qualityOnChange);
 
+  const debouncedAddItem = debounce((cartItem) => {
+    cartThunks.addItem(cartItem);
+  }, 500);
+
   const addToCartButton = root.querySelector(".add-to-cart-button");
   addToCartButton.addEventListener("click", (e) => {
     const cartItem = getCartItem();
-    console.log("cartItem", cartItem);
 
-    cartThunks.addItem({ ...cartItem });
+    debouncedAddItem({ ...cartItem });
   });
 
   function getCartItem() {

@@ -1,6 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { IconCross2 } from "../../../../shared/ui/icons/icons";
 import { OrderCard } from "../order-card/order-card";
+import { baseUrl } from "../../../../shared/helpers/base-url";
 
 export function MiniCart(props) {
   return createComponent(props, {
@@ -38,9 +39,9 @@ export function MiniCart(props) {
                   <span>$123.00</span>
                 </div>
             
-                <button class="mini-cart__cart-btn button button_outlined button_gray button_fill" type="button">
+                <a href="${baseUrl}cart/" class="mini-cart__cart-btn button button_outlined button_gray button_fill" type="button">
                   View and edit cart
-                </button>
+                </a>
                 <button class="mini-cart__checkout-btn button button_solid button_black button_fill" type="button">
                   Go to checkout
               </button>

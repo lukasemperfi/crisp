@@ -3,30 +3,29 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 import { cartThunks } from "../../model/cart-slice";
+import { debounce } from "../../../../shared/helpers/debounce";
 
 export function CartProductCard(props) {
   return createComponent(
     {
       ...props,
-      quantity: props?.quantity ?? props.product.quantity,
+      // quantity: props?.quantity ?? props.product.quantity,
     },
     {
       tag: "div",
 
       render(el, props, emit, { runOnce }) {
-        const { product, quantity, className = "" } = props;
+        const { product, className = "" } = props;
 
-        const { cartItemId, images, name, final_price, sku, selectedVariant } =
-          product;
-
-        function initQuantity() {
-          const quantityComponent = Quantity({
-            itemId: cartItemId,
-            initialValue: quantity,
-          });
-
-          el._els.quantity.append(quantityComponent);
-        }
+        const {
+          cartItemId,
+          images,
+          name,
+          final_price,
+          sku,
+          selectedVariant,
+          quantity,
+        } = product;
 
         if (runOnce) {
           el.className = `cart-product-card ${className ? className : ""}`;
@@ -65,6 +64,10 @@ export function CartProductCard(props) {
             <div class="cart-product-card__quantity-total">
               <div class="cart-product-card__quantity">
                 <div class="cart-product-card__sub-title cart-product-card__sub-title_quantity">Quantity</div>
+                ${Quantity({
+                  itemId: cartItemId,
+                  initialValue: quantity,
+                }).toHTML()}
               </div>
               <div class="cart-product-card__total-price">
                 <div class="cart-product-card__sub-title">Price:</div>   
@@ -99,12 +102,18 @@ export function CartProductCard(props) {
             total: el.querySelector(".cart-product-card__total-price-value"),
             totalDetails: el.querySelector(".product-details__price-value"),
             removeBtn: el.querySelector(".actions__btn_remove"),
+            incrementBtn: el.querySelector(".quantity__increase"),
+            decrementBtn: el.querySelector(".quantity__decrease"),
+            quantityInput: el.querySelector(".quantity__input"),
           };
 
           initQuantity();
 
-          el._els.removeBtn.addEventListener("click", (e) => {
+          const debouncedRemoveItem = debounce((cartItemId) => {
             cartThunks.removeItem(cartItemId);
+          }, 500);
+          el._els.removeBtn.addEventListener("click", (e) => {
+            debouncedRemoveItem(cartItemId);
           });
         }
 
@@ -125,6 +134,28 @@ export function CartProductCard(props) {
         el._els.totalDetails.innerHTML = `${quantity} X ${formatPrice(
           final_price
         )} EUR`;
+
+        function initQuantity() {
+          const debouncedIncrementQuantity = debounce((cartItemId) => {
+            cartThunks.incrementQuantity(cartItemId);
+          }, 500);
+          const debouncedDecrementQuantity = debounce((cartItemId) => {
+            cartThunks.decrementQuantity(cartItemId);
+          }, 500);
+          const debouncedSetQuantity = debounce((cartItemId) => {
+            cartThunks.setQuantity({ cartItemId, quantity });
+          }, 500);
+
+          el._els.incrementBtn.addEventListener("click", (e) => {
+            debouncedIncrementQuantity(cartItemId);
+          });
+          el._els.decrementBtn.addEventListener("click", (e) => {
+            debouncedDecrementQuantity(cartItemId);
+          });
+          el._els.quantityInput.addEventListener("change", (e) => {
+            debouncedSetQuantity({ cartItemId, quantity: e.target.value });
+          });
+        }
       },
     }
   );
