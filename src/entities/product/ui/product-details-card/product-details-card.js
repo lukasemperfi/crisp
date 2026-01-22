@@ -6,6 +6,7 @@ import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
 import { store } from "../../../../app/store";
+import { cartThunks } from "../../../../features/cart/model/cart-slice";
 
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
@@ -15,10 +16,6 @@ export const ProductDetailsCard = ({ container, product }) => {
   let selectedSizeId = null;
   let uniqueSizes = getSizesWithAvailability(selectedColorId);
   let currentQuantity = 1;
-
-  console.log("start", selectedColorId, selectedSizeId);
-
-  console.log(variants);
 
   const mountPoint =
     typeof container === "string"
@@ -161,20 +158,11 @@ export const ProductDetailsCard = ({ container, product }) => {
       sizeFilter.update({ sizes: uniqueSizes });
       dropdown.update({ options: sizeOptions });
 
-      console.log(
-        "color onChange",
-        selectedColorId,
-        selectedSizeId,
-        currentVariant
-      );
-
       updateAddToCartButton();
     });
 
     sizeFilter.addEventListener("onChange", (e) => {
       selectedSizeId = e.detail.selected;
-
-      console.log("size onChange", selectedColorId, selectedSizeId);
 
       updateAddToCartButton();
     });
@@ -198,8 +186,6 @@ export const ProductDetailsCard = ({ container, product }) => {
 
         const sizeObj = uniqueSizes.find((s) => s.id === sizeId);
         selectedSizeId = sizeObj?.id || null;
-
-        console.log("size dropdown onChange", selectedColorId, selectedSizeId);
 
         updateAddToCartButton();
       });
@@ -251,10 +237,7 @@ export const ProductDetailsCard = ({ container, product }) => {
     const cartItem = getCartItem();
     console.log("cartItem", cartItem);
 
-    store.dispatch({
-      type: "cart/addItem",
-      payload: { ...cartItem },
-    });
+    cartThunks.addItem({ ...cartItem });
   });
 
   function getCartItem() {

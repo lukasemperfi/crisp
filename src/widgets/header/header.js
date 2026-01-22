@@ -1,6 +1,11 @@
 import { initActiveLink } from "@/shared/ui/nav-menu/nav-menu";
 import { MiniCart } from "../../features/cart/ui/mini-cart/mini-cart";
-import { mockProducts } from "@/shared/helpers/mock-products";
+import { store } from "../../app/store";
+import {
+  selectCartCount,
+  selectCartTotalSum,
+} from "../../features/cart/model/cart-slice";
+import { formatPrice } from "../../shared/helpers/format-price";
 
 export async function initHeader() {
   initMenu();
@@ -86,20 +91,22 @@ function observeHeaderHeight(selector = ".header") {
 }
 
 function initMiniCart() {
-  // const miniCart = MiniCart({ items: products });
   const miniCartContainer = document.querySelector(".cart-item__popover");
+  const countContainer = document.querySelector(".cart-item__count");
+  const totalSumContainer = document.querySelector(".cart-item__total");
+  const miniCart = MiniCart({ items: [] });
 
-  // miniCartContainer.append(miniCart);
+  miniCartContainer.appendChild(miniCart);
+
+  store.subscribe("cart", async (newState) => {
+    const cartViewItems = newState.viewItems;
+    const cartCount = selectCartCount(newState);
+    const cartTotalSum = selectCartTotalSum(newState);
+
+    console.log("header mini cart: cartViewsItems", cartViewItems);
+
+    miniCart.update({ items: cartViewItems });
+    countContainer.textContent = cartCount;
+    totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
+  });
 }
-
-const products = mockProducts
-  .map((product) => {
-    const { variants, ...rest } = product;
-    return {
-      ...rest,
-      sku: 434536465,
-      quantity: 3,
-      variant: variants[0],
-    };
-  })
-  .slice(0, 6);

@@ -1,8 +1,7 @@
 import { CartTable } from "@/features/cart/ui/cart-table/cart-table";
-import { initBreadcrumbs } from "../../../../widgets/breadcrumbs/breadcrumbs";
-import { CartOrderSummary } from "../../../../features/cart/ui/cart-order-summary/cart-order-summary";
-import { getCartViewItems } from "../../../../features/cart/model/get-cart-view-items";
-import { store } from "../../../../app/store";
+import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
+import { CartOrderSummary } from "@/features/cart/ui/cart-order-summary/cart-order-summary";
+import { store } from "@/app/store";
 
 export const initCartContent = async () => {
   initBreadcrumbs(".cart-section__breadcrumbs");
@@ -16,8 +15,10 @@ export const initCartContent = async () => {
   cartOrderContainer.append(cartOrderSummary);
 
   store.subscribe("cart", async (newState) => {
-    const cartViewItems = await getCartViewItems(newState.items);
+    const cartViewItems = newState.viewItems;
+
     console.log("cartpage: cartViewsItems", cartViewItems);
+
     cartTable.update({ items: cartViewItems });
   });
 };
