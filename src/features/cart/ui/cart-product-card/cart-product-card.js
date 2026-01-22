@@ -14,21 +14,14 @@ export function CartProductCard(props) {
 
       render(el, props, emit, { runOnce }) {
         const { product, quantity, className = "" } = props;
-        const { id, images, name, final_price, sku, variant } = product;
+
+        const { cartItemId, images, name, final_price, sku, selectedVariant } =
+          product;
 
         function initQuantity() {
           const quantityComponent = Quantity({
-            itemId: id,
+            itemId: cartItemId,
             initialValue: quantity,
-          });
-
-          quantityComponent.addEventListener("onChange", (e) => {
-            el.update({ quantity: e.detail.value });
-
-            // emit("cart:quantity-change", {
-            //   id,
-            //   quantity: e.detail.value,
-            // });
           });
 
           el._els.quantity.append(quantityComponent);
@@ -110,18 +103,22 @@ export function CartProductCard(props) {
         }
 
         const mainImage = images.find((img) => img.is_main);
-        const totalPrice = formatPrice(quantity * final_price);
+        const totalPriceValue = quantity * final_price;
+        const totalPriceFormatted = formatPrice(totalPriceValue);
 
         el._els.image.src = mainImage?.image_path_webp || "";
         el._els.name.textContent = name;
         el._els.price.textContent = `${formatPrice(final_price)} EUR`;
-        el._els.size.textContent = variant.size.name;
-        el._els.total.innerHTML = `${totalPrice} EUR`;
-        el._els.totalDetails.innerHTML = `1 X ${totalPrice} EUR`;
 
-        el._els.detailsSize.textContent = variant.size.name;
+        el._els.size.textContent = selectedVariant.size.name;
+        el._els.detailsSize.textContent = selectedVariant.size.name;
+        el._els.color.innerHTML = createColorItem(selectedVariant.color);
+
         el._els.sku.textContent = sku;
-        el._els.color.innerHTML = createColorItem(variant.color);
+        el._els.total.innerHTML = `${totalPriceFormatted} EUR`;
+        el._els.totalDetails.innerHTML = `${quantity} X ${formatPrice(
+          final_price
+        )} EUR`;
       },
     }
   );
@@ -134,98 +131,3 @@ function createColorItem(colorObj) {
     </div>
   `;
 }
-
-const mockProduct = {
-  id: "12d7e202-e133-403d-8560-129bc987ed98",
-  brand_id: 15,
-  name: "Angels malu zip jeans slim black used",
-  description: "High-quality fabric and modern design for your perfect look.",
-  base_price: 238.69,
-  discount_percent: 20,
-  sku: 434536465,
-  created_at: "2025-12-28T13:49:23.703911+00:00",
-  length_id: 1,
-  final_price: 190.95,
-  is_featured: false,
-  is_popular: false,
-  brand: {
-    id: 15,
-    name: "Fendi",
-    created_at: "2025-12-28T13:49:23.703911+00:00",
-  },
-  images: [
-    {
-      id: 302,
-      is_main: true,
-      created_at: "2025-12-28T13:49:23.703911+00:00",
-      product_id: "12d7e202-e133-403d-8560-129bc987ed98",
-      sort_order: 1,
-      image_path_jpg:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.jpg",
-      image_path_webp:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.webp",
-    },
-    {
-      id: 303,
-      is_main: false,
-      created_at: "2025-12-28T13:49:23.703911+00:00",
-      product_id: "12d7e202-e133-403d-8560-129bc987ed98",
-      sort_order: 2,
-      image_path_jpg:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.jpg",
-      image_path_webp:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.webp",
-    },
-    {
-      id: 320,
-      is_main: false,
-      created_at: "2026-01-04T23:08:21.851541+00:00",
-      product_id: "12d7e202-e133-403d-8560-129bc987ed98",
-      sort_order: 3,
-      image_path_jpg:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.jpg",
-      image_path_webp:
-        "https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.webp",
-    },
-  ],
-  length: {
-    id: 1,
-    name: "short",
-    created_at: "2025-12-28T14:05:37.264663+00:00",
-    sort_order: 1,
-  },
-  variant: {
-    id: 671,
-    size: {
-      id: 34,
-      name: "w34",
-      created_at: "2025-12-28T13:49:23.703911+00:00",
-      sort_order: 80,
-    },
-    color: {
-      id: 19,
-      name: "Red",
-      hex_code: "#FF0000",
-      created_at: "2025-12-28T13:49:23.703911+00:00",
-    },
-    stock: 21,
-  },
-
-  quantity: 3,
-  tags: [
-    {
-      tag: {
-        id: 15,
-        name: "Top Women",
-        sort_order: 3,
-      },
-    },
-    {
-      tag: {
-        id: 16,
-        name: "Collection: Summer",
-        sort_order: 4,
-      },
-    },
-  ],
-};

@@ -86,10 +86,10 @@ function observeHeaderHeight(selector = ".header") {
 }
 
 function initMiniCart() {
-  const miniCart = MiniCart({ items: products });
+  // const miniCart = MiniCart({ items: products });
   const miniCartContainer = document.querySelector(".cart-item__popover");
 
-  miniCartContainer.append(miniCart);
+  // miniCartContainer.append(miniCart);
 }
 
 const products = mockProducts

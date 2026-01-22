@@ -48,6 +48,40 @@ class Products {
     return await this._getFilteredProducts(filters, "is_popular");
   };
 
+  getProductsByIds = async (productIds) => {
+    if (!productIds || productIds.length === 0) {
+      return [];
+    }
+
+    const { data, error } = await supabase
+      .from("products")
+      .select(
+        `
+        *,
+        brand:brands (*),
+        images:product_images (*),
+        length:product_lengths (*),
+        variants:product_variants (
+          id, 
+          stock, 
+          color:product_colors (*), 
+          size:product_sizes (*)
+        ),
+        tags:product_tags_mapping (
+          tag:product_tags (*)
+        )
+      `
+      )
+      .in("id", productIds);
+
+    if (error) {
+      console.error("Error fetching products by IDs:", error.message);
+      throw error;
+    }
+
+    return data;
+  };
+
   _getFilteredProducts = async (filters = {}, flagCondition = null) => {
     const {
       brand = [],
