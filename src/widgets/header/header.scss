@@ -2,7 +2,6 @@
 @use "@/app/styles/variables" as variables;
 @use "@/app/styles/functions" as functions;
 @use "@/features/cart/ui/mini-cart/mini-cart.scss" as *;
-@use "@/features/cart/ui/order-card/order-card.scss" as *;
 
 .header {
   $mobile-bp: 600px;

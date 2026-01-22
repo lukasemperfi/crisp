@@ -5,6 +5,7 @@ import { SizeFilter } from "@/features/product-filters/ui/size/size";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
+import { store } from "../../../../app/store";
 
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
@@ -249,6 +250,11 @@ export const ProductDetailsCard = ({ container, product }) => {
   addToCartButton.addEventListener("click", (e) => {
     const cartItem = getCartItem();
     console.log("cartItem", cartItem);
+
+    store.dispatch({
+      type: "cart/addItem",
+      payload: { ...cartItem },
+    });
   });
 
   function getCartItem() {

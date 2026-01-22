@@ -1,3 +1,5 @@
+@use "@/features/cart/ui/cart-product-card/cart-product-card.scss" as *;
+
 .order-card {
   .product-details__item {
     &_color {

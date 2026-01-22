@@ -1,5 +1,6 @@
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
+@use "@/features/cart/ui/order-card/order-card.scss" as *;
 
 // functions.fluidValue(12px, 14px, 320px, 1920px)
 

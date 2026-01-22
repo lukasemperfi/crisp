@@ -1,7 +1,6 @@
 {%from "src/widgets/header/header.html" import header%}
 {%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
 {%from "src/pages/catalog/sections/hero-section/hero-section.html" import heroSection%}
-{%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 {%from "src/pages/catalog/sections/products-section/products-section.html" import productsSection%}
 {%from "src/widgets/footer/footer.html" import footer%}
 
@@ -21,7 +20,6 @@
     <main>
         {{heroSection(baseUrl)}}
         {{productsSection()}}
-        {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>
     <div class="portal-root">

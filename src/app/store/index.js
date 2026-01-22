@@ -1,4 +1,3 @@
-import { authSlice } from "@/entities/auth/model/auth-slice";
 import { cartSlice } from "@/features/cart/model/cart-slice";
 
 class Store {
@@ -128,5 +127,4 @@ class Store {
 
 export const store = new Store();
 
-store.registerSlice(authSlice);
 store.registerSlice(cartSlice, { persist: true, fields: ["items"] });

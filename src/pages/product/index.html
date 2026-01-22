@@ -4,7 +4,6 @@
 {%from "src/pages/product/sections/product-content/product-content.html" import productContent%}
 {%from "src/pages/product/sections/recomendation-section/recomendation-section.html" import
 recomendationSection%}
-{%from "src/widgets/benefits-section/benefits-section.html" import benefitsSection%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +21,6 @@ recomendationSection%}
     <main class="product-page">
         {{productContent()}}
         {{recomendationSection()}}
-        {{benefitsSection()}}
         {{footer(baseUrl)}}
     </main>
     <div class="portal-root">

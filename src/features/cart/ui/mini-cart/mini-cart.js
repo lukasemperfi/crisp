@@ -1,5 +1,4 @@
 import { createComponent } from "@/shared/lib/core/core";
-import { CartProductCard } from "@/features/cart/ui/cart-product-card/cart-product-card";
 import { IconCross2 } from "../../../../shared/ui/icons/icons";
 import { OrderCard } from "../order-card/order-card";
 
