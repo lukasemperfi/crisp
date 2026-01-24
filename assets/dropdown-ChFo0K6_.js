@@ -1,4 +1,4 @@
-import{c as y}from"./core-BLSz-6hf.js";function E(n){return y(n,{tag:"div",render(t,u,b){const{options:d=[],defaultValue:s="",name:_="",placeholder:r="Не выбрано"}=u;t.className="dropdown-wrapper",t.innerHTML=`
+import{c as y}from"./footer-mnrRef1t.js";function E(n){return y(n,{tag:"div",render(t,u,b){const{options:d=[],defaultValue:s="",name:_="",placeholder:r="Не выбрано"}=u;t.className="dropdown-wrapper",t.innerHTML=`
         <div class="dropdown">
           <select class="dropdown__native" ${_?`name="${_}"`:""}>
             <option value="">${r}</option>

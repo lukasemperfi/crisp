@@ -1,32 +1,32 @@
-import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i as D,e as R,S as I,P as U,C as W,p as Q}from"../../product-list-Cfs14K5W.js";import{f as $,Q as G}from"../../format-price-upoCZm_v.js";import{D as K}from"../../dropdown-Dc_O7ixp.js";import{i as J}from"../../product-slider-C1HXpHY0.js";function X({swiper:e,extendParams:s,on:p}){s({thumbs:{swiper:null,multipleActiveThumbs:!0,autoScrollOffset:0,slideThumbActiveClass:"swiper-slide-thumb-active",thumbsContainerClass:"swiper-thumbs"}});let d=!1,r=!1;e.thumbs={swiper:null};function l(){const i=e.thumbs.swiper;if(!i||i.destroyed)return;const t=i.clickedIndex,_=i.clickedSlide;if(_&&_.classList.contains(e.params.thumbs.slideThumbActiveClass)||typeof t>"u"||t===null)return;let c;i.params.loop?c=parseInt(i.clickedSlide.getAttribute("data-swiper-slide-index"),10):c=t,e.params.loop?e.slideToLoop(c):e.slideTo(c)}function m(){const{thumbs:i}=e.params;if(d)return!1;d=!0;const t=e.constructor;if(i.swiper instanceof t){if(i.swiper.destroyed)return d=!1,!1;e.thumbs.swiper=i.swiper,Object.assign(e.thumbs.swiper.originalParams,{watchSlidesProgress:!0,slideToClickedSlide:!1}),Object.assign(e.thumbs.swiper.params,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper.update()}else if(D(i.swiper)){const _=Object.assign({},i.swiper);Object.assign(_,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper=new t(_),r=!0}return e.thumbs.swiper.el.classList.add(e.params.thumbs.thumbsContainerClass),e.thumbs.swiper.on("tap",l),!0}function u(i){const t=e.thumbs.swiper;if(!t||t.destroyed)return;const _=t.params.slidesPerView==="auto"?t.slidesPerViewDynamic():t.params.slidesPerView;let c=1;const a=e.params.thumbs.slideThumbActiveClass;if(e.params.slidesPerView>1&&!e.params.centeredSlides&&(c=e.params.slidesPerView),e.params.thumbs.multipleActiveThumbs||(c=1),c=Math.floor(c),t.slides.forEach(h=>h.classList.remove(a)),t.params.loop||t.params.virtual&&t.params.virtual.enabled)for(let h=0;h<c;h+=1)R(t.slidesEl,`[data-swiper-slide-index="${e.realIndex+h}"]`).forEach(f=>{f.classList.add(a)});else for(let h=0;h<c;h+=1)t.slides[e.realIndex+h]&&t.slides[e.realIndex+h].classList.add(a);const v=e.params.thumbs.autoScrollOffset,g=v&&!t.params.loop;if(e.realIndex!==t.realIndex||g){const h=t.activeIndex;let f,F;if(t.params.loop){const T=t.slides.find(x=>x.getAttribute("data-swiper-slide-index")===`${e.realIndex}`);f=t.slides.indexOf(T),F=e.activeIndex>e.previousIndex?"next":"prev"}else f=e.realIndex,F=f>e.previousIndex?"next":"prev";g&&(f+=F==="next"?v:-1*v),t.visibleSlidesIndexes&&t.visibleSlidesIndexes.indexOf(f)<0&&(t.params.centeredSlides?f>h?f=f-Math.floor(_/2)+1:f=f+Math.floor(_/2)-1:f>h&&t.params.slidesPerGroup,t.slideTo(f,i?0:void 0))}}p("beforeInit",()=>{const{thumbs:i}=e.params;if(!(!i||!i.swiper))if(typeof i.swiper=="string"||i.swiper instanceof HTMLElement){const t=N(),_=()=>{const a=typeof i.swiper=="string"?t.querySelector(i.swiper):i.swiper;if(a&&a.swiper)i.swiper=a.swiper,m(),u(!0);else if(a){const v=`${e.params.eventsPrefix}init`,g=h=>{i.swiper=h.detail[0],a.removeEventListener(v,g),m(),u(!0),i.swiper.update(),e.update()};a.addEventListener(v,g)}return a},c=()=>{if(e.destroyed)return;_()||requestAnimationFrame(c)};requestAnimationFrame(c)}else m(),u(!0)}),p("slideChange update resize observerUpdate",()=>{u()}),p("setTransition",(i,t)=>{const _=e.thumbs.swiper;!_||_.destroyed||_.setTransition(t)}),p("beforeDestroy",()=>{const i=e.thumbs.swiper;!i||i.destroyed||r&&i.destroy()}),Object.assign(e.thumbs,{init:m,update:u})}function Y(e){return B(e,{tag:"div",render(s,p,d){const{sizes:r=[],title:l="Size",showTitle:m=!0,selectionMode:u="multiple",selectedId:i=null}=p;if(!r||!Array.isArray(r)){console.error("SizeFilter Error: sizes array not found.");return}const _=[...r].sort((a,v)=>a.sort_order-v.sort_order).map(a=>e1(a,i)).join("");s.className="size-filter",s.innerHTML=`
+import{c as O,f as z,Q as N,d as D,b as j,p as $,i as R,a as U,l as Q}from"../../footer-mnrRef1t.js";import{g as G,i as W,e as K,S as P,P as J,C as X}from"../../product-list-2D0aSmFL.js";import{D as Y}from"../../dropdown-ChFo0K6_.js";import{A as e1}from"../../accordion-Bjh1x9Ki.js";import{i as t1}from"../../product-slider-BIsMQVXp.js";function i1({swiper:e,extendParams:n,on:C}){n({thumbs:{swiper:null,multipleActiveThumbs:!0,autoScrollOffset:0,slideThumbActiveClass:"swiper-slide-thumb-active",thumbsContainerClass:"swiper-thumbs"}});let c=!1,d=!1;e.thumbs={swiper:null};function v(){const i=e.thumbs.swiper;if(!i||i.destroyed)return;const t=i.clickedIndex,m=i.clickedSlide;if(m&&m.classList.contains(e.params.thumbs.slideThumbActiveClass)||typeof t>"u"||t===null)return;let l;i.params.loop?l=parseInt(i.clickedSlide.getAttribute("data-swiper-slide-index"),10):l=t,e.params.loop?e.slideToLoop(l):e.slideTo(l)}function u(){const{thumbs:i}=e.params;if(c)return!1;c=!0;const t=e.constructor;if(i.swiper instanceof t){if(i.swiper.destroyed)return c=!1,!1;e.thumbs.swiper=i.swiper,Object.assign(e.thumbs.swiper.originalParams,{watchSlidesProgress:!0,slideToClickedSlide:!1}),Object.assign(e.thumbs.swiper.params,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper.update()}else if(W(i.swiper)){const m=Object.assign({},i.swiper);Object.assign(m,{watchSlidesProgress:!0,slideToClickedSlide:!1}),e.thumbs.swiper=new t(m),d=!0}return e.thumbs.swiper.el.classList.add(e.params.thumbs.thumbsContainerClass),e.thumbs.swiper.on("tap",v),!0}function _(i){const t=e.thumbs.swiper;if(!t||t.destroyed)return;const m=t.params.slidesPerView==="auto"?t.slidesPerViewDynamic():t.params.slidesPerView;let l=1;const a=e.params.thumbs.slideThumbActiveClass;if(e.params.slidesPerView>1&&!e.params.centeredSlides&&(l=e.params.slidesPerView),e.params.thumbs.multipleActiveThumbs||(l=1),l=Math.floor(l),t.slides.forEach(f=>f.classList.remove(a)),t.params.loop||t.params.virtual&&t.params.virtual.enabled)for(let f=0;f<l;f+=1)K(t.slidesEl,`[data-swiper-slide-index="${e.realIndex+f}"]`).forEach(h=>{h.classList.add(a)});else for(let f=0;f<l;f+=1)t.slides[e.realIndex+f]&&t.slides[e.realIndex+f].classList.add(a);const p=e.params.thumbs.autoScrollOffset,H=p&&!t.params.loop;if(e.realIndex!==t.realIndex||H){const f=t.activeIndex;let h,M;if(t.params.loop){const x=t.slides.find(Z=>Z.getAttribute("data-swiper-slide-index")===`${e.realIndex}`);h=t.slides.indexOf(x),M=e.activeIndex>e.previousIndex?"next":"prev"}else h=e.realIndex,M=h>e.previousIndex?"next":"prev";H&&(h+=M==="next"?p:-1*p),t.visibleSlidesIndexes&&t.visibleSlidesIndexes.indexOf(h)<0&&(t.params.centeredSlides?h>f?h=h-Math.floor(m/2)+1:h=h+Math.floor(m/2)-1:h>f&&t.params.slidesPerGroup,t.slideTo(h,i?0:void 0))}}C("beforeInit",()=>{const{thumbs:i}=e.params;if(!(!i||!i.swiper))if(typeof i.swiper=="string"||i.swiper instanceof HTMLElement){const t=G(),m=()=>{const a=typeof i.swiper=="string"?t.querySelector(i.swiper):i.swiper;if(a&&a.swiper)i.swiper=a.swiper,u(),_(!0);else if(a){const p=`${e.params.eventsPrefix}init`,H=f=>{i.swiper=f.detail[0],a.removeEventListener(p,H),u(),_(!0),i.swiper.update(),e.update()};a.addEventListener(p,H)}return a},l=()=>{if(e.destroyed)return;m()||requestAnimationFrame(l)};requestAnimationFrame(l)}else u(),_(!0)}),C("slideChange update resize observerUpdate",()=>{_()}),C("setTransition",(i,t)=>{const m=e.thumbs.swiper;!m||m.destroyed||m.setTransition(t)}),C("beforeDestroy",()=>{const i=e.thumbs.swiper;!i||i.destroyed||d&&i.destroy()}),Object.assign(e.thumbs,{init:u,update:_})}function s1(e){return O(e,{tag:"div",render(n,C,c){const{sizes:d=[],title:v="Size",showTitle:u=!0,selectionMode:_="multiple",selectedId:i=null}=C;if(!d||!Array.isArray(d)){console.error("SizeFilter Error: sizes array not found.");return}const m=[...d].sort((a,p)=>a.sort_order-p.sort_order).map(a=>n1(a,i)).join("");n.className="size-filter",n.innerHTML=`
         <div class="size-filter__header">
-          ${m?`<div class="size-filter__title">${l}</div>`:""}
+          ${u?`<div class="size-filter__title">${v}</div>`:""}
           <a class="size-filter__guide" href="#" name="size guide">Size guide</a>
         </div>
         <div class="size-filter__grid">
-          ${_}
+          ${m}
         </div>
-      `;const c=s.querySelectorAll(".size-filter__input");u==="single"&&i!=null&&c.forEach(a=>{a.checked=Number(a.value)===Number(i)}),u==="single"?c.forEach(a=>{a.addEventListener("change",()=>{a.checked&&(c.forEach(v=>{v!==a&&(v.checked=!1)}),d("onChange",{selected:Number(a.value)}))})}):c.forEach(a=>{a.addEventListener("change",()=>{const v=Array.from(c).filter(g=>g.checked).map(g=>Number(g.value));d("onChange",{selected:v})})})}})}function e1(e,s){const p=e.available?"":"size-filter__box_disabled",d=e.id===s?"checked":"";return`
+      `;const l=n.querySelectorAll(".size-filter__input");_==="single"&&i!=null&&l.forEach(a=>{a.checked=Number(a.value)===Number(i)}),_==="single"?l.forEach(a=>{a.addEventListener("change",()=>{a.checked&&(l.forEach(p=>{p!==a&&(p.checked=!1)}),c("onChange",{selected:Number(a.value)}))})}):l.forEach(a=>{a.addEventListener("change",()=>{const p=Array.from(l).filter(H=>H.checked).map(H=>Number(H.value));c("onChange",{selected:p})})})}})}function n1(e,n){const C=e.available?"":"size-filter__box_disabled",c=e.id===n?"checked":"";return`
     <label class="size-filter__item" title="${e.name}">
       <input
         type="checkbox"
         class="size-filter__input"
         name="filter-size"
         value="${e.id}"
-        ${d}
+        ${c}
         ${e.available?"":"disabled"}
       />
-      <span class="size-filter__box ${p}">
+      <span class="size-filter__box ${C}">
         ${e.name}
       </span>
     </label>
-  `}const t1=({container:e,product:s})=>{const p=[...s.variants];let d=E(),r=d[0].id,l=null,m=Z(r),u=1;console.log("start",r,l),console.log(p);const i=document.querySelector(e);if(!i){console.error("ProductDetailsCard: container not found");return}if(!s){console.error("ProductDetailsCard: product is required");return}i.innerHTML="";const t=document.createElement("div");t.className="product-details-card";const _=s.images?.slice().sort((o,n)=>o.sort_order-n.sort_order).map(o=>o.image_path_jpg);t.innerHTML=`
+  `}const a1=({container:e,product:n})=>{const C=[...n.variants];let c=q(),d=c[0].id,v=null,u=T(d),_=1;const i=document.querySelector(e);if(!i){console.error("ProductDetailsCard: container not found");return}if(!n){console.error("ProductDetailsCard: product is required");return}i.innerHTML="";const t=document.createElement("div");t.className="product-details-card";const m=n.images?.slice().sort((s,o)=>s.sort_order-o.sort_order).map(s=>s.image_path_jpg);t.innerHTML=`
     <div class="product-details-card__media"></div>
     <div class="product-details-card__breadcrumbs"></div>
     <div class="product-details-card__info info">
       <div class="info__header">
         <div class="info__brand"></div>
-        <div class="info__title">${s.name}</div>
+        <div class="info__title">${n.name}</div>
       </div>
       <div class="info__color"></div>
       <div class="info__size"></div>
@@ -38,17 +38,17 @@ import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i 
           </div>
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
-            <div class="info__price-value">${$(s.final_price*u)} EUR</div>
+            <div class="info__price-value">${z(n.final_price*_)} EUR</div>
           </div>
         </div>
         <div class="info__actions">
           <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
-          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${c1()}Save</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${p1()}Save</button>
         </div>
         <div class="info__promo promo">
-              ${P("info__social-block")}
+              ${E("info__social-block")}
               <div class="promo__item promo__item_free-shipping">
-                <div class="promo__item-title">${C1()}</div>
+                <div class="promo__item-title">${v1()}</div>
                 <div class="promo__item-text">Free shipping</div>
               </div>
               <div class="promo__item">
@@ -57,20 +57,20 @@ import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i 
               </div>
               <div class="promo__item">
                 <div class="promo__item-title">Tags:</div>
-                <div class="promo__item-text">${s.tags.map(o=>o.tag.name).join(", ")}</div>
+                <div class="promo__item-text">${n.tags.map(s=>s.tag.name).join(", ")}</div>
               </div>
         </div>
       </div>
 
     </div>
-  `,i.appendChild(t),i1({container:t.querySelector(".product-details-card__media"),images:_}),s1(t.querySelector(".product-details-card__breadcrumbs")),a1(t.querySelector(".info__brand"),s.brand?.name||"");const c=window.matchMedia("(max-width: 1380px)"),a=o=>{const n=t.querySelector(".info__size"),C=t.querySelector(".info__color");if(!n||!C)return;const b=W({colors:d,title:"Select Color",showTitle:!0,selectionMode:"single",selectedId:r}),w=Y({sizes:m,selectionMode:"single",title:"Select size (Inches)",selectedId:l}),H=K({options:[],defaultValue:String(l)||String(sizeOptions[0]?.value)});if(n.innerHTML="",C.innerHTML="",b.addEventListener("onChange",M=>{r=M.detail.selected,l=null,m=Z(r);const k=y(r,l);k||(l=null);const A=m.map(S=>({label:S.name,value:S.id,disabled:!S.available}));w.update({sizes:m}),H.update({options:A}),console.log("color onChange",r,l,k),v()}),w.addEventListener("onChange",M=>{l=M.detail.selected,console.log("size onChange",r,l),v()}),o.matches){b.update({maxVisibleColors:3}),C.append(b);const M=m.map(L=>({label:L.name,value:L.id,disabled:!L.available}));H.update({options:M}),n.append(H),H.addEventListener("onChange",L=>{const k=Number(L.detail);l=m.find(S=>S.id===k)?.id||null,console.log("size dropdown onChange",r,l),v()})}else C.append(b),n.append(w)},v=()=>{const o=t.querySelector(".add-to-cart-button"),n=y(r,l);console.log("currentVariant",n),n&&n.stock>0?(o.disabled=!1,o.textContent="Add to Bag"):r&&l?(o.disabled=!0,o.textContent="Not Available"):(o.disabled=!0,o.textContent="Select Color and Size")};c.addEventListener("change",a),a(c),v();const g=t.querySelector(".info__quantity-container"),h=t.querySelector(".info__price-value"),f=G({itemId:s.id});g.append(f);const F=o=>{const n=o.detail.value;u=n,h.textContent=`${$(s.final_price*n)} EUR`};f.addEventListener("onChange",F),t.querySelector(".add-to-cart-button").addEventListener("click",o=>{const n=x();console.log("cartItem",n)});function x(){const o=y(r,l);return{productId:s.id,variantId:o.id,quantity:u}}function E(o=null){const n=new Map;return p.forEach(C=>{const b=C.color.id,w=!o||C.size.id===o,H=C.stock>0&&w;n.has(b)||n.set(b,{id:C.color.id,name:C.color.name,hex_code:C.color.hex_code,available:!1}),H&&(n.get(b).available=!0)}),[...n.values()]}function Z(o=null){const n=new Map;return p.forEach(C=>{const b=C.size.id,w=!o||C.color.id===o,H=C.stock>0&&w;n.has(b)||n.set(b,{id:C.size.id,name:C.size.name,sort_order:C.size.sort_order,available:!1}),H&&(n.get(b).available=!0)}),[...n.values()].sort((C,b)=>C.sort_order-b.sort_order)}function y(o,n){return!o||!n?null:p.find(C=>C.color.id===o&&C.size.id===n)||null}};function i1({container:e,images:s=[]}){const p=typeof e=="string"?document.querySelector(e):e;if(!p){console.error("ProductDetailsCardSlider: container not found");return}const d=document.createElement("div");d.className="card-slider",d.innerHTML=`
+  `,i.appendChild(t),o1({container:t.querySelector(".product-details-card__media"),images:m}),l1(t.querySelector(".product-details-card__breadcrumbs")),r1(t.querySelector(".info__brand"),n.brand?.name||"");const l=window.matchMedia("(max-width: 1380px)"),a=s=>{const o=t.querySelector(".info__size"),r=t.querySelector(".info__color");if(!o||!r)return;const b=X({colors:c,title:"Select Color",showTitle:!0,selectionMode:"single",selectedId:d}),w=s1({sizes:u,selectionMode:"single",title:"Select size (Inches)",selectedId:v}),g=Y({options:[],defaultValue:String(v)||String(sizeOptions[0]?.value)});if(o.innerHTML="",r.innerHTML="",b.addEventListener("onChange",F=>{d=F.detail.selected,v=null,u=T(d),k(d,v)||(v=null);const A=u.map(S=>({label:S.name,value:S.id,disabled:!S.available}));w.update({sizes:u}),g.update({options:A}),p()}),w.addEventListener("onChange",F=>{v=F.detail.selected,p()}),s.matches){b.update({maxVisibleColors:3}),r.append(b);const F=u.map(L=>({label:L.name,value:L.id,disabled:!L.available}));g.update({options:F}),o.append(g),g.addEventListener("onChange",L=>{const I=Number(L.detail);v=u.find(S=>S.id===I)?.id||null,p()})}else r.append(b),o.append(w)},p=()=>{const s=t.querySelector(".add-to-cart-button"),o=k(d,v);console.log("currentVariant",o),o&&o.stock>0?(s.disabled=!1,s.textContent="Add to Bag"):d&&v?(s.disabled=!0,s.textContent="Not Available"):(s.disabled=!0,s.textContent="Select Color and Size")};l.addEventListener("change",a),a(l),p();const H=t.querySelector(".info__quantity-container"),f=t.querySelector(".info__price-value"),h=N({itemId:n.id});H.append(h);const M=s=>{const o=s.detail.value;_=o,f.textContent=`${z(n.final_price*o)} EUR`};h.addEventListener("onChange",M);const x=D(s=>{j.addItem(s)},500);t.querySelector(".add-to-cart-button").addEventListener("click",s=>{const o=B();x({...o})});function B(){const s=k(d,v);return{productId:n.id,variantId:s.id,quantity:_}}function q(s=null){const o=new Map;return C.forEach(r=>{const b=r.color.id,w=!s||r.size.id===s,g=r.stock>0&&w;o.has(b)||o.set(b,{id:r.color.id,name:r.color.name,hex_code:r.color.hex_code,available:!1}),g&&(o.get(b).available=!0)}),[...o.values()]}function T(s=null){const o=new Map;return C.forEach(r=>{const b=r.size.id,w=!s||r.color.id===s,g=r.stock>0&&w;o.has(b)||o.set(b,{id:r.size.id,name:r.size.name,sort_order:r.size.sort_order,available:!1}),g&&(o.get(b).available=!0)}),[...o.values()].sort((r,b)=>r.sort_order-b.sort_order)}function k(s,o){return!s||!o?null:C.find(r=>r.color.id===s&&r.size.id===o)||null}};function o1({container:e,images:n=[]}){const C=typeof e=="string"?document.querySelector(e):e;if(!C){console.error("ProductDetailsCardSlider: container not found");return}const c=document.createElement("div");c.className="card-slider",c.innerHTML=`
  
     <div class="card-slider__thumbs thumbs-slider swiper">
       <div class="swiper-wrapper">
-        ${s.map(m=>`
+        ${n.map(u=>`
           <div class="swiper-slide">
             <div class="thumbs-slider__card">
-              <img class="thumbs-slider__img" src="${m}" alt="thumbs image" />
+              <img class="thumbs-slider__img" src="${u}" alt="thumbs image" />
             </div>
           </div>
         `).join("")}
@@ -80,44 +80,44 @@ import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i 
     <div class="card-slider__main-wrapper">
       <div class="card-slider__main main-slider swiper">
         <div class="swiper-wrapper">
-          ${s.map(m=>`
+          ${n.map(u=>`
               <div class="swiper-slide">
                 <div class="main-slider__card">
-                  <img class="main-slider__img" src="${m}" alt="thumbs image" />
+                  <img class="main-slider__img" src="${u}" alt="thumbs image" />
                 </div>
             </div>
           `).join("")}
         </div>
         <button class="main-slider__zoom-btn">
-            <span class="main-slider__icon-zoom">${o1()}</span>
+            <span class="main-slider__icon-zoom">${d1()}</span>
             <span class="main-slider__text-zoom">Zoom</span>
         </button>
       </div>
       <div class="card-slider__main-wrapper-bottom">
         <div class="card-slider__main-wrapper-social-block">
-          ${P()}
+          ${E()}
         </div>        
         <div class="swiper-pagination main-slider__nav-bullets slider-nav-bullets"></div>
       </div>    
     </div>
 
-  `,p.appendChild(d);const r=new I(d.querySelector(".card-slider__thumbs"),{direction:"vertical",slidesPerView:"auto",spaceBetween:10,freeMode:!0,watchSlidesProgress:!0}),l=new I(d.querySelector(".card-slider__main"),{modules:[X,U],spaceBetween:10,thumbs:{swiper:r},pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(m,u){return`<span class="${u}"></span>`}}});return{root:d,thumbsSwiper:r,mainSwiper:l,destroy(){r.destroy(),l.destroy(),d.remove()}}}function s1(e){if(!e){console.error("Breadcrumbs Error: container not found.");return}const s=`
+  `,C.appendChild(c);const d=new P(c.querySelector(".card-slider__thumbs"),{direction:"vertical",slidesPerView:"auto",spaceBetween:10,freeMode:!0,watchSlidesProgress:!0}),v=new P(c.querySelector(".card-slider__main"),{modules:[i1,J],spaceBetween:10,thumbs:{swiper:d},pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(u,_){return`<span class="${_}"></span>`}}});return{root:c,thumbsSwiper:d,mainSwiper:v,destroy(){d.destroy(),v.destroy(),c.remove()}}}function l1(e){if(!e){console.error("Breadcrumbs Error: container not found.");return}const n=`
     <nav aria-label="Breadcrumb" class="breadcrumbs">
       <div class="breadcrumbs__content">
         Home / Womens Dress / Angels malu
       </div>
     </nav>
-  `;e.innerHTML=s}function a1(e,s){if(!e){console.error("Brand Error: container not found.");return}const p=s.trim().toLowerCase(),r=`
+  `;e.innerHTML=n}function r1(e,n){if(!e){console.error("Brand Error: container not found.");return}const C=n.trim().toLowerCase(),d=`
     <div class="brand">
-      ${{fendi:V.fendi("brand__icon"),armani:V.armani("brand__icon"),burberry:V.burberry("brand__icon"),chanel:V.chanel("brand__icon"),versace:V.versace("brand__icon"),dior:V.dior("brand__icon"),gucci:V.gucci("brand__icon")}[p]||""}
+      ${{fendi:V.fendi("brand__icon"),armani:V.armani("brand__icon"),burberry:V.burberry("brand__icon"),chanel:V.chanel("brand__icon"),versace:V.versace("brand__icon"),dior:V.dior("brand__icon"),gucci:V.gucci("brand__icon")}[C]||""}
     </div>
-  `;e.innerHTML=r}const P=(e="")=>`
+  `;e.innerHTML=d}const E=(e="")=>`
           <div class="social-block ${e}">
           <span class="social-block__text">Share:</span>
-          <a href="#" class="social-block__link">${n1()}</a>
-          <a href="#" class="social-block__link">${r1()}</a>
-          <a href="#" class="social-block__link">${l1()}</a>
-          <a href="#" class="social-block__link">${d1()}</a>        
+          <a href="#" class="social-block__link">${c1()}</a>
+          <a href="#" class="social-block__link">${C1()}</a>
+          <a href="#" class="social-block__link">${u1()}</a>
+          <a href="#" class="social-block__link">${m1()}</a>        
         </div>
   `,V={chanel:(e="")=>`
     <svg class="${e}" width="143" height="23" viewBox="0 0 143 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -159,47 +159,35 @@ import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i 
     </svg>`,armani:(e="")=>`
     <svg class="${e}" width="169" height="30" viewBox="0 0 169 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M144.285 1.18068L145.575 1.22517C146.458 1.22517 147.103 1.25898 147.465 1.31414C147.837 1.37019 148.109 1.48141 148.29 1.62643C148.529 1.7937 148.686 2.08376 148.742 2.47346C148.788 2.87473 148.822 3.65414 148.822 4.82413V22.0129L131.505 0.435085H122.288V1.18157H125.807L126.608 1.70473V26.1804C126.608 26.2355 126.597 26.3023 126.587 26.3574C126.577 26.4126 126.565 26.458 126.565 26.4909C126.474 27.45 126.281 28.1049 125.998 28.4634C125.716 28.8078 124.969 28.9759 123.759 28.943H120.151L108.965 0H108.343L106.919 3.91038L98.9907 25.6554C98.8552 26.0567 98.707 26.4251 98.5941 26.7258C98.4812 27.0372 98.3574 27.3166 98.2427 27.539C97.8814 28.241 97.4523 28.6636 96.9428 28.7971C96.5472 28.8976 95.9139 28.9537 95.0323 28.9537V28.943H90.7126V1.18068H95.0332V0.434195H86.392L77.31 22.4141L67.602 0.434195H59.3113V1.18068H63.0556L63.4512 1.97165V26.2685C63.4512 27.3495 63.2588 28.0844 62.8749 28.4403C62.4901 28.8069 61.7439 28.9759 60.6473 28.9421H59.1433V29.6877H68.8919V28.9421L67.6029 28.9857C65.9634 28.9857 64.9896 28.7179 64.6734 28.1725C64.3681 27.6369 64.2091 26.8254 64.2091 25.7435V25.3894V25.0433C64.177 24.9195 64.1618 24.792 64.1639 24.6643V3.59808L75.3498 29.1201L86.3884 2.67365V28.943H82.113V29.6886H103.626V28.943L102.246 28.9866C101.172 28.9866 100.413 28.8861 99.9509 28.709C99.4974 28.5195 99.2608 28.1734 99.2608 27.7169C99.2608 27.5728 99.305 27.3379 99.3944 27.0167C99.4866 26.6938 99.6221 26.2471 99.791 25.7008L101.838 20.1311H111.995L115.421 28.943H110.977V29.6886H131.945V28.9866C129.696 28.9866 128.35 28.7971 127.93 28.3958C127.524 28.0061 127.308 26.6368 127.308 24.2968V2.49481L149.228 29.9101H149.487V4.86862C149.487 3.75467 149.51 3.03043 149.533 2.67365C149.556 2.32843 149.659 2.03838 149.805 1.83819C149.828 1.83819 149.861 1.81595 149.872 1.79371C149.891 1.76114 149.914 1.73096 149.941 1.70384C150.087 1.50365 150.336 1.37019 150.698 1.31414C151.049 1.25898 151.672 1.20292 152.564 1.18068H153.808V0.434195H144.284V1.18068H144.285ZM106.917 19.3837H102.11L106.782 6.40608L106.917 6.75129L111.723 19.3846H106.917V19.3837ZM169 1.18068V0.434195H155.914V1.18068H160.222V28.943H155.914V29.6886H169V28.943H164.679V1.18068H169ZM56.3484 29.0311C56.156 29.0862 55.9871 29.1201 55.8389 29.1201C55.7486 29.1423 55.6583 29.1654 55.5679 29.1654H55.2617C54.2897 29.1654 53.6447 28.5853 53.362 27.45C53.0793 26.3138 52.8869 24.9979 52.7622 23.5049C52.7396 23.3608 52.7062 23.2149 52.6945 23.0708C52.6827 22.9266 52.6719 22.77 52.6719 22.6259C52.5945 21.6116 52.4548 20.6029 52.2536 19.6053C52.0612 18.6372 51.7225 17.8445 51.2473 17.2332C50.6602 16.4423 49.8671 15.8417 48.8951 15.4297C47.9231 15.016 46.5085 14.6824 44.6648 14.4261C44.756 14.4261 44.8346 14.4146 44.9132 14.4039C44.9917 14.3901 45.0711 14.3827 45.1508 14.3816C47.2664 14.0925 49.1887 13.4572 50.942 12.499C52.6945 11.5292 53.5653 9.81375 53.5653 7.36343C53.5653 4.87929 52.6945 3.14076 50.9646 2.17273C49.2338 1.19224 47.3224 0.635273 45.2411 0.523167C45.0547 0.491588 44.8657 0.476696 44.6766 0.478678C44.495 0.478678 44.3035 0.456439 44.1337 0.434195H28.7736V1.18068H33.0932V28.943H25.8667L14.6916 0H14.0702L12.6447 3.91038L4.71625 25.6554C4.56901 26.0567 4.43351 26.4251 4.32059 26.7258C4.20768 27.0372 4.08302 27.3166 3.95927 27.539C3.60878 28.241 3.17879 28.6636 2.67022 28.7971C2.17249 28.9208 1.2782 28.9759 0 28.943V29.6886H9.34217V28.943L7.96189 28.9866C6.89868 28.9866 6.14079 28.8861 5.67829 28.709C5.21398 28.5195 4.98815 28.1734 4.98815 27.7169C4.98815 27.5728 5.03332 27.3379 5.12365 27.0167C5.20224 26.6938 5.33864 26.2471 5.5193 25.7008L7.56623 20.1311H17.7241L21.1513 28.943H16.6952V29.6886H42.0416V28.943H37.45V14.7713L39.1916 14.8167C40.7977 14.8167 42.1436 14.9155 43.2186 15.1281C44.598 15.3853 45.5483 15.8194 46.046 16.4209C46.9285 17.4895 47.5392 19.3837 47.8671 22.1018C47.924 22.448 47.98 22.8038 48.0026 23.1597C48.0369 23.5058 48.0812 23.8742 48.1381 24.2514C48.3757 26.3806 48.9186 27.8851 49.7668 28.7312C50.6033 29.5658 51.9718 30 53.8381 30C54.3132 30 54.754 29.9795 55.1497 29.9342C55.5453 29.8888 55.941 29.8007 56.3258 29.6895C56.5074 29.6895 56.6772 29.6566 56.8461 29.6005C57.0198 29.5401 57.1897 29.4694 57.3547 29.3888L57.0837 28.8087C56.7892 28.8976 56.5399 28.9759 56.3484 29.0311ZM12.6447 19.3837H7.83813L12.5092 6.40608L12.6447 6.75129L17.4513 19.3846H12.6447V19.3837ZM41.1021 13.9919C40.4797 14.0471 39.8465 14.0809 39.2241 14.0925C38.6134 14.104 38.0145 14.104 37.4491 14.0702V1.18068L39.01 1.22517C40.7182 1.22517 42.1202 1.28033 43.2177 1.40311C43.8735 1.48141 44.4164 1.57038 44.8464 1.68159C45.9999 1.99389 46.9502 2.62828 47.6855 3.59808C47.9574 3.9433 48.1941 4.36681 48.3865 4.86862C48.5789 5.35886 48.7379 5.85978 48.8508 6.36159C48.8734 6.58402 48.9068 6.8287 48.9411 7.06359C48.9637 7.28602 48.9863 7.50845 48.9863 7.7211C48.9863 10.0486 48.1607 11.6537 46.5094 12.5007C45.4682 13.032 44.3619 13.4288 43.2177 13.6814C42.5275 13.8362 41.8257 13.9359 41.1021 13.9919Z" fill="#3F3F3F" />
-    </svg>`},o1=(e="")=>`<svg class="${e}" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    </svg>`},d1=(e="")=>`<svg class="${e}" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M0.5 6.5V10.5H4.5" stroke="black" />
   <path d="M0.5 4.5V0.5H4.5" stroke="black" />
   <path d="M6.5 0.5H10.5V4.5" stroke="black" />
   <path d="M10.5 6.5V10.5H6.5" stroke="black" />
   <path d="M0.5 0.5L10.5 10.5" stroke="black" />
   <path d="M10.5 0.5L0.5 10.5" stroke="black" stroke-width="1.4" />
-</svg>`,n1=(e="")=>`<svg width="6" height="13" viewBox="0 0 6 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg>`,c1=(e="")=>`<svg width="6" height="13" viewBox="0 0 6 13" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M4 4.22501V3.08754C4 2.51879 4.07692 2.19376 4.92308 2.19376H6V0H4.23077C2.07692 0 1.38462 1.05628 1.38462 2.92503V4.30629H0V6.5H1.30769V13H4V6.5H5.76923L6 4.22501H4Z" fill="black" />
-</svg>`,r1=(e="")=>`<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg>`,C1=(e="")=>`<svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M13 1.15326C12.5135 1.36079 12.0041 1.49145 11.4795 1.53757C12.0117 1.23012 12.4222 0.738223 12.6199 0.15408C12.0953 0.438465 11.5328 0.64598 10.9474 0.768958C10.4076 0.269362 9.70058 -0.00733705 8.97076 0.000349035C7.54912 -0.0227092 6.37076 1.0995 6.30994 2.5368C6.29473 2.72126 6.31755 2.90569 6.38597 3.07478C4.28012 3.02098 2.2959 2.06793 0.912278 0.461542C0.661401 0.853533 0.532161 1.30702 0.532161 1.76819C0.547366 2.62903 1.00351 3.42066 1.74853 3.84339C1.33041 3.82033 0.912278 3.72044 0.532161 3.53598C0.554968 4.76575 1.45205 5.80338 2.66082 5.99553C2.44035 6.05702 2.20468 6.08775 1.97661 6.07238C1.79415 6.08006 1.6193 6.05702 1.44445 5.99553C1.80936 7.07159 2.82807 7.79407 3.95321 7.76332C2.98772 8.48582 1.80935 8.86241 0.608184 8.83935H0C1.24678 9.57721 2.66082 9.97689 4.10526 9.99226C8.1193 10.1767 11.5175 7.04081 11.7 2.98255C11.7 2.93644 11.7 2.89033 11.7076 2.84421V2.5368C12.1942 2.12943 12.6351 1.66823 13 1.15326Z" fill="black" />
 </svg>
-`,l1=(e="")=>`<svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+`,u1=(e="")=>`<svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M5.91874 9.43848C5.29547 9.31706 4.7046 9.04185 4.21893 8.62903C3.89515 10.4098 3.49043 12.1096 2.19532 13C1.7906 10.3288 2.76192 8.30522 3.16664 6.11973C2.43814 4.90556 3.24758 2.39631 4.78553 2.96292C6.72819 3.69142 3.08569 7.57674 5.51402 8.06241C8.0233 8.54808 9.07557 3.69139 7.53763 2.0725C5.27119 -0.193938 0.981135 1.99156 1.4668 5.31028C1.62869 6.11973 2.43815 6.36257 1.7906 7.49579C0.333599 7.17201 -0.0711326 6.03878 0.00981179 4.50084C0.187889 2.15345 2.03342 0.275539 4.38081 0.0488948C7.13291 -0.274883 9.64219 1.02025 10.0469 3.61047C10.4516 6.52447 8.83274 9.68131 5.91874 9.43848Z" fill="black" />
-</svg>`,d1=(e="")=>`
+</svg>`,m1=(e="")=>`
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M5.99999 3.56201C4.65569 3.56201 3.56201 4.65565 3.56201 5.99996C3.56201 7.34426 4.65569 8.43795 5.99999 8.43795C7.3443 8.43795 8.43796 7.34426 8.43796 5.99996C8.43796 4.65565 7.35189 3.56201 5.99999 3.56201Z" fill="black" />
   <path d="M11.9544 3.04558C11.9241 2.33165 11.8025 1.94428 11.7038 1.68605C11.5747 1.34428 11.4152 1.10126 11.157 0.843027C10.8987 0.584799 10.6557 0.425328 10.3139 0.296214C10.0557 0.19748 9.66837 0.0759476 8.95444 0.0455678C8.17976 0.00759309 7.95191 0 6.00001 0C4.04811 0 3.82026 0.00759309 3.04558 0.0455678C2.33165 0.0759476 1.94431 0.19748 1.68608 0.296214C1.34431 0.425328 1.10127 0.584799 0.843039 0.843027C0.584811 1.10126 0.425316 1.34428 0.296202 1.68605C0.197468 1.94428 0.0759592 2.33165 0.0455794 3.04558C0.00760468 3.82026 0 4.04808 0 5.99998C0 7.95188 0.00760468 8.17974 0.0455794 8.95442C0.0759592 9.66835 0.197468 10.0557 0.296202 10.3139C0.425316 10.6557 0.584811 10.8987 0.843039 11.157C1.10127 11.4152 1.34431 11.5747 1.68608 11.7038C1.94431 11.8025 2.33165 11.9241 3.04558 11.9544C3.81267 11.9924 4.04811 12 6.00001 12C7.95191 12 8.18735 11.9924 8.95444 11.9544C9.66837 11.9241 10.0557 11.8025 10.3139 11.7038C10.6557 11.5747 10.8987 11.4152 11.157 11.157C11.4152 10.8987 11.5747 10.6557 11.7038 10.3139C11.8025 10.0557 11.9241 9.66835 11.9544 8.95442C11.9924 8.17974 12 7.95188 12 5.99998C12 4.04808 11.9924 3.82026 11.9544 3.04558ZM6.00001 9.75188C3.92659 9.75188 2.24811 8.0734 2.24811 5.99998C2.24811 3.92656 3.92659 2.24807 6.00001 2.24807C8.07343 2.24807 9.75191 3.92656 9.75191 5.99998C9.75951 8.0734 8.07343 9.75188 6.00001 9.75188ZM9.90381 2.9772C9.41774 2.9772 9.0228 2.58229 9.0228 2.09621C9.0228 1.61014 9.41774 1.21517 9.90381 1.21517C10.3899 1.21517 10.7848 1.61014 10.7848 2.09621C10.7848 2.58229 10.3899 2.9772 9.90381 2.9772Z" fill="black" />
 </svg>
-  `,c1=(e="")=>`
+  `,p1=(e="")=>`
 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M12.2402 2.60034C14.5081 2.60056 16.2997 4.29505 16.2998 6.47632C16.2998 7.80511 15.6703 9.00544 14.5879 10.2683C13.5064 11.5301 11.9613 12.868 10.1094 14.4695L9.06543 15.3757L9 15.4324L8.93457 15.3757L7.89062 14.4695C6.03866 12.8679 4.49258 11.5301 3.41113 10.2683C2.32884 9.0055 1.7002 7.80505 1.7002 6.47632C1.7003 4.29492 3.49167 2.60036 5.75977 2.60034C7.00282 2.60034 8.196 3.13584 9 3.98315C9.804 3.13595 10.9973 2.60034 12.2402 2.60034ZM12.2402 4.17358C11.1676 4.17358 10.1264 4.83912 9.76172 5.7312L9.73633 5.7937H8.2627L8.2373 5.7312C7.87257 4.83922 6.83233 4.17358 5.75977 4.17358C4.37056 4.1736 3.33995 5.16278 3.33984 6.47632C3.33984 7.42994 3.88319 8.39192 4.87207 9.49487C5.85957 10.5963 7.27457 11.8203 8.98633 13.3015L8.99707 13.3103L9.00293 13.3054L9.00684 13.3015C10.7221 11.8203 12.1386 10.5962 13.127 9.49487C14.1167 8.39194 14.6602 7.42992 14.6602 6.47632C14.6601 5.1629 13.6292 4.17379 12.2402 4.17358Z" fill="#3F3F3F" stroke="#3F3F3F" stroke-width="0.2"/>
 </svg>
 
-  `,C1=(e="")=>`
+  `,v1=(e="")=>`
   <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0.848633 2.84863L5.84863 7.84863L12.8486 0.848633" stroke="#828282" stroke-width="2.4" />
   </svg>
-  `,u1=(e,s,p={})=>{const d=document.querySelector(e);if(!d){console.error(`Accordion: Container '${e}' not found`);return}const{isSingleOpen:r=!0}=p,l=document.createElement("div");l.className="accordion",l.innerHTML=s.map(u=>`
-    <div class="accordion__item ${u.isActive?"is-active":""}">
-      <button class="accordion__button" type="button">
-        <span class="accordion__title">${u.title}</span> 
-        <span class="accordion__icon"></span>
-      </button>
-      <div class="accordion__content">
-        <div class="accordion__inner">
-          ${u.content}
-        </div>
-      </div>
-    </div>
-  `).join(""),d.innerHTML="",d.appendChild(l);const m=l.querySelectorAll(".accordion__item");m.forEach(u=>{u.querySelector(".accordion__button").addEventListener("click",()=>{const t=u.classList.contains("is-active");r&&!t&&m.forEach(_=>_.classList.remove("is-active")),u.classList.toggle("is-active")})})},m1=async e=>{t1({container:".product-content__card",product:e});const s=[{title:"Details",content:z(),isActive:!0},{title:"Other information",content:z()},{title:"Another tab",content:z()}];u1(".description__col-2",s)},z=()=>`
+  `,f1=async e=>{a1({container:".product-content__card",product:e});const n=[{title:"Details",content:y(),isActive:!0},{title:"Other information",content:y()},{title:"Another tab",content:y()}];e1(".description__col-2",n)},y=()=>`
     <div class="accordion-content">
       <div class="accordion-content__item accordion-content__item_about-product">
         <div class="accordion-content__title">ABOUT PRODUCT</div>
@@ -241,4 +229,4 @@ import{c as B,i as q,a as j,l as O}from"../../core-BLSz-6hf.js";import{g as N,i 
         </div>
       </div>
     </div>
-  `,p1=async()=>{J({...{totalLimit:16,pageSizeMobile:4,swiperOptions:{breakpoints:{471:{slidesPerView:3,spaceBetween:16},1024:{slidesPerView:4,spaceBetween:20},1920:{slidesPerView:5,spaceBetween:27}}}},containerSelector:".featured-slider__slider-container",fetchProducts:Q.getFeaturedProducts,navSelectors:{prevEl:".featured-slider__left-nav",nextEl:".featured-slider__right-nav"}})};document.addEventListener("DOMContentLoaded",async()=>{new URLSearchParams(window.location.search).get("id"),q(),m1(_1),p1(),j(),O(".lazy",{rootMargin:"200px 0px"})});const _1={id:"12d7e202-e133-403d-8560-129bc987ed98",name:"Women Black Checked Fit and Flare Dress",final_price:190.95,brand:{id:15,name:"Fendi",created_at:"2025-12-28T13:49:23.703911+00:00"},images:[{id:302,is_main:!0,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:1,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-1.webp"},{id:303,is_main:!1,created_at:"2025-12-28T13:49:23.703911+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:2,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-2.webp"},{id:320,is_main:!1,created_at:"2026-01-04T23:08:21.851541+00:00",product_id:"12d7e202-e133-403d-8560-129bc987ed98",sort_order:3,image_path_jpg:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.jpg",image_path_webp:"https://opznamhtgnrgslzzqhmt.supabase.co/storage/v1/object/public/product-images/img-details-3.webp"}],variants:[{id:671,size:{id:34,name:"w34",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:80},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:21},{id:672,size:{id:46,name:"w52",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:200},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:7},{id:675,size:{id:28,name:"w26",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:20},color:{id:19,name:"Red",hex_code:"#FF0000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:9},{id:673,size:{id:35,name:"w33",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:90},color:{id:16,name:"Black",hex_code:"#000000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:12},{id:674,size:{id:28,name:"w26",created_at:"2025-12-28T13:49:23.703911+00:00",sort_order:20},color:{id:16,name:"Black",hex_code:"#000000",created_at:"2025-12-28T13:49:23.703911+00:00"},stock:14}],tags:[{tag:{id:15,name:"Top Women",sort_order:3}},{tag:{id:16,name:"Collection: Summer",sort_order:4}}]};
+  `,h1=async()=>{t1({...{totalLimit:16,pageSizeMobile:4,swiperOptions:{breakpoints:{471:{slidesPerView:3,spaceBetween:16},1024:{slidesPerView:4,spaceBetween:20},1920:{slidesPerView:5,spaceBetween:27}}}},containerSelector:".featured-slider__slider-container",fetchProducts:$.getFeaturedProducts,navSelectors:{prevEl:".featured-slider__left-nav",nextEl:".featured-slider__right-nav"}})};document.addEventListener("DOMContentLoaded",async()=>{const n=new URLSearchParams(window.location.search).get("id"),C=await $.getProductById(n);R(),f1(C),h1(),U(),Q(".lazy",{rootMargin:"200px 0px"})});
