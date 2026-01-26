@@ -109,11 +109,8 @@ export function CartProductCard(props) {
 
           initQuantity();
 
-          const debouncedRemoveItem = debounce((cartItemId) => {
-            cartThunks.removeItem(cartItemId);
-          }, 500);
           el._els.removeBtn.addEventListener("click", (e) => {
-            debouncedRemoveItem(cartItemId);
+            cartThunks.removeItem(cartItemId);
           });
         }
 
@@ -132,32 +129,20 @@ export function CartProductCard(props) {
         el._els.sku.textContent = sku;
         el._els.total.innerHTML = `${totalPriceFormatted} EUR`;
         el._els.totalDetails.innerHTML = `${quantity} X ${formatPrice(
-          final_price
+          final_price,
         )} EUR`;
 
         function initQuantity() {
-          const debouncedIncrementQuantity = debounce((cartItemId) => {
-            cartThunks.incrementQuantity(cartItemId);
-          }, 500);
-          const debouncedDecrementQuantity = debounce((cartItemId) => {
-            cartThunks.decrementQuantity(cartItemId);
-          }, 500);
-          const debouncedSetQuantity = debounce((cartItemId) => {
-            cartThunks.setQuantity({ cartItemId, quantity });
-          }, 500);
-
           el._els.incrementBtn.addEventListener("click", (e) => {
-            debouncedIncrementQuantity(cartItemId);
+            cartThunks.incrementQuantity(cartItemId);
           });
           el._els.decrementBtn.addEventListener("click", (e) => {
-            debouncedDecrementQuantity(cartItemId);
+            cartThunks.decrementQuantity(cartItemId);
           });
-          el._els.quantityInput.addEventListener("change", (e) => {
-            debouncedSetQuantity({ cartItemId, quantity: e.target.value });
-          });
+          el._els.quantityInput.addEventListener("change", (e) => {});
         }
       },
-    }
+    },
   );
 }
 
