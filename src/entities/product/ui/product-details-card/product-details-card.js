@@ -61,7 +61,7 @@ export const ProductDetailsCard = ({ container, product }) => {
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
             <div class="info__price-value">${formatPrice(
-              product.final_price * currentQuantity
+              product.final_price * currentQuantity,
             )} EUR</div>
           </div>
         </div>
@@ -143,7 +143,7 @@ export const ProductDetailsCard = ({ container, product }) => {
 
       const currentVariant = findCurrentVariant(
         selectedColorId,
-        selectedSizeId
+        selectedSizeId,
       );
 
       if (!currentVariant) {
@@ -227,21 +227,17 @@ export const ProductDetailsCard = ({ container, product }) => {
     currentQuantity = quantity;
 
     priceContainer.textContent = `${formatPrice(
-      product.final_price * quantity
+      product.final_price * quantity,
     )} EUR`;
   };
 
   qty.addEventListener("onChange", qualityOnChange);
 
-  const debouncedAddItem = debounce((cartItem) => {
-    cartThunks.addItem(cartItem);
-  }, 500);
-
   const addToCartButton = root.querySelector(".add-to-cart-button");
   addToCartButton.addEventListener("click", (e) => {
     const cartItem = getCartItem();
 
-    debouncedAddItem({ ...cartItem });
+    cartThunks.addItem({ ...cartItem });
   });
 
   function getCartItem() {
@@ -338,7 +334,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
               <img class="thumbs-slider__img" src="${src}" alt="thumbs image" />
             </div>
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -355,7 +351,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
                   <img class="main-slider__img" src="${src}" alt="thumbs image" />
                 </div>
             </div>
-          `
+          `,
             )
             .join("")}
         </div>
