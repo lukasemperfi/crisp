@@ -3,7 +3,6 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 import { cartThunks } from "../../model/cart-slice";
-import { debounce } from "../../../../shared/helpers/debounce";
 
 export function CartProductCard(props) {
   return createComponent(
@@ -139,7 +138,14 @@ export function CartProductCard(props) {
           el._els.decrementBtn.addEventListener("click", (e) => {
             cartThunks.decrementQuantity(cartItemId);
           });
-          el._els.quantityInput.addEventListener("change", (e) => {});
+          el._els.quantityInput.addEventListener("change", (e) => {
+            console.log("value", e.target.value);
+
+            cartThunks.setQuantity({
+              cartItemId,
+              quantity: Number(e.target.value),
+            });
+          });
         }
       },
     },
