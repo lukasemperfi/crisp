@@ -2,13 +2,15 @@ import { createComponent } from "@/shared/lib/core/core";
 import { IconCross2 } from "../../../../shared/ui/icons/icons";
 import { OrderCard } from "../order-card/order-card";
 import { baseUrl } from "../../../../shared/helpers/base-url";
+import { formatPrice } from "@/shared/helpers/format-price";
 
 export function MiniCart(props) {
   return createComponent(props, {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { items = [] } = props;
+      const { items = [], totalSum = 0 } = props;
+      console.log("from comp", totalSum);
 
       if (runOnce) {
         el.className = "mini-cart";
@@ -36,7 +38,7 @@ export function MiniCart(props) {
               <footer class="mini-cart__footer">
                 <div class="mini-cart__total">
                   <span>Cart Subtotal:</span>
-                  <span>$123.00</span>
+                  <span class="mini-cart__total-sum">${totalSum} EUR</span>
                 </div>
             
                 <a href="${baseUrl}cart/" class="mini-cart__cart-btn button button_outlined button_gray button_fill" type="button">
@@ -50,10 +52,12 @@ export function MiniCart(props) {
 
         el._els = {
           list: el.querySelector(".mini-cart__items"),
+          totalSum: el.querySelector(".mini-cart__total-sum"),
         };
       }
 
       renderList(el._els.list, items);
+      el._els.totalSum.textContent = `${formatPrice(totalSum)} EUR`;
     },
   });
 }

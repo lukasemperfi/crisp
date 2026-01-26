@@ -5,7 +5,7 @@ import {
   selectCartCount,
   selectCartTotalSum,
 } from "../../features/cart/model/cart-slice";
-import { formatPrice } from "../../shared/helpers/format-price";
+import { formatPrice } from "@/shared/helpers/format-price";
 
 export async function initHeader() {
   initMenu();
@@ -103,9 +103,7 @@ function initMiniCart() {
     const cartCount = selectCartCount(newState);
     const cartTotalSum = selectCartTotalSum(newState);
 
-    console.log("header mini cart: cartViewsItems", cartViewItems);
-
-    miniCart.update({ items: cartViewItems });
+    miniCart.update({ items: cartViewItems, totalSum: cartTotalSum });
     countContainer.textContent = cartCount;
     totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
   });
