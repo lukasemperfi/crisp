@@ -56,9 +56,10 @@ export function CartOrderSummary(props) {
 
         let currentCountry = "";
         let currentRegion = "";
+        const SUBTOTAL = 120.0;
 
         const shippingContainer = el.querySelector(
-          ".order-summary__block_shipping-estimate"
+          ".order-summary__block_shipping-estimate",
         );
         const shippingAccordion = Accordion2({
           items: [
@@ -72,19 +73,11 @@ export function CartOrderSummary(props) {
         });
         shippingContainer.append(shippingAccordion);
 
-        const countryControl = el.querySelector(
-          ".shipping-estimate__control_country"
-        );
-        const stateControl = el.querySelector(
-          ".shipping-estimate__control_state"
-        );
-
         const countryDropdown = Dropdown({
           name: "country",
           placeholder: "Select country",
           options: countries,
         });
-
         const stateDropdown = Dropdown({
           name: "state",
           placeholder: "Select state",
@@ -92,49 +85,69 @@ export function CartOrderSummary(props) {
           disabled: true,
         });
 
-        countryControl.append(countryDropdown);
-        stateControl.append(stateDropdown);
+        el.querySelector(".shipping-estimate__control_country").append(
+          countryDropdown,
+        );
+        el.querySelector(".shipping-estimate__control_state").append(
+          stateDropdown,
+        );
 
-        const updateTaxes = () => {
+        const calculateTotals = (rule) => {
           const taxEl = el.querySelector(".js-tax-value");
           const totalEl = el.querySelector(".js-total-value");
-          const flatLabel = el.querySelector('label[for="shipping-flat"]');
-          const bestLabel = el.querySelector('label[for="shipping-best"]');
-          const radioInputs = el.querySelectorAll('input[name="shipping"]');
 
-          const subtotal = 120.0;
-
-          if (currentCountry && currentRegion) {
-            const rule = shippingTaxRules[currentCountry]?.[currentRegion];
-
-            if (rule) {
-              radioInputs.forEach((input) => (input.disabled = false));
-
-              flatLabel.textContent = `Fixed ${rule.flatRate.toFixed(2)} EUR`;
-              bestLabel.textContent = `Table Rate ${rule.bestWay.toFixed(
-                2
-              )} EUR`;
-
-              const selectedMethod = el.querySelector(
-                'input[name="shipping"]:checked'
-              )?.id;
-              const currentTax =
-                selectedMethod === "shipping-flat"
-                  ? rule.flatRate
-                  : rule.bestWay;
-
-              taxEl.textContent = `${currentTax.toFixed(2)} EUR`;
-              totalEl.textContent = `${(subtotal + currentTax).toFixed(2)} EUR`;
-              return;
-            }
+          if (!rule) {
+            taxEl.textContent = "0.00 EUR";
+            totalEl.textContent = `${SUBTOTAL.toFixed(2)} EUR`;
+            return;
           }
 
-          radioInputs.forEach((input) => (input.disabled = true));
+          const selectedInput = el.querySelector(
+            'input[name="shipping"]:checked',
+          );
+          const taxValue =
+            selectedInput?.id === "shipping-flat"
+              ? rule.flatRate
+              : rule.bestWay;
 
-          flatLabel.textContent = "Fixed 0.00 EUR";
-          bestLabel.textContent = "Table Rate 0.00 EUR";
-          taxEl.textContent = "0.00 EUR";
-          totalEl.textContent = `${subtotal.toFixed(2)} EUR`;
+          taxEl.textContent = `${taxValue.toFixed(2)} EUR`;
+          totalEl.textContent = `${(SUBTOTAL + taxValue).toFixed(2)} EUR`;
+        };
+
+        const updateMethodLabels = (rule) => {
+          const flatLabel = el.querySelector('label[for="shipping-flat"]');
+          const bestLabel = el.querySelector('label[for="shipping-best"]');
+
+          if (rule) {
+            flatLabel.textContent = `Fixed ${rule.flatRate.toFixed(2)} EUR`;
+            bestLabel.textContent = `Table Rate ${rule.bestWay.toFixed(2)} EUR`;
+          } else {
+            flatLabel.textContent = "Fixed 0.00 EUR";
+            bestLabel.textContent = "Table Rate 0.00 EUR";
+          }
+        };
+
+        const updateTaxes = (forceFirstChecked = false) => {
+          const radioInputs = el.querySelectorAll('input[name="shipping"]');
+          const rule = shippingTaxRules[currentCountry]?.[currentRegion];
+
+          if (currentCountry && currentRegion && rule) {
+            radioInputs.forEach((input) => (input.disabled = false));
+
+            if (forceFirstChecked) {
+              radioInputs[0].checked = true;
+            }
+
+            updateMethodLabels(rule);
+            calculateTotals(rule);
+          } else {
+            radioInputs.forEach((input) => {
+              input.disabled = true;
+              input.checked = false;
+            });
+            updateMethodLabels(null);
+            calculateTotals(null);
+          }
         };
 
         countryDropdown.addEventListener("onChange", (event) => {
@@ -153,12 +166,13 @@ export function CartOrderSummary(props) {
 
         stateDropdown.addEventListener("onChange", (event) => {
           currentRegion = event.detail;
-          updateTaxes();
+          updateTaxes(true);
         });
 
         el.addEventListener("change", (event) => {
           if (event.target.name === "shipping") {
-            updateTaxes();
+            const rule = shippingTaxRules[currentCountry]?.[currentRegion];
+            calculateTotals(rule);
           }
         });
 
