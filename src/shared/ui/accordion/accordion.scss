@@ -8,6 +8,7 @@
 
       .accordion__content {
         grid-template-rows: 1fr;
+        overflow: initial;
       }
     }
   }

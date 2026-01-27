@@ -157,6 +157,11 @@
       text-transform: none;
     }
   }
+
+  .dropdown_is-open .dropdown__icon path {
+    stroke: var(--black-2);
+  }
+
   .form-field__input {
     color: var(--black-2);
   }

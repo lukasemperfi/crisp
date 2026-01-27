@@ -1,3 +1,19 @@
+export const shippingTaxRules = {
+  UA: {
+    "kyiv-oblast": { flatRate: 5.0, bestWay: 10.0 },
+    lviv: { flatRate: 7.0, bestWay: 12.0 },
+    odesa: { flatRate: 6.0, bestWay: 11.0 },
+  },
+  PL: {
+    mazowieckie: { flatRate: 10.0, bestWay: 20.0 },
+    malopolskie: { flatRate: 12.0, bestWay: 22.0 },
+  },
+  DE: {
+    bayern: { flatRate: 15.0, bestWay: 25.0 },
+    berlin: { flatRate: 13.0, bestWay: 23.0 },
+  },
+};
+
 export const countries = [
   { id: 1, value: "UA", label: "Украина" },
   { id: 5, value: "BE", label: "Бельгия" },

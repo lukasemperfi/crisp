@@ -2,7 +2,11 @@ import { createComponent } from "@/shared/lib/core/core";
 import { FormField } from "../../../../shared/ui/form-field/form-field";
 import { Accordion2 } from "../../../../shared/ui/accordion/accordion";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
-import { countries, regionsByCountry } from "../../../../shared/lib/location";
+import {
+  countries,
+  regionsByCountry,
+  shippingTaxRules,
+} from "../../../../shared/lib/location";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
@@ -21,11 +25,9 @@ export function CartOrderSummary(props) {
                   inputProps: { placeholder: "Enter discount code" },
                   withButton: true,
                   buttonText: `<span class="order-summary__discount-button mobile">Apply</span><span class="order-summary__discount-button desktop">Apply Discount</span>`,
-                  messageText: "Some error",
                 }).toHTML()}
               </div>
             </div>
-
             <div class="order-summary__block order-summary__block_shipping-estimate"></div>
           </div>
 
@@ -35,42 +37,30 @@ export function CartOrderSummary(props) {
                 <span>Subtotal</span>
                 <span>120.00 EUR</span>
               </div>
-        
-              <div class="order-summary__row order-summary__subtitle  order-summary__row_muted">
+              <div class="order-summary__row order-summary__subtitle order-summary__row_muted">
                 <span>Tax</span>
-                <span>0.00 EUR</span>
+                <span class="js-tax-value">0.00 EUR</span>
               </div>
-        
               <div class="order-summary__row order-summary__row--total order-summary__title">
                 <span>Order Total</span>
-                <span>120.00 EUR</span>
+                <span class="js-total-value">120.00 EUR</span>
               </div>
             </div>
-
             <div class="order-summary__divider"></div>
-        
-
             <div class="order-summary__actions">
-                <button class="button order-summary__link order-summary__link_muted">
-                  Check Out with Multiple Addresses
-                </button>
-            
-                <button class="order-summary__cta button button_solid button_black">
-                  Proceed to checkout
-                </button>           
+                <button class="button order-summary__link order-summary__link_muted">Check Out with Multiple Addresses</button>
+                <button class="order-summary__cta button button_solid button_black">Proceed to checkout</button>          
+            </div>
           </div>
-          
-
-
         `;
 
-        el._els = {
-          shippingContainer: el.querySelector(
-            ".order-summary__block_shipping-estimate"
-          ),
-        };
+        let currentCountry = "";
+        let currentRegion = "";
 
-        el._els.shippingAccordion = Accordion2({
+        const shippingContainer = el.querySelector(
+          ".order-summary__block_shipping-estimate"
+        );
+        const shippingAccordion = Accordion2({
           items: [
             {
               title: "Estimate Shipping and Tax",
@@ -80,8 +70,7 @@ export function CartOrderSummary(props) {
           ],
           isSingleOpen: true,
         });
-
-        el._els.shippingContainer.append(el._els.shippingAccordion);
+        shippingContainer.append(shippingAccordion);
 
         const countryControl = el.querySelector(
           ".shipping-estimate__control_country"
@@ -106,88 +95,109 @@ export function CartOrderSummary(props) {
         countryControl.append(countryDropdown);
         stateControl.append(stateDropdown);
 
+        const updateTaxes = () => {
+          const taxEl = el.querySelector(".js-tax-value");
+          const totalEl = el.querySelector(".js-total-value");
+          const flatLabel = el.querySelector('label[for="shipping-flat"]');
+          const bestLabel = el.querySelector('label[for="shipping-best"]');
+          const radioInputs = el.querySelectorAll('input[name="shipping"]');
+
+          const subtotal = 120.0;
+
+          if (currentCountry && currentRegion) {
+            const rule = shippingTaxRules[currentCountry]?.[currentRegion];
+
+            if (rule) {
+              radioInputs.forEach((input) => (input.disabled = false));
+
+              flatLabel.textContent = `Fixed ${rule.flatRate.toFixed(2)} EUR`;
+              bestLabel.textContent = `Table Rate ${rule.bestWay.toFixed(
+                2
+              )} EUR`;
+
+              const selectedMethod = el.querySelector(
+                'input[name="shipping"]:checked'
+              )?.id;
+              const currentTax =
+                selectedMethod === "shipping-flat"
+                  ? rule.flatRate
+                  : rule.bestWay;
+
+              taxEl.textContent = `${currentTax.toFixed(2)} EUR`;
+              totalEl.textContent = `${(subtotal + currentTax).toFixed(2)} EUR`;
+              return;
+            }
+          }
+
+          radioInputs.forEach((input) => (input.disabled = true));
+
+          flatLabel.textContent = "Fixed 0.00 EUR";
+          bestLabel.textContent = "Table Rate 0.00 EUR";
+          taxEl.textContent = "0.00 EUR";
+          totalEl.textContent = `${subtotal.toFixed(2)} EUR`;
+        };
+
         countryDropdown.addEventListener("onChange", (event) => {
-          const country = event.detail;
-          console.log("contry change");
+          currentCountry = event.detail;
+          currentRegion = "";
+
+          const regions = regionsByCountry[currentCountry] || [];
           stateDropdown.update({
-            options: regionsByCountry[country],
-            disabled: false,
+            options: regions,
+            disabled: regions.length === 0,
+            defaultValue: "",
           });
+
+          updateTaxes();
         });
+
+        stateDropdown.addEventListener("onChange", (event) => {
+          currentRegion = event.detail;
+          updateTaxes();
+        });
+
+        el.addEventListener("change", (event) => {
+          if (event.target.name === "shipping") {
+            updateTaxes();
+          }
+        });
+
+        updateTaxes();
       }
     },
   });
 }
 
-const createShipingEstimateContent = () => {
+function createShipingEstimateContent() {
   return `
-        <div class="order-summary__shipping-estimate-content shipping-estimate">
-          <p class="shipping-estimate__description">
-            Enter your destination to get a shipping estimate.
-          </p>
+    <div class="shipping-estimate">
+      <div class="shipping-estimate__fields">
+        <div class="shipping-estimate__field">
+          <div class="shipping-estimate__label">Country *</div>
+          <div class="shipping-estimate__control_country"></div>
+        </div>
+        <div class="shipping-estimate__field">
+          <div class="shipping-estimate__label">State/Province *</div>
+          <div class="shipping-estimate__control_state"></div>
+        </div>
+      </div>
 
-          <div class="shipping-estimate__methods shipping-methods">
-            <div class="shipping-estimate__fields">
-              <div class="shipping-estimate__field">
-                <div class="shipping-estimate__label">
-                  Country <span class="shipping-estimate__required">*</span>
-                </div>
-                <div class="shipping-estimate__control_country"></div>
-              </div>
-
-              <div class="shipping-estimate__field">
-                <div class="shipping-estimate__label">
-                  State/Province <span class="shipping-estimate__required">*</span>
-                </div>
-                <div class="shipping-estimate__control_state"></div>
-              </div>
-
-              <div class="shipping-estimate__field">
-                <div class="shipping-estimate__label">
-                  Zip/Postal Code
-                </div>
-                <div class="shipping-estimate__control_postal-code">
-                  ${FormField().toHTML()}
-                </div>
-              </div>
-            </div>
-
-            <div class="shipping-methods__item shipping-methods__item_flat-rate">
-              <div class="shipping-methods__title order-summary__subtitle">
-                Flat Rate
-              </div>
-
-              <div class="shipping-methods__radio radio">
-                <input
-                  type="radio"
-                  id="shipping-flat"
-                  name="shipping"
-                  checked
-                />
-                <label for="shipping-flat" class="radio__label">
-                  Fixed 5.00 EUR
-                </label>
-              </div>
-            </div>
-
-            <div class="shipping-methods__item shipping-methods__item_best-way">
-              <div class="shipping-methods__title order-summary__subtitle">
-                Best Way
-              </div>
-
-              <div class="shipping-methods__radio radio">
-                <input
-                  type="radio"
-                  id="shipping-best"
-                  name="shipping"
-                />
-                <label for="shipping-best" class="radio__label">
-                  Table Rate 10.00 EUR
-                </label>
-              </div>
-            </div>
+      <div class="shipping-methods">
+        <div class="shipping-methods__item shipping-methods__item_flat-rate">
+          <div class="order-summary__subtitle shipping-methods__title">Flat Rate</div>
+          <div class="radio">
+            <input type="radio" id="shipping-flat" name="shipping" disabled />
+            <label for="shipping-flat" class="radio__label">Fixed 0.00 EUR</label>
           </div>
         </div>
-
+        <div class="shipping-methods__item">
+          <div class="order-summary__subtitle shipping-methods__title">Best Way</div>
+          <div class="radio">
+            <input type="radio" id="shipping-best" name="shipping" disabled />
+            <label for="shipping-best" class="radio__label">Table Rate 0.00 EUR</label>
+          </div>
+        </div>
+      </div>
+    </div>
   `;
-};
+}
