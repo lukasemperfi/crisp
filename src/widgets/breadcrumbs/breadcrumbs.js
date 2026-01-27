@@ -1,5 +1,6 @@
 const breadcrumbNames = {
   cart: "Shopping Cart",
+  registration: "Create New Customer Account",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
@@ -42,7 +43,7 @@ export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
           <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="${basePath}" name="breadcrumb-link" aria-label="Home">Home</a></li>
           ${parts
             .map((part, index) =>
-              createBreadcrumbItem(part, index === parts.length - 1)
+              createBreadcrumbItem(part, index === parts.length - 1),
             )
             .join("")}
         </ul>
