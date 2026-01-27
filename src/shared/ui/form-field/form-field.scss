@@ -1,8 +1,4 @@
 .form-field {
-  /* =========================
-     BASE ELEMENTS
-     ========================= */
-
   &__label {
     font-family: var(--second-family);
     font-size: 14px;
@@ -35,10 +31,6 @@
       box-shadow: inset 0 0 0 2px var(--divider);
     }
   }
-
-  /* =========================
-     MESSAGE (BASE)
-     ========================= */
 
   &__message {
     padding-inline: 17px;

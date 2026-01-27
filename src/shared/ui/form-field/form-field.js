@@ -6,6 +6,7 @@ export function FormField(initialProps) {
 
     render(el, props, emit, { runOnce }) {
       const {
+        label = "",
         messageText = "",
         buttonText = "",
         withButton = false,
@@ -18,17 +19,11 @@ export function FormField(initialProps) {
           .join(" ");
 
         el.innerHTML = `
-          <label class="form-field__label"></label>
+          <label class="form-field__label" for="${inputProps.id || ""}"></label>
 
           <div class="form-field__control">
             <input class="form-field__input" />
-            ${
-              withButton
-                ? `<button type="button" class="form-field__action">
-                     ${buttonText}
-                   </button>`
-                : ""
-            }
+            ${withButton ? `<button type="button" class="form-field__action">${buttonText}</button>` : ""}
           </div>
 
           <div class="form-field__message">
@@ -38,25 +33,23 @@ export function FormField(initialProps) {
         `;
 
         const input = el.querySelector(".form-field__input");
+        const labelEl = el.querySelector(".form-field__label");
 
         Object.entries(inputProps).forEach(([key, value]) => {
-          if (value === false || value == null) {
-            return;
-          }
-
-          if (value === true) {
-            input.setAttribute(key, "");
-          } else {
-            input.setAttribute(key, String(value));
-          }
+          if (value === false || value == null) return;
+          input.setAttribute(key, value === true ? "" : String(value));
         });
 
         el._els = {
           input,
+          label: labelEl,
           messageText: el.querySelector(".form-field__message-text"),
         };
       }
 
+      if (label !== undefined) {
+        el._els.label.textContent = label;
+      }
       if (messageText !== undefined) {
         el._els.messageText.textContent = messageText;
       }

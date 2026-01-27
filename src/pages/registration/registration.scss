@@ -9,6 +9,7 @@
 @use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
 @use "@/shared/ui/accordion/accordion.scss" as *;
 @use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/entities/auth/ui/registration-form/registration-form.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

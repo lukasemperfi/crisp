@@ -1,0 +1,16 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.registration-form {
+  .form-field {
+    display: flex;
+
+    &__label {
+      white-space: nowrap;
+    }
+
+    &__control {
+      width: 100%;
+    }
+  }
+}
