@@ -94,6 +94,13 @@
     color: var(--gray-1);
   }
 
+  &__link {
+    color: var(--gray-1);
+    &.button:disabled {
+      color: var(--gray-1);
+    }
+  }
+
   .shipping-estimate {
     padding-top: 12px;
 
@@ -164,6 +171,10 @@
 
   .form-field__input {
     color: var(--black-2);
+  }
+
+  .highlight-required {
+    color: var(--main-color-2);
   }
 }
 

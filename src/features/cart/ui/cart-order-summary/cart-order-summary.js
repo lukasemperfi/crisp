@@ -48,8 +48,8 @@ export function CartOrderSummary(props) {
             </div>
             <div class="order-summary__divider"></div>
             <div class="order-summary__actions">
-                <button class="button order-summary__link order-summary__link_muted">Check Out with Multiple Addresses</button>
-                <button class="order-summary__cta button button_solid button_black">Proceed to checkout</button>          
+                <button class="button order-summary__link js-summary-btn order-summary__link_muted ">Check Out with Multiple Addresses</button>
+                <button class="order-summary__cta button button_solid button_black js-summary-btn">Proceed to checkout</button>          
             </div>
           </div>
         `;
@@ -57,6 +57,8 @@ export function CartOrderSummary(props) {
         let currentCountry = "";
         let currentRegion = "";
         const SUBTOTAL = 120.0;
+
+        // --- Инициализация компонентов ---
 
         const shippingContainer = el.querySelector(
           ".order-summary__block_shipping-estimate",
@@ -92,6 +94,25 @@ export function CartOrderSummary(props) {
           stateDropdown,
         );
 
+        // --- Логические блоки ---
+
+        /**
+         * Валидация: Проверяет заполненность обязательных полей и блокирует/разблокирует кнопки
+         */
+        const validateForm = () => {
+          const mainButtons = el.querySelectorAll(".js-summary-btn");
+          const isValid = currentCountry !== "" && currentRegion !== "";
+
+          mainButtons.forEach((btn) => {
+            btn.disabled = !isValid;
+            // Добавляем визуальный класс для заблокированной кнопки, если нужно
+            btn.classList.toggle("button_disabled", !isValid);
+          });
+        };
+
+        /**
+         * Расчеты: Обновляет Tax и Order Total
+         */
         const calculateTotals = (rule) => {
           const taxEl = el.querySelector(".js-tax-value");
           const totalEl = el.querySelector(".js-total-value");
@@ -114,6 +135,9 @@ export function CartOrderSummary(props) {
           totalEl.textContent = `${(SUBTOTAL + taxValue).toFixed(2)} EUR`;
         };
 
+        /**
+         * UI Методы доставки: Обновление текста лейблов
+         */
         const updateMethodLabels = (rule) => {
           const flatLabel = el.querySelector('label[for="shipping-flat"]');
           const bestLabel = el.querySelector('label[for="shipping-best"]');
@@ -127,16 +151,16 @@ export function CartOrderSummary(props) {
           }
         };
 
+        /**
+         * Управление налогами и состоянием радиокнопок
+         */
         const updateTaxes = (forceFirstChecked = false) => {
           const radioInputs = el.querySelectorAll('input[name="shipping"]');
           const rule = shippingTaxRules[currentCountry]?.[currentRegion];
 
           if (currentCountry && currentRegion && rule) {
             radioInputs.forEach((input) => (input.disabled = false));
-
-            if (forceFirstChecked) {
-              radioInputs[0].checked = true;
-            }
+            if (forceFirstChecked) radioInputs[0].checked = true;
 
             updateMethodLabels(rule);
             calculateTotals(rule);
@@ -148,7 +172,11 @@ export function CartOrderSummary(props) {
             updateMethodLabels(null);
             calculateTotals(null);
           }
+
+          validateForm(); // Вызываем валидацию при каждом обновлении данных
         };
+
+        // --- Обработчики событий ---
 
         countryDropdown.addEventListener("onChange", (event) => {
           currentCountry = event.detail;
@@ -176,6 +204,7 @@ export function CartOrderSummary(props) {
           }
         });
 
+        // Начальное состояние
         updateTaxes();
       }
     },
@@ -187,12 +216,18 @@ function createShipingEstimateContent() {
     <div class="shipping-estimate">
       <div class="shipping-estimate__fields">
         <div class="shipping-estimate__field">
-          <div class="shipping-estimate__label">Country *</div>
+          <div class="shipping-estimate__label">Country <span class="highlight-required">*</span></div>
           <div class="shipping-estimate__control_country"></div>
         </div>
         <div class="shipping-estimate__field">
-          <div class="shipping-estimate__label">State/Province *</div>
+          <div class="shipping-estimate__label">State/Province <span class="highlight-required">*</span></div>
           <div class="shipping-estimate__control_state"></div>
+        </div>
+        <div class="shipping-estimate__field">
+          <div class="shipping-estimate__label">Zip/Postal Code</div>
+          <div class="shipping-estimate__control_zip">
+            ${FormField().toHTML()}
+          </div>
         </div>
       </div>
 
