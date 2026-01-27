@@ -3,31 +3,39 @@ import { createComponent } from "@/shared/lib/core/core";
 export function Dropdown(props) {
   return createComponent(props, {
     tag: "div",
-    render(el, props, emit) {
+    render(el, props, emit, { runOnce }) {
       const {
         options = [],
         defaultValue = "",
         name = "",
         placeholder = "Не выбрано",
+        disabled = false, // Извлекаем disabled
       } = props;
 
-      el.className = "dropdown-wrapper";
+      el.className = `dropdown ${disabled ? "dropdown_is-disabled" : ""}`;
 
       el.innerHTML = `
-        <div class="dropdown">
-          <select class="dropdown__native" ${name ? `name="${name}"` : ""}>
+          <select 
+            class="dropdown__native" 
+            ${name ? `name="${name}"` : ""} 
+            ${disabled ? "disabled" : ""}
+          >
             <option value="">${placeholder}</option>
             ${options
               .map(
                 (o) =>
-                  `<option value="${o.value}" ${o.disabled ? "disabled" : ""}>${
-                    o.label
-                  }</option>`
+                  `<option value="${o.value}" ${o.disabled ? "disabled" : ""}>
+                    ${o.label}
+                  </option>`
               )
               .join("")}
           </select>
 
-          <button type="button" class="dropdown__trigger">
+          <button 
+            type="button" 
+            class="dropdown__trigger" 
+            ${disabled ? "disabled" : ""}
+          >
             <span class="dropdown__value"></span>
             ${createArrowIcon("dropdown__icon")}
           </button>
@@ -40,21 +48,18 @@ export function Dropdown(props) {
                 type="button"
                 class="dropdown__option ${
                   o.disabled ? "dropdown__option_is-disabled" : ""
-                } ${
-                  o.value === defaultValue ? "dropdown__option_selected" : ""
-                }"
+                } 
+                ${o.value === defaultValue ? "dropdown__option_selected" : ""}"
                 data-value="${o.value}"
-                ${o.disabled ? "disabled" : ""}
+                ${o.disabled || disabled ? "disabled" : ""}
               >
                 ${o.label}
               </button>`
               )
               .join("")}
           </div>
-        </div>
       `;
 
-      const dropdown = el.querySelector(".dropdown");
       const nativeSelect = el.querySelector(".dropdown__native");
       const trigger = el.querySelector(".dropdown__trigger");
       const valueEl = el.querySelector(".dropdown__value");
@@ -64,19 +69,26 @@ export function Dropdown(props) {
       let isOpen = false;
 
       const open = () => {
+        if (disabled) return; // Защита от открытия
         isOpen = true;
-        dropdown.classList.add("dropdown_is-open");
+        el.classList.add("dropdown_is-open");
       };
 
       const close = () => {
         isOpen = false;
-        dropdown.classList.remove("dropdown_is-open");
+        el.classList.remove("dropdown_is-open");
       };
 
       const toggle = () => (isOpen ? close() : open());
 
-      const getLabelByValue = (val) =>
-        options.find((o) => o.value == val)?.label ?? placeholder;
+      const getLabelByValue = (val) => {
+        const currentOptions = props.options || [];
+        return (
+          currentOptions.find((o) => o.value == val)?.label ??
+          props.placeholder ??
+          "Не выбрано"
+        );
+      };
 
       const highlightSelected = (val) => {
         optionButtons.forEach((btn) => {
@@ -107,6 +119,7 @@ export function Dropdown(props) {
         trigger.classList.add("dropdown__trigger_is-empty");
       }
 
+      // Слушатели событий
       trigger.addEventListener("click", toggle);
 
       menu.addEventListener("click", (e) => {
@@ -121,7 +134,7 @@ export function Dropdown(props) {
       });
 
       document.addEventListener("click", (e) => {
-        if (!dropdown.contains(e.target)) close();
+        if (!el.contains(e.target)) close();
       });
     },
   });

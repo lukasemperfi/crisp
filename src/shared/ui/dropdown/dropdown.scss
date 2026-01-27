@@ -110,4 +110,20 @@
       }
     }
   }
+
+  &_is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .dropdown__trigger {
+      background-color: #f9f9f9;
+    }
+
+    .dropdown__trigger,
+    .dropdown__value,
+    .dropdown__icon,
+    .dropdown__menu {
+      pointer-events: none;
+    }
+  }
 }

@@ -2,16 +2,7 @@ import { createComponent } from "@/shared/lib/core/core";
 import { FormField } from "../../../../shared/ui/form-field/form-field";
 import { Accordion2 } from "../../../../shared/ui/accordion/accordion";
 import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
-
-const COUNTRY_OPTIONS = [
-  { value: "us", label: "United States" },
-  { value: "ca", label: "Canada" },
-];
-
-const STATE_OPTIONS = [
-  { value: "al", label: "Alaska" },
-  { value: "ny", label: "New York" },
-];
+import { countries, regionsByCountry } from "../../../../shared/lib/location";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
@@ -99,31 +90,30 @@ export function CartOrderSummary(props) {
           ".shipping-estimate__control_state"
         );
 
-        if (countryControl) {
-          countryControl.append(
-            Dropdown({
-              name: "country",
-              placeholder: "Select country",
-              options: [
-                { value: "us", label: "United States" },
-                { value: "ca", label: "Canada" },
-              ],
-            })
-          );
-        }
+        const countryDropdown = Dropdown({
+          name: "country",
+          placeholder: "Select country",
+          options: countries,
+        });
 
-        if (stateControl) {
-          stateControl.append(
-            Dropdown({
-              name: "state",
-              placeholder: "Select state",
-              options: [
-                { value: "al", label: "Alaska" },
-                { value: "ny", label: "New York" },
-              ],
-            })
-          );
-        }
+        const stateDropdown = Dropdown({
+          name: "state",
+          placeholder: "Select state",
+          options: [],
+          disabled: true,
+        });
+
+        countryControl.append(countryDropdown);
+        stateControl.append(stateDropdown);
+
+        countryDropdown.addEventListener("onChange", (event) => {
+          const country = event.detail;
+          console.log("contry change");
+          stateDropdown.update({
+            options: regionsByCountry[country],
+            disabled: false,
+          });
+        });
       }
     },
   });
