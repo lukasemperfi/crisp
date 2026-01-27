@@ -28,15 +28,7 @@
   }
 
   &__content {
-    display: flex;
-    gap: 71px;
-
-    @include mixins.respond-to($bp-tablet) {
-      flex-direction: column;
-      margin-inline: auto;
-      max-width: 1000px;
-      gap: functions.fluidValue(32px, 71px, 320px, $bp-tablet);
-    }
+    border: 1px solid var(--divider);
   }
 
   &__breadcrumbs {
