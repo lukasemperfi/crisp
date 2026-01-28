@@ -156,6 +156,8 @@ export function RegistrationForm(props) {
 
         validator.onSuccess(() => {
           const formData = Object.fromEntries(new FormData(el));
+
+          formData.isSubscribed = !!formData.isSubscribed;
           onSubmit?.(formData);
         });
 

@@ -77,9 +77,88 @@
     justify-content: center;
     padding-top: 95px;
     padding-bottom: 123px;
+
+    @include mixins.respond-to(sm) {
+      border: none;
+      padding-top: functions.fluidValue(15px, 95px, 320px, 1920px);
+      padding-bottom: functions.fluidValue(15px, 123px, 320px, 1920px);
+    }
   }
   .registration-form {
     max-width: 606px;
+
+    &__section_personal {
+      @include mixins.respond-to(sm) {
+        margin-bottom: functions.fluidValue(31px, 48px, 320px, 1920px);
+      }
+    }
+
+    &__title {
+      @include mixins.respond-to(sm) {
+        font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: functions.fluidValue(9px, 32px, 320px, 1920px);
+      }
+    }
+
+    &__fields-container {
+      @include mixins.respond-to(sm) {
+        gap: 8px;
+      }
+    }
+
+    .form-field {
+      @include mixins.respond-to(sm) {
+        display: flex;
+        flex-direction: column;
+      }
+      &__label {
+        @include mixins.respond-to(sm) {
+          flex: 1;
+          font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
+          margin-bottom: 6px;
+        }
+      }
+      &__control {
+        @include mixins.respond-to(sm) {
+          flex: 1;
+        }
+      }
+
+      &__input {
+        @include mixins.respond-to(sm) {
+          font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
+          padding-block: 10px;
+        }
+        &::placeholder {
+          @include mixins.respond-to(sm) {
+            font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
+          }
+        }
+      }
+    }
+
+    &__actions {
+      @include mixins.respond-to(sm) {
+        margin-top: functions.fluidValue(26px, 65px, 320px, 1920px);
+      }
+    }
+
+    &__btn-submit,
+    &__btn-back {
+      @include mixins.respond-to(sm) {
+        padding-block: 8px;
+        padding-inline: 15px;
+        font-size: 12px;
+      }
+    }
+
+    .checkbox__text {
+      @include mixins.respond-to(sm) {
+        font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
+      }
+    }
   }
 }
 
