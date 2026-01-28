@@ -7,6 +7,7 @@ import {
 } from "../../features/cart/model/cart-slice";
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Modal } from "../../shared/ui/modal/modal";
+import { LoginForm } from "../../entities/auth/ui/login-form/login-form";
 
 export async function initHeader() {
   initMenu();
@@ -111,8 +112,13 @@ function initMiniCart() {
 }
 
 function initLoginModal() {
+  const loginForm = LoginForm({
+    onSubmit: (data) => console.log("Success:", data),
+  });
   const myModal = Modal({
     isOpen: false,
+    content: loginForm,
+    className: "login-modal",
   });
   const loginBtn = document.querySelector(".auth__login");
 
@@ -125,7 +131,6 @@ function initLoginModal() {
   loginBtn.addEventListener("click", () => {
     myModal.update({
       isOpen: true,
-      content: "cartView",
     });
   });
 }

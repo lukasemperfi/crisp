@@ -6,7 +6,7 @@ export function FormField(initialProps) {
 
     render(el, props, emit, { runOnce }) {
       const {
-        label = "",
+        label = null,
         messageText = "",
         buttonText = "",
         withButton = false,
@@ -19,7 +19,13 @@ export function FormField(initialProps) {
           .join(" ");
 
         el.innerHTML = `
-          <label class="form-field__label" for="${inputProps.id || ""}"></label>
+          ${
+            label !== null
+              ? `<label class="form-field__label" for="${
+                  inputProps.id || ""
+                }"></label>`
+              : ""
+          }
 
           <div class="form-field__control">
             <input class="form-field__input" />
@@ -50,7 +56,7 @@ export function FormField(initialProps) {
         };
       }
 
-      if (label !== undefined) {
+      if (label !== null) {
         el._els.label.innerHTML = label;
       }
       if (messageText !== undefined) {

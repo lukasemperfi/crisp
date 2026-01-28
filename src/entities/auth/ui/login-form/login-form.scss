@@ -1,0 +1,88 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.login-form {
+  width: 100%;
+
+  &__section {
+    &_personal {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 38px;
+    text-transform: uppercase;
+  }
+
+  &__fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    gap: 15px;
+  }
+
+  &__btn-registration.button,
+  &__btn-login.button {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    padding-block: 12.5px;
+    width: 100%;
+  }
+
+  &__btn-registration {
+    border: 2px solid var(--black);
+  }
+
+  &__btn-login {
+  }
+
+  .form-field {
+    display: flex;
+
+    &__label {
+      white-space: nowrap;
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--black-2);
+      flex: 1 1 163px;
+      margin-top: 5px;
+      display: flex;
+      gap: 7px;
+    }
+
+    &__control {
+      width: 100%;
+      flex: 1 1 443px;
+    }
+  }
+
+  .checkbox {
+    &__box {
+      align-self: flex-start;
+      margin-top: 3px;
+    }
+
+    &__text {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--gray-1);
+    }
+  }
+}

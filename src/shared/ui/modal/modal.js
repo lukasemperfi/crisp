@@ -11,10 +11,15 @@ export function Modal(props) {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { isOpen = false, content = "", size = "md" } = props;
+      const {
+        isOpen = false,
+        content = "",
+        size = "md",
+        className = "",
+      } = props;
 
       if (runOnce) {
-        el.className = "modal";
+        el.className = `modal ${className}`.trim();
 
         el.innerHTML = `
           <div class="modal__overlay">

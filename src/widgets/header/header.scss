@@ -2,7 +2,10 @@
 @use "@/app/styles/variables" as variables;
 @use "@/app/styles/functions" as functions;
 @use "@/features/cart/ui/mini-cart/mini-cart.scss" as *;
+@use "@/entities/auth/ui/login-form/login-form.scss" as *;
 @use "@/shared/ui/modal/modal.scss" as *;
+@use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/shared/ui/checkbox/checkbox.scss" as *;
 
 .header {
   $mobile-bp: 600px;
@@ -408,6 +411,43 @@
 body:has(.cart-item__popover:popover-open) {
   @include mixins.respond-to(765px) {
     overflow: hidden;
+  }
+}
+
+.login-modal {
+  .modal {
+    &__overlay {
+      @include mixins.respond-to(sm) {
+        padding: 0;
+      }
+    }
+
+    &__window {
+      @include mixins.respond-to(sm) {
+        width: 100vw;
+        height: 100%;
+        max-height: 100%;
+        max-width: 100%;
+      }
+
+      &_open {
+        @include mixins.respond-to(sm) {
+          .modal__window {
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+    &__content {
+      padding-inline: 30px;
+      padding-bottom: 30px;
+    }
+
+    &__header {
+      padding-inline: 26px;
+      padding-top: 41px;
+      padding-bottom: 30px;
+    }
   }
 }
 
