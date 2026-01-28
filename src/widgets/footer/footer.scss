@@ -4,7 +4,7 @@
 .page-footer {
   $bp-tablet: 1190px;
   $bp-mobile: 500px;
-
+  background-color: var(--black);
   .page-footer__container {
     background-color: var(--black);
     color: var(--white);
@@ -113,7 +113,9 @@
           display: grid;
           grid-template-rows: 0fr;
           overflow: hidden;
-          transition: grid-template-rows 0.3s ease, padding 0.3s ease;
+          transition:
+            grid-template-rows 0.3s ease,
+            padding 0.3s ease;
 
           & > * {
             min-height: 0;
