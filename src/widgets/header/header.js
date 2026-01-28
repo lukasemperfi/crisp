@@ -6,13 +6,14 @@ import {
   selectCartTotalSum,
 } from "../../features/cart/model/cart-slice";
 import { formatPrice } from "@/shared/helpers/format-price";
+import { Modal } from "../../shared/ui/modal/modal";
 
 export async function initHeader() {
   initMenu();
   initResizeHandler();
   initActiveLink(".nav-menu__link");
-
   initMiniCart();
+  initLoginModal();
 
   observeHeaderHeight();
 }
@@ -106,5 +107,25 @@ function initMiniCart() {
     miniCart.update({ items: cartViewItems, totalSum: cartTotalSum });
     countContainer.textContent = cartCount;
     totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
+  });
+}
+
+function initLoginModal() {
+  const myModal = Modal({
+    isOpen: false,
+  });
+  const loginBtn = document.querySelector(".auth__login");
+
+  document.body.appendChild(myModal);
+
+  myModal.addEventListener("close", () => {
+    myModal.update({ isOpen: false });
+  });
+
+  loginBtn.addEventListener("click", () => {
+    myModal.update({
+      isOpen: true,
+      content: "cartView",
+    });
   });
 }

@@ -10,7 +10,6 @@ export function MiniCart(props) {
 
     render(el, props, emit, { runOnce }) {
       const { items = [], totalSum = 0 } = props;
-      console.log("from comp", totalSum);
 
       if (runOnce) {
         el.className = "mini-cart";

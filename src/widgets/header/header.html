@@ -53,9 +53,9 @@
 
 {%macro auth(class="", baseUrl="/")%}
 <div class="auth {{class}}">
-    <a href="{{baseUrl}}login/" class="auth__login" name="login" aria-label="SIGN IN">
+    <button class="auth__login" name="login" aria-label="SIGN IN">
         <span class="auth__link">SIGN IN</span>
-    </a>
+    </button>
     <a href="{{baseUrl}}registration/" class="auth__link" name="registration" aria-label="CREATE AN ACCOUNT">CREATE AN
         ACCOUNT</a>
 </div>

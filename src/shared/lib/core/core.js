@@ -38,24 +38,3 @@ export function createComponent(initialProps, { tag = "div", create, render }) {
 
   return el;
 }
-
-export function createSlot({ content, className = "" }) {
-  const el = document.createElement("div");
-  if (className) el.className = className;
-
-  if (content instanceof HTMLElement) {
-    el.append(content);
-  } else if (Array.isArray(content)) {
-    content.forEach((c) => {
-      if (c instanceof HTMLElement) {
-        el.append(c);
-      } else {
-        el.insertAdjacentHTML("beforeend", c);
-      }
-    });
-  } else {
-    el.innerHTML = content || "";
-  }
-
-  return el;
-}
