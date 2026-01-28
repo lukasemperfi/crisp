@@ -90,24 +90,25 @@ export function RegistrationForm(props) {
         el.querySelector('[data-group="personal"]').append(
           fields.firstName,
           fields.lastName,
-          fields.newsletter
+          fields.newsletter,
         );
 
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.confirmPassword
+          fields.confirmPassword,
         );
 
         const validator = new JustValidate(el, {
           errorLabelStyle: undefined,
           errorsContainer: ".form-field__message-text",
+          validateBeforeSubmitting: true,
         });
 
         const addValidatedField = (fieldComponent, id, rules) => {
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text"
+              ".form-field__message-text",
             ),
           });
         };
@@ -118,6 +119,7 @@ export function RegistrationForm(props) {
         addValidatedField(fields.lastName, "#reg-ln", [
           { rule: "required", errorMessage: "Last name is required" },
         ]);
+
         addValidatedField(fields.email, "#reg-email", [
           { rule: "required", errorMessage: "Email is required" },
           { rule: "email", errorMessage: "Email is invalid" },
@@ -159,7 +161,7 @@ export function RegistrationForm(props) {
 
         el.querySelector(".registration-form__btn-back").addEventListener(
           "click",
-          () => onBack?.()
+          () => onBack?.(),
         );
 
         el._els = { validator };

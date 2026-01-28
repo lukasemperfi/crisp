@@ -2,6 +2,7 @@ import { initHeader } from "@/widgets/header/header.js";
 import { initPageFooter } from "@/widgets/footer/footer.js";
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { RegistrationForm } from "../../entities/auth/ui/registration-form/registration-form";
+import { baseUrl } from "../../shared/helpers/base-url";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
@@ -9,7 +10,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const form = RegistrationForm({
     onSubmit: (data) => console.log("Success:", data),
-    onBack: () => console.log("Go back clicked"),
+    onBack: () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = baseUrl;
+      }
+    },
   });
 
   const contentEl = document.querySelector(".registration-page__content");
