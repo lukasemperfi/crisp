@@ -2,15 +2,83 @@
 @use "@/app/styles/functions" as functions;
 
 .registration-form {
+  width: 100%;
+
+  &__section {
+    &_personal {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 32px;
+  }
+
+  &__fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 65px;
+  }
+
+  &__btn-submit {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--white);
+    padding-inline: 73px;
+    padding-block: 15px;
+  }
+
+  &__btn-back {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--gray-1);
+    padding-inline: 0;
+  }
+
   .form-field {
     display: flex;
 
     &__label {
       white-space: nowrap;
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--black-2);
+      flex: 1 1 163px;
+      margin-top: 5px;
+      display: flex;
+      gap: 7px;
     }
 
     &__control {
       width: 100%;
+      flex: 1 1 443px;
     }
+  }
+
+  .checkbox__text {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+
+    color: var(--gray-1);
   }
 }

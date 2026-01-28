@@ -32,6 +32,10 @@
     }
   }
 
+  .highlight-required {
+    color: var(--main-color-2);
+  }
+
   &__message {
     padding-inline: 17px;
     padding-block: 6px;

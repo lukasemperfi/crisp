@@ -58,10 +58,8 @@ export function CartOrderSummary(props) {
         let currentRegion = "";
         const SUBTOTAL = 120.0;
 
-        // --- Инициализация компонентов ---
-
         const shippingContainer = el.querySelector(
-          ".order-summary__block_shipping-estimate",
+          ".order-summary__block_shipping-estimate"
         );
         const shippingAccordion = Accordion2({
           items: [
@@ -88,31 +86,22 @@ export function CartOrderSummary(props) {
         });
 
         el.querySelector(".shipping-estimate__control_country").append(
-          countryDropdown,
+          countryDropdown
         );
         el.querySelector(".shipping-estimate__control_state").append(
-          stateDropdown,
+          stateDropdown
         );
 
-        // --- Логические блоки ---
-
-        /**
-         * Валидация: Проверяет заполненность обязательных полей и блокирует/разблокирует кнопки
-         */
         const validateForm = () => {
           const mainButtons = el.querySelectorAll(".js-summary-btn");
           const isValid = currentCountry !== "" && currentRegion !== "";
 
           mainButtons.forEach((btn) => {
             btn.disabled = !isValid;
-            // Добавляем визуальный класс для заблокированной кнопки, если нужно
             btn.classList.toggle("button_disabled", !isValid);
           });
         };
 
-        /**
-         * Расчеты: Обновляет Tax и Order Total
-         */
         const calculateTotals = (rule) => {
           const taxEl = el.querySelector(".js-tax-value");
           const totalEl = el.querySelector(".js-total-value");
@@ -124,7 +113,7 @@ export function CartOrderSummary(props) {
           }
 
           const selectedInput = el.querySelector(
-            'input[name="shipping"]:checked',
+            'input[name="shipping"]:checked'
           );
           const taxValue =
             selectedInput?.id === "shipping-flat"
@@ -135,9 +124,6 @@ export function CartOrderSummary(props) {
           totalEl.textContent = `${(SUBTOTAL + taxValue).toFixed(2)} EUR`;
         };
 
-        /**
-         * UI Методы доставки: Обновление текста лейблов
-         */
         const updateMethodLabels = (rule) => {
           const flatLabel = el.querySelector('label[for="shipping-flat"]');
           const bestLabel = el.querySelector('label[for="shipping-best"]');
@@ -151,9 +137,6 @@ export function CartOrderSummary(props) {
           }
         };
 
-        /**
-         * Управление налогами и состоянием радиокнопок
-         */
         const updateTaxes = (forceFirstChecked = false) => {
           const radioInputs = el.querySelectorAll('input[name="shipping"]');
           const rule = shippingTaxRules[currentCountry]?.[currentRegion];
@@ -173,10 +156,8 @@ export function CartOrderSummary(props) {
             calculateTotals(null);
           }
 
-          validateForm(); // Вызываем валидацию при каждом обновлении данных
+          validateForm();
         };
-
-        // --- Обработчики событий ---
 
         countryDropdown.addEventListener("onChange", (event) => {
           currentCountry = event.detail;
@@ -204,7 +185,6 @@ export function CartOrderSummary(props) {
           }
         });
 
-        // Начальное состояние
         updateTaxes();
       }
     },

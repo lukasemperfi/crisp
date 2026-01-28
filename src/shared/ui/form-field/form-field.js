@@ -23,7 +23,11 @@ export function FormField(initialProps) {
 
           <div class="form-field__control">
             <input class="form-field__input" />
-            ${withButton ? `<button type="button" class="form-field__action">${buttonText}</button>` : ""}
+            ${
+              withButton
+                ? `<button type="button" class="form-field__action">${buttonText}</button>`
+                : ""
+            }
           </div>
 
           <div class="form-field__message">
@@ -48,7 +52,7 @@ export function FormField(initialProps) {
       }
 
       if (label !== undefined) {
-        el._els.label.textContent = label;
+        el._els.label.innerHTML = label;
       }
       if (messageText !== undefined) {
         el._els.messageText.textContent = messageText;

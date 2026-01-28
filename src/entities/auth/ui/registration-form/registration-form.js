@@ -1,6 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
+import { Checkbox } from "../../../../shared/ui/checkbox/checkbox";
 
 export function RegistrationForm(props) {
   return createComponent(props, {
@@ -13,30 +14,25 @@ export function RegistrationForm(props) {
         el.className = "registration-form";
 
         el.innerHTML = `
-          <div class="form-section">
-            <h2 class="form-title">Personal Information</h2>
-            <div class="fields-container" data-group="personal"></div>
-            
-            <label class="checkbox-label">
-              <input type="checkbox" name="isSubscribed" />
-              Sign Up for Newsletter
-            </label>
+          <div class="registration-form__section registration-form__section_personal">
+            <h2 class="registration-form__title">Personal Information</h2>
+            <div class="registration-form__fields-container" data-group="personal"></div>
           </div>
 
-          <div class="form-section">
-            <h2 class="form-title">Sign In Information</h2>
-            <div class="fields-container" data-group="auth"></div>
+          <div class="registration-form__section">
+            <h2 class="registration-form__title">Sign In Information</h2>
+            <div class="registration-form__fields-container" data-group="auth"></div>
           </div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn-submit">Create an Account</button>
-            <button type="button" class="btn-back">Back</button>
+          <div class="registration-form__actions">
+            <button type="submit" class="registration-form__btn-submit button button_solid button_black">Create an Account</button>
+            <button type="button" class="registration-form__btn-back button">Back</button>
           </div>
         `;
 
         const fields = {
           firstName: FormField({
-            label: "First name *",
+            label: `First name <span class="highlight-required">*</span>`,
             inputProps: {
               name: "firstName",
               id: "reg-fn",
@@ -44,15 +40,22 @@ export function RegistrationForm(props) {
             },
           }),
           lastName: FormField({
-            label: "Last Name *",
+            label: `Last Name <span class="highlight-required">*</span>`,
             inputProps: {
               name: "lastName",
               id: "reg-ln",
               placeholder: "Enter your last name",
             },
           }),
+          newsletter: Checkbox({
+            label: "Sign Up for Newsletter",
+            inputProps: {
+              name: "isSubscribed",
+              id: "reg-newsletter",
+            },
+          }),
           email: FormField({
-            label: "Email *",
+            label: `Email <span class="highlight-required">*</span>`,
             inputProps: {
               name: "email",
               type: "email",
@@ -61,7 +64,7 @@ export function RegistrationForm(props) {
             },
           }),
           password: FormField({
-            label: "Password *",
+            label: `Password <span class="highlight-required">*</span>`,
             inputProps: {
               name: "password",
               type: "password",
@@ -70,7 +73,7 @@ export function RegistrationForm(props) {
             },
           }),
           confirmPassword: FormField({
-            label: "Confirm Password *",
+            label: `Confirm Password <span class="highlight-required">*</span>`,
             inputProps: {
               name: "confirmPassword",
               type: "password",
@@ -80,14 +83,17 @@ export function RegistrationForm(props) {
           }),
         };
 
-        el.querySelector('[data-group="personal"]').append(
+        const personalContainer = el.querySelector('[data-group="personal"]');
+        personalContainer.append(
           fields.firstName,
           fields.lastName,
+          fields.newsletter // Добавляем компонент чекбокса сюда
         );
+
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.confirmPassword,
+          fields.confirmPassword
         );
 
         const validator = new JustValidate(el, {
@@ -126,8 +132,9 @@ export function RegistrationForm(props) {
           onSubmit?.(formData);
         });
 
-        el.querySelector(".btn-back").addEventListener("click", () =>
-          onBack?.(),
+        el.querySelector(".registration-form__btn-back").addEventListener(
+          "click",
+          () => onBack?.()
         );
 
         el._els = { validator };

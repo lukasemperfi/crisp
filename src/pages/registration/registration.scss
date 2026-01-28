@@ -9,6 +9,7 @@
 @use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
 @use "@/shared/ui/accordion/accordion.scss" as *;
 @use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/shared/ui/checkbox/checkbox.scss" as *;
 @use "@/entities/auth/ui/registration-form/registration-form.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
@@ -26,10 +27,6 @@
 
   .page-container-1920 {
     max-width: 1496px;
-  }
-
-  &__content {
-    border: 1px solid var(--divider);
   }
 
   &__breadcrumbs {
@@ -60,12 +57,12 @@
     color: var(--black);
     line-height: 68px;
     padding-block: 11px;
-    margin-bottom: 56px;
+    margin-bottom: 23px;
 
     @include mixins.respond-to($bp-tablet) {
       font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
       line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
-      margin-bottom: functions.fluidValue(0px, 56px, 320px, $bp-tablet);
+      margin-bottom: functions.fluidValue(0px, 23px, 320px, $bp-tablet);
     }
 
     @include mixins.respond-to($bp-mobile) {
@@ -73,6 +70,16 @@
       padding-bottom: 15px;
       border-bottom: 1px solid var(--divider);
     }
+  }
+  &__content {
+    border: 1px solid var(--divider);
+    display: flex;
+    justify-content: center;
+    padding-top: 95px;
+    padding-bottom: 123px;
+  }
+  .registration-form {
+    max-width: 606px;
   }
 }
 

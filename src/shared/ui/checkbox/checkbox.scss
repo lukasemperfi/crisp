@@ -1,0 +1,63 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.checkbox {
+  display: flex;
+  align-items: baseline;
+  cursor: pointer;
+  user-select: none;
+  gap: 9px;
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  &__box {
+    border: 1px solid var(--gray-1);
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    margin-bottom: 5px;
+
+    &::after {
+      content: "";
+      display: block;
+      opacity: 0;
+      width: 6px;
+      height: 4px;
+      border: solid white;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(-45deg) scaleX(-1);
+      margin-top: -2px;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  &__label {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: clamp(10px, 0.25vw + 9.2px, 14px);
+    text-transform: uppercase;
+    color: var(--black-2);
+  }
+
+  &__input:checked + &__box {
+    background-color: var(--black);
+    border-color: var(--black);
+  }
+
+  &__input:checked + &__box::after {
+    opacity: 1;
+  }
+}
