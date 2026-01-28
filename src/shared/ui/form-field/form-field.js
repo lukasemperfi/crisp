@@ -28,11 +28,10 @@ export function FormField(initialProps) {
                 ? `<button type="button" class="form-field__action">${buttonText}</button>`
                 : ""
             }
-          </div>
-
-          <div class="form-field__message">
-            <span class="form-field__message-text"></span>
-            <span class="form-field__message-icon">X</span>
+            <div class="form-field__message">
+              <span class="form-field__message-text"></span>
+              <span class="form-field__message-icon">X</span>
+            </div>
           </div>
         `;
 

@@ -25,8 +25,12 @@ export function RegistrationForm(props) {
           </div>
 
           <div class="registration-form__actions">
-            <button type="submit" class="registration-form__btn-submit button button_solid button_black">Create an Account</button>
-            <button type="button" class="registration-form__btn-back button">Back</button>
+            <button type="submit" class="registration-form__btn-submit button button_solid button_black">
+              Create an Account
+            </button>
+            <button type="button" class="registration-form__btn-back button">
+              Back
+            </button>
           </div>
         `;
 
@@ -83,11 +87,10 @@ export function RegistrationForm(props) {
           }),
         };
 
-        const personalContainer = el.querySelector('[data-group="personal"]');
-        personalContainer.append(
+        el.querySelector('[data-group="personal"]').append(
           fields.firstName,
           fields.lastName,
-          fields.newsletter // Добавляем компонент чекбокса сюда
+          fields.newsletter
         );
 
         el.querySelector('[data-group="auth"]').append(
@@ -97,35 +100,57 @@ export function RegistrationForm(props) {
         );
 
         const validator = new JustValidate(el, {
-          errorFieldCssClass: "form-field_message-secondary",
-          successFieldCssClass: "form-field_message-success",
           errorLabelStyle: undefined,
+          errorsContainer: ".form-field__message-text",
         });
 
-        validator
-          .addField("#reg-fn", [
-            { rule: "required", errorMessage: "First name is required" },
-          ])
-          .addField("#reg-ln", [
-            { rule: "required", errorMessage: "Last name is required" },
-          ])
-          .addField("#reg-email", [
-            { rule: "required", errorMessage: "Email is required" },
-            { rule: "email", errorMessage: "Email is invalid" },
-          ])
-          .addField("#reg-pass", [
-            { rule: "required", errorMessage: "Password is required" },
-            { rule: "minLength", value: 8 },
-          ])
-          .addField("#reg-confirm", [
-            { rule: "required", errorMessage: "Please confirm your password" },
-            {
-              validator: (value, fields) => {
-                return value === fields["#reg-pass"].elem.value;
-              },
-              errorMessage: "Passwords should match",
-            },
-          ]);
+        const addValidatedField = (fieldComponent, id, rules) => {
+          validator.addField(id, rules, {
+            errorsContainer: fieldComponent.querySelector(
+              ".form-field__message-text"
+            ),
+          });
+        };
+
+        addValidatedField(fields.firstName, "#reg-fn", [
+          { rule: "required", errorMessage: "First name is required" },
+        ]);
+        addValidatedField(fields.lastName, "#reg-ln", [
+          { rule: "required", errorMessage: "Last name is required" },
+        ]);
+        addValidatedField(fields.email, "#reg-email", [
+          { rule: "required", errorMessage: "Email is required" },
+          { rule: "email", errorMessage: "Email is invalid" },
+        ]);
+        addValidatedField(fields.password, "#reg-pass", [
+          { rule: "required", errorMessage: "Password is required" },
+          { rule: "minLength", value: 8 },
+        ]);
+        addValidatedField(fields.confirmPassword, "#reg-confirm", [
+          { rule: "required", errorMessage: "Please confirm your password" },
+          {
+            validator: (value, fields) =>
+              value === fields["#reg-pass"].elem.value,
+            errorMessage: "Passwords should match",
+          },
+        ]);
+
+        validator.onValidate(({ fields }) => {
+          Object.values(fields).forEach((field) => {
+            const formField = field.elem?.closest(".form-field");
+            const isValidField = field.isValid;
+
+            if (!formField) {
+              return;
+            }
+
+            if (!isValidField) {
+              formField.classList.add("form-field_message-default");
+            } else {
+              formField.classList.remove("form-field_message-default");
+            }
+          });
+        });
 
         validator.onSuccess(() => {
           const formData = Object.fromEntries(new FormData(el));
