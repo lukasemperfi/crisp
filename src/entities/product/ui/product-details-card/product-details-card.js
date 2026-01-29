@@ -4,10 +4,9 @@ import { ColorFilter } from "@/features/product-filters/ui/color/color";
 import { SizeFilter } from "@/features/product-filters/ui/size/size";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { formatPrice } from "@/shared/helpers/format-price";
-import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
-import { store } from "../../../../app/store";
-import { cartThunks } from "../../../../features/cart/model/cart-slice";
-import { debounce } from "../../../../shared/helpers/debounce";
+import { Dropdown } from "@/shared/ui/dropdown/dropdown";
+import { cartThunks } from "@/features/cart/model/cart-slice";
+import { showToast } from "@/shared/ui/toast/toast";
 
 export const ProductDetailsCard = ({ container, product }) => {
   const variants = [...product.variants];
@@ -61,7 +60,7 @@ export const ProductDetailsCard = ({ container, product }) => {
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
             <div class="info__price-value">${formatPrice(
-              product.final_price * currentQuantity,
+              product.final_price * currentQuantity
             )} EUR</div>
           </div>
         </div>
@@ -143,7 +142,7 @@ export const ProductDetailsCard = ({ container, product }) => {
 
       const currentVariant = findCurrentVariant(
         selectedColorId,
-        selectedSizeId,
+        selectedSizeId
       );
 
       if (!currentVariant) {
@@ -227,7 +226,7 @@ export const ProductDetailsCard = ({ container, product }) => {
     currentQuantity = quantity;
 
     priceContainer.textContent = `${formatPrice(
-      product.final_price * quantity,
+      product.final_price * quantity
     )} EUR`;
   };
 
@@ -238,6 +237,7 @@ export const ProductDetailsCard = ({ container, product }) => {
     const cartItem = getCartItem();
 
     cartThunks.addItem({ ...cartItem });
+    showToast("Товар успешно добавлен в корзину!", "success");
   });
 
   function getCartItem() {
@@ -334,7 +334,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
               <img class="thumbs-slider__img" src="${src}" alt="thumbs image" />
             </div>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
@@ -351,7 +351,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
                   <img class="main-slider__img" src="${src}" alt="thumbs image" />
                 </div>
             </div>
-          `,
+          `
             )
             .join("")}
         </div>

@@ -3,6 +3,7 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 import { cartThunks } from "../../model/cart-slice";
+import { showToast } from "../../../../shared/ui/toast/toast";
 
 export function CartProductCard(props) {
   return createComponent(
@@ -128,27 +129,41 @@ export function CartProductCard(props) {
         el._els.sku.textContent = sku;
         el._els.total.innerHTML = `${totalPriceFormatted} EUR`;
         el._els.totalDetails.innerHTML = `${quantity} X ${formatPrice(
-          final_price,
+          final_price
         )} EUR`;
 
         function initQuantity() {
           el._els.incrementBtn.addEventListener("click", (e) => {
             cartThunks.incrementQuantity(cartItemId);
+            showToast("Количество увеличено!", "success");
           });
+
           el._els.decrementBtn.addEventListener("click", (e) => {
-            cartThunks.decrementQuantity(cartItemId);
+            if (quantity === 1) {
+              cartThunks.decrementQuantity(cartItemId);
+              showToast("Товар удален!", "error");
+            } else {
+              cartThunks.decrementQuantity(cartItemId);
+              showToast("Количество уменьшено!", "info");
+            }
           });
+
           el._els.quantityInput.addEventListener("change", (e) => {
             console.log("value", e.target.value);
+            const newValue = Number(e.target.value);
 
             cartThunks.setQuantity({
               cartItemId,
-              quantity: Number(e.target.value),
+              quantity: newValue,
             });
+
+            if (newValue === 0) {
+              showToast("Товар удален!", "error");
+            }
           });
         }
       },
-    },
+    }
   );
 }
 

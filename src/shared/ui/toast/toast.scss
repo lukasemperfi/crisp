@@ -10,8 +10,7 @@
 }
 
 .toast-notification {
-  padding: 15px 20px;
-  border-radius: 8px;
+  padding: 18px;
   font-family: sans-serif;
   font-size: 16px;
   color: white;
@@ -30,14 +29,17 @@
   }
 
   &.success {
-    background-color: var(--border-color);
+    background-color: var(--success);
+    color: #27ae60;
   }
 
   &.error {
     background-color: var(--error);
+    color: var(--main-color-2);
   }
 
   &.info {
-    background-color: #2196f3;
+    background-color: var(--main-color);
+    color: #63a6dc;
   }
 }
