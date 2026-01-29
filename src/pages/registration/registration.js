@@ -3,7 +3,7 @@ import { initPageFooter } from "@/widgets/footer/footer.js";
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { RegistrationForm } from "../../entities/auth/ui/registration-form/registration-form";
 import { baseUrl } from "../../shared/helpers/base-url";
-import { authApi } from "../../entities/auth/api/auth";
+import { registerUser } from "../../entities/auth/model/auth-slice";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     onSubmit: async ({ confirm_password, ...restData }) => {
       console.log("Success:", restData);
 
-      await authApi.registerUser(restData);
+      await registerUser(restData);
     },
     onBack: () => {
       if (window.history.length > 1) {

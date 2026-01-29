@@ -1,9 +1,11 @@
 import { store } from "@/app/store/index.js";
+import { initAuthListener } from "@/entities/auth/model/auth-slice";
 import { fetchCartProducts } from "../features/cart/model/cart-slice";
 
 initializeApp();
 
 async function initializeApp() {
+  initAuthListener();
   initializeCart();
 }
 
@@ -18,7 +20,3 @@ function initializeCart() {
     console.error("Помилка під час ініціалізації кошика:", error);
   }
 }
-
-store.subscribe("cart", async (newState) => {
-  console.log("cart: onchange", newState);
-});

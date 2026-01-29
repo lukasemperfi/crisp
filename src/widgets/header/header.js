@@ -9,13 +9,15 @@ import { formatPrice } from "@/shared/helpers/format-price";
 import { Modal } from "../../shared/ui/modal/modal";
 import { LoginForm } from "../../entities/auth/ui/login-form/login-form";
 import { authApi } from "../../entities/auth/api/auth";
+import { createComponent } from "../../shared/lib/core/core";
+import { baseUrl } from "../../shared/helpers/base-url";
 
 export async function initHeader() {
   initMenu();
   initResizeHandler();
   initActiveLink(".nav-menu__link");
   initMiniCart();
-  initLoginModal();
+  initAuth();
 
   observeHeaderHeight();
 }
@@ -112,28 +114,104 @@ function initMiniCart() {
   });
 }
 
-function initLoginModal() {
-  const loginForm = LoginForm({
-    onSubmit: (data) => {
-      console.log("Success:", data);
+async function initAuth() {
+  // const isAuth = await getSession();
+
+  const container = document.querySelector(".header__auth");
+
+  if (container) {
+    // container.replaceChildren(AuthButtons());
+    container.replaceChildren(Profile());
+  }
+
+  store.subscribe("auth", (newState) => {});
+}
+
+function AuthButtons(initialProps = {}) {
+  return createComponent(initialProps, {
+    tag: "div",
+
+    render(el, props, emit, { runOnce }) {
+      if (runOnce) {
+        const loginForm = LoginForm({
+          onSubmit: async (data) => {
+            console.log("Данные для входа:", data);
+          },
+        });
+
+        const myModal = Modal({
+          isOpen: false,
+          content: loginForm,
+          className: "login-modal",
+        });
+
+        document.body.appendChild(myModal);
+
+        myModal.addEventListener("close", () => {
+          myModal.update({ isOpen: false });
+        });
+
+        el.className = "auth";
+        el.innerHTML = `
+          <button class="auth__login" name="login" aria-label="SIGN IN">
+            <span class="auth__link">SIGN IN</span>
+          </button>
+          <a href="${baseUrl}registration/" class="auth__link" name="registration" aria-label="CREATE AN ACCOUNT">
+            CREATE AN ACCOUNT
+          </a>
+        `;
+
+        const loginBtn = el.querySelector(".auth__login");
+        loginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          myModal.update({ isOpen: true });
+
+          emit("login", { originalEvent: e });
+        });
+      }
     },
   });
-  const myModal = Modal({
-    isOpen: false,
-    content: loginForm,
-    className: "login-modal",
-  });
-  const loginBtn = document.querySelector(".auth__login");
+}
 
-  document.body.appendChild(myModal);
+function Profile(initialProps = {}) {
+  return createComponent(initialProps, {
+    tag: "div",
 
-  myModal.addEventListener("close", () => {
-    myModal.update({ isOpen: false });
-  });
+    render(el, props, emit, { runOnce }) {
+      if (runOnce) {
+        el.className = "profile-menu";
 
-  loginBtn.addEventListener("click", () => {
-    myModal.update({
-      isOpen: true,
-    });
+        const popoverId = "profile-popover-main";
+
+        el.innerHTML = `
+          <button class="profile-menu__trigger" popovertarget="${popoverId}">
+            Profile
+          </button>
+
+          <div id="${popoverId}" popover class="profile-menu__popover">
+            <nav class="profile-menu__nav">
+              <ul class="profile-menu__list">
+                <li class="profile-menu__item">
+                  <a href="#" class="profile-menu__link">Account</a>
+                </li>
+              </ul>
+              <div class="profile-menu__divider"></div>
+              <button class="profile-menu__logout-btn">
+                Logout
+              </button>
+            </nav>
+          </div>
+        `;
+
+        const logoutBtn = el.querySelector(".profile-menu__logout-btn");
+        logoutBtn.addEventListener("click", () => {
+          console.log("Logging out...");
+          emit("logout");
+
+          el.querySelector(`[id="${popoverId}"]`).hidePopover();
+        });
+      }
+    },
   });
 }

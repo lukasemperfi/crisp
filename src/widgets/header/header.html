@@ -28,7 +28,7 @@
             </div>
             <div class="header__right-block">
                 {{icons.search(class="header__mobile-search-btn")}}
-                {{auth(class="header__auth",baseUrl=baseUrl)}}
+                <div class="header__auth"></div>
                 <a href="#" class="header__wishlist-link">
                     {{icons.heart()}}
                 </a>
@@ -48,15 +48,4 @@
         </div>
     </div>
 </header>
-{%endmacro%}
-
-
-{%macro auth(class="", baseUrl="/")%}
-<div class="auth {{class}}">
-    <button class="auth__login" name="login" aria-label="SIGN IN">
-        <span class="auth__link">SIGN IN</span>
-    </button>
-    <a href="{{baseUrl}}registration/" class="auth__link" name="registration" aria-label="CREATE AN ACCOUNT">CREATE AN
-        ACCOUNT</a>
-</div>
 {%endmacro%}
