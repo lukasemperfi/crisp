@@ -11,6 +11,8 @@ import { LoginForm } from "../../entities/auth/ui/login-form/login-form";
 import { authApi } from "../../entities/auth/api/auth";
 import { createComponent } from "../../shared/lib/core/core";
 import { baseUrl } from "../../shared/helpers/base-url";
+import { loginUser, logoutUser } from "../../entities/auth/model/auth-slice";
+import { createOverlaySpinner } from "../../shared/ui/overlay-spinner/overlay-spinner";
 
 export async function initHeader() {
   initMenu();
@@ -119,12 +121,20 @@ async function initAuth() {
 
   const container = document.querySelector(".header__auth");
 
-  if (container) {
-    // container.replaceChildren(AuthButtons());
-    container.replaceChildren(Profile());
+  if (!container) {
+    console.error("Container is not found");
+    return;
   }
 
-  store.subscribe("auth", (newState) => {});
+  store.subscribe("auth", (newState) => {
+    console.log("header auth. isAuth", newState.isAuth);
+
+    if (newState.isAuth) {
+      container.replaceChildren(Profile());
+    } else {
+      container.replaceChildren(AuthButtons());
+    }
+  });
 }
 
 function AuthButtons(initialProps = {}) {
@@ -133,9 +143,24 @@ function AuthButtons(initialProps = {}) {
 
     render(el, props, emit, { runOnce }) {
       if (runOnce) {
+        const authSpinner = createOverlaySpinner({
+          successText: "Вход выполнен успешно!",
+        });
+
         const loginForm = LoginForm({
           onSubmit: async (data) => {
-            console.log("Данные для входа:", data);
+            try {
+              authSpinner.show();
+              console.log("Данные для входа:", data);
+              await loginUser(data.email, data.password);
+              authSpinner.success();
+
+              location.reload();
+            } catch (error) {
+              authSpinner.hide();
+              console.error("Ошибка входа:", error);
+              alert("Не удалось войти: " + error.message);
+            }
           },
         });
 
@@ -205,8 +230,9 @@ function Profile(initialProps = {}) {
         `;
 
         const logoutBtn = el.querySelector(".profile-menu__logout-btn");
-        logoutBtn.addEventListener("click", () => {
-          console.log("Logging out...");
+
+        logoutBtn.addEventListener("click", async () => {
+          await logoutUser();
           emit("logout");
 
           el.querySelector(`[id="${popoverId}"]`).hidePopover();

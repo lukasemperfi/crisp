@@ -6,6 +6,7 @@
 @use "@/shared/ui/modal/modal.scss" as *;
 @use "@/shared/ui/form-field/form-field.scss" as *;
 @use "@/shared/ui/checkbox/checkbox.scss" as *;
+@use "@/shared/ui/overlay-spinner/overlay-spinner.scss" as *;
 
 .header {
   $mobile-bp: 600px;

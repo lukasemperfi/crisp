@@ -1,4 +1,5 @@
 import { cartSlice } from "@/features/cart/model/cart-slice";
+import { authSlice } from "../../entities/auth/model/auth-slice";
 
 class Store {
   constructor() {
@@ -35,7 +36,7 @@ class Store {
 
     if (!sliceName || !reducerName) {
       console.error(
-        `Некорректный action.type: ${action.type}. Ожидается 'slice/reducer'.`
+        `Некорректный action.type: ${action.type}. Ожидается 'slice/reducer'.`,
       );
       return;
     }
@@ -127,4 +128,5 @@ class Store {
 
 export const store = new Store();
 
+store.registerSlice(authSlice);
 store.registerSlice(cartSlice, { persist: true, fields: ["items"] });
