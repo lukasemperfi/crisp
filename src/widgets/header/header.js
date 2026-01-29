@@ -151,15 +151,14 @@ function AuthButtons(initialProps = {}) {
           onSubmit: async (data) => {
             try {
               authSpinner.show();
-              console.log("Данные для входа:", data);
               await loginUser(data.email, data.password);
               authSpinner.success();
 
               location.reload();
             } catch (error) {
               authSpinner.hide();
+
               console.error("Ошибка входа:", error);
-              alert("Не удалось войти: " + error.message);
             }
           },
         });
