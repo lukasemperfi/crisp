@@ -1,14 +1,10 @@
 {%macro profileSection(baseUrl="", content=null)%}
 <section class="profile-section">
-    <div class="profile-section__page-container page-container">
-        <div class="profile-section__wrapper">
-            <div class="profile-section__body">
-                <div class="profile-section__menu">
-                    {{accountMenu(baseUrl)}}
-                </div>
-                <div class="profile-section__content">{{content | safe}}</div>
-            </div>
+    <div class="profile-section__body">
+        <div class="profile-section__menu">
+            {{accountMenu(baseUrl)}}
         </div>
+        <div class="profile-section__content">{{content | safe}}</div>
     </div>
 </section>
 {%endmacro%}
@@ -16,27 +12,24 @@
 {% macro accountMenu(baseUrl="")%}
 <div class="account-menu">
     <div class="account-menu__item account-menu-item">
-        <div class="account-menu-item__title">Мои заказы</div>
         <ul class="account-menu-item__list account-menu-list">
             <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}profile/orders/">История заказов</a>
+                <a class="account-menu-list__link" href="{{baseUrl}}account/dashboard/">Account Dashboard</a>
             </li>
             <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}profile/transactions/">История транзакций</a>
-            </li>
-        </ul>
-    </div>
-    <div class="account-menu__item account-menu-item">
-        <div class="account-menu-item__title">Моя учетная запись</div>
-        <ul class="account-menu-item__list account-menu-list">
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}profile/contacts/">Контактная информация</a>
+                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">Account Information</a>
             </li>
             <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}profile/password/">Пароль</a>
+                <a class="account-menu-list__link" href="{{baseUrl}}account/orders/">Address Book</a>
             </li>
             <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}profile/address/">Адрес реквизиты</a>
+                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">My Orders</a>
+            </li>
+            <li class="account-menu-list__item">
+                <a class="account-menu-list__link" href="{{baseUrl}}account/orders/">My Wishlist</a>
+            </li>
+            <li class="account-menu-list__item">
+                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">Newsletter Subscriptions</a>
             </li>
         </ul>
     </div>
