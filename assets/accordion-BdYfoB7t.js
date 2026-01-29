@@ -1,4 +1,4 @@
-import{c as l}from"./footer-mnrRef1t.js";const u=(t,n,a={})=>{const i=document.querySelector(t);if(!i){console.error(`Accordion: Container '${t}' not found`);return}const{isSingleOpen:e=!0}=a,o=document.createElement("div");o.className="accordion",o.innerHTML=n.map(c=>`
+import{c as l}from"./footer-DnGZcwvZ.js";const u=(t,n,a={})=>{const i=document.querySelector(t);if(!i){console.error(`Accordion: Container '${t}' not found`);return}const{isSingleOpen:e=!0}=a,o=document.createElement("div");o.className="accordion",o.innerHTML=n.map(c=>`
     <div class="accordion__item ${c.isActive?"is-active":""}">
       <button class="accordion__button" type="button">
         <span class="accordion__title">${c.title}</span> 
