@@ -111,6 +111,7 @@ export function CartProductCard(props) {
 
           el._els.removeBtn.addEventListener("click", (e) => {
             cartThunks.removeItem(cartItemId);
+            showToast("Товар удален!", "error");
           });
         }
 
