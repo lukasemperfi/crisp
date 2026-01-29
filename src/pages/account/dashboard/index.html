@@ -1,0 +1,39 @@
+{%from "src/widgets/header/header.html" import header%}
+{%from "src/widgets/header/mobile-menu.html" import mobileMenu%}
+{%from "src/widgets/footer/footer.html" import footer%}
+{%from "src/pages/account/sections/profile-section/profile-section.html" import profileSection%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product page">
+    <title>Dashboard Page</title>
+    <link rel="stylesheet" href="./dashboard.scss">
+</head>
+
+<body>
+    {{header(baseUrl)}}
+    <main class="dashboard-page">
+        <div class="page-container-1920">
+            <div class="dashboard-page__breadcrumbs"></div>
+            <div class="dashboard-page__header">My Dashboard</div>
+            <div class="dashboard-page__content">
+                {{profileSection(baseUrl)}}
+            </div>
+        </div>
+    </main>
+    {{footer(baseUrl)}}
+    <div class="portal-root">
+        {{mobileMenu(baseUrl)}}
+        <div id="toast-container"></div>
+        <button class="button button_solid button_black page-contacts-btn">Contact Us</button>
+    </div>
+    <script type="module" src="../../main.js"></script>
+    <script type="module" src="./dashboard.js"></script>
+</body>
+
+</html>
