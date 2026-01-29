@@ -1,0 +1,72 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.dashboard-info {
+  display: flex;
+  flex-direction: column;
+  gap: 65px;
+  &__section {
+  }
+
+  &__section-title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 27px;
+  }
+
+  &__grid {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__card {
+    flex: 1;
+  }
+
+  &__text {
+  }
+
+  &__actions {
+  }
+
+  &__button {
+    font-family: var(--third-family);
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: var(--black);
+    background: var(--main-color);
+    padding-inline: 10px;
+    padding-block: 5px;
+  }
+}
+.dashboard-card {
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--black-2);
+    margin-bottom: 15px;
+  }
+
+  &__content {
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--gray-1);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+  }
+}
