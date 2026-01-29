@@ -35,18 +35,18 @@ export function RegistrationForm(props) {
         `;
 
         const fields = {
-          firstName: FormField({
+          first_name: FormField({
             label: `First name <span class="highlight-required">*</span>`,
             inputProps: {
-              name: "firstName",
+              name: "first_name",
               id: "reg-fn",
               placeholder: "Enter your first name",
             },
           }),
-          lastName: FormField({
+          last_name: FormField({
             label: `Last Name <span class="highlight-required">*</span>`,
             inputProps: {
-              name: "lastName",
+              name: "last_name",
               id: "reg-ln",
               placeholder: "Enter your last name",
             },
@@ -54,7 +54,7 @@ export function RegistrationForm(props) {
           newsletter: Checkbox({
             label: "Sign Up for Newsletter",
             inputProps: {
-              name: "isSubscribed",
+              name: "is_subscribed_for_newsletter",
               id: "reg-newsletter",
             },
           }),
@@ -76,10 +76,10 @@ export function RegistrationForm(props) {
               placeholder: "********",
             },
           }),
-          confirmPassword: FormField({
+          confirm_password: FormField({
             label: `Confirm Password <span class="highlight-required">*</span>`,
             inputProps: {
-              name: "confirmPassword",
+              name: "confirm_password",
               type: "password",
               id: "reg-confirm",
               placeholder: "********",
@@ -88,15 +88,15 @@ export function RegistrationForm(props) {
         };
 
         el.querySelector('[data-group="personal"]').append(
-          fields.firstName,
-          fields.lastName,
+          fields.first_name,
+          fields.last_name,
           fields.newsletter,
         );
 
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.confirmPassword,
+          fields.confirm_password,
         );
 
         const validator = new JustValidate(el, {
@@ -113,10 +113,10 @@ export function RegistrationForm(props) {
           });
         };
 
-        addValidatedField(fields.firstName, "#reg-fn", [
+        addValidatedField(fields.first_name, "#reg-fn", [
           { rule: "required", errorMessage: "First name is required" },
         ]);
-        addValidatedField(fields.lastName, "#reg-ln", [
+        addValidatedField(fields.last_name, "#reg-ln", [
           { rule: "required", errorMessage: "Last name is required" },
         ]);
 
@@ -128,7 +128,7 @@ export function RegistrationForm(props) {
           { rule: "required", errorMessage: "Password is required" },
           { rule: "minLength", value: 8 },
         ]);
-        addValidatedField(fields.confirmPassword, "#reg-confirm", [
+        addValidatedField(fields.confirm_password, "#reg-confirm", [
           { rule: "required", errorMessage: "Please confirm your password" },
           {
             validator: (value, fields) =>
@@ -157,7 +157,8 @@ export function RegistrationForm(props) {
         validator.onSuccess(() => {
           const formData = Object.fromEntries(new FormData(el));
 
-          formData.isSubscribed = !!formData.isSubscribed;
+          formData.is_subscribed_for_newsletter =
+            !!formData.is_subscribed_for_newsletter;
           onSubmit?.(formData);
         });
 

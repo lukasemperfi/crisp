@@ -8,6 +8,7 @@ import {
 import { formatPrice } from "@/shared/helpers/format-price";
 import { Modal } from "../../shared/ui/modal/modal";
 import { LoginForm } from "../../entities/auth/ui/login-form/login-form";
+import { authApi } from "../../entities/auth/api/auth";
 
 export async function initHeader() {
   initMenu();
@@ -113,7 +114,9 @@ function initMiniCart() {
 
 function initLoginModal() {
   const loginForm = LoginForm({
-    onSubmit: (data) => console.log("Success:", data),
+    onSubmit: (data) => {
+      console.log("Success:", data);
+    },
   });
   const myModal = Modal({
     isOpen: false,

@@ -5,7 +5,7 @@ class Auth {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         callback(event, session);
-      }
+      },
     );
 
     return () => {
@@ -36,14 +36,9 @@ class Auth {
     const {
       email,
       password,
-      full_name,
-      phone,
-      person_type,
-      upload_file,
-      country,
-      region,
-      city,
-      address,
+      first_name,
+      last_name,
+      is_subscribed_for_newsletter,
     } = data;
 
     const { data: userData, error: signUpError } = await supabase.auth.signUp({
@@ -57,43 +52,11 @@ class Auth {
     }
 
     const userId = userData.user.id;
-    let avatarUrl = null;
-
-    if (upload_file && upload_file.name) {
-      const fileExt = upload_file.name.split(".").pop();
-      const filePath = `${userId}.${fileExt}`;
-
-      const { error: uploadErr } = await supabase.storage
-        .from("avatars")
-        .upload(filePath, upload_file, {
-          cacheControl: "no-cache",
-          upsert: true,
-        });
-
-      if (uploadErr) {
-        console.warn(
-          "Предупреждение: Ошибка загрузки аватара, продолжение регистрации:",
-          uploadErr.message
-        );
-      }
-
-      const { data: urlData } = supabase.storage
-        .from("avatars")
-        .getPublicUrl(filePath);
-
-      avatarUrl = urlData.publicUrl;
-    }
-
     const profileData = {
       id: userId,
-      full_name: full_name,
-      phone: phone,
-      country: country || null,
-      region: region || null,
-      city: city || null,
-      address: address || null,
-      person_type: person_type,
-      avatar_url: avatarUrl,
+      first_name: first_name,
+      last_name: last_name,
+      is_subscribed_for_newsletter: is_subscribed_for_newsletter || false,
     };
 
     const { error: profileError } = await supabase
@@ -103,48 +66,6 @@ class Auth {
     if (profileError) {
       console.error("Ошибка вставки в profiles:", profileError.message);
       throw profileError;
-    }
-
-    if (person_type === "fop" && data.fop) {
-      const fopDetails = {
-        profile_id: userId,
-        edrpou: data.fop.edrpou,
-        country: data.fop.country || null,
-        region: data.fop.region || null,
-        city: data.fop.city || null,
-        address: data.fop.address || null,
-      };
-
-      const { error: fopError } = await supabase
-        .from("fop_details")
-        .insert([fopDetails]);
-
-      if (fopError) {
-        console.error("Ошибка вставки в fop_details:", fopError.message);
-        throw fopError;
-      }
-    } else if (person_type === "legal" && data.legal_entity) {
-      const legalDetails = {
-        profile_id: userId,
-        okpo: data.legal_entity.okpo,
-        country: data.legal_entity.country || null,
-        region: data.legal_entity.region || null,
-        city: data.legal_entity.city || null,
-        address: data.legal_entity.address || null,
-        postal_code: data.legal_entity.postal_code || null,
-      };
-
-      const { error: legalError } = await supabase
-        .from("legal_entity_details")
-        .insert([legalDetails]);
-
-      if (legalError) {
-        console.error(
-          "Ошибка вставки в legal_entity_details:",
-          legalError.message
-        );
-        throw legalError;
-      }
     }
 
     return userData;
