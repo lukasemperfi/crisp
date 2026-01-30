@@ -9,7 +9,7 @@ export function Dropdown(props) {
         defaultValue = "",
         name = "",
         placeholder = "Не выбрано",
-        disabled = false, // Извлекаем disabled
+        disabled = false,
       } = props;
 
       el.className = `dropdown ${disabled ? "dropdown_is-disabled" : ""}`;
@@ -69,7 +69,7 @@ export function Dropdown(props) {
       let isOpen = false;
 
       const open = () => {
-        if (disabled) return; // Защита от открытия
+        if (disabled) return;
         isOpen = true;
         el.classList.add("dropdown_is-open");
       };
@@ -119,12 +119,12 @@ export function Dropdown(props) {
         trigger.classList.add("dropdown__trigger_is-empty");
       }
 
-      // Слушатели событий
       trigger.addEventListener("click", toggle);
 
       menu.addEventListener("click", (e) => {
         const option = e.target.closest(".dropdown__option");
         if (!option || option.disabled) return;
+
         setValue(option.dataset.value);
         close();
       });

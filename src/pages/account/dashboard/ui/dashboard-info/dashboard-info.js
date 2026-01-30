@@ -1,4 +1,5 @@
 import { createComponent } from "@/shared/lib/core/core.js";
+import { IconEdit } from "../../../../../shared/ui/icons/icons";
 
 export function DashboardInfo(props) {
   return createComponent(props, {
@@ -10,7 +11,9 @@ export function DashboardInfo(props) {
 
         el.innerHTML = `
             <div class="dashboard-info__section">
-                <h2 class="dashboard-info__section-title">Account Information</h2>
+                <div class="dashboard-info__header">
+                    <h2 class="dashboard-info__section-title">Account Information</h2>
+                </div> 
 
                 <div class="dashboard-info__grid">
                     <div class="dashboard-info__card dashboard-card">
@@ -38,8 +41,12 @@ export function DashboardInfo(props) {
             </div>
 
             <div class="dashboard-info__section">
-                <h2 class="dashboard-info__section-title">Address Book  <button class="dashboard-info__button">Edit</button></h2>
-
+                <div class="dashboard-info__header">
+                    <h2 class="dashboard-info__section-title">Address Book</h2>
+                    <button class="dashboard-info__button">${IconEdit({
+                      size: 11,
+                    })}</button>
+                </div>            
                 <div class="dashboard-info__grid">
                     <div class="dashboard-info__card dashboard-card">
                         <h3 class="dashboard-card__title">Default Billing Address</h3>

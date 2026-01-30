@@ -5,30 +5,29 @@
   display: flex;
   flex-direction: column;
   gap: 65px;
-  &__section {
-  }
 
   &__section-title {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 24px;
     color: var(--black);
+  }
+
+  &__header {
+    display: flex;
+    gap: 13px;
     margin-bottom: 27px;
+    line-height: 1;
   }
 
   &__grid {
     display: flex;
     justify-content: space-between;
+    gap: 25px;
   }
 
   &__card {
     flex: 1;
-  }
-
-  &__text {
-  }
-
-  &__actions {
   }
 
   &__button {
@@ -38,8 +37,10 @@
     text-align: center;
     color: var(--black);
     background: var(--main-color);
-    padding-inline: 10px;
-    padding-block: 5px;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 .dashboard-card {
