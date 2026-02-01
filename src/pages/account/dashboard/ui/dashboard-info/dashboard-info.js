@@ -12,7 +12,7 @@ export function DashboardInfo(props) {
         el.innerHTML = `
             <div class="dashboard-info__section">
                 <div class="dashboard-info__header">
-                    <h2 class="dashboard-info__section-title">Account Information</h2>
+                    <h2 class="profile-section__section-title">Account Information</h2>
                 </div> 
 
                 <div class="dashboard-info__grid">
@@ -42,10 +42,8 @@ export function DashboardInfo(props) {
 
             <div class="dashboard-info__section">
                 <div class="dashboard-info__header">
-                    <h2 class="dashboard-info__section-title">Address Book</h2>
-                    <button class="dashboard-info__button">${IconEdit({
-                      size: 11,
-                    })}</button>
+                    <h2 class="profile-section__section-title">Address Book</h2>
+                    <button class="dashboard-info__button dashboard-info__button_icon">${IconEdit()}</button>
                 </div>            
                 <div class="dashboard-info__grid">
                     <div class="dashboard-info__card dashboard-card">

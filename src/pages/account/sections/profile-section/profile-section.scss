@@ -3,21 +3,22 @@
 @use "@/shared/ui/dropdown/dropdown.scss" as *;
 
 .profile-section {
-  $bp-mobile: 1028px;
+  $bp-tablet: 1028px;
+  $bp-mobile: 650px;
   width: 100%;
   max-width: 1058px;
 
   @include mixins.respond-to(lg-sm) {
-    padding-top: functions.fluidValue(20px, 46px, 360px, 1920px);
-    padding-bottom: functions.fluidValue(20px, 90px, 360px, 1920px);
+    padding-top: functions.fluidValue(20px, 46px, 320px, 1920px);
+    padding-bottom: functions.fluidValue(20px, 90px, 320px, 1920px);
   }
 
   &__body {
     display: flex;
-    gap: functions.fluidValue(25px, 108px, $bp-mobile, 1920px);
+    gap: functions.fluidValue(25px, 108px, $bp-tablet, 1920px);
     justify-content: space-between;
 
-    @include mixins.respond-to($bp-mobile) {
+    @include mixins.respond-to($bp-tablet) {
       flex-direction: column;
     }
   }
@@ -26,7 +27,7 @@
     flex: 1 1 288px;
     transform: translateX(0);
 
-    @include mixins.respond-to(xl) {
+    @include mixins.respond-to($bp-tablet) {
       flex: none;
     }
   }
@@ -35,8 +36,20 @@
     min-height: 260px;
     flex: 1 1 662px;
 
-    @include mixins.respond-to(xl) {
+    @include mixins.respond-to($bp-tablet) {
       flex: none;
+    }
+  }
+
+  &__section-title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
+    color: var(--black);
+
+    @include mixins.respond-to($bp-mobile) {
+      color: var(--gray-1);
+      text-transform: uppercase;
     }
   }
 
@@ -93,45 +106,69 @@
   }
 
   .dropdown {
+    @media (min-width: $bp-tablet) {
+      position: static;
+    }
+
     &__trigger {
       background: var(--light-blue-hover);
-    }
-  }
-
-  @media (min-width: $bp-mobile) {
-    .dropdown {
-      position: static;
-    }
-
-    .dropdown__native,
-    .dropdown__trigger {
-      display: none;
-      pointer-events: none;
-    }
-
-    .dropdown__menu {
-      position: static;
-      display: flex;
-      flex-direction: column;
-      box-shadow: none;
+      font-size: functions.fluidValue(12px, 18px, 320px, 1920px);
+      transition: 0.3s;
       border: none;
-      padding: 0;
-      opacity: 1;
-      visibility: visible;
-      max-height: none;
-      pointer-events: auto;
     }
 
-    .dropdown__option {
-      justify-content: flex-start;
-      font-family: var(--font-family);
-      font-weight: 400;
-      font-size: 18px;
-      color: var(--gray-1);
+    &_is-open {
+      .dropdown__trigger {
+        background-color: var(--black);
+        color: var(--white);
+        transition: 0.3s;
+      }
+
+      .dropdown__icon path {
+        stroke: var(--white);
+      }
+    }
+
+    &__native,
+    &__trigger {
+      text-transform: uppercase;
+      font-weight: 500;
+      @media (min-width: $bp-tablet) {
+        display: none;
+        pointer-events: none;
+      }
+    }
+
+    &__menu {
+      @media (min-width: $bp-tablet) {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        opacity: 1;
+        visibility: visible;
+        max-height: none;
+        pointer-events: auto;
+      }
+    }
+
+    &__option {
+      font-size: functions.fluidValue(12px, 18px, 320px, 1920px);
+      @media (min-width: $bp-tablet) {
+        justify-content: flex-start;
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 18px;
+        color: var(--gray-1);
+      }
 
       &_selected {
-        font-weight: 500;
-        color: var(--black);
+        @media (min-width: $bp-tablet) {
+          font-weight: 500;
+          color: var(--black);
+        }
       }
     }
   }

@@ -1,22 +1,28 @@
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
 
+$bp-mobile: 650px;
 .dashboard-info {
   display: flex;
   flex-direction: column;
-  gap: 65px;
+  gap: functions.fluidValue(20px, 65px, 320px, 1920px);
 
-  &__section-title {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    color: var(--black);
-  }
+  // &__section-title {
+  //   font-family: var(--font-family);
+  //   font-weight: 400;
+  //   font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
+  //   color: var(--black);
+
+  //   @include mixins.respond-to($bp-mobile) {
+  //     color: var(--gray-1);
+  //     text-transform: uppercase;
+  //   }
+  // }
 
   &__header {
     display: flex;
     gap: 13px;
-    margin-bottom: 27px;
+    margin-bottom: functions.fluidValue(10px, 27px, 320px, 1920px);
     line-height: 1;
   }
 
@@ -24,6 +30,10 @@
     display: flex;
     justify-content: space-between;
     gap: 25px;
+
+    @include mixins.respond-to($bp-mobile) {
+      flex-direction: column;
+    }
   }
 
   &__card {
@@ -33,7 +43,7 @@
   &__button {
     font-family: var(--third-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: functions.fluidValue(10px, 14px, 320px, 1920px);
     text-align: center;
     color: var(--black);
     background: var(--main-color);
@@ -41,17 +51,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &_icon {
+      padding: 0;
+      @include mixins.respond-to($bp-mobile) {
+        width: 20px;
+        height: 20px;
+      }
+
+      svg {
+        width: 11px;
+        height: 11px;
+
+        @include mixins.respond-to($bp-mobile) {
+          width: 9px;
+          height: 9px;
+        }
+      }
+    }
   }
 }
 .dashboard-card {
   &__title {
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 18px;
+    font-size: functions.fluidValue(12px, 18px, 320px, 1920px);
     letter-spacing: 0.03em;
     text-transform: uppercase;
     color: var(--black-2);
-    margin-bottom: 15px;
+    margin-bottom: functions.fluidValue(10px, 15px, 320px, 1920px);
+
+    @include mixins.respond-to($bp-mobile) {
+      text-transform: none;
+    }
   }
 
   &__content {
@@ -61,13 +93,13 @@
   &__text {
     font-family: var(--second-family);
     font-weight: 400;
-    font-size: 16px;
+    font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
     line-height: 125%;
     color: var(--gray-1);
   }
 
   &__actions {
     display: flex;
-    gap: 12px;
+    gap: functions.fluidValue(9px, 12px, 320px, 1920px);
   }
 }

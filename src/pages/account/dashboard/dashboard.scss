@@ -66,24 +66,21 @@
       margin-bottom: functions.fluidValue(0px, 23px, 320px, $bp-tablet);
     }
 
-    @include mixins.respond-to($bp-mobile) {
-      text-align: left;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--divider);
+    @include mixins.respond-to(650px) {
+      display: none;
     }
   }
   &__content {
     border: 1px solid var(--divider);
     display: flex;
     justify-content: center;
-    padding-top: 95px;
-    padding-bottom: 123px;
+    padding-top: functions.fluidValue(15px, 95px, 650px, 1920px);
+    padding-bottom: functions.fluidValue(15px, 123px, 650px, 1920px);
     padding-inline: 25px;
 
-    @include mixins.respond-to(sm) {
+    @include mixins.respond-to(650px) {
       border: none;
-      padding-top: functions.fluidValue(15px, 95px, 320px, 1920px);
-      padding-bottom: functions.fluidValue(15px, 123px, 320px, 1920px);
+      padding: 0;
     }
   }
 }
