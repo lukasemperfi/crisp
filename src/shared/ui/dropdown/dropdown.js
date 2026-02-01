@@ -26,7 +26,7 @@ export function Dropdown(props) {
                 (o) =>
                   `<option value="${o.value}" ${o.disabled ? "disabled" : ""}>
                     ${o.label}
-                  </option>`
+                  </option>`,
               )
               .join("")}
           </select>
@@ -54,7 +54,7 @@ export function Dropdown(props) {
                 ${o.disabled || disabled ? "disabled" : ""}
               >
                 ${o.label}
-              </button>`
+              </button>`,
               )
               .join("")}
           </div>
@@ -94,18 +94,22 @@ export function Dropdown(props) {
         optionButtons.forEach((btn) => {
           btn.classList.toggle(
             "dropdown__option_selected",
-            btn.dataset.value === val
+            btn.dataset.value === val,
           );
         });
       };
 
       const setValue = (val, emitEvent = true) => {
+        if (props.value === val && nativeSelect.value === val) return;
+
         props.value = val;
         nativeSelect.value = val;
         valueEl.textContent = getLabelByValue(val);
         trigger.classList.toggle("dropdown__trigger_is-empty", !val);
 
         highlightSelected(val);
+
+        nativeSelect.dispatchEvent(new Event("change", { bubbles: true }));
 
         if (emitEvent) {
           emit("onChange", val);

@@ -54,20 +54,22 @@ export function AddressForm(props) {
           currentRegion = "";
 
           const regions = regionsByCountry[currentCountry] || [];
+
           stateDropdown.update({
             options: regions,
             disabled: regions.length === 0,
             defaultValue: "",
           });
 
-          validator.revalidateField('select[name="country"]');
-          validator.revalidateField('select[name="state"]');
+          validator.removeField('select[name="state"]');
+
+          addValidatedField(fields.state_field, 'select[name="state"]', [
+            { rule: "required", errorMessage: "State/Region is required" },
+          ]);
         });
 
         stateDropdown.addEventListener("onChange", (event) => {
           currentRegion = event.detail;
-          //TODO: не работает ревалидейт
-          validator.revalidateField('select[name="state"]');
         });
 
         function createDropdownField(labelText, dropdownComponent) {
@@ -90,16 +92,6 @@ export function AddressForm(props) {
 
           return wrapper;
         }
-
-        const countryField = createDropdownField(
-          `Country <span class="highlight-required">*</span>`,
-          countryDropdown
-        );
-
-        const stateField = createDropdownField(
-          `State/Region <span class="highlight-required">*</span>`,
-          stateDropdown
-        );
 
         const fields = {
           first_name: FormField({
@@ -146,24 +138,14 @@ export function AddressForm(props) {
               id: "reg-sa",
             },
           }),
-          password: FormField({
-            label: `Password <span class="highlight-required">*</span>`,
-            inputProps: {
-              name: "password",
-              type: "password",
-              id: "reg-pass",
-              placeholder: "********",
-            },
-          }),
-          confirm_password: FormField({
-            label: `Confirm Password <span class="highlight-required">*</span>`,
-            inputProps: {
-              name: "confirm_password",
-              type: "password",
-              id: "reg-confirm",
-              placeholder: "********",
-            },
-          }),
+          state_field: createDropdownField(
+            `State/Region <span class="highlight-required">*</span>`,
+            stateDropdown,
+          ),
+          country_field: createDropdownField(
+            `Country <span class="highlight-required">*</span>`,
+            countryDropdown,
+          ),
           postal_code: FormField({
             label: `Zip/Postal Code <span class="highlight-required">*</span>`,
             inputProps: {
@@ -178,14 +160,14 @@ export function AddressForm(props) {
           fields.last_name,
           fields.company,
           fields.phone_number,
-          fields.fax
+          fields.fax,
         );
 
         el.querySelector('[data-group="auth"]').append(
           fields.street_address,
-          countryField,
-          stateField,
-          fields.postal_code
+          fields.country_field,
+          fields.state_field,
+          fields.postal_code,
         );
 
         const validator = new JustValidate(el, {
@@ -197,7 +179,7 @@ export function AddressForm(props) {
         const addValidatedField = (fieldComponent, id, rules) => {
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text"
+              ".form-field__message-text",
             ),
           });
         };
@@ -209,12 +191,42 @@ export function AddressForm(props) {
           { rule: "required", errorMessage: "Last name is required" },
         ]);
 
-        addValidatedField(countryField, 'select[name="country"]', [
+        addValidatedField(fields.phone_number, "#reg-pn", [
+          { rule: "required", errorMessage: "Phone number is required" },
+          {
+            rule: "customRegexp",
+            value: /^(?:\+380\d{9}|0\d{9})$/,
+            errorMessage:
+              "Enter the correct number (+380501234567, 0501234567)",
+          },
+        ]);
+        addValidatedField(fields.street_address, "#reg-sa", [
+          { rule: "required", errorMessage: "Street address is required" },
+        ]);
+
+        addValidatedField(fields.country_field, 'select[name="country"]', [
           { rule: "required", errorMessage: "Country is required" },
         ]);
 
-        addValidatedField(stateField, 'select[name="state"]', [
+        addValidatedField(fields.state_field, 'select[name="state"]', [
           { rule: "required", errorMessage: "State/Region is required" },
+        ]);
+
+        addValidatedField(fields.postal_code, "#reg-pc", [
+          {
+            rule: "required",
+            errorMessage: "Zip/Postal Code is required",
+          },
+          {
+            rule: "minLength",
+            value: 5,
+            errorMessage: "Postal code must be at least 5 characters",
+          },
+          {
+            rule: "customRegexp",
+            value: /^[0-9]+$/,
+            errorMessage: "Postal code must contain only numbers",
+          },
         ]);
 
         validator.onValidate(({ fields }) => {
@@ -237,8 +249,6 @@ export function AddressForm(props) {
         validator.onSuccess(() => {
           const formData = Object.fromEntries(new FormData(el));
 
-          formData.is_subscribed_for_newsletter =
-            !!formData.is_subscribed_for_newsletter;
           onSubmit?.(formData);
         });
 
