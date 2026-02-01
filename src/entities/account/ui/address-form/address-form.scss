@@ -25,7 +25,7 @@
   &__btn-submit {
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 14px;
+    font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
@@ -53,6 +53,10 @@
       width: 100%;
       flex: 1 1 443px;
     }
+
+    &__input {
+      font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
+    }
   }
 
   .checkbox__text {
@@ -73,7 +77,7 @@
       line-height: 20px;
       font-family: var(--second-family);
       font-weight: 400;
-      font-size: 16px;
+      font-size: functions.fluidValue(12px, 16px, 320px, 1920px);
     }
 
     &_is-open {
