@@ -1,37 +1,8 @@
 {%macro profileSection(baseUrl="", content=null)%}
 <section class="profile-section">
     <div class="profile-section__body">
-        <div class="profile-section__menu">
-            <!-- {{accountMenu(baseUrl)}} -->
-        </div>
+        <div class="profile-section__menu"></div>
         <div class="profile-section__content">{{content | safe}}</div>
     </div>
 </section>
-{%endmacro%}
-
-{% macro accountMenu(baseUrl="")%}
-<div class="account-menu">
-    <div class="account-menu__item account-menu-item">
-        <ul class="account-menu-item__list account-menu-list">
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/dashboard/">Account Dashboard</a>
-            </li>
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">Account Information</a>
-            </li>
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/orders/">Address Book</a>
-            </li>
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">My Orders</a>
-            </li>
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/orders/">My Wishlist</a>
-            </li>
-            <li class="account-menu-list__item">
-                <a class="account-menu-list__link" href="{{baseUrl}}account/transactions/">Newsletter Subscriptions</a>
-            </li>
-        </ul>
-    </div>
-</div>
 {%endmacro%}

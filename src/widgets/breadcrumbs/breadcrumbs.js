@@ -2,6 +2,7 @@ const breadcrumbNames = {
   cart: "Shopping Cart",
   registration: "Create New Customer Account",
   "account/dashboard": "MyDashboard",
+  "account/address": "Create New Customer Account",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
@@ -30,7 +31,10 @@ export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
         .map((part, index) => {
           accumulatedPath += (index === 0 ? "" : "/") + part;
 
-          if (part === "account" && parts[index + 1] === "dashboard") {
+          if (
+            part === "account" &&
+            (parts[index + 1] === "dashboard" || parts[index + 1] === "address")
+          ) {
             return "";
           }
 

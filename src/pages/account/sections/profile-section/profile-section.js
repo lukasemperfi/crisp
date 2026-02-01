@@ -20,7 +20,7 @@ function initAccountMenu() {
       value: `${baseUrl}account/dahboard/`,
       label: "Account Information",
     },
-    { id: 9, value: `${baseUrl}account/dashoard/`, label: "Address Book" },
+    { id: 9, value: `${baseUrl}account/address/`, label: "Address Book" },
     { id: 31, value: `${baseUrl}account/dashbard/`, label: "My Orders" },
     { id: 10, value: `${baseUrl}account/dashbord/`, label: "My Wishlist" },
     {
@@ -51,21 +51,3 @@ function initAccountMenu() {
     window.location.href = value;
   });
 }
-
-// function initAccountMenu() {
-//   try {
-//     const currentUrl = window.location.href;
-//     const menuLinks = document.querySelectorAll(".account-menu-list__link");
-
-//     menuLinks.forEach((link) => {
-//       const linkUrl = link.href;
-
-//       if (linkUrl === currentUrl) {
-//         link.classList.add("active");
-//         link.setAttribute("aria-current", "page");
-//       }
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
