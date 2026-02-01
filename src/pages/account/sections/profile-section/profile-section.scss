@@ -114,6 +114,7 @@
     font-weight: 400;
     font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
     color: var(--black);
+    margin-bottom: functions.fluidValue(10px, 23px, 320px, 1920px);
 
     @include mixins.respond-to($bp-mobile) {
       color: var(--gray-1);
@@ -170,6 +171,12 @@
           }
         }
       }
+    }
+  }
+
+  .form-field {
+    &__label {
+      font-size: functions.fluidValue(12px, 16px, 320px, 1920px) !important;
     }
   }
 }

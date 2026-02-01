@@ -10,13 +10,13 @@
     }
   }
 
-  &__title {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    color: var(--black);
-    margin-bottom: 32px;
-  }
+  // &__title {
+  //   font-family: var(--font-family);
+  //   font-weight: 400;
+  //   font-size: 24px;
+  //   color: var(--black);
+  //   margin-bottom: 32px;
+  // }
 
   &__fields-container {
     display: flex;
@@ -27,7 +27,7 @@
   &__actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 65px;
+    margin-top: functions.fluidValue(29px, 65px, 320px, 1920px);
   }
 
   &__btn-submit {
@@ -38,19 +38,8 @@
     text-transform: uppercase;
     text-align: center;
     color: var(--white);
-    padding-inline: 73px;
+    padding-inline: 29px;
     padding-block: 15px;
-  }
-
-  &__btn-back {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    text-align: right;
-    color: var(--gray-1);
-    padding-inline: 0;
   }
 
   .form-field {

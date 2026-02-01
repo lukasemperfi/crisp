@@ -19,6 +19,7 @@
 
 .address-page {
   $bp-tablet: 1550px;
+  $bp-tablet-sm: 1028px;
   $bp-mobile: 450px;
 
   margin-bottom: 116px;
@@ -82,6 +83,40 @@
     @include mixins.respond-to(650px) {
       border: none;
       padding: 0;
+    }
+  }
+
+  .address-form {
+    max-width: 541px;
+
+    @include mixins.respond-to($bp-tablet-sm) {
+      max-width: none;
+    }
+
+    .form-field {
+      gap: functions.fluidValue(8px, 18px, 320px, 1920px);
+
+      @include mixins.respond-to(650px) {
+        flex-direction: column;
+      }
+
+      &__label {
+        flex: 1 1 131px;
+        @include mixins.respond-to(650px) {
+          flex: none;
+        }
+      }
+
+      &__control {
+        flex: 1 1 392px;
+        @include mixins.respond-to(650px) {
+          flex: none;
+        }
+      }
+    }
+
+    &__btn-submit {
+      width: 100%;
     }
   }
 }

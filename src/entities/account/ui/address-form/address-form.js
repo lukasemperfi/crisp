@@ -17,18 +17,18 @@ export function AddressForm(props) {
 
         el.innerHTML = `
           <div class="address-form__section address-form__section_personal">
-            <h2 class="address-form__title">Contact Information</h2>
+            <h2 class="address-form__title profile-section__section-title">Contact Information</h2>
             <div class="address-form__fields-container" data-group="personal"></div>
           </div>
 
           <div class="address-form__section">
-            <h2 class="address-form__title">Address</h2>
+            <h2 class="address-form__title profile-section__section-title">Address</h2>
             <div class="address-form__fields-container" data-group="auth"></div>
           </div>
 
           <div class="address-form__actions">
             <button type="submit" class="address-form__btn-submit button button_solid button_black">
-              Create an Account
+              Save Adress
             </button>
           </div>
         `;
@@ -44,7 +44,7 @@ export function AddressForm(props) {
 
         const stateDropdown = Dropdown({
           name: "state",
-          placeholder: "Please select a region, state or province.",
+          placeholder: "Please select a state .",
           options: [],
           disabled: true,
         });
