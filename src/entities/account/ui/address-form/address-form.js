@@ -59,10 +59,15 @@ export function AddressForm(props) {
             disabled: regions.length === 0,
             defaultValue: "",
           });
+
+          validator.revalidateField('select[name="country"]');
+          validator.revalidateField('select[name="state"]');
         });
 
         stateDropdown.addEventListener("onChange", (event) => {
           currentRegion = event.detail;
+          //TODO: не работает ревалидейт
+          validator.revalidateField('select[name="state"]');
         });
 
         function createDropdownField(labelText, dropdownComponent) {
@@ -202,6 +207,14 @@ export function AddressForm(props) {
         ]);
         addValidatedField(fields.last_name, "#reg-ln", [
           { rule: "required", errorMessage: "Last name is required" },
+        ]);
+
+        addValidatedField(countryField, 'select[name="country"]', [
+          { rule: "required", errorMessage: "Country is required" },
+        ]);
+
+        addValidatedField(stateField, 'select[name="state"]', [
+          { rule: "required", errorMessage: "State/Region is required" },
         ]);
 
         validator.onValidate(({ fields }) => {

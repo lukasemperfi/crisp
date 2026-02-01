@@ -19,17 +19,8 @@ function initAddressForm() {
   });
 
   const form = AddressForm({
-    onSubmit: async ({ confirm_password, ...restData }) => {
-      try {
-        authSpinner.show();
-        await registerUser(restData);
-        authSpinner.success();
-
-        location.reload();
-      } catch (error) {
-        authSpinner.hide();
-        console.error("Ошибка входа:", error);
-      }
+    onSubmit: async (data) => {
+      console.log("data", data);
     },
   });
 
