@@ -10,14 +10,6 @@
     }
   }
 
-  // &__title {
-  //   font-family: var(--font-family);
-  //   font-weight: 400;
-  //   font-size: 24px;
-  //   color: var(--black);
-  //   margin-bottom: 32px;
-  // }
-
   &__fields-container {
     display: flex;
     flex-direction: column;
@@ -73,7 +65,7 @@
 
   .dropdown {
     &__trigger {
-      color: var(--gray-1);
+      color: var(--black);
       text-transform: none;
       width: 100%;
       padding-block: 12px;
@@ -87,10 +79,10 @@
     &_is-open {
       .dropdown__trigger {
         background-color: transparent;
-        color: var(--gray-1);
+        color: var(--black);
       }
       .dropdown__icon path {
-        stroke: var(--gray-1);
+        stroke: var(--black);
       }
     }
   }

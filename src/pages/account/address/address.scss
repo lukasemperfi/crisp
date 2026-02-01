@@ -116,7 +116,9 @@
     }
 
     &__btn-submit {
-      width: 100%;
+      @include mixins.respond-to($bp-tablet-sm) {
+        width: 100%;
+      }
     }
   }
 }

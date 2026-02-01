@@ -10,7 +10,18 @@ export function AddressForm(props) {
     tag: "form",
 
     render(el, props, emit, { runOnce }) {
-      const { onSubmit } = props;
+      const { onSubmit, userProfileData } = props;
+      const {
+        first_name = "",
+        last_name = "",
+        company = "",
+        phone_number = "",
+        fax = "",
+        street_address = "",
+        country = "",
+        state = "",
+        postal_code = "",
+      } = userProfileData;
 
       if (runOnce) {
         el.className = "address-form";
@@ -33,20 +44,23 @@ export function AddressForm(props) {
           </div>
         `;
 
-        let currentCountry = "";
-        let currentRegion = "";
+        let currentCountry = country;
+        let currentRegion = state;
 
         const countryDropdown = Dropdown({
           name: "country",
           placeholder: "Please select your country",
           options: countries,
+          defaultValue: country,
         });
 
+        const initialRegions = regionsByCountry[country] || [];
         const stateDropdown = Dropdown({
           name: "state",
           placeholder: "Please select a state .",
-          options: [],
-          disabled: true,
+          options: initialRegions,
+          disabled: initialRegions.length === 0,
+          defaultValue: state,
         });
 
         countryDropdown.addEventListener("onChange", (event) => {
@@ -100,6 +114,7 @@ export function AddressForm(props) {
               name: "first_name",
               id: "reg-fn",
               placeholder: "Enter your first name",
+              value: first_name,
             },
           }),
           last_name: FormField({
@@ -108,6 +123,7 @@ export function AddressForm(props) {
               name: "last_name",
               id: "reg-ln",
               placeholder: "Enter your last name",
+              value: last_name,
             },
           }),
           company: FormField({
@@ -115,6 +131,7 @@ export function AddressForm(props) {
             inputProps: {
               name: "company",
               id: "reg-company",
+              value: company,
             },
           }),
           phone_number: FormField({
@@ -122,6 +139,7 @@ export function AddressForm(props) {
             inputProps: {
               name: "phone_number",
               id: "reg-pn",
+              value: phone_number,
             },
           }),
           fax: FormField({
@@ -129,6 +147,7 @@ export function AddressForm(props) {
             inputProps: {
               name: "fax",
               id: "reg-f",
+              value: fax,
             },
           }),
           street_address: FormField({
@@ -136,6 +155,7 @@ export function AddressForm(props) {
             inputProps: {
               name: "street_address",
               id: "reg-sa",
+              value: street_address,
             },
           }),
           state_field: createDropdownField(
@@ -151,6 +171,7 @@ export function AddressForm(props) {
             inputProps: {
               name: "postal_code",
               id: "reg-pc",
+              value: postal_code,
             },
           }),
         };
