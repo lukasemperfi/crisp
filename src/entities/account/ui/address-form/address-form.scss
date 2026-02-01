@@ -81,4 +81,28 @@
 
     color: var(--gray-1);
   }
+
+  .dropdown {
+    &__trigger {
+      color: var(--gray-1);
+      text-transform: none;
+      width: 100%;
+      padding-block: 12px;
+      padding-inline: 16px;
+      line-height: 20px;
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+    }
+
+    &_is-open {
+      .dropdown__trigger {
+        background-color: transparent;
+        color: var(--gray-1);
+      }
+      .dropdown__icon path {
+        stroke: var(--gray-1);
+      }
+    }
+  }
 }

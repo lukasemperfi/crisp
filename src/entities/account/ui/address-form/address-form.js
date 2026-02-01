@@ -2,6 +2,8 @@ import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
 import { Checkbox } from "@/shared/ui/checkbox/checkbox";
+import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
+import { countries, regionsByCountry } from "../../../../shared/lib/location";
 
 export function AddressForm(props) {
   return createComponent(props, {
@@ -30,6 +32,69 @@ export function AddressForm(props) {
             </button>
           </div>
         `;
+
+        let currentCountry = "";
+        let currentRegion = "";
+
+        const countryDropdown = Dropdown({
+          name: "country",
+          placeholder: "Please select your country",
+          options: countries,
+        });
+
+        const stateDropdown = Dropdown({
+          name: "state",
+          placeholder: "Please select a region, state or province.",
+          options: [],
+          disabled: true,
+        });
+
+        countryDropdown.addEventListener("onChange", (event) => {
+          currentCountry = event.detail;
+          currentRegion = "";
+
+          const regions = regionsByCountry[currentCountry] || [];
+          stateDropdown.update({
+            options: regions,
+            disabled: regions.length === 0,
+            defaultValue: "",
+          });
+        });
+
+        stateDropdown.addEventListener("onChange", (event) => {
+          currentRegion = event.detail;
+        });
+
+        function createDropdownField(labelText, dropdownComponent) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "form-field";
+
+          wrapper.innerHTML = `
+            <label class="form-field__label">${labelText}</label>
+            <div class="form-field__control">       
+            <div class="form-field__message">
+              <span class="form-field__message-text"></span>
+              <span class="form-field__message-icon">X</span>
+            </div>
+          </div>
+          `;
+
+          wrapper
+            .querySelector(".form-field__control")
+            .prepend(dropdownComponent);
+
+          return wrapper;
+        }
+
+        const countryField = createDropdownField(
+          `Country <span class="highlight-required">*</span>`,
+          countryDropdown
+        );
+
+        const stateField = createDropdownField(
+          `State/Region <span class="highlight-required">*</span>`,
+          stateDropdown
+        );
 
         const fields = {
           first_name: FormField({
@@ -113,6 +178,8 @@ export function AddressForm(props) {
 
         el.querySelector('[data-group="auth"]').append(
           fields.street_address,
+          countryField,
+          stateField,
           fields.postal_code
         );
 
