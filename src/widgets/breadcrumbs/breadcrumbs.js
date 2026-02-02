@@ -3,6 +3,7 @@ const breadcrumbNames = {
   registration: "Create New Customer Account",
   "account/dashboard": "MyDashboard",
   "account/address": "Create New Customer Account",
+  "account/info": "Edit Account Information",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
@@ -33,7 +34,9 @@ export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
 
           if (
             part === "account" &&
-            (parts[index + 1] === "dashboard" || parts[index + 1] === "address")
+            (parts[index + 1] === "dashboard" ||
+              parts[index + 1] === "address" ||
+              parts[index + 1] === "info")
           ) {
             return "";
           }

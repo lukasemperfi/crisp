@@ -1,0 +1,130 @@
+@use "@/app/styles/index.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
+@use "@/shared/ui/contact-us-button/contact-us-button.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/shared/ui/accordion/accordion.scss" as *;
+@use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/shared/ui/checkbox/checkbox.scss" as *;
+@use "@/pages/account/sections/profile-section/profile-section.scss" as *;
+@use "@/entities/account/ui/info-form/info-form.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.info-page {
+  $bp-tablet: 1550px;
+  $bp-tablet-sm: 1028px;
+  $bp-mobile: 450px;
+
+  margin-bottom: 116px;
+
+  @include mixins.respond-to($bp-tablet) {
+    margin-bottom: functions.fluidValue(17px, 116px, 320px, $bp-tablet);
+  }
+
+  .page-container-1920 {
+    max-width: 1496px;
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    justify-content: center;
+    padding-block: 18px;
+
+    @include mixins.respond-to($bp-tablet) {
+      padding-block: functions.fluidValue(6px, 18px, 320px, $bp-tablet);
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      justify-content: flex-start;
+    }
+
+    .breadcrumbs__link {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+      }
+    }
+  }
+
+  &__header {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 48px;
+    text-align: center;
+    color: var(--black);
+    line-height: 68px;
+    padding-block: 11px;
+    margin-bottom: 23px;
+
+    @include mixins.respond-to($bp-tablet) {
+      font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
+      line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
+      margin-bottom: functions.fluidValue(0px, 23px, 320px, $bp-tablet);
+    }
+
+    @include mixins.respond-to(650px) {
+      display: none;
+    }
+  }
+  &__content {
+    border: 1px solid var(--divider);
+    display: flex;
+    justify-content: center;
+    padding-top: functions.fluidValue(15px, 95px, 650px, 1920px);
+    padding-bottom: functions.fluidValue(15px, 123px, 650px, 1920px);
+    padding-inline: 25px;
+
+    @include mixins.respond-to(650px) {
+      border: none;
+      padding: 0;
+    }
+  }
+
+  .info-form {
+    max-width: 541px;
+
+    @include mixins.respond-to($bp-tablet-sm) {
+      max-width: none;
+    }
+
+    .form-field {
+      gap: functions.fluidValue(8px, 18px, 320px, 1920px);
+
+      @include mixins.respond-to(650px) {
+        flex-direction: column;
+      }
+
+      &__label {
+        flex: 1 1 131px;
+        @include mixins.respond-to(650px) {
+          flex: none;
+        }
+      }
+
+      &__control {
+        flex: 1 1 392px;
+        @include mixins.respond-to(650px) {
+          flex: none;
+        }
+      }
+    }
+
+    &__btn-submit {
+      @include mixins.respond-to($bp-tablet-sm) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.page-contacts-btn {
+  @include mixins.respond-to("1550px") {
+    display: none;
+  }
+}

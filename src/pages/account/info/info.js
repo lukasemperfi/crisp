@@ -3,30 +3,31 @@ import { initPageFooter } from "@/widgets/footer/footer.js";
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { initProfileSection } from "../sections/profile-section/profile-section";
 import { createOverlaySpinner } from "@/shared/ui/overlay-spinner/overlay-spinner";
-import { AddressForm } from "@/entities/account/ui/address-form/address-form";
+import { InfoForm } from "@/entities/account/ui/info-form/info-form";
 import { userProfileApi } from "../../../entities/account/api/profile";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
-  initBreadcrumbs(".address-page__breadcrumbs");
+  initBreadcrumbs(".info-page__breadcrumbs");
   initProfileSection();
   initPageFooter();
 
   // const userProfileData = await userProfileApi.getProfile();
-  initAddressForm({});
+
+  initInfoForm({});
 });
 
-function initAddressForm(userProfileData) {
+function initInfoForm(userProfileData) {
   const authSpinner = createOverlaySpinner({
     successText: "Вход выполнен успешно!",
   });
 
-  const form = AddressForm({
+  const form = InfoForm({
     userProfileData,
     onSubmit: async (data) => {
       try {
         authSpinner.show();
-        await userProfileApi.updateProfile(data);
+        // await userProfileApi.updateProfile(data);
         authSpinner.success("Data is updated!");
 
         location.reload();

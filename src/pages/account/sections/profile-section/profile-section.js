@@ -17,7 +17,7 @@ function initAccountMenu() {
     },
     {
       id: 5,
-      value: `${baseUrl}account/dahboard/`,
+      value: `${baseUrl}account/info/`,
       label: "Account Information",
     },
     { id: 9, value: `${baseUrl}account/address/`, label: "Address Book" },
