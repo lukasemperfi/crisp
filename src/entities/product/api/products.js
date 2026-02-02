@@ -5,39 +5,60 @@ class Products {
     return await productsApi._getFilteredProducts(filters);
   };
 
-  getProductById = async (productId) => {
+  getProductById = async (productId, userId = null) => {
     if (!productId) {
       throw new Error("Product ID is required");
     }
 
-    const { data, error } = await supabase
+    // Запускаем запрос продукта и проверку wishlist параллельно для скорости
+    const productQuery = supabase
       .from("products")
       .select(
         `
-        *,
-        brand:brands (*),
-        images:product_images (*),
-        length:product_lengths (*),
-        variants:product_variants (
-          id, 
-          stock, 
-          color:product_colors (*), 
-          size:product_sizes (*)
-        ),
-        tags:product_tags_mapping (
-          tag:product_tags (*)
-        )
-      `
+      *,
+      brand:brands (*),
+      images:product_images (*),
+      length:product_lengths (*),
+      variants:product_variants (
+        id, 
+        stock, 
+        color:product_colors (*), 
+        size:product_sizes (*)
+      ),
+      tags:product_tags_mapping (
+        tag:product_tags (*)
+      )
+    `,
       )
       .eq("id", productId)
       .single();
 
-    if (error) {
-      console.error("Error fetching product:", error.message);
-      throw error;
+    // Если userId передан, создаем запрос к wishlist, иначе возвращаем null
+    const wishlistQuery = userId
+      ? supabase
+          .from("wishlists")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("product_id", productId)
+          .maybeSingle()
+      : Promise.resolve({ data: null });
+
+    // Выполняем оба запроса одновременно
+    const [productRes, wishlistRes] = await Promise.all([
+      productQuery,
+      wishlistQuery,
+    ]);
+
+    if (productRes.error) {
+      console.error("Error fetching product:", productRes.error.message);
+      throw productRes.error;
     }
 
-    return data;
+    // Собираем итоговый объект
+    return {
+      ...productRes.data,
+      isInWishlist: !!wishlistRes.data, // преобразуем наличие записи в true/false
+    };
   };
 
   getFeaturedProducts = async (filters = {}) => {
@@ -70,7 +91,7 @@ class Products {
         tags:product_tags_mapping (
           tag:product_tags (*)
         )
-      `
+      `,
       )
       .in("id", productIds);
 
@@ -81,8 +102,105 @@ class Products {
 
     return data;
   };
+  getWishlistProducts = async (userId) => {
+    if (!userId) {
+      throw new Error("User ID is required to get wishlist products");
+    }
 
-  _getFilteredProducts = async (filters = {}, flagCondition = null) => {
+    const { data, error } = await supabase
+      .from("wishlists")
+      .select(
+        `
+      product:products (
+        *,
+        brand:brands (*),
+        images:product_images (*),
+        length:product_lengths (*),
+        variants:product_variants (
+          id, 
+          stock, 
+          color:product_colors (*), 
+          size:product_sizes (*)
+        ),
+        tags:product_tags_mapping (
+          tag:product_tags (*)
+        )
+      )
+    `,
+      )
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error fetching wishlist products:", error.message);
+      throw error;
+    }
+
+    return data.map((item) => ({
+      ...item.product,
+      isInWishlist: true,
+    }));
+  };
+
+  removeFromWishlist = async (userId, productId) => {
+    if (!userId) throw new Error("User ID is required");
+    if (!productId) throw new Error("Product ID is required");
+
+    const { data, error } = await supabase
+      .from("wishlists")
+      .delete()
+      .eq("user_id", userId)
+      .eq("product_id", productId);
+
+    if (error) {
+      console.error("Error removing product from wishlist:", error.message);
+      throw error;
+    }
+
+    return data;
+  };
+
+  addToWishlist = async (userId, productId) => {
+    if (!userId) throw new Error("User ID is required");
+    if (!productId) throw new Error("Product ID is required");
+
+    const { data: existing, error: checkError } = await supabase
+      .from("wishlists")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("product_id", productId);
+
+    if (checkError) {
+      console.error("Error checking wishlist:", checkError.message);
+      throw checkError;
+    }
+
+    if (existing && existing.length > 0) {
+      return existing[0];
+    }
+
+    const { data, error } = await supabase
+      .from("wishlists")
+      .insert([
+        {
+          user_id: userId,
+          product_id: productId,
+        },
+      ])
+      .select();
+
+    if (error) {
+      console.error("Error adding product to wishlist:", error.message);
+      throw error;
+    }
+
+    return data[0];
+  };
+
+  _getFilteredProducts = async (
+    filters = {},
+    flagCondition = null,
+    userId = null,
+  ) => {
     const {
       brand = [],
       size = [],
@@ -111,11 +229,16 @@ class Products {
       ),
       tags:product_tags_mapping!inner (
         tag:product_tags (*)
-      )
+      ),
+      wishlists:wishlists (id, user_id)
     `,
-        { count: "exact" }
+        { count: "exact" },
       )
       .range(from, to);
+
+    if (userId) {
+      query = query.eq("wishlists.user_id", userId);
+    }
 
     if (flagCondition) {
       query = query.eq(flagCondition, true);
@@ -162,37 +285,13 @@ class Products {
     const { data, error, count } = await query;
     if (error) throw error;
 
-    return { data, count };
+    const productsWithWishlist = data.map((product) => ({
+      ...product,
+      isInWishlist: product.wishlists && product.wishlists.length > 0,
+    }));
+
+    return { data: productsWithWishlist, count };
   };
 }
 
 export const productsApi = new Products();
-
-// getProductsByIds = async (ids = []) => {
-//   if (!Array.isArray(ids) || ids.length === 0) {
-//     return [];
-//   }
-
-//   const { data: products, error } = await supabase
-//     .from("products")
-//     .select(
-//       `
-//       *,
-//       product_images (*),
-//       product_flavors!inner (
-//         flavor_id,
-//         flavors!inner (*)
-//       ),
-//       packaging_types (*),
-//       product_statuses (*)
-//     `
-//     )
-//     .in("id", ids);
-
-//   if (error) {
-//     console.error("Ошибка при получении продуктов по ID:", error.message);
-//     return [];
-//   }
-
-//   return products;
-// };

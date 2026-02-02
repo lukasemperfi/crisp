@@ -1,10 +1,12 @@
 import { ProductDetailsCard } from "@/entities/product/ui/product-details-card/product-details-card";
 import { Accordion } from "@/shared/ui/accordion/accordion";
+import { supabase } from "../../../../shared/api/supabase/client";
 
-export const initProductContent = async (product) => {
+export const initProductContent = async (product, userId) => {
   ProductDetailsCard({
     container: ".product-content__card",
     product: product,
+    userId,
   });
 
   const footerContent = [
