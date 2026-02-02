@@ -1,7 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
-import { Checkbox } from "../../../../shared/ui/checkbox/checkbox";
+import { Checkbox } from "@/shared/ui/checkbox/checkbox";
 
 export function RegistrationForm(props) {
   return createComponent(props, {
@@ -90,13 +90,13 @@ export function RegistrationForm(props) {
         el.querySelector('[data-group="personal"]').append(
           fields.first_name,
           fields.last_name,
-          fields.newsletter,
+          fields.newsletter
         );
 
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.confirm_password,
+          fields.confirm_password
         );
 
         const validator = new JustValidate(el, {
@@ -108,7 +108,7 @@ export function RegistrationForm(props) {
         const addValidatedField = (fieldComponent, id, rules) => {
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text",
+              ".form-field__message-text"
             ),
           });
         };
@@ -164,7 +164,7 @@ export function RegistrationForm(props) {
 
         el.querySelector(".registration-form__btn-back").addEventListener(
           "click",
-          () => onBack?.(),
+          () => onBack?.()
         );
 
         el._els = { validator };

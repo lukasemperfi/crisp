@@ -21,6 +21,14 @@ export function InfoForm(props) {
             <h2 class="info-form__title profile-section__section-title">Contact Information</h2>
             <div class="info-form__fields-container" data-group="personal"></div>
           </div>
+          
+          <div class="info-form__section">
+            <div class="info-form__fields-container" data-group="is_change"></div>
+          </div>
+
+          <div class="info-form__section">
+            <div class="info-form__fields-container" data-group="auth"></div>
+          </div>
 
           <div class="info-form__actions">
             <button type="submit" class="info-form__btn-submit button button_solid button_black">
@@ -48,11 +56,63 @@ export function InfoForm(props) {
               value: last_name,
             },
           }),
+          is_change_email: Checkbox({
+            label: "Change Email",
+            inputProps: {
+              name: "is_change_email",
+              id: "reg-is_change_email",
+            },
+          }),
+          is_change_password: Checkbox({
+            label: "Change Password",
+            inputProps: {
+              name: "is_change_password",
+              id: "reg-is_change_password",
+            },
+          }),
+          email: FormField({
+            label: `Email <span class="highlight-required">*</span>`,
+            inputProps: {
+              name: "email",
+              type: "email",
+              id: "reg-email",
+              placeholder: "example@mail.com",
+            },
+          }),
+          password: FormField({
+            label: `Password <span class="highlight-required">*</span>`,
+            inputProps: {
+              name: "password",
+              type: "password",
+              id: "reg-pass",
+              placeholder: "********",
+            },
+          }),
+          confirm_password: FormField({
+            label: `Confirm Password <span class="highlight-required">*</span>`,
+            inputProps: {
+              name: "confirm_password",
+              type: "password",
+              id: "reg-confirm",
+              placeholder: "********",
+            },
+          }),
         };
 
         el.querySelector('[data-group="personal"]').append(
           fields.first_name,
           fields.last_name
+        );
+
+        el.querySelector('[data-group="is_change"]').append(
+          fields.is_change_email,
+          fields.is_change_password
+        );
+
+        el.querySelector('[data-group="auth"]').append(
+          fields.email,
+          fields.password,
+          fields.confirm_password
         );
 
         const validator = new JustValidate(el, {
@@ -74,6 +134,23 @@ export function InfoForm(props) {
         ]);
         addValidatedField(fields.last_name, "#reg-ln", [
           { rule: "required", errorMessage: "Last name is required" },
+        ]);
+
+        addValidatedField(fields.email, "#reg-email", [
+          { rule: "required", errorMessage: "Email is required" },
+          { rule: "email", errorMessage: "Email is invalid" },
+        ]);
+        addValidatedField(fields.password, "#reg-pass", [
+          { rule: "required", errorMessage: "Password is required" },
+          { rule: "minLength", value: 8 },
+        ]);
+        addValidatedField(fields.confirm_password, "#reg-confirm", [
+          { rule: "required", errorMessage: "Please confirm your password" },
+          {
+            validator: (value, fields) =>
+              value === fields["#reg-pass"].elem.value,
+            errorMessage: "Passwords should match",
+          },
         ]);
 
         validator.onValidate(({ fields }) => {
