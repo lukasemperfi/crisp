@@ -2,8 +2,6 @@ import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
 import { Checkbox } from "@/shared/ui/checkbox/checkbox";
-import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
-import { countries, regionsByCountry } from "../../../../shared/lib/location";
 
 export function InfoForm(props) {
   return createComponent(props, {
@@ -58,10 +56,7 @@ export function InfoForm(props) {
           }),
           is_change_email: Checkbox({
             label: "Change Email",
-            inputProps: {
-              name: "is_change_email",
-              id: "reg-is_change_email",
-            },
+            inputProps: { name: "is_change_email", id: "reg-is_change_email" },
           }),
           is_change_password: Checkbox({
             label: "Change Password",
@@ -103,12 +98,10 @@ export function InfoForm(props) {
           fields.first_name,
           fields.last_name
         );
-
         el.querySelector('[data-group="is_change"]').append(
           fields.is_change_email,
           fields.is_change_password
         );
-
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
@@ -122,11 +115,19 @@ export function InfoForm(props) {
         });
 
         const addValidatedField = (fieldComponent, id, rules) => {
+          if (validator.fields[id]) return;
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
               ".form-field__message-text"
             ),
           });
+        };
+
+        const removeValidatedField = (id, fieldComponent) => {
+          if (validator.fields[id]) {
+            validator.removeField(id);
+            fieldComponent.classList.remove("form-field_message-default");
+          }
         };
 
         addValidatedField(fields.first_name, "#reg-fn", [
@@ -136,33 +137,65 @@ export function InfoForm(props) {
           { rule: "required", errorMessage: "Last name is required" },
         ]);
 
-        addValidatedField(fields.email, "#reg-email", [
-          { rule: "required", errorMessage: "Email is required" },
-          { rule: "email", errorMessage: "Email is invalid" },
-        ]);
-        addValidatedField(fields.password, "#reg-pass", [
-          { rule: "required", errorMessage: "Password is required" },
-          { rule: "minLength", value: 8 },
-        ]);
-        addValidatedField(fields.confirm_password, "#reg-confirm", [
-          { rule: "required", errorMessage: "Please confirm your password" },
-          {
-            validator: (value, fields) =>
-              value === fields["#reg-pass"].elem.value,
-            errorMessage: "Passwords should match",
-          },
-        ]);
+        const toggleEmailFields = () => {
+          const isActive =
+            fields.is_change_email.querySelector("input").checked;
+          fields.email.style.display = isActive ? "" : "none";
+
+          if (isActive) {
+            addValidatedField(fields.email, "#reg-email", [
+              { rule: "required", errorMessage: "Email is required" },
+              { rule: "email", errorMessage: "Email is invalid" },
+            ]);
+          } else {
+            removeValidatedField("#reg-email", fields.email);
+          }
+        };
+
+        const togglePasswordFields = () => {
+          const isActive =
+            fields.is_change_password.querySelector("input").checked;
+          const displayStyle = isActive ? "" : "none";
+          fields.password.style.display = displayStyle;
+          fields.confirm_password.style.display = displayStyle;
+
+          if (isActive) {
+            addValidatedField(fields.password, "#reg-pass", [
+              { rule: "required", errorMessage: "Password is required" },
+              { rule: "minLength", value: 8 },
+            ]);
+            addValidatedField(fields.confirm_password, "#reg-confirm", [
+              {
+                rule: "required",
+                errorMessage: "Please confirm your password",
+              },
+              {
+                validator: (value, fields) =>
+                  value === fields["#reg-pass"].elem.value,
+                errorMessage: "Passwords should match",
+              },
+            ]);
+          } else {
+            removeValidatedField("#reg-pass", fields.password);
+            removeValidatedField("#reg-confirm", fields.confirm_password);
+          }
+        };
+
+        fields.is_change_email.addEventListener("change", toggleEmailFields);
+        fields.is_change_password.addEventListener(
+          "change",
+          togglePasswordFields
+        );
+
+        toggleEmailFields();
+        togglePasswordFields();
 
         validator.onValidate(({ fields }) => {
           Object.values(fields).forEach((field) => {
             const formField = field.elem?.closest(".form-field");
-            const isValidField = field.isValid;
+            if (!formField) return;
 
-            if (!formField) {
-              return;
-            }
-
-            if (!isValidField) {
+            if (!field.isValid) {
               formField.classList.add("form-field_message-default");
             } else {
               formField.classList.remove("form-field_message-default");
@@ -171,9 +204,21 @@ export function InfoForm(props) {
         });
 
         validator.onSuccess(() => {
-          const formData = Object.fromEntries(new FormData(el));
+          const fullData = Object.fromEntries(new FormData(el));
+          const resultData = {
+            first_name: fullData.first_name,
+            last_name: fullData.last_name,
+          };
 
-          onSubmit?.(formData);
+          if (fields.is_change_email.querySelector("input").checked) {
+            resultData.email = fullData.email;
+          }
+          if (fields.is_change_password.querySelector("input").checked) {
+            resultData.password = fullData.password;
+            resultData.confirm_password = fullData.confirm_password;
+          }
+
+          onSubmit?.(resultData);
         });
 
         el._els = { validator };
