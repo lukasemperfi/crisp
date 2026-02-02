@@ -84,9 +84,9 @@ export class ProductList {
 
     this._btn.addEventListener("click", () => {
       if (typeof this._onLoadMore === "function") {
-        this.showLoader(); 
+        this.showLoader();
         this._onLoadMore().finally(() => {
-          this.hideLoader(); 
+          this.hideLoader();
         });
       }
     });
@@ -170,6 +170,177 @@ export class ProductList {
       this._btn.style.display = "";
     }
   }
+  setLoadMoreHandler(handler) {
+    this._onLoadMore = handler;
+  }
+}
+
+export class ProductList2 {
+  constructor({
+    initialProducts = [],
+    onLoadMore,
+    showEmptyMessageOnInit = false,
+    renderItem,
+  } = {}) {
+    // Убрали containerSelector из параметров
+    this._onLoadMore = onLoadMore;
+    this._renderItem = renderItem;
+    this._products = [];
+    this._showEmptyMessageOnInit = showEmptyMessageOnInit;
+    this._initialized = false;
+
+    // Сразу подготавливаем структуру
+    this._renderStructure();
+
+    if (initialProducts.length > 0) {
+      this.appendProducts(initialProducts);
+    } else {
+      if (this._showEmptyMessageOnInit) {
+        this._renderEmptyMessage();
+      }
+    }
+  }
+
+  // Публичный метод для получения корневого элемента
+  getElement() {
+    return this._wrapper;
+  }
+
+  _renderStructure() {
+    if (this._initialized) return;
+
+    // Теперь мы не чистим чужой контейнер, а создаем свой собственный корень
+    this._wrapper = document.createElement("div");
+    this._wrapper.className = "catalog";
+
+    this._wrapper.innerHTML = `
+      <div class="catalog__list"></div>
+      <div class="catalog__actions">
+        <button type="button" class="button button_outlined button_gray catalog__more-button">
+          Load more
+        </button>
+      </div>
+    `;
+
+    this._list = this._wrapper.querySelector(".catalog__list");
+    this._btnWrapper = this._wrapper.querySelector(".catalog__actions");
+    this._btn = this._wrapper.querySelector(".catalog__more-button");
+
+    this._loader = document.createElement("div");
+    this._loader.className = "catalog__loader";
+    this._loader.style.display = "none";
+    this._loader.innerHTML = `<div class="spinner"></div>`;
+    this._btnWrapper.appendChild(this._loader);
+
+    const style = document.createElement("style");
+    style.textContent = `
+      .catalog__loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .spinner {
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0,0,0,0.2);
+        border-top-color: rgba(0,0,0,0.8);
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
+      }
+    `;
+    document.head.appendChild(style);
+
+    this._btn.addEventListener("click", () => {
+      if (typeof this._onLoadMore === "function") {
+        this.showLoader();
+        this._onLoadMore().finally(() => {
+          this.hideLoader();
+        });
+      }
+    });
+
+    this._initialized = true;
+  }
+
+  appendProducts(products) {
+    if (!products || products.length === 0) {
+      this._renderEmptyMessage();
+      return;
+    }
+
+    this._hideEmptyMessage();
+    this.showLoadMore();
+
+    const fragment = document.createDocumentFragment();
+
+    products.forEach((product) => {
+      const card = this._renderItem ? this._renderItem(product) : null;
+
+      if (card) {
+        fragment.appendChild(card);
+      }
+      this._products.push(product);
+    });
+
+    this._list.appendChild(fragment);
+  }
+
+  clear() {
+    if (this._list) this._list.innerHTML = "";
+    this._products = [];
+    this._hideEmptyMessage();
+  }
+
+  hideLoadMore() {
+    if (this._btnWrapper) this._btnWrapper.style.display = "none";
+    if (this._btn) this._btn.style.display = "none";
+  }
+
+  showLoadMore() {
+    if (this._btnWrapper) this._btnWrapper.style.display = "";
+    if (this._btn) this._btn.style.display = "";
+  }
+
+  getProducts() {
+    return [...this._products];
+  }
+
+  _renderEmptyMessage() {
+    if (!this._emptyMessage) {
+      this._emptyMessage = document.createElement("div");
+      this._emptyMessage.className = "catalog__empty";
+      this._emptyMessage.textContent = "No products found";
+      this._wrapper.appendChild(this._emptyMessage);
+    }
+    this.hideLoadMore();
+    this._emptyMessage.style.display = "";
+  }
+
+  _hideEmptyMessage() {
+    if (this._emptyMessage) {
+      this._emptyMessage.style.display = "none";
+    }
+  }
+
+  showLoader() {
+    if (this._loader) {
+      this._loader.style.display = "";
+      this._btn.style.display = "none";
+    }
+  }
+
+  hideLoader() {
+    if (this._loader) {
+      this._loader.style.display = "none";
+      this._btn.style.display = "";
+    }
+  }
+
   setLoadMoreHandler(handler) {
     this._onLoadMore = handler;
   }

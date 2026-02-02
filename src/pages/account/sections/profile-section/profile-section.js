@@ -21,11 +21,11 @@ function initAccountMenu() {
       label: "Account Information",
     },
     { id: 9, value: `${baseUrl}account/address/`, label: "Address Book" },
-    { id: 31, value: `${baseUrl}account/dashbard/`, label: "My Orders" },
-    { id: 10, value: `${baseUrl}account/dashbord/`, label: "My Wishlist" },
+    { id: 31, value: `#`, label: "My Orders" },
+    { id: 10, value: `${baseUrl}account/wishlist/`, label: "My Wishlist" },
     {
       id: 13,
-      value: `${baseUrl}account/dashboar/`,
+      value: `#`,
       label: "Newsletter Subscriptions",
     },
   ];

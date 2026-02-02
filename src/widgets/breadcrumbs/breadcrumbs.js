@@ -1,9 +1,10 @@
 const breadcrumbNames = {
   cart: "Shopping Cart",
   registration: "Create New Customer Account",
-  "account/dashboard": "MyDashboard",
+  "account/dashboard": "My Dashboard",
   "account/address": "Create New Customer Account",
   "account/info": "Edit Account Information",
+  "account/wishlist": "My Wishlist",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
@@ -36,7 +37,8 @@ export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
             part === "account" &&
             (parts[index + 1] === "dashboard" ||
               parts[index + 1] === "address" ||
-              parts[index + 1] === "info")
+              parts[index + 1] === "info" ||
+              parts[index + 1] === "wishlist")
           ) {
             return "";
           }
