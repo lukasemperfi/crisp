@@ -1,11 +1,107 @@
+{%from "src/shared/ui/picture/picture.html" import picture%}
+
 {%macro blogContent()%}
 <section class="blog-content">
     <div class="page-container-1920">
-        <div class="blog-content__wrapper">
-            <div class="blog-content__card"></div>
-            <div class="blog-content__description description">
-                <div class="description__col-1"></div>
-                <div class="description__col-2"></div>
+        <div class="blog-content__content content">
+            <div class="content__col-1">
+                <div class="content__section">
+                    <h2 class="content__title">The Dress</h2>
+                    <p class="content__paragraph">
+                        It’s a tricky thing, being a wedding guest.<br />
+                        Among the endless list of requirements – buy a present, arrange accommodation, practise your
+                        small talk – there’s one obligation that trumps them all in terms of effort: fix up and look
+                        sharp.
+                    </p>
+                    <p class="content__paragraph">
+                        The rules surrounding wedding guest dressing are as nuanced as they come.
+                    </p>
+                    <p class="content__paragraph">
+                        There are some obvious musts – avoiding white is always a good idea – and others that are only
+                        acknowledged by serial wedding-goers, such as steering clear of stilettos unless you enjoy the
+                        feeling of numbness in your feet.
+                    </p>
+                    <p class="content__paragraph">
+                        In the summer, things get even more complicated. Not only do you have to find a sweat-free way
+                        to “dress to the nines”, but you have to strike the right balance between playful sunshine garb
+                        and formal occasionwear. This forces you to ask difficult questions, such as “Is this wrap dress
+                        more ‘I do’ or ‘BBQ?’” and “Does this hat make me look like a chic French woman, or a
+                        dishevelled bird?”
+
+                    </p>
+                    <p class="content__paragraph">
+                        It’s no mean feat, so here’s our handy guide to summer wedding guest dressing, with tips from
+                        industry experts on the trends and colours you need to know about this season .
+                    </p>
+                </div>
+                {{ picture(
+                jpgSrc="/images/blog/dresses.jpg",
+                webpSrc="/images/blog/dresses.webp",
+                alt="dresses image",
+                class="content__dresses-img"
+                ) }}
+                <div class="content__section">
+                    <h2 class="content__title">The Dress</h2>
+                    <p class="content__paragraph">
+                        It’s a tricky thing, being a wedding guest.<br />
+                        Among the endless list of requirements – buy a present, arrange accommodation, practise your
+                        small talk – there’s one obligation that trumps them all in terms of effort: fix up and look
+                        sharp.
+                    </p>
+                    <p class="content__paragraph">
+                        The rules surrounding wedding guest dressing are as nuanced as they come.
+                    </p>
+                    <p class="content__paragraph">
+                        There are some obvious musts – avoiding white is always a good idea – and others that are only
+                        acknowledged by serial wedding-goers, such as steering clear of stilettos unless you enjoy the
+                        feeling of numbness in your feet.
+                    </p>
+                    <p class="content__paragraph">
+                        In the summer, things get even more complicated. Not only do you have to find a sweat-free way
+                        to “dress to the nines”, but you have to strike the right balance between playful sunshine garb
+                        and formal occasionwear. This forces you to ask difficult questions, such as “Is this wrap dress
+                        more ‘I do’ or ‘BBQ?’” and “Does this hat make me look like a chic French woman, or a
+                        dishevelled bird?”
+                    </p>
+                    <p class="content__paragraph">
+                        It’s no mean feat, so here’s our handy guide to summer wedding guest dressing, with tips from
+                        industry experts on the trends and colours you need to know about this season .
+                    </p>
+                    <p class="content__paragraph">
+                        It’s a tricky thing, being a wedding guest.
+                    </p>
+                    <p class="content__paragraph">
+                        Among the endless list of requirements – buy a present, arrange accommodation, practise your
+                        small talk – there’s one obligation that trumps them all in terms of effort: fix up and look
+                        sharp.
+                    </p>
+                    <p class="content__paragraph">
+                        The rules surrounding wedding guest dressing are as nuanced as they come.
+                    </p>
+                    <p class="content__paragraph">
+                        In the summer, things get even more complicated. Not only do you have to find a sweat-free way
+                        to “dress to the nines”, but you have to strike the right balance between playful sunshine garb
+                        and formal occasionwear. This forces you to ask difficult questions, such as “Is this wrap dress
+                        more ‘I do’ or ‘BBQ?’” and “Does this hat make me look like a chic French woman, or a
+                        dishevelled bird?”
+                    </p>
+                </div>
+            </div>
+            <div class="content__col-2">
+                <div class="content__ad">
+                    {{ picture(
+                    jpgSrc="/images/blog/ad-1.jpg",
+                    webpSrc="/images/blog/ad-1.webp",
+                    alt="ad-1 image",
+                    class="content__img"
+                    ) }}
+                    {{ picture(
+                    jpgSrc="/images/blog/ad-2.jpg",
+                    webpSrc="/images/blog/ad-2.webp",
+                    alt="ad-2 image",
+                    class="content__img"
+                    ) }}
+                </div>
             </div>
         </div>
     </div>
