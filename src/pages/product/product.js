@@ -9,9 +9,10 @@ import { supabase } from "../../shared/api/supabase/client.js";
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  const product = await productsApi.getProductById(id);
+
   const user = await supabase.auth.getUser();
   const userId = user?.data?.user?.id || null;
+  const product = await productsApi.getProductById(id, userId);
 
   console.log("produ", product);
 

@@ -332,6 +332,12 @@
     .add-to-wishlist-button {
       gap: 5px;
       color: var(--black-2) !important;
+
+      .wishlist-icon {
+        fill: none;
+        stroke-width: 2px;
+        stroke: var(--black);
+      }
     }
 
     &__filter-title {
@@ -375,4 +381,3 @@
     }
   }
 }
-

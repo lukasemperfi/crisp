@@ -62,13 +62,15 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
             <div class="info__price-value">${formatPrice(
-              product.final_price * currentQuantity,
+              product.final_price * currentQuantity
             )} EUR</div>
           </div>
         </div>
         <div class="info__actions">
           <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
-          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon("wishlist-icon")}Save</button>
+          <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${heartIcon(
+            "wishlist-icon"
+          )}Save</button>
         </div>
         <div class="info__promo promo">
               ${createSocialBlock("info__social-block")}
@@ -144,7 +146,7 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
 
       const currentVariant = findCurrentVariant(
         selectedColorId,
-        selectedSizeId,
+        selectedSizeId
       );
 
       if (!currentVariant) {
@@ -228,7 +230,7 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
     currentQuantity = quantity;
 
     priceContainer.textContent = `${formatPrice(
-      product.final_price * quantity,
+      product.final_price * quantity
     )} EUR`;
   };
 
@@ -249,18 +251,18 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
   let isWishlistBtnActive = product.isInWishlist;
 
   if (isWishlistBtnActive) {
-    wishlistIcon.style = "background-color: red;";
+    wishlistIcon.style = "fill: var(--black);";
   } else {
-    wishlistIcon.style = "background-color: none";
+    wishlistIcon.style = "fill: none";
   }
 
   addToWishlistButton.addEventListener("click", async (e) => {
     if (!isWishlistBtnActive) {
-      wishlistIcon.style = "background-color: red;";
+      wishlistIcon.style = "fill: var(--black);";
       isWishlistBtnActive = true;
       await productsApi.addToWishlist(userId, product.id);
     } else {
-      wishlistIcon.style = "background-color: none";
+      wishlistIcon.style = "fill: none";
       isWishlistBtnActive = false;
       await productsApi.removeFromWishlist(userId, product.id);
     }
@@ -362,7 +364,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
               <img class="thumbs-slider__img" src="${src}" alt="thumbs image" />
             </div>
           </div>
-        `,
+        `
           )
           .join("")}
       </div>
@@ -379,7 +381,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
                   <img class="main-slider__img" src="${src}" alt="thumbs image" />
                 </div>
             </div>
-          `,
+          `
             )
             .join("")}
         </div>
@@ -586,11 +588,19 @@ const instagramIcon = (className = "") => {
   `;
 };
 
+// const heartIcon = (className = "") => {
+//   return `
+// <svg class="${className}" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+//   <path d="M12.2402 2.60034C14.5081 2.60056 16.2997 4.29505 16.2998 6.47632C16.2998 7.80511 15.6703 9.00544 14.5879 10.2683C13.5064 11.5301 11.9613 12.868 10.1094 14.4695L9.06543 15.3757L9 15.4324L8.93457 15.3757L7.89062 14.4695C6.03866 12.8679 4.49258 11.5301 3.41113 10.2683C2.32884 9.0055 1.7002 7.80505 1.7002 6.47632C1.7003 4.29492 3.49167 2.60036 5.75977 2.60034C7.00282 2.60034 8.196 3.13584 9 3.98315C9.804 3.13595 10.9973 2.60034 12.2402 2.60034ZM12.2402 4.17358C11.1676 4.17358 10.1264 4.83912 9.76172 5.7312L9.73633 5.7937H8.2627L8.2373 5.7312C7.87257 4.83922 6.83233 4.17358 5.75977 4.17358C4.37056 4.1736 3.33995 5.16278 3.33984 6.47632C3.33984 7.42994 3.88319 8.39192 4.87207 9.49487C5.85957 10.5963 7.27457 11.8203 8.98633 13.3015L8.99707 13.3103L9.00293 13.3054L9.00684 13.3015C10.7221 11.8203 12.1386 10.5962 13.127 9.49487C14.1167 8.39194 14.6602 7.42992 14.6602 6.47632C14.6601 5.1629 13.6292 4.17379 12.2402 4.17358Z" fill="#3F3F3F" stroke="#3F3F3F" stroke-width="0.2"/>
+// </svg>
+//   `;
+// };
+
 const heartIcon = (className = "") => {
   return `
-<svg class="${className}" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12.2402 2.60034C14.5081 2.60056 16.2997 4.29505 16.2998 6.47632C16.2998 7.80511 15.6703 9.00544 14.5879 10.2683C13.5064 11.5301 11.9613 12.868 10.1094 14.4695L9.06543 15.3757L9 15.4324L8.93457 15.3757L7.89062 14.4695C6.03866 12.8679 4.49258 11.5301 3.41113 10.2683C2.32884 9.0055 1.7002 7.80505 1.7002 6.47632C1.7003 4.29492 3.49167 2.60036 5.75977 2.60034C7.00282 2.60034 8.196 3.13584 9 3.98315C9.804 3.13595 10.9973 2.60034 12.2402 2.60034ZM12.2402 4.17358C11.1676 4.17358 10.1264 4.83912 9.76172 5.7312L9.73633 5.7937H8.2627L8.2373 5.7312C7.87257 4.83922 6.83233 4.17358 5.75977 4.17358C4.37056 4.1736 3.33995 5.16278 3.33984 6.47632C3.33984 7.42994 3.88319 8.39192 4.87207 9.49487C5.85957 10.5963 7.27457 11.8203 8.98633 13.3015L8.99707 13.3103L9.00293 13.3054L9.00684 13.3015C10.7221 11.8203 12.1386 10.5962 13.127 9.49487C14.1167 8.39194 14.6602 7.42992 14.6602 6.47632C14.6601 5.1629 13.6292 4.17379 12.2402 4.17358Z" fill="#3F3F3F" stroke="#3F3F3F" stroke-width="0.2"/>
-</svg>
+  <svg class="${className}" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.24 2.6c-1.24 0-2.44.53-3.24 1.38-.8-.85-2-1.38-3.24-1.38-2.27 0-4.06 1.69-4.06 3.88 0 1.33.63 2.53 1.71 3.79 1.08 1.26 2.63 2.6 4.48 4.2L9 15.43l1.06-.96c1.85-1.6 3.4-2.94 4.48-4.2 1.08-1.26 1.71-2.46 1.71-3.79 0-2.19-1.79-3.88-4.06-3.88z" />
+  </svg>
 
   `;
 };

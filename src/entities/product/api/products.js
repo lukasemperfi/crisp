@@ -10,54 +10,50 @@ class Products {
       throw new Error("Product ID is required");
     }
 
-    // Запускаем запрос продукта и проверку wishlist параллельно для скорости
-    const productQuery = supabase
+    const { data, error } = await supabase
       .from("products")
       .select(
         `
-      *,
-      brand:brands (*),
-      images:product_images (*),
-      length:product_lengths (*),
-      variants:product_variants (
-        id, 
-        stock, 
-        color:product_colors (*), 
-        size:product_sizes (*)
-      ),
-      tags:product_tags_mapping (
-        tag:product_tags (*)
-      )
-    `,
+        *,
+        brand:brands (*),
+        images:product_images (*),
+        length:product_lengths (*),
+        variants:product_variants (
+          id, 
+          stock, 
+          color:product_colors (*), 
+          size:product_sizes (*)
+        ),
+        tags:product_tags_mapping (
+          tag:product_tags (*)
+        )
+      `
       )
       .eq("id", productId)
       .single();
 
-    // Если userId передан, создаем запрос к wishlist, иначе возвращаем null
-    const wishlistQuery = userId
-      ? supabase
-          .from("wishlists")
-          .select("id")
-          .eq("user_id", userId)
-          .eq("product_id", productId)
-          .maybeSingle()
-      : Promise.resolve({ data: null });
-
-    // Выполняем оба запроса одновременно
-    const [productRes, wishlistRes] = await Promise.all([
-      productQuery,
-      wishlistQuery,
-    ]);
-
-    if (productRes.error) {
-      console.error("Error fetching product:", productRes.error.message);
-      throw productRes.error;
+    if (error) {
+      console.error("Error fetching product:", error.message);
+      throw error;
     }
 
-    // Собираем итоговый объект
+    let isInWishlist = false;
+    if (userId) {
+      const { data: wishlistEntry, error: wishlistError } = await supabase
+        .from("wishlists")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("product_id", productId)
+        .maybeSingle();
+
+      if (!wishlistError && wishlistEntry) {
+        isInWishlist = true;
+      }
+    }
+
     return {
-      ...productRes.data,
-      isInWishlist: !!wishlistRes.data, // преобразуем наличие записи в true/false
+      ...data,
+      isInWishlist,
     };
   };
 
@@ -91,7 +87,7 @@ class Products {
         tags:product_tags_mapping (
           tag:product_tags (*)
         )
-      `,
+      `
       )
       .in("id", productIds);
 
@@ -102,6 +98,7 @@ class Products {
 
     return data;
   };
+
   getWishlistProducts = async (userId) => {
     if (!userId) {
       throw new Error("User ID is required to get wishlist products");
@@ -126,7 +123,7 @@ class Products {
           tag:product_tags (*)
         )
       )
-    `,
+    `
       )
       .eq("user_id", userId);
 
@@ -199,7 +196,7 @@ class Products {
   _getFilteredProducts = async (
     filters = {},
     flagCondition = null,
-    userId = null,
+    userId = null
   ) => {
     const {
       brand = [],
@@ -232,7 +229,7 @@ class Products {
       ),
       wishlists:wishlists (id, user_id)
     `,
-        { count: "exact" },
+        { count: "exact" }
       )
       .range(from, to);
 
