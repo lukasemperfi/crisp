@@ -1,0 +1,106 @@
+@use "@/app/styles/index.scss" as *;
+@use "swiper/css";
+@use "@/pages/blog/sections/blog-content/blog-content.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
+@use "@/shared/ui/slider/slider.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/shared/ui/accordion/accordion.scss" as *;
+@use "@/pages/blog/sections/recomendation-section/recomendation-section.scss"
+  as *;
+@use "@/entities/product/ui/product-card/product-card.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/entities/product/ui/product-list/product-list.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/shared/ui/contact-us-button/contact-us-button.scss" as *;
+@use "@/widgets/banner/banner.scss" as *;
+@use "@/shared/ui/text-block/text-block.scss" as *;
+
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.blog-page {
+  $bp-tablet: 1550px;
+  $bp-tablet-sm: 1028px;
+  $bp-mobile: 450px;
+
+  .page-container-1920 {
+    // max-width: 1496px;
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    justify-content: center;
+    padding-block: 18px;
+
+    @include mixins.respond-to($bp-tablet) {
+      padding-block: functions.fluidValue(6px, 18px, 320px, $bp-tablet);
+    }
+
+    @include mixins.respond-to($bp-mobile) {
+      justify-content: flex-start;
+    }
+
+    .breadcrumbs__link {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+      }
+    }
+  }
+
+  .banner {
+    &__wrapper {
+      @include mixins.respond-to(650px) {
+        aspect-ratio: 291/120;
+      }
+    }
+  }
+
+  .text-block {
+    max-width: 1242px;
+    left: auto;
+    padding: 0;
+    margin: auto;
+    background-color: var(--white);
+
+    padding-inline: functions.fluidValue(10px, 157px, 320px, 1920px);
+    padding-block: functions.fluidValue(10px, 16px, 320px, 1920px);
+
+    @include mixins.respond-to(650px) {
+      background-color: rgb(255 255 255 / 54%);
+    }
+
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: functions.fluidValue(14px, 48px, 320px, 1920px);
+      line-height: functions.fluidValue(16px, 68px, 320px, 1920px);
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 0;
+    }
+
+    &__text {
+      display: none;
+    }
+    .button {
+      display: none;
+    }
+  }
+}
+
+.page-contacts-btn {
+  display: none;
+  @include mixins.respond-to("1550px") {
+    display: none;
+  }
+}

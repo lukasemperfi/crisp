@@ -5,6 +5,7 @@ const breadcrumbNames = {
   "account/address": "Create New Customer Account",
   "account/info": "Edit Account Information",
   "account/wishlist": "My Wishlist",
+  blog: "Blog",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {
