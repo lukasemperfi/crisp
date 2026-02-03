@@ -4,6 +4,7 @@ import { Quantity } from "@/shared/ui/quantity/quantity";
 import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 import { cartThunks } from "../../model/cart-slice";
 import { showToast } from "../../../../shared/ui/toast/toast";
+import { productsApi } from "../../../../entities/product/api/products";
 
 export function CartProductCard(props) {
   return createComponent(
@@ -15,7 +16,7 @@ export function CartProductCard(props) {
       tag: "div",
 
       render(el, props, emit, { runOnce }) {
-        const { product, className = "" } = props;
+        const { product, className = "", userId = null } = props;
 
         const {
           cartItemId,
@@ -25,6 +26,7 @@ export function CartProductCard(props) {
           sku,
           selectedVariant,
           quantity,
+          isInWishlist,
         } = product;
 
         if (runOnce) {
@@ -77,7 +79,7 @@ export function CartProductCard(props) {
             <div class="cart-product-card__actions">
               <div class="actions">
                 <button class="actions__btn actions__btn_add-to-fav">
-                  ${IconHeart()}
+                  ${IconHeart({ className: "wishlist-icon" })}
                 </button>
                 <button class="actions__btn actions__btn_edit">
                   ${IconEdit()}
@@ -160,6 +162,36 @@ export function CartProductCard(props) {
 
             if (newValue === 0) {
               showToast("Товар удален!", "error");
+            }
+          });
+        }
+
+        initFavoriteButton();
+
+        function initFavoriteButton() {
+          const addToWishlistButton = el.querySelector(
+            ".actions__btn_add-to-fav"
+          );
+          const wishlistIcon = el.querySelector(".wishlist-icon");
+          console.log("isIn", isInWishlist);
+
+          let isWishlistBtnActive = isInWishlist;
+
+          if (isWishlistBtnActive) {
+            wishlistIcon.style = "fill: var(--black);";
+          } else {
+            wishlistIcon.style = "fill: none";
+          }
+
+          addToWishlistButton.addEventListener("click", async (e) => {
+            if (!isWishlistBtnActive) {
+              wishlistIcon.style = "fill: var(--black);";
+              isWishlistBtnActive = true;
+              await productsApi.addToWishlist(userId, product.id);
+            } else {
+              wishlistIcon.style = "fill: none";
+              isWishlistBtnActive = false;
+              await productsApi.removeFromWishlist(userId, product.id);
             }
           });
         }

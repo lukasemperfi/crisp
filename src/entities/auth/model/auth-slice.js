@@ -114,7 +114,7 @@ export async function logoutUser() {
   }
 }
 
-export function initAuthListener() {
+export async function initAuthListener() {
   authApi.onAuthChange((event, session) => {
     const authStore = store.getState().auth;
 

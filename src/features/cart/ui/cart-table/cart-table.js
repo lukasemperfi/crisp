@@ -6,7 +6,7 @@ export function CartTable(props) {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { items = [] } = props;
+      const { items = [], userId } = props;
 
       if (runOnce) {
         el.className = "cart-table";
@@ -32,12 +32,12 @@ export function CartTable(props) {
         };
       }
 
-      renderList(el._els.list, items);
+      renderList(el._els.list, items, userId);
     },
   });
 }
 
-function renderList(container, products) {
+function renderList(container, products, userId) {
   container.innerHTML = "";
 
   if (!products || !Array.isArray(products)) {
@@ -45,7 +45,7 @@ function renderList(container, products) {
   }
 
   products.forEach((product) => {
-    const productCard = CartProductCard({ product });
+    const productCard = CartProductCard({ product, userId });
 
     container.appendChild(productCard);
   });

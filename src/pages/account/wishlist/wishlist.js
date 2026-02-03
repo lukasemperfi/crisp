@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initPageFooter();
 
   const user = await supabase.auth.getUser();
-
   const userId = user?.data?.user?.id || null;
 
   const products = await productsApi.getWishlistProducts(userId);

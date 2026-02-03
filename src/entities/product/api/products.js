@@ -65,12 +65,12 @@ class Products {
     return await this._getFilteredProducts(filters, "is_popular");
   };
 
-  getProductsByIds = async (productIds) => {
+  getProductsByIds = async (productIds, userId = null) => {
     if (!productIds || productIds.length === 0) {
       return [];
     }
 
-    const { data, error } = await supabase
+    const { data: products, error } = await supabase
       .from("products")
       .select(
         `
@@ -96,7 +96,26 @@ class Products {
       throw error;
     }
 
-    return data;
+    let wishlistProductIds = new Set();
+
+    if (userId) {
+      const { data: wishlistData, error: wishlistError } = await supabase
+        .from("wishlists")
+        .select("product_id")
+        .eq("user_id", userId)
+        .in("product_id", productIds);
+
+      if (!wishlistError && wishlistData) {
+        wishlistProductIds = new Set(
+          wishlistData.map((item) => item.product_id)
+        );
+      }
+    }
+
+    return products.map((product) => ({
+      ...product,
+      isInWishlist: wishlistProductIds.has(product.id),
+    }));
   };
 
   getWishlistProducts = async (userId) => {
