@@ -1,0 +1,268 @@
+@use "@/app/styles/functions" as functions;
+@use "@/app/styles/mixins" as mixins;
+
+.checkout-section {
+  $bp-tablet: 1550px;
+  $bp-mobile: 924px;
+  $bp-mobile-sm: 450px;
+
+  margin-bottom: 116px;
+
+  @include mixins.respond-to($bp-tablet) {
+    margin-bottom: functions.fluidValue(17px, 116px, 320px, $bp-tablet);
+  }
+
+  .page-container-1920 {
+    max-width: 1496px;
+  }
+
+  &__content {
+    display: flex;
+    gap: 71px;
+
+    @include mixins.respond-to($bp-tablet) {
+      flex-direction: column;
+      margin-inline: auto;
+      max-width: 1000px;
+      gap: functions.fluidValue(32px, 71px, 320px, $bp-tablet);
+    }
+  }
+
+  &__col-1 {
+    flex: 1 1 883px;
+    overflow-x: auto;
+
+    @include mixins.respond-to($bp-tablet) {
+      flex: 1;
+    }
+  }
+  &__col-2 {
+    flex: 1 1 500px;
+
+    @include mixins.respond-to($bp-tablet) {
+      flex: 1;
+    }
+  }
+
+  &__breadcrumbs {
+    display: flex;
+    justify-content: center;
+    padding-block: 18px;
+
+    @include mixins.respond-to($bp-tablet) {
+      padding-block: functions.fluidValue(6px, 18px, 320px, $bp-tablet);
+    }
+
+    @include mixins.respond-to($bp-mobile-sm) {
+      justify-content: flex-start;
+    }
+
+    .breadcrumbs__link {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+      }
+    }
+  }
+
+  &__header {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 48px;
+    text-align: center;
+    color: var(--black);
+    line-height: 68px;
+    padding-block: 11px;
+    margin-bottom: 56px;
+
+    @include mixins.respond-to($bp-tablet) {
+      font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
+      line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
+      margin-bottom: functions.fluidValue(0px, 56px, 320px, $bp-tablet);
+    }
+
+    @include mixins.respond-to($bp-mobile-sm) {
+      text-align: left;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--divider);
+    }
+  }
+
+  .order-summary {
+    &__section {
+      &_top {
+        @include mixins.respond-to($bp-mobile-sm) {
+          padding: 0;
+          border: none;
+          background-color: var(--white);
+        }
+      }
+      &_bottom {
+        @include mixins.respond-to($bp-mobile-sm) {
+          padding: 11px;
+        }
+      }
+    }
+
+    &__discount {
+      @include mixins.respond-to($bp-tablet) {
+        margin-top: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+      }
+
+      button {
+        @include mixins.respond-to($bp-mobile-sm) {
+          background-color: var(--light-blue-hover);
+          color: var(--gray-1);
+          border: 2px solid var(--divider);
+          transition: background-color 0.3s ease, color 0.3s ease,
+            border 0.3s ease;
+          padding-block: 5px;
+          padding-inline: 25px;
+          right: 4px;
+        }
+      }
+
+      .form-field__input {
+        @include mixins.respond-to($bp-mobile-sm) {
+          padding-right: 93px;
+        }
+      }
+    }
+    &__discount-button {
+      &.desktop {
+        display: flex;
+        @include mixins.respond-to($bp-mobile-sm) {
+          display: none;
+        }
+      }
+      &.mobile {
+        display: none;
+        @include mixins.respond-to($bp-mobile-sm) {
+          display: flex;
+        }
+      }
+    }
+    &__title {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
+        text-transform: uppercase;
+      }
+    }
+
+    &__subtitle {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(12px, 18px, 320px, $bp-tablet);
+        margin-bottom: functions.fluidValue(5px, 14px, 320px, $bp-tablet);
+      }
+    }
+
+    .shipping-methods__item_flat-rate {
+      @include mixins.respond-to($bp-tablet) {
+        margin-bottom: functions.fluidValue(15px, 22px, 320px, $bp-tablet);
+      }
+    }
+
+    &__totals {
+      @include mixins.respond-to($bp-tablet) {
+        gap: functions.fluidValue(5px, 19px, 320px, $bp-tablet);
+      }
+    }
+
+    &__actions {
+      @include mixins.respond-to($bp-mobile-sm) {
+        margin-inline: -11px;
+      }
+      .button {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+          padding-block: 11px;
+        }
+      }
+    }
+
+    .accordion {
+      &__title {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
+          text-transform: uppercase;
+        }
+      }
+
+      &__icon {
+        @include mixins.respond-to($bp-tablet) {
+          width: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          height: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        }
+      }
+    }
+
+    .form-field {
+      &__input {
+        &::placeholder {
+          @include mixins.respond-to($bp-tablet) {
+            font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          }
+        }
+      }
+
+      &__action {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+        }
+      }
+    }
+
+    .shipping-estimate {
+      @include mixins.respond-to($bp-tablet) {
+        padding-top: functions.fluidValue(7px, 12px, 320px, $bp-tablet);
+      }
+
+      &__description {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(10px, 16px, 320px, $bp-tablet);
+        }
+      }
+
+      &__label {
+        @include mixins.respond-to($bp-tablet) {
+          font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          margin-bottom: 2px;
+        }
+      }
+
+      &__fields {
+        @include mixins.respond-to($bp-tablet) {
+          gap: functions.fluidValue(13px, 25px, 320px, $bp-tablet);
+          margin-block: functions.fluidValue(12px, 24px, 320px, $bp-tablet);
+        }
+        @include mixins.respond-to($bp-mobile-sm) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .radio {
+        &__label {
+          @include mixins.respond-to($bp-tablet) {
+            font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+            text-transform: uppercase;
+            gap: 8px;
+          }
+        }
+      }
+
+      .dropdown {
+        &__trigger {
+          @include mixins.respond-to($bp-tablet) {
+            font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+            padding-inline: 11px;
+          }
+        }
+      }
+    }
+    input {
+      @include mixins.respond-to($bp-tablet) {
+        font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        padding-block: functions.fluidValue(10px, 12px, 320px, $bp-tablet);
+      }
+    }
+  }
+}

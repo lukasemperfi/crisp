@@ -1,0 +1,29 @@
+@use "@/app/styles/index.scss" as *;
+@use "@/widgets/header/header.scss" as *;
+@use "@/shared/ui/button/button.scss" as *;
+@use "@/shared/ui/nav-menu/nav-menu.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/widgets/footer/footer.scss" as *;
+@use "@/shared/ui/skeleton/skeleton.scss" as *;
+@use "@/shared/ui/quantity/quantity.scss" as *;
+@use "@/shared/ui/contact-us-button/contact-us-button.scss" as *;
+@use "@/widgets/breadcrumbs/breadcrumbs.scss" as *;
+@use "@/shared/ui/accordion/accordion.scss" as *;
+@use "@/shared/ui/form-field/form-field.scss" as *;
+@use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/widgets/benefits-section/benefits-section.scss" as *;
+@use "@/widgets/cart-section/cart-section.scss" as *;
+@use "@/features/cart/ui/cart-product-card/cart-product-card.scss" as *;
+@use "@/features/cart/ui/cart-table/cart-table.scss" as *;
+@use "@/features/cart/ui/cart-order-summary/cart-order-summary.scss" as *;
+@use "@/features/product-filters/ui/color/color.scss" as *;
+@use "@/pages/checkout/sections/checkout-content/checkout-content.scss" as *;
+
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.page-contacts-btn {
+  @include mixins.respond-to("1550px") {
+    display: none;
+  }
+}
