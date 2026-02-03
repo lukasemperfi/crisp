@@ -1,8 +1,15 @@
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { CartOrderSummary } from "@/features/cart/ui/cart-order-summary/cart-order-summary";
+import { createComponent } from "@/shared/lib/core/core";
 
 export const initCheckoutContent = async () => {
   initBreadcrumbs(".checkout-section__breadcrumbs");
+
+  const headerContainer = document.querySelector(".checkout-section__header");
+
+  const stepsComponent = Steps({ step: 2 });
+
+  headerContainer.append(stepsComponent);
 
   const col1Container = document.querySelector(".checkout-section__col-1");
   const checkoutOrderContainer = document.querySelector(
@@ -13,3 +20,71 @@ export const initCheckoutContent = async () => {
 
   checkoutOrderContainer.append(cartOrderSummary);
 };
+
+export function Steps(props) {
+  return createComponent(props, {
+    tag: "div",
+
+    render(el, props, emit, { runOnce }) {
+      const { step = 1 } = props;
+
+      if (runOnce) {
+        el.className = "steps";
+
+        el.innerHTML = `
+          <div class="steps__item steps__item_1">
+            <div class="steps__circle">
+              <div class="steps__circle-inner">
+                <span class="steps__content">1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="steps__item steps__item_2">
+            <div class="steps__circle">
+              <div class="steps__circle-inner">
+                <span class="steps__content">2</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        el._els = {
+          item1: el.querySelector(".steps__item_1"),
+          item2: el.querySelector(".steps__item_2"),
+          content1: el.querySelector(".steps__item_1 .steps__content"),
+          content2: el.querySelector(".steps__item_2 .steps__content"),
+        };
+      }
+
+      const { item1, item2, content1 } = el._els;
+
+      item1.classList.remove("steps__item_active");
+      item2.classList.remove("steps__item_active");
+
+      if (step === 1) {
+        item1.classList.add("steps__item_active");
+      }
+
+      if (step === 2) {
+        item2.classList.add("steps__item_active");
+      }
+
+      if (step === 2) {
+        content1.innerHTML = MarkIcon();
+      } else {
+        content1.textContent = "1";
+      }
+    },
+  });
+}
+
+function MarkIcon() {
+  return `
+  <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="2.12132" y1="5.50427" x2="5" y2="8.38295" stroke="black" stroke-width="3" stroke-linecap="square"/>
+    <line x1="1.5" y1="-1.5" x2="11.4985" y2="-1.5" transform="matrix(-0.707106 0.707107 -0.707106 -0.707107 12.877 0)" stroke="black" stroke-width="3" stroke-linecap="square"/>
+  </svg>
+  
+  `;
+}

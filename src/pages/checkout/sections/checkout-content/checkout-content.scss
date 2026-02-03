@@ -65,26 +65,28 @@
   }
 
   &__header {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 48px;
-    text-align: center;
-    color: var(--black);
-    line-height: 68px;
-    padding-block: 11px;
-    margin-bottom: 56px;
+    display: flex;
+    justify-content: center;
+    // font-family: var(--font-family);
+    // font-weight: 400;
+    // font-size: 48px;
 
-    @include mixins.respond-to($bp-tablet) {
-      font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
-      line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
-      margin-bottom: functions.fluidValue(0px, 56px, 320px, $bp-tablet);
-    }
+    // color: var(--black);
+    // line-height: 68px;
+    // padding-block: 11px;
+    // margin-bottom: 56px;
 
-    @include mixins.respond-to($bp-mobile-sm) {
-      text-align: left;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--divider);
-    }
+    // @include mixins.respond-to($bp-tablet) {
+    //   font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
+    //   line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
+    //   margin-bottom: functions.fluidValue(0px, 56px, 320px, $bp-tablet);
+    // }
+
+    // @include mixins.respond-to($bp-mobile-sm) {
+    //   text-align: left;
+    //   padding-bottom: 15px;
+    //   border-bottom: 1px solid var(--divider);
+    // }
   }
 
   .order-summary {
@@ -264,5 +266,56 @@
         padding-block: functions.fluidValue(10px, 12px, 320px, $bp-tablet);
       }
     }
+  }
+}
+
+.steps {
+  display: flex;
+  &__item {
+    width: 194px;
+    background-color: var(--divider);
+    height: 6px;
+    position: relative;
+
+    &_active {
+      background-color: var(--advanced);
+
+      .steps__circle {
+        background-color: var(--advanced);
+      }
+    }
+  }
+
+  &__circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--divider);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__circle-inner {
+    width: 28px;
+    height: 28px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    color: var(--black);
+    line-height: 0.9;
   }
 }
