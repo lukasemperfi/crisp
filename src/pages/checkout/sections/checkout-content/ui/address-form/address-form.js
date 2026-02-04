@@ -31,6 +31,32 @@ export function AddressForm(props) {
             <div class="address-form__fields-container" data-group="personal"></div>
           </div>
 
+            <div class="shipping-methods">
+              <h3 class="shipping-methods__title">Shipping Methods</h3>
+              <div class="shipping-methods__grid">
+                <div class="shipping-methods__item">
+                  <div class="radio">
+                    <input type="radio" id="shipping-flat" name="shipping" checked/>
+                    <label for="shipping-flat" class="radio__label">5.00 EUR</label>
+                  </div>
+                  
+                  <div class="shipping-methods__type">Fixed</div> 
+                  <div class="shipping-methods__name">Flat Rate</div>
+                </div>
+
+                <div class="shipping-methods__item">
+                  <div class="radio">
+                    <input type="radio" id="shipping-best" name="shipping" />
+                    <label for="shipping-best" class="radio__label">10.00 EUR</label>
+                  </div>  
+                  
+                  <div class="shipping-methods__type">Table Rate</div>
+                  <div class="shipping-methods__name">Best Way</div>
+                </div>              
+              </div>
+
+            </div>
+
           <div class="address-form__actions">
             <button type="submit" class="address-form__btn-submit button button_solid button_black">
               Next
@@ -157,11 +183,11 @@ export function AddressForm(props) {
           }),
           state_field: createDropdownField(
             `State/Region <span class="highlight-required">*</span>`,
-            stateDropdown
+            stateDropdown,
           ),
           country_field: createDropdownField(
             `Country <span class="highlight-required">*</span>`,
-            countryDropdown
+            countryDropdown,
           ),
           postal_code: FormField({
             label: `Zip/Postal Code <span class="highlight-required">*</span>`,
@@ -180,7 +206,7 @@ export function AddressForm(props) {
           fields.street_address,
           fields.country_field,
           fields.state_field,
-          fields.postal_code
+          fields.postal_code,
         );
 
         const validator = new JustValidate(el, {
@@ -192,7 +218,7 @@ export function AddressForm(props) {
         const addValidatedField = (fieldComponent, id, rules) => {
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text"
+              ".form-field__message-text",
             ),
           });
         };

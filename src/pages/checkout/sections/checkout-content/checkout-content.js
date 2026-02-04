@@ -17,7 +17,7 @@ export const initCheckoutContent = async () => {
   col1Container.append(ShippingInfo());
 
   const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2"
+    ".checkout-section__col-2",
   );
   const cartOrderSummary = CartOrderSummary();
 

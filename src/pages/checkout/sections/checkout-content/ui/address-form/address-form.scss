@@ -16,7 +16,7 @@
   &__actions {
     display: flex;
     justify-content: space-between;
-    margin-top: functions.fluidValue(29px, 65px, 320px, 1920px);
+    margin-top: 25px;
 
     button {
       min-width: 120px;
@@ -99,6 +99,54 @@
       }
       .dropdown__icon path {
         stroke: var(--black);
+      }
+    }
+  }
+
+  .shipping-methods {
+    max-width: 443px;
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--black-2);
+
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__item {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+      align-items: center;
+      gap: 8px;
+      padding-block: 12px;
+      border-top: 1px solid var(--divider);
+    }
+
+    &__title {
+      margin-top: 45px;
+      margin-bottom: 35px;
+    }
+
+    .radio {
+      &__label {
+        font-family: var(--second-family);
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--black-2);
+      }
+    }
+    .order-summary {
+      &__subtitle {
       }
     }
   }
