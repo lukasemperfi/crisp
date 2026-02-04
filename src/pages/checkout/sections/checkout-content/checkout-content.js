@@ -1,8 +1,8 @@
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
-import { CartOrderSummary } from "@/features/cart/ui/cart-order-summary/cart-order-summary";
 import { createComponent } from "@/shared/lib/core/core";
 import { LoginForm } from "./ui/login-form";
 import { AddressForm } from "./ui/address-form/address-form";
+import { CartOrderSummary } from "./ui/cart-order-summary/cart-order-summary";
 
 export const initCheckoutContent = async () => {
   initBreadcrumbs(".checkout-section__breadcrumbs");
