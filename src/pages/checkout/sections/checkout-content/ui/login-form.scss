@@ -1,0 +1,100 @@
+@use "@/app/styles/mixins" as mixins;
+@use "@/app/styles/functions" as functions;
+
+.checkout-login-form {
+  width: 100%;
+
+  &__section {
+    &_personal {
+      margin-bottom: 48px;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 38px;
+    text-transform: uppercase;
+  }
+
+  &__fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    margin-top: 27px;
+    gap: 15px;
+  }
+
+  &__btn-login.button {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    padding-block: 12.5px;
+    padding-block: 14.5px;
+    padding-inline: 42px;
+  }
+
+  &__forgot-password {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+
+    color: var(--link);
+  }
+
+  &__btn-login {
+  }
+
+  p {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--gray-1);
+    margin-block: 10px;
+  }
+
+  .form-field {
+    display: flex;
+
+    &__label {
+      white-space: nowrap;
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--black-2);
+      flex: 1 1 155px;
+      margin-top: 5px;
+      display: flex;
+      gap: 7px;
+    }
+
+    &__control {
+      width: 100%;
+      flex: 1 1 451px;
+    }
+  }
+
+  .checkbox {
+    &__box {
+      align-self: flex-start;
+      margin-top: 3px;
+    }
+
+    &__text {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--gray-1);
+    }
+  }
+}

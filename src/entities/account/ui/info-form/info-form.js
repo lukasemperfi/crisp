@@ -8,7 +8,7 @@ export function InfoForm(props) {
     tag: "form",
 
     render(el, props, emit, { runOnce }) {
-      const { onSubmit, userProfileData } = props;
+      const { onSubmit, userProfileData = {} } = props;
       const { first_name = "", last_name = "" } = userProfileData;
 
       if (runOnce) {
@@ -96,16 +96,16 @@ export function InfoForm(props) {
 
         el.querySelector('[data-group="personal"]').append(
           fields.first_name,
-          fields.last_name
+          fields.last_name,
         );
         el.querySelector('[data-group="is_change"]').append(
           fields.is_change_email,
-          fields.is_change_password
+          fields.is_change_password,
         );
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.confirm_password
+          fields.confirm_password,
         );
 
         const validator = new JustValidate(el, {
@@ -118,7 +118,7 @@ export function InfoForm(props) {
           if (validator.fields[id]) return;
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text"
+              ".form-field__message-text",
             ),
           });
         };
@@ -184,7 +184,7 @@ export function InfoForm(props) {
         fields.is_change_email.addEventListener("change", toggleEmailFields);
         fields.is_change_password.addEventListener(
           "change",
-          togglePasswordFields
+          togglePasswordFields,
         );
 
         toggleEmailFields();

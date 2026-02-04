@@ -43,9 +43,9 @@ export function MiniCart(props) {
                 <a href="${baseUrl}cart/" class="mini-cart__cart-btn button button_outlined button_gray button_fill" type="button">
                   View and edit cart
                 </a>
-                <button class="mini-cart__checkout-btn button button_solid button_black button_fill" type="button">
+                <a href="${baseUrl}checkout/" name="checkout" class="mini-cart__checkout-btn button button_solid button_black button_fill" type="button">
                   Go to checkout
-              </button>
+              </a>
               </footer> 
           `;
 

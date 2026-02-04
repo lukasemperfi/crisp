@@ -1,27 +1,32 @@
 import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { CartOrderSummary } from "@/features/cart/ui/cart-order-summary/cart-order-summary";
 import { createComponent } from "@/shared/lib/core/core";
+import { LoginForm } from "./ui/login-form";
 
 export const initCheckoutContent = async () => {
   initBreadcrumbs(".checkout-section__breadcrumbs");
 
   const headerContainer = document.querySelector(".checkout-section__header");
-
-  const stepsComponent = Steps({ step: 2 });
+  const stepsComponent = Steps({ step: 1 });
 
   headerContainer.append(stepsComponent);
 
   const col1Container = document.querySelector(".checkout-section__col-1");
-  const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2"
-  );
+  const loginForm = LoginForm({
+    onSubmit: (data) => console.log("Login Attempt:", data),
+  });
 
+  col1Container.append(loginForm);
+
+  const checkoutOrderContainer = document.querySelector(
+    ".checkout-section__col-2",
+  );
   const cartOrderSummary = CartOrderSummary();
 
   checkoutOrderContainer.append(cartOrderSummary);
 };
 
-export function Steps(props) {
+function Steps(props) {
   return createComponent(props, {
     tag: "div",
 

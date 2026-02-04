@@ -13,12 +13,12 @@
   }
 
   .page-container-1920 {
-    max-width: 1496px;
+    max-width: 1284px;
   }
 
   &__content {
     display: flex;
-    gap: 71px;
+    gap: 106px;
 
     @include mixins.respond-to($bp-tablet) {
       flex-direction: column;
@@ -29,7 +29,7 @@
   }
 
   &__col-1 {
-    flex: 1 1 883px;
+    flex: 1 1 606px;
     overflow-x: auto;
 
     @include mixins.respond-to($bp-tablet) {
@@ -37,7 +37,7 @@
     }
   }
   &__col-2 {
-    flex: 1 1 500px;
+    flex: 1 1 530px;
 
     @include mixins.respond-to($bp-tablet) {
       flex: 1;
@@ -67,26 +67,6 @@
   &__header {
     display: flex;
     justify-content: center;
-    // font-family: var(--font-family);
-    // font-weight: 400;
-    // font-size: 48px;
-
-    // color: var(--black);
-    // line-height: 68px;
-    // padding-block: 11px;
-    // margin-bottom: 56px;
-
-    // @include mixins.respond-to($bp-tablet) {
-    //   font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
-    //   line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
-    //   margin-bottom: functions.fluidValue(0px, 56px, 320px, $bp-tablet);
-    // }
-
-    // @include mixins.respond-to($bp-mobile-sm) {
-    //   text-align: left;
-    //   padding-bottom: 15px;
-    //   border-bottom: 1px solid var(--divider);
-    // }
   }
 
   .order-summary {
@@ -115,7 +95,9 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition: background-color 0.3s ease, color 0.3s ease,
+          transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;

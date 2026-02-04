@@ -1,8 +1,8 @@
 import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
-import { Checkbox } from "../../../../shared/ui/checkbox/checkbox";
-import { baseUrl } from "../../../../shared/helpers/base-url";
+import { Checkbox } from "@/shared/ui/checkbox/checkbox";
+import { baseUrl } from "@/shared/helpers/base-url";
 
 export function LoginForm(props) {
   return createComponent(props, {
@@ -20,27 +20,28 @@ export function LoginForm(props) {
       } = props;
 
       if (runOnce) {
-        el.className = "login-form";
+        el.className = "checkout-login-form";
 
         el.innerHTML = `
-          <div class="login-form__section">
-            <h2 class="login-form__title">${texts.title || ""}</h2>
-            <div class="login-form__fields-container" data-group="auth"></div>
+          <div class="checkout-login-form__section">
+            <div class="checkout-login-form__fields-container" data-group="auth"></div>
           </div>
 
-          <div class="login-form__actions">
-            <button type="submit" class="button button_outlined button_gray login-form__btn-login">
-              ${texts.submitBtn}
+          <p>You already have an account with us. Sign in or continue as guest.</p>
+
+          <div class="checkout-login-form__actions">
+            <button type="submit" class="button button_solid button_black checkout-login-form__btn-login">
+              Login
             </button>
-            <a href="${baseUrl}registration/" class="button button_solid button_black login-form__btn-registration ">
-              ${texts.regBtn}
-            </a>
+            <a href="#" name="forgot password" class="checkout-login-form__forgot-password">Forgot Your Password?</a>
           </div>
         `;
 
         const fields = {
           email: FormField({
-            label: fieldsConfig.email?.label || null,
+            label:
+              fieldsConfig.email?.label ||
+              `Email Address <span class="highlight-required">*</span>`,
             inputProps: {
               name: "email",
               type: "email",
@@ -50,7 +51,9 @@ export function LoginForm(props) {
             },
           }),
           password: FormField({
-            label: fieldsConfig.password?.label || null,
+            label:
+              fieldsConfig.password?.label ||
+              `Password <span class="highlight-required">*</span>`,
             inputProps: {
               name: "password",
               type: "password",
@@ -59,22 +62,11 @@ export function LoginForm(props) {
               ...fieldsConfig.password?.inputProps,
             },
           }),
-          newsletter: Checkbox({
-            label:
-              fieldsConfig.newsletter?.label ||
-              "By using this form you agree with the storage and handling of your data by this website.",
-            inputProps: {
-              name: "isSubscribed",
-              id: "reg-newsletter",
-              ...fieldsConfig.newsletter?.inputProps,
-            },
-          }),
         };
 
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.newsletter,
         );
 
         const validator = new JustValidate(el, {
@@ -126,7 +118,6 @@ export function LoginForm(props) {
 
         validator.onSuccess(() => {
           const formData = Object.fromEntries(new FormData(el));
-          formData.isSubscribed = !!formData.isSubscribed;
           onSubmit?.(formData);
         });
 
