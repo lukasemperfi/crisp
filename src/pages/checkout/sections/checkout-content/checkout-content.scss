@@ -19,6 +19,7 @@
   &__content {
     display: flex;
     gap: 106px;
+    margin-top: 51px;
 
     @include mixins.respond-to($bp-tablet) {
       flex-direction: column;
@@ -38,6 +39,7 @@
   }
   &__col-2 {
     flex: 1 1 530px;
+    padding-top: 8px;
 
     @include mixins.respond-to($bp-tablet) {
       flex: 1;
@@ -67,6 +69,15 @@
   &__header {
     display: flex;
     justify-content: center;
+    margin-top: 15px;
+  }
+
+  &__title {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    margin-bottom: 26px;
   }
 
   .order-summary {
@@ -95,9 +106,7 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition:
-            background-color 0.3s ease,
-            color 0.3s ease,
+          transition: background-color 0.3s ease, color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;
@@ -255,12 +264,11 @@
   display: flex;
   &__item {
     width: 194px;
-    background-color: var(--divider);
-    height: 6px;
-    position: relative;
 
     &_active {
-      background-color: var(--advanced);
+      .steps__item-wrapper::before {
+        background-color: var(--advanced);
+      }
 
       .steps__circle {
         background-color: var(--advanced);
@@ -268,11 +276,34 @@
     }
   }
 
+  &__item-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 6px;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+
+      background-color: var(--divider);
+    }
+  }
+
+  &__label {
+    font-family: var(--second-family);
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    color: var(--black);
+    margin-top: 11px;
+  }
+
   &__circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
     background-color: var(--divider);
@@ -280,6 +311,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
 
   &__circle-inner {

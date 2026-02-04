@@ -19,7 +19,7 @@ export const initCheckoutContent = async () => {
   col1Container.append(loginForm);
 
   const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2",
+    ".checkout-section__col-2"
   );
   const cartOrderSummary = CartOrderSummary();
 
@@ -38,20 +38,27 @@ function Steps(props) {
 
         el.innerHTML = `
           <div class="steps__item steps__item_1">
-            <div class="steps__circle">
-              <div class="steps__circle-inner">
-                <span class="steps__content">1</span>
+            <div class="steps__item-wrapper">
+              <div class="steps__circle">
+                <div class="steps__circle-inner">
+                  <span class="steps__content">1</span>
+                </div>
               </div>
             </div>
+            <div class="steps__label">Shipping</div>
           </div>
 
-          <div class="steps__item steps__item_2">
+        <div class="steps__item steps__item_2">
+          <div class="steps__item-wrapper">
             <div class="steps__circle">
               <div class="steps__circle-inner">
                 <span class="steps__content">2</span>
               </div>
             </div>
           </div>
+          <div class="steps__label">Review & Payments</div>
+        </div>
+
         `;
 
         el._els = {
