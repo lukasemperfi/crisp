@@ -2,15 +2,15 @@ import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
 import { Checkbox } from "@/shared/ui/checkbox/checkbox";
-import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
-import { countries, regionsByCountry } from "../../../../shared/lib/location";
+import { Dropdown } from "@/shared/ui/dropdown/dropdown";
+import { countries, regionsByCountry } from "@/shared/lib/location";
 
 export function AddressForm(props) {
   return createComponent(props, {
     tag: "form",
 
     render(el, props, emit, { runOnce }) {
-      const { onSubmit, userProfileData } = props;
+      const { onSubmit, userProfileData = {} } = props;
       const {
         first_name = "",
         last_name = "",
@@ -28,19 +28,16 @@ export function AddressForm(props) {
 
         el.innerHTML = `
           <div class="address-form__section address-form__section_personal">
-            <h2 class="address-form__title profile-section__section-title">Contact Information</h2>
             <div class="address-form__fields-container" data-group="personal"></div>
-          </div>
-
-          <div class="address-form__section">
-            <h2 class="address-form__title profile-section__section-title">Address</h2>
-            <div class="address-form__fields-container" data-group="auth"></div>
           </div>
 
           <div class="address-form__actions">
             <button type="submit" class="address-form__btn-submit button button_solid button_black">
-              Save Adress
+              Next
             </button>
+            <button type="button" class="address-form__btn-back button">
+              Back
+          </button>
           </div>
         `;
 
@@ -115,7 +112,6 @@ export function AddressForm(props) {
             inputProps: {
               name: "first_name",
               id: "reg-fn",
-              placeholder: "Enter your first name",
               value: first_name,
             },
           }),
@@ -124,7 +120,6 @@ export function AddressForm(props) {
             inputProps: {
               name: "last_name",
               id: "reg-ln",
-              placeholder: "Enter your last name",
               value: last_name,
             },
           }),
@@ -182,11 +177,6 @@ export function AddressForm(props) {
           fields.first_name,
           fields.last_name,
           fields.company,
-          fields.phone_number,
-          fields.fax
-        );
-
-        el.querySelector('[data-group="auth"]').append(
           fields.street_address,
           fields.country_field,
           fields.state_field,
@@ -214,15 +204,6 @@ export function AddressForm(props) {
           { rule: "required", errorMessage: "Last name is required" },
         ]);
 
-        addValidatedField(fields.phone_number, "#reg-pn", [
-          { rule: "required", errorMessage: "Phone number is required" },
-          {
-            rule: "customRegexp",
-            value: /^(?:\+380\d{9}|0\d{9})$/,
-            errorMessage:
-              "Enter the correct number (+380501234567, 0501234567)",
-          },
-        ]);
         addValidatedField(fields.street_address, "#reg-sa", [
           { rule: "required", errorMessage: "Street address is required" },
         ]);

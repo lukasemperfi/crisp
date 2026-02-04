@@ -2,6 +2,7 @@ import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { CartOrderSummary } from "@/features/cart/ui/cart-order-summary/cart-order-summary";
 import { createComponent } from "@/shared/lib/core/core";
 import { LoginForm } from "./ui/login-form";
+import { AddressForm } from "./ui/address-form/address-form";
 
 export const initCheckoutContent = async () => {
   initBreadcrumbs(".checkout-section__breadcrumbs");
@@ -12,11 +13,8 @@ export const initCheckoutContent = async () => {
   headerContainer.append(stepsComponent);
 
   const col1Container = document.querySelector(".checkout-section__col-1");
-  const loginForm = LoginForm({
-    onSubmit: (data) => console.log("Login Attempt:", data),
-  });
 
-  col1Container.append(loginForm);
+  col1Container.append(ShippingInfo());
 
   const checkoutOrderContainer = document.querySelector(
     ".checkout-section__col-2"
@@ -25,6 +23,26 @@ export const initCheckoutContent = async () => {
 
   checkoutOrderContainer.append(cartOrderSummary);
 };
+
+function ShippingInfo() {
+  const el = document.createElement("div");
+  el.className = "shipping-info";
+
+  el.innerHTML = `
+      <h2 class="shipping-info__title">Shipping Address</h2>
+  `;
+
+  const loginForm = LoginForm({
+    onSubmit: (data) => console.log("Login Attempt:", data),
+  });
+  const addressForm = AddressForm({
+    onSubmit: (data) => console.log("Login Attempt:", data),
+  });
+
+  el.append(loginForm, addressForm);
+
+  return el;
+}
 
 function Steps(props) {
   return createComponent(props, {

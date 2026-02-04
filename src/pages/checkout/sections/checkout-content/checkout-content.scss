@@ -31,7 +31,6 @@
 
   &__col-1 {
     flex: 1 1 606px;
-    overflow-x: auto;
 
     @include mixins.respond-to($bp-tablet) {
       flex: 1;
@@ -72,12 +71,18 @@
     margin-top: 15px;
   }
 
-  &__title {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 24px;
-    color: var(--black);
-    margin-bottom: 26px;
+  .checkout-login-form {
+    margin-bottom: 74px;
+  }
+
+  .shipping-info {
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+      margin-bottom: 26px;
+    }
   }
 
   .order-summary {
