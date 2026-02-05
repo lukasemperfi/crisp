@@ -1,4 +1,4 @@
-import{c as f,m as R,F as C,s as T,j as L,i as q,a as U}from"../../footer-D6qklo8q.js";import{l as k}from"../../lazy-loading-Cecxv2lM.js";import{i as w}from"../../breadcrumbs-BpSfuU0S.js";import{a as F}from"../../accordion-C4dWlGMG.js";import{D as y}from"../../dropdown-BVPD7bAo.js";import{c as A,r as M,s as g}from"../../index-B-aVQfpU.js";function j(o){return f(o,{tag:"div",render(t,d,l,{runOnce:n}){const{items:i=[],userId:r}=d;n&&(t.className="cart-table",t.innerHTML=`
+import{c as f,m as R,F as C,s as T,j as L,i as q,a as U}from"../../footer-BQVaf_UP.js";import{l as k}from"../../lazy-loading-Cecxv2lM.js";import{i as w}from"../../breadcrumbs-BpSfuU0S.js";import{a as F}from"../../accordion-FqG3kPc4.js";import{D as y}from"../../dropdown-Cjm1SIqw.js";import{c as A,r as M,s as g}from"../../index-B-aVQfpU.js";function j(o){return f(o,{tag:"div",render(t,d,l,{runOnce:n}){const{items:i=[],userId:r}=d;n&&(t.className="cart-table",t.innerHTML=`
           <header class="cart-table__header cart-table-header">
              <div class="cart-table-header__title">Product</div> 
              <div class="cart-table-header__title">Price</div> 

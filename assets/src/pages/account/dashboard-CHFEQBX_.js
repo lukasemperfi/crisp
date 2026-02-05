@@ -1,4 +1,4 @@
-import{c as o,o as t,i,a as r}from"../../../footer-D6qklo8q.js";import{i as n}from"../../../breadcrumbs-BpSfuU0S.js";import{i as c}from"../../../profile-section-EQdESRyG.js";import"../../../dropdown-BVPD7bAo.js";function e(a){return o(a,{tag:"div",render(d,b,h,{runOnce:s}){s&&(d.className="dashboard-info",d.innerHTML=`
+import{c as o,o as t,i,a as r}from"../../../footer-BQVaf_UP.js";import{i as n}from"../../../breadcrumbs-BpSfuU0S.js";import{i as c}from"../../../profile-section-BjNgi_JN.js";import"../../../dropdown-Cjm1SIqw.js";function e(a){return o(a,{tag:"div",render(d,b,h,{runOnce:s}){s&&(d.className="dashboard-info",d.innerHTML=`
             <div class="dashboard-info__section">
                 <div class="dashboard-info__header">
                     <h2 class="profile-section__section-title">Account Information</h2>

@@ -1,4 +1,4 @@
-import{c as _,F as n,C as b,J as h,b as u,s as w,i as v,a as y,d as q,r as S}from"../../footer-D6qklo8q.js";import{i as F}from"../../breadcrumbs-BpSfuU0S.js";function P(s){return _(s,{tag:"form",render(e,d,p,{runOnce:c}){const{onSubmit:m,onBack:f}=d;if(c){e.className="registration-form",e.innerHTML=`
+import{c as _,F as n,C as b,J as h,b as u,s as w,i as v,a as y,d as q,r as S}from"../../footer-BQVaf_UP.js";import{i as F}from"../../breadcrumbs-BpSfuU0S.js";function P(s){return _(s,{tag:"form",render(e,d,p,{runOnce:c}){const{onSubmit:m,onBack:f}=d;if(c){e.className="registration-form",e.innerHTML=`
           <div class="registration-form__section registration-form__section_personal">
             <h2 class="registration-form__title">Personal Information</h2>
             <div class="registration-form__fields-container" data-group="personal"></div>
