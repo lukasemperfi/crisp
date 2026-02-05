@@ -3,6 +3,11 @@ import { createComponent } from "@/shared/lib/core/core";
 import { LoginForm } from "./ui/login-form";
 import { AddressForm } from "./ui/address-form/address-form";
 import { CartOrderSummary } from "./ui/cart-order-summary/cart-order-summary";
+import { store } from "@/app/store";
+import {
+  selectCartCount,
+  selectCartTotalSum,
+} from "@/features/cart/model/cart-slice";
 
 export const initCheckoutContent = async () => {
   initBreadcrumbs(".checkout-section__breadcrumbs");
@@ -17,11 +22,21 @@ export const initCheckoutContent = async () => {
   col1Container.append(ShippingInfo());
 
   const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2",
+    ".checkout-section__col-2"
   );
-  const cartOrderSummary = CartOrderSummary();
+  const cartOrderSummary = CartOrderSummary({ items: [] });
 
   checkoutOrderContainer.append(cartOrderSummary);
+
+  store.subscribe("cart", async (newState) => {
+    const cartViewItems = newState.viewItems;
+    const cartCount = selectCartCount(newState);
+    const cartTotalSum = selectCartTotalSum(newState);
+
+    cartOrderSummary.update({ items: cartViewItems });
+    // countContainer.textContent = cartCount;
+    // totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
+  });
 };
 
 function ShippingInfo() {

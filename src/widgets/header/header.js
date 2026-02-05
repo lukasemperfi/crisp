@@ -1,18 +1,18 @@
 import { initActiveLink } from "@/shared/ui/nav-menu/nav-menu";
-import { MiniCart } from "../../features/cart/ui/mini-cart/mini-cart";
-import { store } from "../../app/store";
+import { MiniCart } from "@/features/cart/ui/mini-cart/mini-cart";
+import { store } from "@/app/store";
 import {
   selectCartCount,
   selectCartTotalSum,
-} from "../../features/cart/model/cart-slice";
+} from "@/features/cart/model/cart-slice";
 import { formatPrice } from "@/shared/helpers/format-price";
-import { Modal } from "../../shared/ui/modal/modal";
-import { LoginForm } from "../../entities/auth/ui/login-form/login-form";
-import { authApi } from "../../entities/auth/api/auth";
-import { createComponent } from "../../shared/lib/core/core";
-import { baseUrl } from "../../shared/helpers/base-url";
-import { loginUser, logoutUser } from "../../entities/auth/model/auth-slice";
-import { createOverlaySpinner } from "../../shared/ui/overlay-spinner/overlay-spinner";
+import { Modal } from "@/shared/ui/modal/modal";
+import { LoginForm } from "@/entities/auth/ui/login-form/login-form";
+import { authApi } from "@/entities/auth/api/auth";
+import { createComponent } from "@/shared/lib/core/core";
+import { baseUrl } from "@/shared/helpers/base-url";
+import { loginUser, logoutUser } from "@/entities/auth/model/auth-slice";
+import { createOverlaySpinner } from "@/shared/ui/overlay-spinner/overlay-spinner";
 
 export async function initHeader() {
   initMenu();

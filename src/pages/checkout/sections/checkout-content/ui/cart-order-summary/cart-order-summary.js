@@ -7,12 +7,18 @@ import {
   regionsByCountry,
   shippingTaxRules,
 } from "@/shared/lib/location";
+import { IconArrowDown } from "../../../../../../shared/ui/icons/icons";
+import { OrderCard } from "../../../../../../features/cart/ui/order-card/order-card";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
+      const { items = [] } = props;
+
+      console.log("summary", items);
+
       if (runOnce) {
         el.className = "order-summary";
 
@@ -37,9 +43,7 @@ export function CartOrderSummary(props) {
                 <span class="js-total-value">120.00 EUR</span>
               </div>
             </div>
-            <div class="order-summary__cart-items">
-            
-            </div>   
+            <div class="order-summary__cart-items"></div>   
           </div>
 
         `;
@@ -49,19 +53,53 @@ export function CartOrderSummary(props) {
             items: [
               {
                 title: "1 Item in Cart",
-                content: `<div>Cart Item</div>`,
+                content: "",
                 isActive: true,
               },
             ],
             isSingleOpen: true,
           }),
+          itemsList: el.querySelector(".order-summary__cart-items"),
         };
 
         const cartItemsContainer = el.querySelector(
-          ".order-summary__cart-items",
+          ".order-summary__cart-items"
         );
+        const iconContainer =
+          el._els.accordion.querySelector(".accordion__icon");
+
+        iconContainer.innerHTML = IconArrowDown();
+
         cartItemsContainer.append(el._els.accordion);
       }
+
+      el._els.accordion.update({
+        items: [
+          {
+            title: "1 Item in Cart",
+            content: ItemsList(items),
+            isActive: true,
+          },
+        ],
+        isSingleOpen: true,
+      });
     },
   });
+}
+
+function ItemsList(items) {
+  if (!items || !Array.isArray(items)) {
+    return;
+  }
+
+  const el = document.createElement("div");
+  el.className = "items-list";
+
+  items.forEach((item) => {
+    const itemCard = OrderCard({ product: item });
+
+    el.appendChild(itemCard);
+  });
+
+  return el;
 }

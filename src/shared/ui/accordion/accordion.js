@@ -62,17 +62,15 @@ export function Accordion2(props) {
 
         el.innerHTML = items
           .map(
-            (item) => `
-              <div class="accordion__item ${item.isActive ? "is-active" : ""}">
+            () => `
+              <div class="accordion__item">
                 <button class="accordion__button" type="button">
-                  <span class="accordion__title">${item.title}</span>
+                  <span class="accordion__title"></span>
                   <span class="accordion__icon"></span>
                 </button>
 
                 <div class="accordion__content">
-                  <div class="accordion__inner">
-                    ${item.content}
-                  </div>
+                  <div class="accordion__inner"></div>
                 </div>
               </div>
             `
@@ -95,6 +93,29 @@ export function Accordion2(props) {
           });
         });
       }
+
+      if (el._items.length !== items.length) {
+        el.update(props);
+        return;
+      }
+
+      el._items.forEach((itemEl, index) => {
+        const item = items[index];
+
+        const titleEl = itemEl.querySelector(".accordion__title");
+        const innerEl = itemEl.querySelector(".accordion__inner");
+
+        titleEl.textContent = item.title;
+
+        itemEl.classList.toggle("is-active", !!item.isActive);
+
+        if (item.content instanceof Node) {
+          innerEl.innerHTML = "";
+          innerEl.append(item.content);
+        } else {
+          innerEl.innerHTML = item.content;
+        }
+      });
     },
   });
 }
