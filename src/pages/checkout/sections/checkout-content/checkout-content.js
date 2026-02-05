@@ -22,7 +22,7 @@ export const initCheckoutContent = async () => {
   col1Container.append(ShippingInfo());
 
   const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2"
+    ".checkout-section__col-2",
   );
   const cartOrderSummary = CartOrderSummary({ items: [] });
 
@@ -33,7 +33,7 @@ export const initCheckoutContent = async () => {
     const cartCount = selectCartCount(newState);
     const cartTotalSum = selectCartTotalSum(newState);
 
-    cartOrderSummary.update({ items: cartViewItems });
+    cartOrderSummary.update({ items: cartViewItems, cartCount });
     // countContainer.textContent = cartCount;
     // totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
   });

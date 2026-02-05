@@ -246,6 +246,10 @@ $container-media: "882px";
           height: 9px;
         }
       }
+
+      &__price {
+        display: none;
+      }
     }
   }
 }

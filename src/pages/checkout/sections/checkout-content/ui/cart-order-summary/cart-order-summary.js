@@ -9,13 +9,14 @@ import {
 } from "@/shared/lib/location";
 import { IconArrowDown } from "../../../../../../shared/ui/icons/icons";
 import { OrderCard } from "../../../../../../features/cart/ui/order-card/order-card";
+import { baseUrl } from "../../../../../../shared/helpers/base-url";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { items = [] } = props;
+      const { items = [], cartCount = 0 } = props;
 
       console.log("summary", items);
 
@@ -52,7 +53,7 @@ export function CartOrderSummary(props) {
           accordion: Accordion2({
             items: [
               {
-                title: "1 Item in Cart",
+                title: `${cartCount} Item${cartCount > 1 ? "s" : ""} in Cart`,
                 content: "",
                 isActive: true,
               },
@@ -63,7 +64,7 @@ export function CartOrderSummary(props) {
         };
 
         const cartItemsContainer = el.querySelector(
-          ".order-summary__cart-items"
+          ".order-summary__cart-items",
         );
         const iconContainer =
           el._els.accordion.querySelector(".accordion__icon");
@@ -76,7 +77,7 @@ export function CartOrderSummary(props) {
       el._els.accordion.update({
         items: [
           {
-            title: "1 Item in Cart",
+            title: `${cartCount} Item${cartCount > 1 ? "s" : ""} in Cart`,
             content: ItemsList(items),
             isActive: true,
           },
@@ -113,21 +114,16 @@ function CheckoutCard(item) {
 
   el.append(orderCard);
 
-  const sumcontainer = orderCard.querySelector(".actions");
   const detailsItemsContainer = orderCard.querySelector(
-    ".product-details__items"
+    ".product-details__items",
   );
-
-  sumcontainer.innerHTML = `
-    <div class="checkout__price">123,89 EUR</div>
-  `;
 
   detailsItemsContainer.innerHTML = `
     <div class="product-details__item product-details__item_qty">
       <div class="cart-product-card__sub-title">QTY:</div>
       <div class="product-details__value product-details__qty-value">3</div>
     </div>
-    <div class="product-details__item checkout__view-details">view details</div>
+    <a href="${baseUrl}product/?id=${item.id}" class="product-details__item product-details__item_view-details">view details ${IconArrowDown()}</a>
   `;
 
   return el;

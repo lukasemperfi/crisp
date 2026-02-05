@@ -87,6 +87,7 @@ export function CartProductCard(props) {
                 <button class="actions__btn actions__btn_remove">
                   ${IconCross()}
                 </button>
+                <div class="actions__price">123,89 EUR</div>
               </div>            
             </div>        
           </div>
@@ -107,6 +108,7 @@ export function CartProductCard(props) {
             incrementBtn: el.querySelector(".quantity__increase"),
             decrementBtn: el.querySelector(".quantity__decrease"),
             quantityInput: el.querySelector(".quantity__input"),
+            actionsPrice: el.querySelector(".actions__price"),
           };
 
           initQuantity();
@@ -124,6 +126,7 @@ export function CartProductCard(props) {
         el._els.image.src = mainImage?.image_path_webp || "";
         el._els.name.textContent = name;
         el._els.price.textContent = `${formatPrice(final_price)} EUR`;
+        el._els.actionsPrice.textContent = `${totalPriceFormatted} EUR`;
 
         el._els.size.textContent = selectedVariant.size.name;
         el._els.detailsSize.textContent = selectedVariant.size.name;
@@ -132,7 +135,7 @@ export function CartProductCard(props) {
         el._els.sku.textContent = sku;
         el._els.total.innerHTML = `${totalPriceFormatted} EUR`;
         el._els.totalDetails.innerHTML = `${quantity} X ${formatPrice(
-          final_price
+          final_price,
         )} EUR`;
 
         function initQuantity() {
@@ -170,7 +173,7 @@ export function CartProductCard(props) {
 
         function initFavoriteButton() {
           const addToWishlistButton = el.querySelector(
-            ".actions__btn_add-to-fav"
+            ".actions__btn_add-to-fav",
           );
           const wishlistIcon = el.querySelector(".wishlist-icon");
           console.log("isIn", isInWishlist);
@@ -196,7 +199,7 @@ export function CartProductCard(props) {
           });
         }
       },
-    }
+    },
   );
 }
 
