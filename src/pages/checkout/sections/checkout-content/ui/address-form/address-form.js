@@ -36,7 +36,7 @@ export function AddressForm(props) {
               <div class="shipping-methods__grid">
                 <div class="shipping-methods__item">
                   <div class="radio">
-                    <input type="radio" id="shipping-flat" value="flat_rate_fixed" name="shipping" checked/>
+                    <input type="radio" id="shipping-flat" value="fixed" name="shipping" checked  data-type="fixed" data-label="Flat Rate - Fixed" data-price="5"/>
                     <label for="shipping-flat" class="radio__label">5.00 EUR</label>
                   </div>
                   
@@ -46,7 +46,7 @@ export function AddressForm(props) {
 
                 <div class="shipping-methods__item">
                   <div class="radio">
-                    <input type="radio" id="shipping-best" value="best_way_table" name="shipping" />
+                    <input type="radio" id="shipping-best" value="table_rate" name="shipping" data-type="table" data-label="Table Rate - Best Way" data-price="10"/>
                     <label for="shipping-best" class="radio__label">10.00 EUR</label>
                   </div>  
                   

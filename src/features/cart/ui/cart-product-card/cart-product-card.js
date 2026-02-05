@@ -5,6 +5,8 @@ import { IconCross, IconEdit, IconHeart } from "@/shared/ui/icons/icons";
 import { cartThunks } from "../../model/cart-slice";
 import { showToast } from "../../../../shared/ui/toast/toast";
 import { productsApi } from "../../../../entities/product/api/products";
+import { baseUrl } from "../../../../shared/helpers/base-url";
+import { IconArrowDown } from "../../../../shared/ui/icons/icons";
 
 export function CartProductCard(props) {
   return createComponent(
@@ -56,7 +58,12 @@ export function CartProductCard(props) {
                     </div>   
                     <div class="product-details__item product-details__item_price">
                       <div class="product-details__value product-details__price-value"></div>
-                    </div>                 
+                    </div>
+                    <div class="product-details__item product-details__item_qty">
+                      <div class="cart-product-card__sub-title">QTY:</div>
+                      <div class="product-details__value product-details__qty-value">3</div>
+                    </div>
+                    <a href="${baseUrl}product/?id=${product.id}" class="product-details__item product-details__item_view-details">view details ${IconArrowDown()}</a>                             
                   </div>
                 </div>
               </div>      

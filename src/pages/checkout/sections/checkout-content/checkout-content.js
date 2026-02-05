@@ -10,6 +10,15 @@ import {
 } from "@/features/cart/model/cart-slice";
 
 export const initCheckoutContent = async () => {
+  let orderSummaryState = {
+    items: [],
+    cartCount: 0,
+    shippingCost: 5,
+    shippingLabel: "Flat Rate - Fixed",
+    subtotal: 0,
+    total: 0,
+  };
+
   initBreadcrumbs(".checkout-section__breadcrumbs");
 
   const headerContainer = document.querySelector(".checkout-section__header");
@@ -24,19 +33,53 @@ export const initCheckoutContent = async () => {
   const checkoutOrderContainer = document.querySelector(
     ".checkout-section__col-2",
   );
-  const cartOrderSummary = CartOrderSummary({ items: [] });
+  const cartOrderSummary = CartOrderSummary(orderSummaryState);
 
   checkoutOrderContainer.append(cartOrderSummary);
+
+  const radios = document.querySelectorAll('input[name="shipping"]');
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const label = e.target.dataset.label;
+      const price = parseFloat(e.target.dataset.price);
+
+      orderSummaryState = {
+        ...orderSummaryState,
+        shippingCost: price,
+        shippingLabel: label,
+      };
+
+      cartOrderSummary.update({
+        shippingCost: price,
+        shippingLabel: label,
+        total: calculateOrderTotal(price, orderSummaryState.subtotal),
+      });
+    });
+  });
 
   store.subscribe("cart", async (newState) => {
     const cartViewItems = newState.viewItems;
     const cartCount = selectCartCount(newState);
     const cartTotalSum = selectCartTotalSum(newState);
 
-    cartOrderSummary.update({ items: cartViewItems, cartCount });
-    // countContainer.textContent = cartCount;
-    // totalSumContainer.textContent = `${formatPrice(cartTotalSum)} EUR`;
+    orderSummaryState = {
+      ...orderSummaryState,
+      subtotal: cartTotalSum,
+      total: calculateOrderTotal(orderSummaryState.shippingCost, cartTotalSum),
+    };
+
+    cartOrderSummary.update({
+      items: cartViewItems,
+      cartCount,
+      subtotal: cartTotalSum,
+      total: calculateOrderTotal(orderSummaryState.shippingCost, cartTotalSum),
+    });
   });
+
+  function calculateOrderTotal(shippingCost, subtotal) {
+    return subtotal + shippingCost;
+  }
 };
 
 function ShippingInfo() {

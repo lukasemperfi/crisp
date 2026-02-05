@@ -2,6 +2,7 @@ import { createComponent } from "@/shared/lib/core/core";
 import { FormField } from "@/shared/ui/form-field/form-field";
 import { Accordion2 } from "@/shared/ui/accordion/accordion";
 import { Dropdown } from "@/shared/ui/dropdown/dropdown";
+import { formatPrice } from "@/shared/helpers/format-price";
 import {
   countries,
   regionsByCountry,
@@ -16,9 +17,14 @@ export function CartOrderSummary(props) {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { items = [], cartCount = 0 } = props;
-
-      console.log("summary", items);
+      const {
+        items = [],
+        cartCount = 0,
+        shippingCost = 0,
+        shippingLabel = "",
+        subtotal = 0,
+        total = 0,
+      } = props;
 
       if (runOnce) {
         el.className = "order-summary";
@@ -29,19 +35,19 @@ export function CartOrderSummary(props) {
             <div class="order-summary__totals">
               <div class="order-summary__row order-summary__subtitle order-summary__row_muted">
                 <span>Cart Subtotal</span>
-                <span>120.00 EUR</span>
+                <span class="js-subtotal-value">${subtotal} EUR</span>
               </div>
               <div class="order-summary__row order-summary__subtitle order-summary__row_muted">
                 <span>Shipping</span>
-                <span class="js-tax-value">0.00 EUR</span>
+                <span class="js-tax-value">${shippingCost} EUR</span>
               </div>
               <div class="order-summary__row order-summary__subtitle order-summary__row_muted">
-                <span>Flat Rate - Fixed</span>
+                <span class="js-shipping-label">${shippingLabel}</span>
               </div>
               <hr class="order-summary__divider" />
               <div class="order-summary__row order-summary__row_total">
                 <span>Order Total</span>
-                <span class="js-total-value">120.00 EUR</span>
+                <span class="js-total-value">${total} EUR</span>
               </div>
             </div>
             <div class="order-summary__cart-items"></div>   
@@ -61,6 +67,10 @@ export function CartOrderSummary(props) {
             isSingleOpen: true,
           }),
           itemsList: el.querySelector(".order-summary__cart-items"),
+          total: el.querySelector(".js-total-value"),
+          subtotal: el.querySelector(".js-subtotal-value"),
+          shippingCost: el.querySelector(".js-tax-value"),
+          shippingLabel: el.querySelector(".js-shipping-label"),
         };
 
         const cartItemsContainer = el.querySelector(
@@ -84,6 +94,11 @@ export function CartOrderSummary(props) {
         ],
         isSingleOpen: true,
       });
+
+      el._els.total.textContent = `${formatPrice(total)} EUR`;
+      el._els.subtotal.textContent = `${formatPrice(subtotal)} EUR`;
+      el._els.shippingCost.textContent = `${formatPrice(shippingCost)} EUR`;
+      el._els.shippingLabel.textContent = shippingLabel;
     },
   });
 }
@@ -113,18 +128,6 @@ function CheckoutCard(item) {
   const orderCard = OrderCard({ product: item });
 
   el.append(orderCard);
-
-  const detailsItemsContainer = orderCard.querySelector(
-    ".product-details__items",
-  );
-
-  detailsItemsContainer.innerHTML = `
-    <div class="product-details__item product-details__item_qty">
-      <div class="cart-product-card__sub-title">QTY:</div>
-      <div class="product-details__value product-details__qty-value">3</div>
-    </div>
-    <a href="${baseUrl}product/?id=${item.id}" class="product-details__item product-details__item_view-details">view details ${IconArrowDown()}</a>
-  `;
 
   return el;
 }

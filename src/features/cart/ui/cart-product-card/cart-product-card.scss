@@ -130,6 +130,13 @@ $container-media: "882px";
         &_price {
           display: none;
         }
+
+        &_qty {
+          display: none;
+        }
+        &_view-details {
+          display: none;
+        }
       }
 
       &__value {
