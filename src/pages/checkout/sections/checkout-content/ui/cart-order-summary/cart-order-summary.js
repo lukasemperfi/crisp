@@ -96,10 +96,39 @@ function ItemsList(items) {
   el.className = "items-list";
 
   items.forEach((item) => {
-    const itemCard = OrderCard({ product: item });
+    const itemCard = CheckoutCard(item);
 
     el.appendChild(itemCard);
   });
+
+  return el;
+}
+
+function CheckoutCard(item) {
+  const el = document.createElement("div");
+
+  el.className = "checkout-card";
+
+  const orderCard = OrderCard({ product: item });
+
+  el.append(orderCard);
+
+  const sumcontainer = orderCard.querySelector(".actions");
+  const detailsItemsContainer = orderCard.querySelector(
+    ".product-details__items"
+  );
+
+  sumcontainer.innerHTML = `
+    <div class="checkout__price">123,89 EUR</div>
+  `;
+
+  detailsItemsContainer.innerHTML = `
+    <div class="product-details__item product-details__item_qty">
+      <div class="cart-product-card__sub-title">QTY:</div>
+      <div class="product-details__value product-details__qty-value">3</div>
+    </div>
+    <div class="product-details__item checkout__view-details">view details</div>
+  `;
 
   return el;
 }

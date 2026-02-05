@@ -200,4 +200,16 @@
     flex-direction: column;
     gap: 10px;
   }
+
+  .cart-product-card {
+    &__wrapper {
+      background-color: transparent;
+    }
+    .actions {
+      &__btn_edit,
+      &__btn_remove {
+        display: none;
+      }
+    }
+  }
 }
