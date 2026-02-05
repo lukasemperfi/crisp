@@ -111,7 +111,9 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition: background-color 0.3s ease, color 0.3s ease,
+          transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;
@@ -194,7 +196,19 @@
     }
 
     .form-field {
+      @include mixins.respond-to(650px) {
+        flex-direction: column;
+      }
+      &__label {
+        @include mixins.respond-to(650px) {
+          flex: auto;
+        }
+      }
+
       &__input {
+        @include mixins.respond-to(650px) {
+          flex: auto;
+        }
         &::placeholder {
           @include mixins.respond-to($bp-tablet) {
             font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
@@ -260,6 +274,24 @@
       @include mixins.respond-to($bp-tablet) {
         font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
         padding-block: functions.fluidValue(10px, 12px, 320px, $bp-tablet);
+      }
+    }
+  }
+
+  .form-field {
+    @include mixins.respond-to(650px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+    &__label {
+      @include mixins.respond-to(650px) {
+        flex: auto !important;
+      }
+    }
+
+    &__control {
+      @include mixins.respond-to(650px) {
+        flex: auto !important;
       }
     }
   }
