@@ -217,7 +217,7 @@ function Profile(initialProps = {}) {
             <nav class="profile-menu__nav">
               <ul class="profile-menu__list">
                 <li class="profile-menu__item">
-                  <a href="#" class="profile-menu__link">Account</a>
+                  <a href="${baseUrl}account/dashboard/" class="profile-menu__link">Account</a>
                 </li>
               </ul>
               <div class="profile-menu__divider"></div>
