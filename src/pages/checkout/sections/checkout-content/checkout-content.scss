@@ -162,9 +162,7 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition:
-            background-color 0.3s ease,
-            color 0.3s ease,
+          transition: background-color 0.3s ease, color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;
@@ -445,6 +443,53 @@
       @include mixins.respond-to($bp-mobile-sm) {
         font-size: 11px;
       }
+    }
+  }
+
+  .payment-method {
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+      margin-bottom: 22px;
+    }
+
+    &__subtitle {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--gray-1);
+      margin-bottom: 21px;
+    }
+
+    &__grid {
+      padding-inline: 16px;
+      display: grid;
+      column-gap: 13px;
+      row-gap: 11px;
+      grid-template-columns: max-content 1fr;
+
+      .checkbox {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
+        gap: inherit;
+      }
+    }
+
+    &__info {
+      grid-template-columns: subgrid;
+      grid-column: 2/-1;
+      display: grid;
+      row-gap: 6px;
+    }
+
+    &__info-item {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 14px;
+      color: var(--gray-1);
     }
   }
 }

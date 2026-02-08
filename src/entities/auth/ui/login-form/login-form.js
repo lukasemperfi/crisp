@@ -1,8 +1,8 @@
 import { createComponent } from "@/shared/lib/core/core.js";
 import { FormField } from "@/shared/ui/form-field/form-field.js";
 import JustValidate from "just-validate";
-import { Checkbox } from "../../../../shared/ui/checkbox/checkbox";
-import { baseUrl } from "../../../../shared/helpers/base-url";
+import { Checkbox } from "@/shared/ui/checkbox/checkbox";
+import { baseUrl } from "@/shared/helpers/base-url";
 
 export function LoginForm(props) {
   return createComponent(props, {
@@ -74,7 +74,7 @@ export function LoginForm(props) {
         el.querySelector('[data-group="auth"]').append(
           fields.email,
           fields.password,
-          fields.newsletter,
+          fields.newsletter
         );
 
         const validator = new JustValidate(el, {
@@ -86,7 +86,7 @@ export function LoginForm(props) {
         const addValidatedField = (fieldComponent, id, rules) => {
           validator.addField(id, rules, {
             errorsContainer: fieldComponent.querySelector(
-              ".form-field__message-text",
+              ".form-field__message-text"
             ),
           });
         };
@@ -97,7 +97,7 @@ export function LoginForm(props) {
           fieldsConfig.email?.rules || [
             { rule: "required", errorMessage: "Email is required" },
             { rule: "email", errorMessage: "Email is invalid" },
-          ],
+          ]
         );
 
         addValidatedField(
@@ -106,7 +106,7 @@ export function LoginForm(props) {
           fieldsConfig.password?.rules || [
             { rule: "required", errorMessage: "Password is required" },
             { rule: "minLength", value: 8 },
-          ],
+          ]
         );
 
         validator.onValidate(({ fields }) => {
