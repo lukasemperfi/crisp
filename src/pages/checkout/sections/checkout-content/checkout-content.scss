@@ -35,6 +35,10 @@
     @include mixins.respond-to($bp-desktop) {
       flex: 1;
     }
+
+    @include mixins.respond-to($bp-desktop) {
+      order: 2;
+    }
   }
   &__col-2 {
     flex: 1 1 530px;
@@ -42,6 +46,10 @@
 
     @include mixins.respond-to($bp-desktop) {
       flex: 1;
+    }
+
+    @include mixins.respond-to($bp-desktop) {
+      order: 1;
     }
   }
 
@@ -162,7 +170,9 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition: background-color 0.3s ease, color 0.3s ease,
+          transition:
+            background-color 0.3s ease,
+            color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;
@@ -447,20 +457,36 @@
   }
 
   .payment-method {
+    &__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
     &__title {
       font-family: var(--font-family);
       font-weight: 400;
-      font-size: 24px;
+      font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
       color: var(--black);
-      margin-bottom: 22px;
+      margin-bottom: functions.fluidValue(8px, 22px, 320px, 1920px);
+
+      @include mixins.respond-to($bp-mobile-sm) {
+        text-transform: uppercase;
+        color: var(--gray-1);
+      }
     }
 
     &__subtitle {
       font-family: var(--font-family);
       font-weight: 500;
-      font-size: 18px;
+      font-size: functions.fluidValue(12px, 18px, 320px, 1920px);
       color: var(--gray-1);
-      margin-bottom: 21px;
+      margin-bottom: functions.fluidValue(8px, 21px, 320px, 1920px);
+
+      @include mixins.respond-to($bp-mobile-sm) {
+        text-transform: uppercase;
+        color: var(--black);
+      }
     }
 
     &__grid {
@@ -470,11 +496,25 @@
       row-gap: 11px;
       grid-template-columns: max-content 1fr;
 
+      @include mixins.respond-to($bp-mobile-sm) {
+        padding: 0;
+      }
+
       .checkbox {
         display: grid;
         grid-template-columns: subgrid;
         grid-column: 1 / -1;
         gap: inherit;
+
+        &__text {
+          font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
+        }
+
+        &__box {
+          @include mixins.respond-to($bp-mobile-sm) {
+            margin-bottom: 3px;
+          }
+        }
       }
     }
 
@@ -488,8 +528,115 @@
     &__info-item {
       font-family: var(--second-family);
       font-weight: 400;
-      font-size: 14px;
+      font-size: functions.fluidValue(12px, 14px, 320px, 1920px);
       color: var(--gray-1);
+    }
+
+    &__button-icon {
+      text-align: center;
+      color: var(--black);
+      background: var(--main-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+
+      @include mixins.respond-to($bp-mobile) {
+        width: 20px;
+        height: 20px;
+      }
+
+      svg {
+        width: 11px;
+        height: 11px;
+
+        @include mixins.respond-to($bp-mobile) {
+          width: 9px;
+          height: 9px;
+        }
+      }
+    }
+
+    &_2 {
+      margin-block: functions.fluidValue(12px, 35px, 320px, 1920px);
+
+      @include mixins.respond-to($bp-desktop) {
+        display: none;
+      }
+
+      .payment-method__subtitle {
+        display: none;
+      }
+
+      .checkbox {
+        display: none;
+      }
+    }
+
+    &_3 {
+      @include mixins.respond-to($bp-desktop) {
+        display: none;
+      }
+
+      .payment-method__subtitle {
+        display: none;
+      }
+
+      .checkbox {
+        display: none;
+      }
+    }
+  }
+
+  .discount-code {
+    margin-top: 57px;
+    &__title {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--black);
+      margin-bottom: 27px;
+    }
+
+    &__form-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    .form-field {
+      width: 100%;
+    }
+
+    button {
+      @include mixins.respond-to($bp-mobile-sm) {
+        background-color: var(--light-blue-hover);
+        color: var(--gray-1);
+        border: 2px solid var(--divider);
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border 0.3s ease;
+        padding-block: 5px;
+        padding-inline: 25px;
+        right: 4px;
+      }
+    }
+
+    &__button-text {
+      &_mobile {
+        display: none;
+        @include mixins.respond-to($bp-mobile-sm) {
+          display: inline;
+        }
+      }
+
+      &_desktop {
+        display: inline;
+        @include mixins.respond-to($bp-mobile-sm) {
+          display: none;
+        }
+      }
     }
   }
 }

@@ -7,18 +7,6 @@ $bp-mobile: 650px;
   flex-direction: column;
   gap: functions.fluidValue(20px, 65px, 320px, 1920px);
 
-  // &__section-title {
-  //   font-family: var(--font-family);
-  //   font-weight: 400;
-  //   font-size: functions.fluidValue(14px, 24px, 320px, 1920px);
-  //   color: var(--black);
-
-  //   @include mixins.respond-to($bp-mobile) {
-  //     color: var(--gray-1);
-  //     text-transform: uppercase;
-  //   }
-  // }
-
   &__header {
     display: flex;
     gap: 13px;
@@ -54,6 +42,9 @@ $bp-mobile: 650px;
 
     &_icon {
       padding: 0;
+      width: 24px;
+      height: 24px;
+
       @include mixins.respond-to($bp-mobile) {
         width: 20px;
         height: 20px;

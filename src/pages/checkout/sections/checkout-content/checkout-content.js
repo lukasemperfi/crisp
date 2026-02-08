@@ -14,6 +14,10 @@ import { AddressForm } from "./ui/address-form/address-form";
 import { CartOrderSummary } from "./ui/cart-order-summary/cart-order-summary";
 import { Checkbox } from "@/shared/ui/checkbox/checkbox";
 import { countries, regionsByCountry } from "../../../../shared/lib/location";
+import { IconEdit } from "@/shared/ui/icons/icons";
+import { FormField } from "@/shared/ui/form-field/form-field";
+import { delay } from "../../../../shared/helpers/delay";
+import { baseUrl } from "../../../../shared/helpers/base-url";
 
 export const initCheckoutContent = async () => {
   let orderSummaryState = {
@@ -42,14 +46,38 @@ export const initCheckoutContent = async () => {
   const stepsComponent = Steps({ step: 1 });
   headerContainer.append(stepsComponent);
 
+  const paymentMethod2 = PaymentMethod({
+    userData: addressState,
+    className: "payment-method_2",
+  });
+  const paymentMethod3 = PaymentMethod({
+    userData: addressState,
+    className: "payment-method_3",
+    title: "Shipping Method:",
+  });
+
   const col1Container = document.querySelector(".checkout-section__col-1");
-  col1Container.append(ShippingInfo({ addressState, stepsComponent }));
+
+  col1Container.append(
+    ShippingInfo({
+      addressState,
+      stepsComponent,
+      paymentMethod2,
+      paymentMethod3,
+      orderSummaryState,
+    }),
+  );
 
   const checkoutOrderContainer = document.querySelector(
-    ".checkout-section__col-2"
+    ".checkout-section__col-2",
   );
   const cartOrderSummary = CartOrderSummary(orderSummaryState);
-  checkoutOrderContainer.append(cartOrderSummary);
+
+  checkoutOrderContainer.append(
+    cartOrderSummary,
+    paymentMethod2,
+    paymentMethod3,
+  );
 
   const radios = document.querySelectorAll('input[name="shipping"]');
   radios.forEach((radio) => {
@@ -95,7 +123,13 @@ export const initCheckoutContent = async () => {
   }
 };
 
-function ShippingInfo({ addressState = {}, stepsComponent }) {
+function ShippingInfo({
+  addressState = {},
+  stepsComponent,
+  paymentMethod2,
+  paymentMethod3,
+  orderSummaryState,
+}) {
   const el = document.createElement("div");
   el.className = "shipping-info";
   el.innerHTML = `<h2 class="shipping-info__title">Shipping Address</h2>`;
@@ -104,7 +138,11 @@ function ShippingInfo({ addressState = {}, stepsComponent }) {
     successText: "Вход выполнен успешно!",
   });
 
-  const paymentMethod = PaymentMethod({ userData: addressState });
+  const paymentMethod = PaymentMethod({
+    userData: addressState,
+    title: "Shipping Address",
+  });
+  const discountCode = DiscountCode();
 
   const loginForm = LoginForm({
     onSubmit: async (data) => {
@@ -121,18 +159,31 @@ function ShippingInfo({ addressState = {}, stepsComponent }) {
   });
 
   const addressForm = AddressForm({
-    onSubmit: (data) => {
+    onSubmit: async (data) => {
+      const { shipping, ...restData } = data;
       addressState = { ...data };
       const step = Number(stepsComponent.dataset.step);
 
       if (step === 1) {
         hideStepOne({ el, loginForm });
-        paymentMethod.update({ userData: data });
+        paymentMethod.update({ userData: restData });
+        paymentMethod2.update({ userData: restData });
+        paymentMethod3.update({
+          userData: { shipping: orderSummaryState.shippingLabel },
+        });
         showStepTwo();
       }
 
       if (step === 2) {
         console.log("Данные адреса и доставки:", data);
+        try {
+          authSpinner.show();
+          await delay();
+          authSpinner.success("Order placed successfully!");
+          location.href = `${baseUrl}`;
+        } catch (error) {
+          console.error("Ошибка входа:", error);
+        }
       }
     },
     userProfileData: addressState,
@@ -140,10 +191,16 @@ function ShippingInfo({ addressState = {}, stepsComponent }) {
 
   function hideStepTwo() {
     paymentMethod.style.display = "none";
+    discountCode.style.display = "none";
+    paymentMethod2.style.display = "none";
+    paymentMethod3.style.display = "none";
   }
 
   function showStepTwo() {
-    paymentMethod.style.display = "flex";
+    paymentMethod.style.display = "block";
+    discountCode.style.display = "block";
+    paymentMethod2.style.display = "block";
+    paymentMethod3.style.display = "block";
   }
 
   function hideStepOne({ el, loginForm }) {
@@ -175,6 +232,18 @@ function ShippingInfo({ addressState = {}, stepsComponent }) {
 
   const title = el.querySelector(".shipping-info__title");
   const backBtn = addressForm.querySelector(".address-form__btn-back");
+  const editButton = paymentMethod.querySelector(
+    ".payment-method__button-icon",
+  );
+
+  editButton.addEventListener("click", () => {
+    const step = Number(stepsComponent.dataset.step);
+    if (step === 2) {
+      stepsComponent.update({ step: 1 });
+      showStepOne({ el, loginForm });
+      hideStepTwo();
+    }
+  });
 
   backBtn.addEventListener("click", () => {
     const step = Number(stepsComponent.dataset.step);
@@ -196,8 +265,11 @@ function ShippingInfo({ addressState = {}, stepsComponent }) {
   el.append(addressForm);
 
   const actions = el.querySelector(".address-form__actions");
-  // hideStepTwo();
+
+  hideStepTwo();
   actions.before(paymentMethod);
+
+  addressForm.after(discountCode);
 
   return el;
 }
@@ -260,7 +332,13 @@ function PaymentMethod(props) {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
-      const { isAddressSame = true, userData = {} } = props;
+      const {
+        isAddressSame = true,
+        userData = {},
+        title = "Payment Method:",
+        className = "",
+      } = props;
+
       const {
         first_name = "",
         last_name = "",
@@ -271,18 +349,28 @@ function PaymentMethod(props) {
         postal_code = "",
         shipping = "",
       } = userData;
+
       const countryMap = new Map(countries.map((c) => [c.value, c.label]));
       const regionsMap = new Map(
         Object.values(regionsByCountry)
           .flat()
-          .map((region) => [region.value, region.label])
+          .map((region) => [region.value, region.label]),
       );
 
+      const renderInfoItem = (value) => {
+        return value && value.toString().trim()
+          ? `<div class="payment-method__info-item">${value}</div>`
+          : "";
+      };
+
       if (runOnce) {
-        el.className = "payment-method";
+        el.className = "payment-method " + className;
 
         el.innerHTML = `
-          <div class="payment-method__title">Payment Method:</div>
+          <div class="payment-method__header">
+            <div class="payment-method__title"></div>
+            <button type="button" class="payment-method__button-icon">${IconEdit()}</button>          
+          </div>
           <div class="payment-method__subtitle">Check / Money order</div>
           <div class="payment-method__grid">
               ${Checkbox({
@@ -296,9 +384,10 @@ function PaymentMethod(props) {
 
             <div class="payment-method__info"></div>
           </div>
-
         `;
+
         el._els = {
+          title: el.querySelector(".payment-method__title"),
           checkbox: el.querySelector('input[name="isAddressConf"]'),
           infoContainer: el.querySelector(".payment-method__info"),
         };
@@ -310,22 +399,75 @@ function PaymentMethod(props) {
         });
       }
 
-      const { checkbox, infoContainer } = el._els;
+      const { checkbox, infoContainer, title: titleEl } = el._els;
+
+      if (titleEl) {
+        titleEl.textContent = title;
+      }
+
       if (checkbox) {
         checkbox.checked = isAddressSame;
       }
 
       if (infoContainer) {
+        const name = `${first_name} ${last_name}`.trim();
+        const location =
+          `${regionsMap.get(state) || state || ""} ${postal_code}`.trim();
+        const countryLabel = countryMap.get(country) || country;
+
         infoContainer.innerHTML = `
-          <div class="payment-method__info-item">${first_name} ${last_name}</div>
-          <div class="payment-method__info-item">${street_address}</div>
-          <div class="payment-method__info-item">${regionsMap.get(
-            state
-          )} ${postal_code}</div>
-          <div class="payment-method__info-item">${countryMap.get(
-            country
-          )}</div>
+          ${renderInfoItem(name)}
+          ${renderInfoItem(street_address)}
+          ${renderInfoItem(location)}
+          ${renderInfoItem(countryLabel)}
+          ${renderInfoItem(shipping)}
         `;
+      }
+    },
+  });
+}
+
+function DiscountCode(props) {
+  return createComponent(props, {
+    tag: "div",
+
+    render(el, props, emit, { runOnce }) {
+      const {
+        title = "Apply Discount Code",
+        placeholder = "Enter discount code",
+      } = props;
+
+      if (runOnce) {
+        el.className = "discount-code";
+
+        el.innerHTML = `
+          <h3 class="discount-code__title">${title}</h3>
+          <div class="discount-code__form-wrapper">
+            ${FormField({
+              inputProps: {
+                placeholder,
+                name: "discount",
+              },
+              withButton: true,
+              buttonText: `
+                <span class="discount-code__button-text discount-code__button-text_mobile">Apply</span>
+                <span class="discount-code__button-text discount-code__button-text_desktop">Apply Discount</span>
+              `,
+            }).toHTML()}
+          </div>
+        `;
+
+        el._els = {
+          input: el.querySelector('input[name="discount"]'),
+          button: el.querySelector("button"),
+        };
+
+        el._els.button?.addEventListener("click", () => {
+          const code = el._els.input.value.trim();
+          if (code) {
+            emit("apply", { code });
+          }
+        });
       }
     },
   });
