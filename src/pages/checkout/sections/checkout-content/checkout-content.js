@@ -21,6 +21,17 @@ export const initCheckoutContent = async () => {
     total: 0,
   };
 
+  let addressState = {
+    first_name: "",
+    last_name: "",
+    company: "",
+    street_address: "",
+    country: "",
+    state: "",
+    postal_code: "",
+    shipping: "",
+  };
+
   initBreadcrumbs(".checkout-section__breadcrumbs");
 
   const headerContainer = document.querySelector(".checkout-section__header");
@@ -30,7 +41,7 @@ export const initCheckoutContent = async () => {
 
   const col1Container = document.querySelector(".checkout-section__col-1");
 
-  col1Container.append(ShippingInfo());
+  col1Container.append(ShippingInfo({ addressState, stepsComponent }));
 
   const checkoutOrderContainer = document.querySelector(
     ".checkout-section__col-2",
@@ -84,7 +95,7 @@ export const initCheckoutContent = async () => {
   }
 };
 
-function ShippingInfo() {
+function ShippingInfo({ addressState = {}, stepsComponent }) {
   const el = document.createElement("div");
   el.className = "shipping-info";
 
@@ -112,10 +123,60 @@ function ShippingInfo() {
     },
   });
   const addressForm = AddressForm({
-    onSubmit: (data) => console.log("Login Attempt:", data),
+    onSubmit: (data) => {
+      addressState = { ...data };
+      const step = Number(stepsComponent.dataset.step);
+      const addressSection = el.querySelector(
+        ".address-form__section_personal",
+      );
+      const shippingSection = el.querySelector(".shipping-methods");
+      const infoTitle = document.querySelector(".shipping-info__title");
+      const submitBtn = el.querySelector(".address-form__btn-submit");
+
+      if (step === 1) {
+        stepsComponent.update({ step: 2 });
+        addressSection.style.display = "none";
+        shippingSection.style.display = "none";
+        infoTitle.style.display = "none";
+        submitBtn.textContent = "Place Order";
+        if (loginForm) {
+          loginForm.style.display = "none";
+        }
+      }
+
+      if (step === 2) {
+        // Здесь можно добавить логику для обработки данных адреса и выбранного способа доставки
+        console.log("Данные адреса и доставки:", data);
+      }
+    },
+    userProfileData: addressState,
   });
 
   const title = el.querySelector(".shipping-info__title");
+  const backBtn = addressForm.querySelector(".address-form__btn-back");
+
+  backBtn.addEventListener("click", () => {
+    const step = Number(stepsComponent.dataset.step);
+
+    if (step === 2) {
+      stepsComponent.update({ step: 1 });
+      const addressSection = el.querySelector(
+        ".address-form__section_personal",
+      );
+      const shippingSection = el.querySelector(".shipping-methods");
+      const infoTitle = document.querySelector(".shipping-info__title");
+      const submitBtn = el.querySelector(".address-form__btn-submit");
+
+      addressSection.style.display = "block";
+      shippingSection.style.display = "block";
+      infoTitle.style.display = "block";
+      submitBtn.textContent = "Next";
+
+      if (loginForm) {
+        loginForm.style.display = "block";
+      }
+    }
+  });
 
   store.subscribe("auth", async (newState) => {
     console.log("newstate", newState);
@@ -178,6 +239,8 @@ function Steps(props) {
           content2: el.querySelector(".steps__item_2 .steps__content"),
         };
       }
+
+      el.dataset.step = step;
 
       const { item1, item2, content1 } = el._els;
 
