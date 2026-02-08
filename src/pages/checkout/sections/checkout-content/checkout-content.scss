@@ -2,14 +2,14 @@
 @use "@/app/styles/mixins" as mixins;
 
 .checkout-section {
-  $bp-tablet: 1550px;
+  $bp-desktop: 1550px;
   $bp-mobile: 924px;
-  $bp-mobile-sm: 450px;
+  $bp-mobile-sm: 650px;
 
   margin-bottom: 116px;
 
-  @include mixins.respond-to($bp-tablet) {
-    margin-bottom: functions.fluidValue(17px, 116px, 320px, $bp-tablet);
+  @include mixins.respond-to($bp-desktop) {
+    margin-bottom: functions.fluidValue(17px, 116px, 320px, $bp-desktop);
   }
 
   .page-container-1920 {
@@ -19,20 +19,20 @@
   &__content {
     display: flex;
     gap: 106px;
-    margin-top: 51px;
+    margin-top: functions.fluidValue(16px, 51px, 320px, 1920px);
 
-    @include mixins.respond-to($bp-tablet) {
+    @include mixins.respond-to($bp-desktop) {
       flex-direction: column;
       margin-inline: auto;
       max-width: 1000px;
-      gap: functions.fluidValue(32px, 71px, 320px, $bp-tablet);
+      gap: functions.fluidValue(32px, 71px, 320px, $bp-desktop);
     }
   }
 
   &__col-1 {
     flex: 1 1 606px;
 
-    @include mixins.respond-to($bp-tablet) {
+    @include mixins.respond-to($bp-desktop) {
       flex: 1;
     }
   }
@@ -40,7 +40,7 @@
     flex: 1 1 530px;
     padding-top: 8px;
 
-    @include mixins.respond-to($bp-tablet) {
+    @include mixins.respond-to($bp-desktop) {
       flex: 1;
     }
   }
@@ -50,8 +50,8 @@
     justify-content: center;
     padding-block: 18px;
 
-    @include mixins.respond-to($bp-tablet) {
-      padding-block: functions.fluidValue(6px, 18px, 320px, $bp-tablet);
+    @include mixins.respond-to($bp-desktop) {
+      padding-block: functions.fluidValue(6px, 18px, 320px, $bp-desktop);
     }
 
     @include mixins.respond-to($bp-mobile-sm) {
@@ -59,8 +59,8 @@
     }
 
     .breadcrumbs__link {
-      @include mixins.respond-to($bp-tablet) {
-        font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        font-size: functions.fluidValue(10px, 14px, 320px, $bp-desktop);
       }
     }
   }
@@ -69,6 +69,10 @@
     display: flex;
     justify-content: center;
     margin-top: 15px;
+
+    @include mixins.respond-to($bp-mobile-sm) {
+      margin-top: 2px;
+    }
   }
 
   .checkout-login-form {
@@ -87,6 +91,7 @@
 
   .order-summary {
     &__section {
+      padding: functions.fluidValue(12px, 28px, 320px, 1920px);
       &_top {
         @include mixins.respond-to($bp-mobile-sm) {
           padding: 0;
@@ -101,9 +106,15 @@
       }
     }
 
+    &__row {
+      &_total {
+        font-size: functions.fluidValue(14px, 18px, 320px, 1920px);
+      }
+    }
+
     &__discount {
-      @include mixins.respond-to($bp-tablet) {
-        margin-top: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        margin-top: functions.fluidValue(12px, 16px, 320px, $bp-desktop);
       }
 
       button {
@@ -111,9 +122,7 @@
           background-color: var(--light-blue-hover);
           color: var(--gray-1);
           border: 2px solid var(--divider);
-          transition:
-            background-color 0.3s ease,
-            color 0.3s ease,
+          transition: background-color 0.3s ease, color 0.3s ease,
             border 0.3s ease;
           padding-block: 5px;
           padding-inline: 25px;
@@ -142,29 +151,35 @@
       }
     }
     &__title {
-      @include mixins.respond-to($bp-tablet) {
-        font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
-        text-transform: uppercase;
+      @include mixins.respond-to($bp-desktop) {
+        font-size: functions.fluidValue(14px, 24px, 320px, $bp-desktop);
       }
     }
 
     &__subtitle {
-      @include mixins.respond-to($bp-tablet) {
-        font-size: functions.fluidValue(12px, 18px, 320px, $bp-tablet);
-        margin-bottom: functions.fluidValue(5px, 14px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        font-size: functions.fluidValue(12px, 18px, 320px, $bp-desktop);
+        // margin-bottom: functions.fluidValue(5px, 14px, 320px, $bp-desktop);
+        margin-bottom: 0;
       }
     }
 
     .shipping-methods__item_flat-rate {
-      @include mixins.respond-to($bp-tablet) {
-        margin-bottom: functions.fluidValue(15px, 22px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        margin-bottom: functions.fluidValue(15px, 22px, 320px, $bp-desktop);
       }
     }
 
     &__totals {
-      @include mixins.respond-to($bp-tablet) {
-        gap: functions.fluidValue(5px, 19px, 320px, $bp-tablet);
+      padding-block: functions.fluidValue(12px, 17px, 320px, 1920px);
+
+      @include mixins.respond-to($bp-desktop) {
+        gap: functions.fluidValue(5px, 19px, 320px, $bp-desktop);
       }
+    }
+
+    &__divider {
+      margin-block: functions.fluidValue(12px, 14px, 320px, 1920px);
     }
 
     &__actions {
@@ -172,8 +187,8 @@
         margin-inline: -11px;
       }
       .button {
-        @include mixins.respond-to($bp-tablet) {
-          font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          font-size: functions.fluidValue(12px, 14px, 320px, $bp-desktop);
           padding-block: 11px;
         }
       }
@@ -181,70 +196,69 @@
 
     .accordion {
       &__title {
-        @include mixins.respond-to($bp-tablet) {
-          font-size: functions.fluidValue(14px, 24px, 320px, $bp-tablet);
-          text-transform: uppercase;
+        @include mixins.respond-to($bp-desktop) {
+          font-size: functions.fluidValue(12px, 24px, 320px, $bp-desktop);
         }
       }
 
       &__icon {
-        @include mixins.respond-to($bp-tablet) {
-          width: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
-          height: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          width: functions.fluidValue(8px, 16px, 320px, $bp-desktop);
+          height: functions.fluidValue(8px, 16px, 320px, $bp-desktop);
         }
       }
     }
 
     .form-field {
-      @include mixins.respond-to(650px) {
+      @include mixins.respond-to($bp-mobile-sm) {
         flex-direction: column;
       }
       &__label {
-        @include mixins.respond-to(650px) {
+        @include mixins.respond-to($bp-mobile-sm) {
           flex: auto;
         }
       }
 
       &__input {
-        @include mixins.respond-to(650px) {
+        @include mixins.respond-to($bp-mobile-sm) {
           flex: auto;
         }
         &::placeholder {
-          @include mixins.respond-to($bp-tablet) {
-            font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          @include mixins.respond-to($bp-desktop) {
+            font-size: functions.fluidValue(12px, 16px, 320px, $bp-desktop);
           }
         }
       }
 
       &__action {
-        @include mixins.respond-to($bp-tablet) {
-          font-size: functions.fluidValue(12px, 14px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          font-size: functions.fluidValue(12px, 14px, 320px, $bp-desktop);
         }
       }
     }
 
     .shipping-estimate {
-      @include mixins.respond-to($bp-tablet) {
-        padding-top: functions.fluidValue(7px, 12px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        padding-top: functions.fluidValue(7px, 12px, 320px, $bp-desktop);
       }
 
       &__description {
-        @include mixins.respond-to($bp-tablet) {
-          font-size: functions.fluidValue(10px, 16px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          font-size: functions.fluidValue(10px, 16px, 320px, $bp-desktop);
         }
       }
 
       &__label {
-        @include mixins.respond-to($bp-tablet) {
-          font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          font-size: functions.fluidValue(12px, 16px, 320px, $bp-desktop);
           margin-bottom: 2px;
         }
       }
 
       &__fields {
-        @include mixins.respond-to($bp-tablet) {
-          gap: functions.fluidValue(13px, 25px, 320px, $bp-tablet);
-          margin-block: functions.fluidValue(12px, 24px, 320px, $bp-tablet);
+        @include mixins.respond-to($bp-desktop) {
+          gap: functions.fluidValue(13px, 25px, 320px, $bp-desktop);
+          margin-block: functions.fluidValue(12px, 24px, 320px, $bp-desktop);
         }
         @include mixins.respond-to($bp-mobile-sm) {
           grid-template-columns: 1fr;
@@ -253,8 +267,8 @@
 
       .radio {
         &__label {
-          @include mixins.respond-to($bp-tablet) {
-            font-size: functions.fluidValue(10px, 14px, 320px, $bp-tablet);
+          @include mixins.respond-to($bp-desktop) {
+            font-size: functions.fluidValue(10px, 14px, 320px, $bp-desktop);
             text-transform: uppercase;
             gap: 8px;
           }
@@ -263,110 +277,127 @@
 
       .dropdown {
         &__trigger {
-          @include mixins.respond-to($bp-tablet) {
-            font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
+          @include mixins.respond-to($bp-desktop) {
+            font-size: functions.fluidValue(12px, 16px, 320px, $bp-desktop);
             padding-inline: 11px;
           }
         }
       }
     }
     input {
-      @include mixins.respond-to($bp-tablet) {
-        font-size: functions.fluidValue(12px, 16px, 320px, $bp-tablet);
-        padding-block: functions.fluidValue(10px, 12px, 320px, $bp-tablet);
+      @include mixins.respond-to($bp-desktop) {
+        font-size: functions.fluidValue(12px, 16px, 320px, $bp-desktop);
+        padding-block: functions.fluidValue(10px, 12px, 320px, $bp-desktop);
       }
     }
   }
 
   .form-field {
-    @include mixins.respond-to(650px) {
+    @include mixins.respond-to($bp-mobile-sm) {
       flex-direction: column;
       gap: 10px;
     }
     &__label {
-      @include mixins.respond-to(650px) {
+      @include mixins.respond-to($bp-mobile-sm) {
         flex: auto !important;
       }
     }
 
     &__control {
-      @include mixins.respond-to(650px) {
+      @include mixins.respond-to($bp-mobile-sm) {
         flex: auto !important;
       }
     }
   }
-}
 
-.steps {
-  display: flex;
-  &__item {
-    width: 194px;
+  .steps {
+    display: flex;
+    &__item {
+      width: 194px;
 
-    &_active {
-      .steps__item-wrapper::before {
-        background-color: var(--advanced);
+      @include mixins.respond-to($bp-mobile-sm) {
+        width: 145px;
       }
 
-      .steps__circle {
-        background-color: var(--advanced);
+      &_active {
+        .steps__item-wrapper::before {
+          background-color: var(--advanced);
+        }
+
+        .steps__circle {
+          background-color: var(--advanced);
+        }
       }
     }
-  }
 
-  &__item-wrapper {
-    display: flex;
-    justify-content: center;
-    position: relative;
+    &__item-wrapper {
+      display: flex;
+      justify-content: center;
+      position: relative;
 
-    &::before {
-      content: "";
-      width: 100%;
-      height: 6px;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
+      &::before {
+        content: "";
+        width: 100%;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        background-color: var(--divider);
+      }
+    }
 
+    &__label {
+      font-family: var(--second-family);
+      font-weight: 400;
+      font-size: 16px;
+      text-align: center;
+      color: var(--black);
+      margin-top: 11px;
+
+      @include mixins.respond-to($bp-mobile-sm) {
+        font-size: 12px;
+        margin-top: 4px;
+      }
+    }
+
+    &__circle {
+      width: 40px;
+      height: 40px;
       background-color: var(--divider);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+
+      @include mixins.respond-to($bp-mobile-sm) {
+        width: 31px;
+        height: 31px;
+      }
     }
-  }
 
-  &__label {
-    font-family: var(--second-family);
-    font-weight: 400;
-    font-size: 16px;
-    text-align: center;
-    color: var(--black);
-    margin-top: 11px;
-  }
+    &__circle-inner {
+      width: 21px;
+      height: 21px;
+      background-color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  &__circle {
-    width: 40px;
-    height: 40px;
-    background-color: var(--divider);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
+    &__content {
+      font-family: var(--font-family);
+      font-weight: 700;
+      font-size: 15px;
+      text-align: center;
+      color: var(--black);
+      line-height: 0.9;
 
-  &__circle-inner {
-    width: 28px;
-    height: 28px;
-    background-color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__content {
-    font-family: var(--font-family);
-    font-weight: 700;
-    font-size: 15px;
-    text-align: center;
-    color: var(--black);
-    line-height: 0.9;
+      @include mixins.respond-to($bp-mobile-sm) {
+        font-size: 11px;
+      }
+    }
   }
 }
