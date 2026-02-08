@@ -8,6 +8,8 @@ import {
   selectCartCount,
   selectCartTotalSum,
 } from "@/features/cart/model/cart-slice";
+import { loginUser } from "@/entities/auth/model/auth-slice";
+import { createOverlaySpinner } from "@/shared/ui/overlay-spinner/overlay-spinner";
 
 export const initCheckoutContent = async () => {
   let orderSummaryState = {
@@ -90,14 +92,46 @@ function ShippingInfo() {
       <h2 class="shipping-info__title">Shipping Address</h2>
   `;
 
+  const authSpinner = createOverlaySpinner({
+    successText: "Вход выполнен успешно!",
+  });
+
   const loginForm = LoginForm({
-    onSubmit: (data) => console.log("Login Attempt:", data),
+    onSubmit: async (data) => {
+      try {
+        authSpinner.show();
+        await loginUser(data.email, data.password);
+        authSpinner.success();
+
+        // location.reload();
+      } catch (error) {
+        console.error("Ошибка входа:", error);
+      } finally {
+        authSpinner.hide();
+      }
+    },
   });
   const addressForm = AddressForm({
     onSubmit: (data) => console.log("Login Attempt:", data),
   });
 
-  el.append(loginForm, addressForm);
+  const title = el.querySelector(".shipping-info__title");
+
+  store.subscribe("auth", async (newState) => {
+    console.log("newstate", newState);
+
+    if (!newState.isAuth) {
+      if (!el.contains(loginForm)) {
+        title.after(loginForm);
+      }
+    } else {
+      if (el.contains(loginForm)) {
+        loginForm.remove();
+      }
+    }
+  });
+
+  el.append(addressForm);
 
   return el;
 }

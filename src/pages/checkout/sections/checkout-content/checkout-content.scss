@@ -420,13 +420,18 @@
     }
 
     &__circle-inner {
-      width: 21px;
-      height: 21px;
+      width: 28px;
+      height: 28px;
       background-color: var(--white);
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @include mixins.respond-to($bp-mobile-sm) {
+        width: 21px;
+        height: 21px;
+      }
     }
 
     &__content {
