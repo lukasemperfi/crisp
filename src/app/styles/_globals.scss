@@ -93,10 +93,16 @@ main {
   box-sizing: border-box;
 }
 
-// input:-webkit-autofill,
-// input:-webkit-autofill:hover,
-// input:-webkit-autofill:focus {
-//   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-//   -webkit-text-fill-color: black !important;
-//   transition: background-color 5000s ease-in-out 0s;
-// }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow:
+    inset 0 0 0 2px var(--divider),
+    inset 0 0 0 1000px white;
+
+  box-shadow:
+    inset 0 0 0 2px var(--divider),
+    inset 0 0 0 1000px white;
+
+  -webkit-text-fill-color: var(--black);
+}
