@@ -53,13 +53,13 @@ export function ColorFilter(props) {
       if (hasLimit && hiddenColors.length) {
         const moreBtn = el.querySelector(".color-filter__more-btn");
         const hiddenItems = el.querySelectorAll(
-          ".color-filter__item_is-hidden"
+          ".color-filter__item_is-hidden",
         );
 
         if (moreBtn) {
           moreBtn.addEventListener("click", () => {
             hiddenItems.forEach((item) => {
-              item.style.display = "";
+              item.classList.remove("color-filter__item_is-hidden");
             });
             moreBtn.remove();
           });

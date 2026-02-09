@@ -24,6 +24,10 @@
     position: relative;
     user-select: none;
     padding: 3px;
+
+    &_is-hidden {
+      display: none;
+    }
   }
 
   &__input {
@@ -34,7 +38,8 @@
     width: 0;
 
     &:checked + .color-filter__box {
-      box-shadow: 0 0 0 $selected-checkbox-border-width var(--white),
+      box-shadow:
+        0 0 0 $selected-checkbox-border-width var(--white),
         0 0 0 5px var(--black);
     }
   }
@@ -46,7 +51,9 @@
     aspect-ratio: 1 / 1;
     width: functions.fluidValue(15px, 17px, 320px, 1920px);
     height: functions.fluidValue(15px, 17px, 320px, 1920px);
-    box-shadow: 0 0 0 3px transparent, 0 0 0 4px transparent;
+    box-shadow:
+      0 0 0 3px transparent,
+      0 0 0 4px transparent;
     transition: box-shadow 0.2s;
 
     // &_checked {
@@ -56,12 +63,16 @@
 
     @media (hover: hover) {
       &:hover {
-        box-shadow: 0 0 0 3px var(--white), 0 0 0 4px var(--divider);
+        box-shadow:
+          0 0 0 3px var(--white),
+          0 0 0 4px var(--divider);
       }
     }
 
     &_selected-secondary {
-      box-shadow: 0 0 0 3px var(--white), 0 0 0 4px var(--divider);
+      box-shadow:
+        0 0 0 3px var(--white),
+        0 0 0 4px var(--divider);
     }
 
     &_is-white {
