@@ -58,12 +58,10 @@
     color: var(--black);
     line-height: 68px;
     padding-block: 11px;
-    // margin-bottom: 23px;
 
     @include mixins.respond-to($bp-tablet) {
       font-size: functions.fluidValue(18px, 48px, 320px, $bp-tablet);
       line-height: functions.fluidValue(12px, 68px, 320px, $bp-tablet);
-      // margin-bottom: functions.fluidValue(0px, 23px, 320px, $bp-tablet);
     }
 
     @include mixins.respond-to(650px) {

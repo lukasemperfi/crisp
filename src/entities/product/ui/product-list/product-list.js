@@ -5,7 +5,7 @@ export class ProductList {
     containerSelector,
     initialProducts = [],
     onLoadMore,
-    showEmptyMessageOnInit = false
+    showEmptyMessageOnInit = false,
   ) {
     this._container =
       typeof containerSelector === "string"
@@ -182,14 +182,12 @@ export class ProductList2 {
     showEmptyMessageOnInit = false,
     renderItem,
   } = {}) {
-    // Убрали containerSelector из параметров
     this._onLoadMore = onLoadMore;
     this._renderItem = renderItem;
     this._products = [];
     this._showEmptyMessageOnInit = showEmptyMessageOnInit;
     this._initialized = false;
 
-    // Сразу подготавливаем структуру
     this._renderStructure();
 
     if (initialProducts.length > 0) {
@@ -201,7 +199,6 @@ export class ProductList2 {
     }
   }
 
-  // Публичный метод для получения корневого элемента
   getElement() {
     return this._wrapper;
   }
@@ -209,7 +206,6 @@ export class ProductList2 {
   _renderStructure() {
     if (this._initialized) return;
 
-    // Теперь мы не чистим чужой контейнер, а создаем свой собственный корень
     this._wrapper = document.createElement("div");
     this._wrapper.className = "catalog";
 
