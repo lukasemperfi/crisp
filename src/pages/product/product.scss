@@ -20,6 +20,7 @@
 @use "@/widgets/benefits-section/benefits-section.scss" as *;
 @use "@/entities/product/ui/product-list/product-list.scss" as *;
 @use "@/shared/ui/skeleton/skeleton.scss" as *;
+@use "@/shared/ui/modal/modal.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

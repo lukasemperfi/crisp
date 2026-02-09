@@ -15,6 +15,7 @@
 @use "@/shared/ui/breadcrumbs/breadcrumbs.scss" as *;
 @use "@/features/product-filters/ui/filter-panel.scss" as *;
 @use "@/features/product-filters/ui/filter-bar.scss" as *;
+@use "@/shared/ui/modal/modal.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

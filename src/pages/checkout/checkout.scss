@@ -21,6 +21,7 @@
 @use "@/pages/checkout/sections/checkout-content/ui/login-form.scss" as *;
 @use "@/pages/checkout/sections/checkout-content/ui/address-form/address-form.scss"
   as *;
+@use "@/shared/ui/modal/modal.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

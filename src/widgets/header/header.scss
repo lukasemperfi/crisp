@@ -3,7 +3,6 @@
 @use "@/app/styles/functions" as functions;
 @use "@/features/cart/ui/mini-cart/mini-cart.scss" as *;
 @use "@/entities/auth/ui/login-form/login-form.scss" as *;
-@use "@/shared/ui/modal/modal.scss" as *;
 @use "@/shared/ui/form-field/form-field.scss" as *;
 @use "@/shared/ui/checkbox/checkbox.scss" as *;
 @use "@/shared/ui/overlay-spinner/overlay-spinner.scss" as *;
@@ -99,9 +98,7 @@
       top: 50%;
       left: 50%;
       transform-origin: center;
-      transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .header__burger-icon {
@@ -152,9 +149,7 @@
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition:
-        opacity 0.3s ease 0.2s,
-        visibility 0s linear 0.2s;
+      transition: opacity 0.3s ease 0.2s, visibility 0s linear 0.2s;
       white-space: nowrap;
       position: relative;
       z-index: 2;
@@ -180,9 +175,7 @@
       border-bottom: 1px solid var(--white);
       transform: translateX(-100%);
       opacity: 0;
-      transition:
-        transform 0.4s ease,
-        opacity 0.3s ease;
+      transition: transform 0.4s ease, opacity 0.3s ease;
       pointer-events: none;
       background-color: var(--black);
     }
@@ -212,9 +205,7 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition:
-          opacity 0.2s ease 0s,
-          visibility 0s linear 0s;
+        transition: opacity 0.2s ease 0s, visibility 0s linear 0s;
       }
 
       .header-search__field-container {
@@ -389,9 +380,7 @@
   height: 100vh;
   background-color: var(--black);
   z-index: var(--z-index-header-nav-mobile);
-  transition:
-    transform 0.3s ease-in-out,
-    opacity 0s linear 0.3s,
+  transition: transform 0.3s ease-in-out, opacity 0s linear 0.3s,
     visibility 0s linear 0.3s;
   transform: translateY(-100%);
   opacity: 0;
@@ -402,10 +391,7 @@
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
-    transition:
-      transform 0.3s ease-in-out,
-      opacity 0s,
-      visibility 0s;
+    transition: transform 0.3s ease-in-out, opacity 0s, visibility 0s;
   }
 
   .page-container-1920 {
@@ -574,9 +560,7 @@ body:has(.cart-item__popover:popover-open) {
 
     opacity: 0;
     transform: translateY(-1px);
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease,
+    transition: opacity 0.3s ease, transform 0.3s ease,
       display 0.3s allow-discrete;
 
     &:popover-open {

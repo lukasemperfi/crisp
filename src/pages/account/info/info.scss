@@ -13,6 +13,7 @@
 @use "@/pages/account/sections/profile-section/profile-section.scss" as *;
 @use "@/entities/account/ui/info-form/info-form.scss" as *;
 @use "@/shared/ui/dropdown/dropdown.scss" as *;
+@use "@/shared/ui/modal/modal.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;

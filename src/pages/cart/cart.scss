@@ -18,6 +18,7 @@
 @use "@/features/cart/ui/cart-order-summary/cart-order-summary.scss" as *;
 @use "@/features/product-filters/ui/color/color.scss" as *;
 @use "@/pages/cart/sections/cart-content/cart-content.scss" as *;
+@use "@/shared/ui/modal/modal.scss" as *;
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
