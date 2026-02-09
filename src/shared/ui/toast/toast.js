@@ -6,6 +6,8 @@ export function showToast(message, type = "info", duration = 3000) {
     return;
   }
 
+  container.innerHTML = "";
+
   const toast = document.createElement("div");
   toast.className = `toast-notification ${type}`;
   toast.textContent = message;
@@ -27,7 +29,7 @@ export function showToast(message, type = "info", duration = 3000) {
     });
   };
 
-  container.prepend(toast);
+  container.appendChild(toast);
 
   setTimeout(() => {
     toast.classList.add("show");
