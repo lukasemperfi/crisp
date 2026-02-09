@@ -173,7 +173,12 @@ function AuthButtons(initialProps = {}) {
           className: "login-modal",
         });
 
+        myModal.style.display = "none";
         document.body.appendChild(myModal);
+
+        setTimeout(() => {
+          myModal.style.display = "";
+        }, 0);
 
         myModal.addEventListener("close", () => {
           myModal.update({ isOpen: false });
@@ -490,7 +495,7 @@ function SearchProductsList(props) {
             <div class="search-product-card__title">${item.name}</div>
           </div>
         </div>
-      `
+      `,
         )
         .join("");
     },
