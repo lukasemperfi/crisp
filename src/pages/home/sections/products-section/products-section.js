@@ -94,8 +94,6 @@ export const initProducts = async () => {
       }),
 
     onData: (data) => {
-      console.log(data);
-
       productList.appendProducts(data);
       productList.showLoadMore();
     },
@@ -105,7 +103,6 @@ export const initProducts = async () => {
     },
 
     onPageChange: (page) => {
-      console.log("page", page);
       if (isInitialLoad) {
         isInitialLoad = false;
         return;

@@ -16,7 +16,6 @@ export function createOverlaySpinner({
 
   const spinner = createSpinner();
   const successBox = createSuccessBox(successText);
-  // Находим элемент текста один раз при инициализации
   const successTextField = successBox.querySelector(".success-text");
 
   overlay.appendChild(spinner);
@@ -47,7 +46,6 @@ export function createOverlaySpinner({
       show();
     }
 
-    // Если передан текст, обновляем его в DOM
     if (customText && successTextField) {
       successTextField.textContent = customText;
     }

@@ -12,7 +12,6 @@ export function CartProductCard(props) {
   return createComponent(
     {
       ...props,
-      // quantity: props?.quantity ?? props.product.quantity,
     },
     {
       tag: "div",
@@ -162,7 +161,6 @@ export function CartProductCard(props) {
           });
 
           el._els.quantityInput.addEventListener("change", (e) => {
-            console.log("value", e.target.value);
             const newValue = Number(e.target.value);
 
             cartThunks.setQuantity({
@@ -183,7 +181,6 @@ export function CartProductCard(props) {
             ".actions__btn_add-to-fav",
           );
           const wishlistIcon = el.querySelector(".wishlist-icon");
-          console.log("isIn", isInWishlist);
 
           let isWishlistBtnActive = isInWishlist;
 

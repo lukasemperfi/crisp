@@ -175,7 +175,6 @@ function ShippingInfo({
       }
 
       if (step === 2) {
-        console.log("Данные адреса и доставки:", data);
         try {
           authSpinner.show();
           await delay();

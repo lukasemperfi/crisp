@@ -209,7 +209,6 @@
     &__subtitle {
       @include mixins.respond-to($bp-desktop) {
         font-size: functions.fluidValue(12px, 18px, 320px, $bp-desktop);
-        // margin-bottom: functions.fluidValue(5px, 14px, 320px, $bp-desktop);
         margin-bottom: 0;
       }
     }

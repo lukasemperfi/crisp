@@ -56,11 +56,6 @@
       0 0 0 4px transparent;
     transition: box-shadow 0.2s;
 
-    // &_checked {
-    //   box-shadow: 0 0 0 $selected-checkbox-border-width var(--white),
-    //     0 0 0 5px var(--black);
-    // }
-
     @media (hover: hover) {
       &:hover {
         box-shadow:

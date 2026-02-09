@@ -146,7 +146,6 @@ export const initProducts = async () => {
       limit: queryState.limit,
       sort: queryState.sort,
     });
-    console.log("data", data);
 
     productList.appendProducts(data);
 

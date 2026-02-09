@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userId = user?.data?.user?.id || null;
   const product = await productsApi.getProductById(id, userId);
 
-  console.log("produ", product);
-
   initHeader();
   initProductContent(product, userId);
   initRecomendationSection();

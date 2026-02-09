@@ -63,14 +63,14 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
           <div class="info__total-price">
             <div class="info__filter-title">Price Total</div>
             <div class="info__price-value">${formatPrice(
-              product.final_price * currentQuantity
+              product.final_price * currentQuantity,
             )} EUR</div>
           </div>
         </div>
         <div class="info__actions">
           <button class="add-to-cart-button button button_solid button_black button_fill info__btn">Add to Bag</button>
           <button class="add-to-wishlist-button  button button_outlined button_gray button_fill info__btn">${IconHeart(
-            { className: "wishlist-icon" }
+            { className: "wishlist-icon" },
           )}Save</button>
         </div>
         <div class="info__promo promo">
@@ -147,7 +147,7 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
 
       const currentVariant = findCurrentVariant(
         selectedColorId,
-        selectedSizeId
+        selectedSizeId,
       );
 
       if (!currentVariant) {
@@ -203,7 +203,6 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
   const updateAddToCartButton = () => {
     const btn = root.querySelector(".add-to-cart-button");
     const currentVariant = findCurrentVariant(selectedColorId, selectedSizeId);
-    console.log("currentVariant", currentVariant);
 
     if (currentVariant && currentVariant.stock > 0) {
       btn.disabled = false;
@@ -231,7 +230,7 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
     currentQuantity = quantity;
 
     priceContainer.textContent = `${formatPrice(
-      product.final_price * quantity
+      product.final_price * quantity,
     )} EUR`;
   };
 
@@ -250,7 +249,6 @@ export const ProductDetailsCard = ({ container, product, userId }) => {
   function initFavoriteButton() {
     const addToWishlistButton = root.querySelector(".add-to-wishlist-button");
     const wishlistIcon = root.querySelector(".wishlist-icon");
-    console.log("isIn", product.isInWishlist);
 
     let isWishlistBtnActive = product.isInWishlist;
 
@@ -367,7 +365,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
               <img class="thumbs-slider__img" src="${src}" alt="thumbs image" />
             </div>
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -384,7 +382,7 @@ function ProductDetailsCardSlider({ container, images = [] }) {
                   <img class="main-slider__img" src="${src}" alt="thumbs image" />
                 </div>
             </div>
-          `
+          `,
             )
             .join("")}
         </div>

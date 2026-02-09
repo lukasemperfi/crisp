@@ -1,8 +1,6 @@
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
 
-// functions.fluidValue(12px, 14px, 320px, 1920px)
-
 .cart-table {
   $bp-mobile: 950px;
   $bp-mobile-sm: 450px;

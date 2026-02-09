@@ -5,7 +5,6 @@ import { initProfileSection } from "../sections/profile-section/profile-section"
 import { createOverlaySpinner } from "@/shared/ui/overlay-spinner/overlay-spinner";
 import { InfoForm } from "@/entities/account/ui/info-form/info-form";
 import { userProfileApi } from "../../../entities/account/api/profile";
-import { delay } from "../../../shared/helpers/delay";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
@@ -13,9 +12,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   initProfileSection();
   initPageFooter();
 
-  // const userProfileData = await userProfileApi.getProfile();
+  const userProfileData = await userProfileApi.getProfile();
 
-  initInfoForm({});
+  initInfoForm(userProfileData);
 });
 
 function initInfoForm(userProfileData) {
@@ -27,12 +26,9 @@ function initInfoForm(userProfileData) {
     userProfileData,
     onSubmit: async (data) => {
       try {
-        console.log("data", data);
         authSpinner.show();
-        // await userProfileApi.updateProfile(data);
-        await delay(500);
+        await userProfileApi.updateProfile(data);
         authSpinner.success();
-
         location.reload();
       } catch (error) {
         console.error("Ошибка входа:", error);

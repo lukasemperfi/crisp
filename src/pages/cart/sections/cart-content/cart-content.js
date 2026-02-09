@@ -21,8 +21,6 @@ export const initCartContent = async () => {
   store.subscribe("cart", async (newState) => {
     const cartViewItems = newState.viewItems;
 
-    console.log("cartpage: cartViewsItems", cartViewItems);
-
     cartTable.update({ items: cartViewItems });
   });
 };

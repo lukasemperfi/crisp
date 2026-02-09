@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   initProfileSection();
   initPageFooter();
 
-  // const userProfileData = await userProfileApi.getProfile();
-  initAddressForm({});
+  const userProfileData = await userProfileApi.getProfile();
+  initAddressForm(userProfileData);
 });
 
 function initAddressForm(userProfileData) {

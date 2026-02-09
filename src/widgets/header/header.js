@@ -121,8 +121,6 @@ function initMiniCart() {
 }
 
 async function initAuth() {
-  // const isAuth = await getSession();
-
   const container = document.querySelector(".header__auth");
 
   if (!container) {
@@ -131,8 +129,6 @@ async function initAuth() {
   }
 
   store.subscribe("auth", (newState) => {
-    console.log("header auth. isAuth", newState.isAuth);
-
     if (newState.isAuth) {
       container.replaceChildren(Profile());
     } else {
@@ -419,7 +415,6 @@ async function initMobileSearch() {
     try {
       const results = await productsApi.searchProductsByName(value);
       lastSearchValue = value;
-      console.log(results);
       productsList.update({ items: results || [], isLoading: false });
 
       searchPopover.update({

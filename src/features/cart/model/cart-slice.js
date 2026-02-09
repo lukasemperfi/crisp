@@ -23,7 +23,7 @@ const calculateState = (state, newItems) => {
     .filter((vItem) => newItems.some((i) => i.cartItemId === vItem.cartItemId))
     .map((vItem) => {
       const actualItem = newItems.find(
-        (i) => i.cartItemId === vItem.cartItemId
+        (i) => i.cartItemId === vItem.cartItemId,
       );
       return { ...vItem, quantity: actualItem.quantity };
     });
@@ -48,7 +48,7 @@ export const cartSlice = {
       const { productId, variantId, quantity = 1 } = action.payload;
       const cartItemId = `${productId}_${variantId}`;
       const existing = state.items.find(
-        (item) => item.cartItemId === cartItemId
+        (item) => item.cartItemId === cartItemId,
       );
 
       let newItems;
@@ -56,7 +56,7 @@ export const cartSlice = {
         newItems = state.items.map((item) =>
           item.cartItemId === cartItemId
             ? { ...item, quantity: item.quantity + quantity }
-            : item
+            : item,
         );
         return calculateState(state, newItems);
       }
@@ -76,7 +76,7 @@ export const cartSlice = {
     incrementQuantity: (state, action) => {
       const { cartItemId } = action.payload;
       const newItems = state.items.map((i) =>
-        i.cartItemId === cartItemId ? { ...i, quantity: i.quantity + 1 } : i
+        i.cartItemId === cartItemId ? { ...i, quantity: i.quantity + 1 } : i,
       );
       return calculateState(state, newItems);
     },
@@ -92,7 +92,7 @@ export const cartSlice = {
         newItems = state.items.filter((i) => i.cartItemId !== cartItemId);
       } else {
         newItems = state.items.map((i) =>
-          i.cartItemId === cartItemId ? { ...i, quantity: i.quantity - 1 } : i
+          i.cartItemId === cartItemId ? { ...i, quantity: i.quantity - 1 } : i,
         );
       }
       return calculateState(state, newItems);
@@ -102,13 +102,11 @@ export const cartSlice = {
       const { cartItemId, quantity } = action.payload;
       let newItems;
 
-      console.log("from slice:", cartItemId, quantity);
-
       if (quantity <= 0) {
         newItems = state.items.filter((item) => item.cartItemId !== cartItemId);
       } else {
         newItems = state.items.map((item) =>
-          item.cartItemId === cartItemId ? { ...item, quantity } : item
+          item.cartItemId === cartItemId ? { ...item, quantity } : item,
         );
       }
       return calculateState(state, newItems);
@@ -159,7 +157,7 @@ export async function fetchCartProducts(userId) {
       const product = productMap.get(cartItem.productId);
       if (!product) return [];
       const selectedVariant = product.variants?.find(
-        (v) => v.id === cartItem.variantId
+        (v) => v.id === cartItem.variantId,
       );
       if (!selectedVariant) return [];
 
