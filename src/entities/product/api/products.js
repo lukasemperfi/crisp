@@ -212,6 +212,46 @@ class Products {
     return data[0];
   };
 
+  searchProductsByName = async (query) => {
+    if (!query) return [];
+
+    const { data, error } = await supabase
+      .from("products")
+      .select(
+        `
+        id,
+        name,
+        final_price,
+        base_price,
+        discount_percent,
+        is_featured,
+        is_popular,
+  
+        brand:brands (
+          id,
+          name
+        ),
+  
+        images:product_images (
+          id,
+          image_path_jpg,
+          image_path_webp,
+          is_main
+        )
+      `
+      )
+      .ilike("name", `%${query}%`)
+      .order("created_at", { ascending: false })
+      .limit(20);
+
+    if (error) {
+      console.error("Search error:", error);
+      return [];
+    }
+
+    return data;
+  };
+
   _getFilteredProducts = async (
     filters = {},
     flagCondition = null,
