@@ -386,6 +386,7 @@
   top: var(--header-height, 50px);
   left: 0;
   width: 100vw;
+  height: 100vh;
   background-color: var(--black);
   z-index: var(--z-index-header-nav-mobile);
   transition:
@@ -495,7 +496,6 @@
     }
   }
 }
-
 body:has(.cart-item__popover:popover-open) {
   @include mixins.respond-to(765px) {
     overflow: hidden;
