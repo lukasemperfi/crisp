@@ -21,6 +21,11 @@ const generateCriticalCss = async () => {
         target: relativePath,
         inline: true,
         css: cssFiles,
+        dimensions: [
+          { width: 320, height: 667 },
+          { width: 1920, height: 1080 },
+        ],
+        extract: false,
       });
 
       console.log(`✅ Critical CSS generated for: ${relativePath}`);
@@ -30,4 +35,4 @@ const generateCriticalCss = async () => {
   }
 };
 
-generateCriticalCss();
+// generateCriticalCss();
