@@ -1,7 +1,7 @@
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
 
-.hero {
+.hero-catalog {
   padding-block: functions.fluidValue(11px, 17px, 320px, 1920px);
 
   .banner__img {
