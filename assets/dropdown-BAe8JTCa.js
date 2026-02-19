@@ -1,4 +1,4 @@
-import{c as E}from"./footer-0H0OF5BI.js";function C(a){return E(a,{tag:"div",render(t,n,b,{runOnce:q}){const{options:p=[],defaultValue:r="",name:_="",placeholder:g="Не выбрано",disabled:d=!1}=n;t.className=`dropdown ${d?"dropdown_is-disabled":""}`,t.innerHTML=`
+import{c as E}from"./footer-D3eUB4_-.js";function C(a){return E(a,{tag:"div",render(t,n,b,{runOnce:q}){const{options:p=[],defaultValue:r="",name:_="",placeholder:g="Не выбрано",disabled:d=!1}=n;t.className=`dropdown ${d?"dropdown_is-disabled":""}`,t.innerHTML=`
           <select 
             class="dropdown__native" 
             ${_?`name="${_}"`:""} 
