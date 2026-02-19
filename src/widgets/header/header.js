@@ -244,7 +244,6 @@ function Profile(initialProps = {}) {
 function initDesktopHeaderSearch() {
   const container = document.querySelector(".header__center-block");
   const search = HeaderSearch();
-
   container.append(search);
 }
 
@@ -342,7 +341,6 @@ function HeaderSearch(props) {
         const updateSearch = (e) => {
           const value = e.target.value.trim();
           const isFocused = document.activeElement === el._els.input;
-
           if (value.length > 0) {
             el._popover.update({ isOpen: isFocused });
 
@@ -372,9 +370,15 @@ function HeaderSearch(props) {
           }
         });
 
-        el._els.input.addEventListener("blur", () => {
-          el._popover.update({ isOpen: false });
-          if (!el._els.input.value) el.update({ isOpen: false });
+        // Альтернативный способ закрытия вместо blur
+        document.addEventListener("mousedown", (e) => {
+          const isClickInsideSearch = el.contains(e.target);
+          const isClickInsidePopover = el._popover.contains(e.target);
+
+          if (!isClickInsideSearch && !isClickInsidePopover) {
+            el._popover.update({ isOpen: false });
+            if (!el._els.input.value) el.update({ isOpen: false });
+          }
         });
       }
 
@@ -449,8 +453,14 @@ async function initMobileSearch() {
     }
   });
 
-  searchInput.addEventListener("blur", () => {
-    searchPopover.update({ isOpen: false });
+  // Альтернативный способ закрытия для мобильной версии
+  document.addEventListener("mousedown", (e) => {
+    const isClickInsideInput = searchInput.contains(e.target);
+    const isClickInsidePopover = searchPopover.contains(e.target);
+
+    if (!isClickInsideInput && !isClickInsidePopover) {
+      searchPopover.update({ isOpen: false });
+    }
   });
 }
 
@@ -477,16 +487,17 @@ function SearchProductsList(props) {
       }
 
       el.innerHTML = items
-        .map(
-          (item) => `
+        .map((item) => {
+          const mainImg = item.images.find((img) => img.is_main);
+          return `
         <div class="search-product-card">
-          <div class="search-product-card__image"><img src="${item.images[0].image_path_jpg}"></div>
+          <div class="search-product-card__image"><img src="${mainImg?.image_path_jpg || item.images[0].image_path_jpg}"></div>
           <div class="search-product-card__info">
-            <div class="search-product-card__title">${item.name}</div>
+            <a class="search-product-card__title" href="${baseUrl}product/?id=${item.id}">${item.name}</a>
           </div>
         </div>
-      `,
-        )
+      `;
+        })
         .join("");
     },
   });

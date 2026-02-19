@@ -4,9 +4,7 @@ import { ProductList } from "@/entities/product/ui/product-list/product-list";
 import { FiltersBar } from "@/features/product-filters/ui/filter-bar";
 import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 import queryString from "query-string";
-import { Banner } from "../../../../widgets/banner/banner";
-import { mockProducts } from "../../../../shared/helpers/mock-products";
-import { debounce } from "../../../../shared/helpers/debounce";
+import { Banner } from "@/widgets/banner/banner";
 
 export const initProducts = async () => {
   const urlParams = parseUrlParams(window.location.search);
@@ -87,25 +85,43 @@ export const initProducts = async () => {
     showSelectedFilters: true,
   });
 
-  Dropdown(".products__sort", {
+  const sortDropdown = Dropdown({
     options: [
       { value: "new", label: "Newest" },
       { value: "price_asc", label: "Price (Low to High)" },
       { value: "price_desc", label: "Price (High to Low)" },
     ],
     defaultValue: queryState.sort,
-    onChange: (value) => applyNewParams({ ...urlParams, sort: value }),
   });
 
-  Dropdown(".products__limit", {
+  sortDropdown.addEventListener("onChange", (event) => {
+    const value = event.detail;
+    applyNewParams({ ...urlParams, sort: value });
+  });
+
+  const sortContainer = document.querySelector(".products__sort");
+  if (sortContainer) {
+    sortContainer.appendChild(sortDropdown);
+  }
+
+  const limitDropdown = Dropdown({
     options: [
-      { value: "48", label: "48" },
-      { value: "24", label: "24" },
       { value: "8", label: "8" },
+      { value: "24", label: "24" },
+      { value: "48", label: "48" },
     ],
     defaultValue: String(queryState.limit),
-    onChange: (value) => applyNewParams({ ...urlParams, limit: Number(value) }),
   });
+
+  limitDropdown.addEventListener("onChange", (event) => {
+    const value = event.detail;
+    applyNewParams({ ...urlParams, limit: Number(value) });
+  });
+
+  const limitContainer = document.querySelector(".products__limit");
+  if (limitContainer) {
+    limitContainer.appendChild(limitDropdown);
+  }
 
   filtersBar.onApply((filters) => {
     applyNewParams(filters);

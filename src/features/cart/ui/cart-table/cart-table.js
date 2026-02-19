@@ -1,5 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
 import { CartProductCard } from "@/features/cart/ui/cart-product-card/cart-product-card";
+import { baseUrl } from "@/shared/helpers/base-url";
+import { cartThunks } from "../../model/cart-slice";
 
 export function CartTable(props) {
   return createComponent(props, {
@@ -22,14 +24,23 @@ export function CartTable(props) {
           </header>
           <div class="cart-table__list"></div> 
           <footer class="cart-table__footer">
-                <button class="button button_elevated button_gray">continue shopping</button>
-                <button class="button button_elevated button_gray">clear shopping cart</button>
+                <button class="button button_elevated button_gray continue-shopping-btn">continue shopping</button>
+                <button class="button button_elevated button_gray clear-cart-btn">clear shopping cart</button>
           </footer>
           `;
 
         el._els = {
           list: el.querySelector(".cart-table__list"),
+          continueShoppingBtn: el.querySelector(".continue-shopping-btn"),
+          clearCartBtn: el.querySelector(".clear-cart-btn"),
         };
+        el._els.continueShoppingBtn.addEventListener("click", () => {
+          window.location.href = `${baseUrl}catalog/`;
+        });
+        el._els.clearCartBtn.addEventListener("click", () => {
+          cartThunks.clearCart();
+          renderList(el._els.list, [], userId);
+        });
       }
 
       renderList(el._els.list, items, userId);
@@ -40,7 +51,8 @@ export function CartTable(props) {
 function renderList(container, products, userId) {
   container.innerHTML = "";
 
-  if (!products || !Array.isArray(products)) {
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    container.innerHTML = `<div class="cart-table__empty-message">Cart is empty</div>`;
     return;
   }
 

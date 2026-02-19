@@ -1,7 +1,7 @@
 import { createComponent } from "@/shared/lib/core/core";
-import { IconCross2 } from "../../../../shared/ui/icons/icons";
+import { IconCross2 } from "@/shared/ui/icons/icons";
 import { OrderCard } from "../order-card/order-card";
-import { baseUrl } from "../../../../shared/helpers/base-url";
+import { baseUrl } from "@/shared/helpers/base-url";
 import { formatPrice } from "@/shared/helpers/format-price";
 
 export function MiniCart(props) {
@@ -52,8 +52,14 @@ export function MiniCart(props) {
         el._els = {
           list: el.querySelector(".mini-cart__items"),
           totalSum: el.querySelector(".mini-cart__total-sum"),
+          footer: el.querySelector(".mini-cart__footer"),
         };
       }
+
+      const isEmpty = items.length === 0;
+
+      // Управляем видимостью футера
+      el._els.footer.style.display = isEmpty ? "none" : "block";
 
       renderList(el._els.list, items);
       el._els.totalSum.textContent = `${formatPrice(totalSum)} EUR`;
@@ -64,7 +70,8 @@ export function MiniCart(props) {
 function renderList(container, products) {
   container.innerHTML = "";
 
-  if (!products || !Array.isArray(products)) {
+  if (!products || !Array.isArray(products) || products.length === 0) {
+    container.innerHTML = `<div class="mini-cart__empty-message">Cart is Empty</div>`;
     return;
   }
 

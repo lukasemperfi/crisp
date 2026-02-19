@@ -6,6 +6,10 @@ export function DashboardInfo(props) {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
+      const { userInfo = {} } = props;
+      const { first_name, last_name, is_subscribed_for_newsletter } = userInfo;
+      const fullName = `${first_name} ${last_name}`;
+
       if (runOnce) {
         el.className = "dashboard-info";
 
@@ -19,8 +23,8 @@ export function DashboardInfo(props) {
                     <div class="dashboard-info__card dashboard-card">
                         <h3 class="dashboard-card__title">Contact Information</h3>
                         <div class="dashboard-card__content">
-                            <p class="dashboard-card__text">Alex Driver</p>
-                            <p class="dashboard-card__text">ExampeAdress@gmail.com</p>
+                            <p class="dashboard-card__text">${fullName}</p>
+                            <p class="dashboard-card__text">${userInfo.email}</p>
                         </div>
                         <div class="dashboard-card__actions">
                             <button class="dashboard-info__button">Edit</button>
@@ -31,7 +35,7 @@ export function DashboardInfo(props) {
                     <div class="dashboard-info__card dashboard-card">
                         <h3 class="dashboard-card__title">Newsletters</h3>
                         <div class="dashboard-card__content">
-                            <p class="dashboard-card__text">You don't subscribe to our newsletter.</p>
+                            <p class="dashboard-card__text">${is_subscribed_for_newsletter ? "You are subscribed to our newsletter ✅" : "You don't subscribe to our newsletter."}</p>
                         </div>
                         <div class="dashboard-card__actions">
                             <button class="dashboard-info__button">Edit</button>

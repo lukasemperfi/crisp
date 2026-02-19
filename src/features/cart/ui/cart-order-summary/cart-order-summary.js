@@ -1,18 +1,21 @@
 import { createComponent } from "@/shared/lib/core/core";
-import { FormField } from "../../../../shared/ui/form-field/form-field";
-import { Accordion2 } from "../../../../shared/ui/accordion/accordion";
-import { Dropdown } from "../../../../shared/ui/dropdown/dropdown";
+import { FormField } from "@/shared/ui/form-field/form-field";
+import { Accordion2 } from "@/shared/ui/accordion/accordion";
+import { Dropdown } from "@/shared/ui/dropdown/dropdown";
 import {
   countries,
   regionsByCountry,
   shippingTaxRules,
-} from "../../../../shared/lib/location";
+} from "@/shared/lib/location";
+import { baseUrl } from "@/shared/helpers/base-url";
 
 export function CartOrderSummary(props) {
   return createComponent(props, {
     tag: "div",
 
     render(el, props, emit, { runOnce }) {
+      const { subtotal = 0 } = props;
+
       if (runOnce) {
         el.className = "order-summary";
 
@@ -35,7 +38,7 @@ export function CartOrderSummary(props) {
             <div class="order-summary__totals">
               <div class="order-summary__row order-summary__subtitle">
                 <span>Subtotal</span>
-                <span>120.00 EUR</span>
+                <span class="js-subtotal-value">0.00 EUR</span>
               </div>
               <div class="order-summary__row order-summary__subtitle order-summary__row_muted">
                 <span>Tax</span>
@@ -43,7 +46,7 @@ export function CartOrderSummary(props) {
               </div>
               <div class="order-summary__row order-summary__row--total order-summary__title">
                 <span>Order Total</span>
-                <span class="js-total-value">120.00 EUR</span>
+                <span class="js-total-value">0.00 EUR</span>
               </div>
             </div>
             <div class="order-summary__divider"></div>
@@ -54,12 +57,24 @@ export function CartOrderSummary(props) {
           </div>
         `;
 
-        let currentCountry = "";
-        let currentRegion = "";
-        const SUBTOTAL = 120.0;
+        el._state = {
+          currentCountry: "",
+          currentRegion: "",
+        };
+
+        el._els = {
+          subtotal: el.querySelector(".js-subtotal-value"),
+          tax: el.querySelector(".js-tax-value"),
+          total: el.querySelector(".js-total-value"),
+          chekoutBtn: el.querySelector(".order-summary__cta"),
+        };
+
+        el._els.chekoutBtn.addEventListener("click", () => {
+          window.location.href = `${baseUrl}checkout/`;
+        });
 
         const shippingContainer = el.querySelector(
-          ".order-summary__block_shipping-estimate"
+          ".order-summary__block_shipping-estimate",
         );
         const shippingAccordion = Accordion2({
           items: [
@@ -86,15 +101,16 @@ export function CartOrderSummary(props) {
         });
 
         el.querySelector(".shipping-estimate__control_country").append(
-          countryDropdown
+          countryDropdown,
         );
         el.querySelector(".shipping-estimate__control_state").append(
-          stateDropdown
+          stateDropdown,
         );
 
-        const validateForm = () => {
+        el._validateForm = () => {
           const mainButtons = el.querySelectorAll(".js-summary-btn");
-          const isValid = currentCountry !== "" && currentRegion !== "";
+          const isValid =
+            el._state.currentCountry !== "" && el._state.currentRegion !== "";
 
           mainButtons.forEach((btn) => {
             btn.disabled = !isValid;
@@ -102,26 +118,23 @@ export function CartOrderSummary(props) {
           });
         };
 
-        const calculateTotals = (rule) => {
-          const taxEl = el.querySelector(".js-tax-value");
-          const totalEl = el.querySelector(".js-total-value");
-
+        el._calculateTotals = (rule) => {
           if (!rule) {
-            taxEl.textContent = "0.00 EUR";
-            totalEl.textContent = `${SUBTOTAL.toFixed(2)} EUR`;
+            el._els.tax.textContent = "0.00 EUR";
+            el._els.total.textContent = `${el._currentSubtotal.toFixed(2)} EUR`;
             return;
           }
 
           const selectedInput = el.querySelector(
-            'input[name="shipping"]:checked'
+            'input[name="shipping"]:checked',
           );
           const taxValue =
             selectedInput?.id === "shipping-flat"
               ? rule.flatRate
               : rule.bestWay;
 
-          taxEl.textContent = `${taxValue.toFixed(2)} EUR`;
-          totalEl.textContent = `${(SUBTOTAL + taxValue).toFixed(2)} EUR`;
+          el._els.tax.textContent = `${taxValue.toFixed(2)} EUR`;
+          el._els.total.textContent = `${(el._currentSubtotal + taxValue).toFixed(2)} EUR`;
         };
 
         const updateMethodLabels = (rule) => {
@@ -137,56 +150,64 @@ export function CartOrderSummary(props) {
           }
         };
 
-        const updateTaxes = (forceFirstChecked = false) => {
+        el._updateTaxes = (forceFirstChecked = false) => {
           const radioInputs = el.querySelectorAll('input[name="shipping"]');
-          const rule = shippingTaxRules[currentCountry]?.[currentRegion];
+          const rule =
+            shippingTaxRules[el._state.currentCountry]?.[
+              el._state.currentRegion
+            ];
 
-          if (currentCountry && currentRegion && rule) {
+          if (el._state.currentCountry && el._state.currentRegion && rule) {
             radioInputs.forEach((input) => (input.disabled = false));
             if (forceFirstChecked) radioInputs[0].checked = true;
 
             updateMethodLabels(rule);
-            calculateTotals(rule);
+            el._calculateTotals(rule);
           } else {
             radioInputs.forEach((input) => {
               input.disabled = true;
               input.checked = false;
             });
             updateMethodLabels(null);
-            calculateTotals(null);
+            el._calculateTotals(null);
           }
 
-          validateForm();
+          el._validateForm();
         };
 
         countryDropdown.addEventListener("onChange", (event) => {
-          currentCountry = event.detail;
-          currentRegion = "";
+          el._state.currentCountry = event.detail;
+          el._state.currentRegion = "";
 
-          const regions = regionsByCountry[currentCountry] || [];
+          const regions = regionsByCountry[el._state.currentCountry] || [];
           stateDropdown.update({
             options: regions,
             disabled: regions.length === 0,
             defaultValue: "",
           });
 
-          updateTaxes();
+          el._updateTaxes();
         });
 
         stateDropdown.addEventListener("onChange", (event) => {
-          currentRegion = event.detail;
-          updateTaxes(true);
+          el._state.currentRegion = event.detail;
+          el._updateTaxes(true);
         });
 
         el.addEventListener("change", (event) => {
           if (event.target.name === "shipping") {
-            const rule = shippingTaxRules[currentCountry]?.[currentRegion];
-            calculateTotals(rule);
+            const rule =
+              shippingTaxRules[el._state.currentCountry]?.[
+                el._state.currentRegion
+              ];
+            el._calculateTotals(rule);
           }
         });
-
-        updateTaxes();
       }
+
+      el._currentSubtotal = subtotal;
+      el._els.subtotal.textContent = `${subtotal.toFixed(2)} EUR`;
+      el._updateTaxes();
     },
   });
 }

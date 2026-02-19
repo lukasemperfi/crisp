@@ -83,4 +83,11 @@
   &__close-icon {
     color: var(--divider);
   }
+
+  &__empty-message {
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--black);
+    text-align: center;
+  }
 }

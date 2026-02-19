@@ -205,6 +205,9 @@ export const cartThunks = {
       payload: { cartItemId, quantity },
     });
   },
+  clearCart: () => {
+    store.dispatch({ type: "cart/clearCart" });
+  },
 };
 
 export const selectCartProductIds = (state) => [

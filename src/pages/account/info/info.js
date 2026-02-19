@@ -4,7 +4,7 @@ import { initBreadcrumbs } from "@/widgets/breadcrumbs/breadcrumbs";
 import { initProfileSection } from "../sections/profile-section/profile-section";
 import { createOverlaySpinner } from "@/shared/ui/overlay-spinner/overlay-spinner";
 import { InfoForm } from "@/entities/account/ui/info-form/info-form";
-import { userProfileApi } from "../../../entities/account/api/profile";
+import { userProfileApi } from "@/entities/account/api/profile";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeader();
