@@ -1,4 +1,4 @@
-import{c,n as _,i as b,s as l,a as h}from"../../../footer-D3eUB4_-.js";import{i as u}from"../../../breadcrumbs-BpSfuU0S.js";import{i as f}from"../../../profile-section-BsnviRcq.js";import{u as v}from"../../../profile-oa3xae70.js";import"../../../dropdown-BAe8JTCa.js";function p(a){return c(a,{tag:"div",render(d,s,g,{runOnce:t}){const{userInfo:o={}}=s,{first_name:r,last_name:i,is_subscribed_for_newsletter:n}=o,e=`${r} ${i}`;t&&(d.className="dashboard-info",d.innerHTML=`
+import{c,n as _,i as b,s as l,a as h}from"../../../footer-D3eUB4_-.js";import{i as u}from"../../../breadcrumbs-DHae3DKD.js";import{i as f}from"../../../profile-section-BsnviRcq.js";import{u as v}from"../../../profile-oa3xae70.js";import"../../../dropdown-BAe8JTCa.js";function p(a){return c(a,{tag:"div",render(d,s,g,{runOnce:t}){const{userInfo:o={}}=s,{first_name:r,last_name:i,is_subscribed_for_newsletter:n}=o,e=`${r} ${i}`;t&&(d.className="dashboard-info",d.innerHTML=`
             <div class="dashboard-info__section">
                 <div class="dashboard-info__header">
                     <h2 class="profile-section__section-title">Account Information</h2>

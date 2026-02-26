@@ -1,6 +1,0 @@
-const i={cart:"Shopping Cart",registration:"Create New Customer Account","account/dashboard":"My Dashboard","account/address":"Create New Customer Account","account/info":"Edit Account Information","account/wishlist":"My Wishlist",blog:"Blog",checkout:"Create Order"},f=(u,b="")=>{const n=document.querySelector(u);if(!n)return;const a=window.location.pathname.split("/").filter(Boolean);let e="/crisp/";const o=e.endsWith("/")?e:e+"/",m=o.replace(/\//g,"");a.length>0&&a[0]===m&&a.shift();const l='<span class="breadcrumbs__separator">/</span>';let c="";const d=`
-    <ul class="breadcrumbs ${b}">
-      <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="${e}" name="breadcrumb-link" aria-label="Home">Home</a></li>
-      ${a.map((r,s)=>{if(c+=(s===0?"":"/")+r,r==="account"&&(a[s+1]==="dashboard"||a[s+1]==="address"||a[s+1]==="info"||a[s+1]==="wishlist"))return"";const t=i[c]||i[r]||decodeURIComponent(r.replace(/-/g," ")),h=o+c+"/";return s===a.length-1?`<li class="breadcrumbs__item"> ${l} <span class="breadcrumbs__link breadcrumbs__link_current">${t}</span></li>`:`<li class="breadcrumbs__item"> ${l} <a class="breadcrumbs__link" href="${h}" name="${t}" aria-label="${t}">${t}</a></li>`}).join("")}
-    </ul>
-  `;n.innerHTML=d};export{f as i};
