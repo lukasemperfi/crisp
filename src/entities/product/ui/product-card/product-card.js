@@ -63,15 +63,19 @@ export function createProductCard(product) {
           ...item.color,
           available: true,
         },
-      ])
+      ]),
     ).values(),
   ];
 
-  ColorFilter(card.querySelector(".product-card__color"), {
+  const colorContainer = card.querySelector(".product-card__color");
+  const colorFilter = ColorFilter({
     colors: uniqueColors,
     showTitle: false,
     selectionMode: "single",
+    maxVisibleColors: 3,
+    selectedId: uniqueColors[1]?.id,
   });
+  colorContainer.appendChild(colorFilter);
 
   return card;
 }

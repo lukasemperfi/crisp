@@ -96,4 +96,16 @@
       gap: 6px;
     }
   }
+
+  .color-filter {
+    &__more-btn {
+      display: none;
+    }
+  }
+
+  // .color-filter__item:nth-child(2) .color-filter__input + .color-filter__box {
+  //   box-shadow:
+  //     0 0 0 3px var(--white),
+  //     0 0 0 5px var(--black);
+  // }
 }

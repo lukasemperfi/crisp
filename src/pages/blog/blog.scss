@@ -9,7 +9,8 @@
 @use "@/shared/ui/slider/slider.scss" as *;
 @use "@/shared/ui/dropdown/dropdown.scss" as *;
 @use "@/shared/ui/accordion/accordion.scss" as *;
-@use "@/pages/blog/sections/recomendation-section/recomendation-section.scss" as *;
+@use "@/pages/blog/sections/recomendation-section/recomendation-section.scss"
+  as *;
 @use "@/entities/product/ui/product-card/product-card.scss" as *;
 @use "@/widgets/benefits-section/benefits-section.scss" as *;
 @use "@/entities/product/ui/product-list/product-list.scss" as *;
@@ -18,6 +19,7 @@
 @use "@/widgets/banner/banner.scss" as *;
 @use "@/shared/ui/text-block/text-block.scss" as *;
 @use "@/shared/ui/modal/modal.scss" as *;
+@use "swiper/css";
 
 @use "@/app/styles/mixins" as mixins;
 @use "@/app/styles/functions" as functions;
@@ -95,6 +97,10 @@
 
   .blog-content {
     margin-block: functions.fluidValue(24px, 34px, 320px, 1920px);
+  }
+
+  .recomendation-section {
+    margin-bottom: 15px;
   }
 }
 

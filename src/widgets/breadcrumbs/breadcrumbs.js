@@ -7,6 +7,7 @@ const breadcrumbNames = {
   "account/wishlist": "My Wishlist",
   blog: "Blog",
   checkout: "Create Order",
+  catalog: "Shop",
 };
 
 export const initBreadcrumbs = (containerSelector, breadcrumbClass = "") => {

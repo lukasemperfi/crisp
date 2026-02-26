@@ -73,7 +73,7 @@ export const initProducts = async () => {
     },
     {
       id: "price",
-      title: "Price",
+      title: "Price Range",
       type: "price-range",
       defaultOpen: true,
       options: filters.priceRange,
@@ -316,7 +316,7 @@ function initCatalogListBanner(banner) {
     insertBannerIntoList({
       listSelector: ".catalog__list",
       element: banner,
-      insertAfterRow: 2,
+      insertAfterRow: 3,
     });
   };
 

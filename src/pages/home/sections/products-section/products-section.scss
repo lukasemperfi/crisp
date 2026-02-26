@@ -18,6 +18,7 @@
     flex: 1 1 394px;
     margin-top: -5px;
     padding-right: functions.fluidValue(14px, 29px, $bp-mobile, 1920px);
+    padding-top: 16px;
 
     @include mixins.respond-to($bp-mobile) {
       padding-right: 0;
